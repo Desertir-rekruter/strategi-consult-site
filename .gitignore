@@ -1,0 +1,16 @@
+# Local Netlify folder
+.netlify
+
+# macOS
+.DS_Store
+
+# Agent skills (dev tools, not part of the site)
+.agents/
+
+# Node
+node_modules/
+*.log
+
+# Impeccable strategy files (local only)
+PRODUCT.md
+DESIGN.md

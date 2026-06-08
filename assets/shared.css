@@ -1,0 +1,57 @@
+/* ============================================
+   SHARED ANIMATIONS — strategi-consult.com
+   ============================================ */
+
+/* Global design tokens */
+:root{
+  --accent-rgb: 0,85,212;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #1da851;
+  --color-success: #34c759;
+}
+
+/* Skip navigation */
+.skip-link{position:absolute;top:-60px;left:16px;padding:8px 16px;background:var(--accent);color:#fff;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;z-index:10001;transition:top .2s}
+.skip-link:focus{top:8px}
+
+/* Focus visible — keyboard navigation */
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* Scroll progress bar */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(to right,#0055d4,#60a5fa);z-index:10000;pointer-events:none}
+
+/* Directional reveals */
+.reveal-left{opacity:0;transform:translateX(-52px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.reveal-right{opacity:0;transform:translateX(52px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.reveal-scale{opacity:0;transform:scale(.93) translateY(18px);transition:opacity .65s cubic-bezier(.23,1,.32,1),transform .65s cubic-bezier(.23,1,.32,1)}
+.reveal-left.visible,.reveal-right.visible,.reveal-scale.visible{opacity:1;transform:none}
+
+/* Step bottom line animation */
+.step{position:relative;overflow:hidden}
+.step::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,#0055d4,transparent);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.23,1,.32,1) .1s}
+.step.visible::after{transform:scaleX(1)}
+
+/* Card — light theme */
+.card{border:1px solid rgba(13,20,32,.09)!important;background:#ffffff!important;transition:border-color .25s,transform .3s ease,box-shadow .25s!important;box-shadow:0 1px 4px rgba(13,20,32,.06)!important}
+.card:hover{border-color:rgba(var(--accent-rgb),.25)!important;background:#ffffff!important;transform:translateY(-4px);box-shadow:0 8px 24px rgba(13,20,32,.1)!important}
+
+/* Hero ambient glow */
+@keyframes heroGlow{0%,100%{opacity:.07;transform:translate(0,0) scale(1)}50%{opacity:.12;transform:translate(28px,-20px) scale(1.1)}}
+.hero-bg{animation:heroGlow 10s ease-in-out infinite}
+
+/* Mobile hero — photo first */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr!important;min-height:auto!important;padding-top:60px!important}
+  .hero-right{order:-1!important;height:80vw!important;min-height:300px!important;opacity:1!important;animation:none!important}
+  .hero-left{padding:24px 24px 48px!important}
+  .hero-eyebrow,.hero-title,.hero-sub,.hero-buttons{animation:none!important;opacity:1!important}
+  .reveal-left,.reveal-right{transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .reveal-left,.reveal-right,.reveal-scale{opacity:1!important;transform:none!important;transition:none!important}
+  .step::after{transition:none!important}
+  .scroll-progress{display:none}
+  .hero-bg{animation:none!important}
+}
