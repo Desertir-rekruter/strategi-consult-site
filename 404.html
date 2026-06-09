@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Страница не найдена — Игнатий Филатов</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0d1520;--accent:#EE6A1B}
+html,body{height:100%}
+body{font-family:'Outfit',-apple-system,sans-serif;background:var(--black);color:#e8e6e0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;padding:0 24px;height:52px;display:flex;align-items:center;background:rgba(13,21,32,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(232,230,224,.1)}
+.nav-logo{font-size:17px;font-weight:600;color:#e8e6e0;text-decoration:none}
+.glow{position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(238,106,27,.09) 0%,transparent 65%);pointer-events:none;animation:pulse 8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.7;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
+.content{position:relative;z-index:1;max-width:480px}
+.code{font-size:clamp(80px,18vw,140px);font-weight:700;letter-spacing:-.05em;color:var(--accent);line-height:1;opacity:.7;margin-bottom:8px}
+h1{font-size:clamp(22px,4vw,32px);font-weight:700;letter-spacing:-.02em;margin-bottom:14px}
+p{font-size:16px;font-weight:300;color:rgba(232,230,224,.65);line-height:1.6;margin-bottom:40px}
+.btn{display:inline-block;padding:13px 32px;background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:10px;text-decoration:none;transition:background .2s,transform .15s}
+.btn:hover{background:#d95d14;transform:translateY(-1px)}
+.links{margin-top:20px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.links a{font-size:14px;color:rgba(232,230,224,.5);text-decoration:none;transition:color .2s}
+.links a:hover{color:rgba(255,255,255,.85)}
+</style>
+</head>
+<body>
+<nav><a href="/" class="nav-logo">Игнатий</a></nav>
+<div class="glow" aria-hidden="true"></div>
+<div class="content">
+  <div class="code" aria-hidden="true">404</div>
+  <h1>Страница не найдена</h1>
+  <p>Такой страницы не существует — возможно, ссылка устарела или адрес введён с ошибкой.</p>
+  <a href="/" class="btn">На главную</a>
+  <div class="links">
+    <a href="/onboarding/">Онбординг</a>
+    <a href="/naim/">Найм</a>
+    <a href="/kadry/">Кадровый учёт</a>
+    <a href="/#contact">Связаться</a>
+  </div>
+</div>
+</body>
+</html>

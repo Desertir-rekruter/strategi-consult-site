@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <title>Автоматизация HR процессов — Игнатий Филатов, HR консультант</title>
 <meta name="description" content="Автоматизация HR процессов для бизнеса. Нахожу где компания теряет деньги на HR, провожу аудит и автоматизирую найм, онбординг, кадровый учёт. HR консультант для компаний до 300 человек.">
 <meta name="keywords" content="автоматизация HR процессов, автоматизация HR, HR консультант, HR аудит, автоматизация найма, онбординг автоматизация, снижение текучести персонала, HR аналитика">
@@ -32,53 +33,14 @@
   "url": "https://strategi-consult.com",
   "image": "https://strategi-consult.com/assets/hero.jpeg",
   "sameAs": ["https://t.me/HR_Ignatiy"],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Батуми",
-    "addressCountry": "GE"
-  },
-  "knowsAbout": ["Автоматизация HR процессов", "Онбординг", "Кадровый учёт", "Найм персонала", "HR аналитика", "Снижение текучести персонала"],
+  "address": {"@type": "PostalAddress","addressLocality": "Батуми","addressCountry": "GE"},
+  "knowsAbout": ["Автоматизация HR процессов","Онбординг","Кадровый учёт","Найм персонала","HR аналитика","Снижение текучести персонала"],
   "offers": [
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Автоматизация HR процессов",
-        "url": "https://strategi-consult.com/"
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Автоматизация онбординга",
-        "url": "https://strategi-consult.com/onboarding/"
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Автоматизация найма",
-        "url": "https://strategi-consult.com/naim/"
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "Автоматизация кадрового учёта",
-        "url": "https://strategi-consult.com/kadry/"
-      }
-    },
-    {
-      "@type": "Offer",
-      "itemOffered": {
-        "@type": "Service",
-        "name": "HR консультант для малого бизнеса",
-        "url": "https://strategi-consult.com/malyj-biznes/"
-      }
-    }
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Автоматизация HR процессов","url":"https://strategi-consult.com/"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Автоматизация онбординга","url":"https://strategi-consult.com/onboarding/"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Автоматизация найма","url":"https://strategi-consult.com/naim/"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Автоматизация кадрового учёта","url":"https://strategi-consult.com/kadry/"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"HR консультант для малого бизнеса","url":"https://strategi-consult.com/malyj-biznes/"}}
   ]
 }
 </script>
@@ -90,223 +52,262 @@
   "url": "https://strategi-consult.com",
   "description": "Автоматизация HR процессов для бизнеса. HR консультант для компаний до 300 человек.",
   "inLanguage": "ru-RU",
-  "author": {
-    "@type": "Person",
-    "name": "Игнатий Филатов"
-  }
+  "author": {"@type": "Person","name": "Игнатий Филатов"}
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-  :root{
-    --bg:#f0f3f8;          /* cold off-white — site background */
-    --surface:#e5e9f2;     /* slightly deeper — stats, process, results, footer */
-    --elevated:#ffffff;    /* cards, steps, result cards */
-    --ink:#0d1420;         /* primary text */
-    --ink-2:#4b5563;       /* body / secondary text */
-    --ink-3:#6b7280;       /* captions and labels */
-    --accent:#0055d4;      /* blue — tuned for light backgrounds */
-    --accent-rgb:0,85,212;
-    --border:rgba(13,20,32,.09);
-    --color-whatsapp:#25D366;
-    --color-whatsapp-hover:#1da851;
-    --color-success:#34c759;
-    /* legacy aliases used in shared.css */
-    --black:var(--bg);
-    --white:var(--ink);
-    --gray-3:var(--ink-2);
-    --gray-4:var(--surface);
-  }
-  html{scroll-behavior:smooth}
-  body{font-family:'Onest',-apple-system,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
-  /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;background:rgba(240,243,248,0.88);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border)}
-  .nav-logo{font-size:17px;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
-  .nav-links{display:flex;gap:32px;list-style:none}
-  .nav-links a{font-size:13px;color:var(--ink-2);text-decoration:none;transition:color .2s}
-  .nav-links a:hover{color:var(--ink)}
-  .nav-cta{color:var(--accent)!important;font-weight:500}
-  .burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;background:none;border:none;padding:4px;position:relative;z-index:200}
-  .burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
-  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .burger.open span:nth-child(2){opacity:0}
-  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  .dropdown-menu{position:fixed;top:52px;right:0;width:260px;background:rgba(240,243,248,0.97);backdrop-filter:blur(20px);border-left:1px solid var(--border);border-bottom:1px solid var(--border);padding:12px 0;z-index:199;transform:translateX(100%);transition:transform .3s ease;border-radius:0 0 0 16px;box-shadow:0 8px 32px rgba(13,20,32,.08)}
-  .dropdown-menu.open{transform:translateX(0)}
-  .dropdown-menu a{display:block;padding:14px 28px;font-size:14px;color:var(--ink-2);text-decoration:none;transition:color .2s,background .2s}
-  .dropdown-menu a:hover{color:var(--ink);background:rgba(13,20,32,.04)}
-  .dropdown-menu .menu-section{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:16px 28px 8px;margin-top:4px}
-  .dropdown-menu .menu-divider{height:1px;background:var(--border);margin:8px 0}
-  .dropdown-menu .menu-cta{color:var(--accent)!important;font-weight:500}
+:root{
+  --black:#0d1520;
+  --surface:#111d2e;
+  --elevated:#172238;
+  --white:#fff;
+  --ink:#e8e6e0;
+  --ink-2:rgba(232,230,224,.72);
+  --ink-3:rgba(232,230,224,.38);
+  --gray:#8E8B80;
+  --accent:#EE6A1B;
+  --accent-hover:#d95d14;
+  --accent-dim:rgba(238,106,27,.12);
+  --accent-border:rgba(238,106,27,.28);
+  --accent-2:#175B9A;
+  --accent-2-dim:rgba(23,91,154,.12);
+  --accent-2-border:rgba(23,91,154,.28);
+  --border:rgba(232,230,224,.1);
+  --border-strong:rgba(232,230,224,.15);
+  --radius:10px;
+  --color-whatsapp:#25D366;
+  --color-whatsapp-hover:#20ba5a;
+  --color-success:#8E8B80;
+}
 
-  /* HERO */
-  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden;position:relative;background:var(--bg)}
-  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 25% 50%,rgba(var(--accent-rgb),0.07) 0%,transparent 70%);pointer-events:none}
-  .hero-left{padding:120px 48px 80px 10%;position:relative;z-index:1}
-  .hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;opacity:0;animation:fadeUp .8s .2s forwards}
-  .hero-title{font-size:clamp(36px,4.2vw,62px);font-weight:700;line-height:1.05;letter-spacing:-.03em;margin-bottom:24px;color:var(--ink);opacity:0;animation:fadeUp .8s .4s forwards}
-  .hero-sub{font-size:17px;font-weight:300;line-height:1.6;color:var(--ink-2);margin-bottom:40px;max-width:420px;opacity:0;animation:fadeUp .8s .6s forwards}
-  .hero-buttons{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .8s forwards}
-  .hero-right{position:relative;height:100vh;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;opacity:0;animation:fadeIn 1s .4s forwards}
-  .hero-photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
-  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(240,243,248,.82) 0%,rgba(240,243,248,.25) 35%,transparent 60%)}
-  .hero-label{position:absolute;bottom:28px;right:24px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(13,20,32,.35)}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',-apple-system,sans-serif;background:var(--black);color:var(--ink);overflow-x:hidden}
 
-  /* BUTTONS */
-  .btn-primary{padding:14px 30px;background:var(--accent);color:#fff;font-size:15px;font-weight:500;border-radius:980px;text-decoration:none;transition:background .2s,transform .15s;display:inline-block}
-  .btn-primary:hover{background:#0047b8;transform:scale(1.02)}
-  .btn-secondary{padding:14px 30px;color:var(--accent);font-size:15px;font-weight:500;border-radius:980px;text-decoration:none;border:1.5px solid rgba(var(--accent-rgb),.4);transition:border-color .2s,transform .15s;display:inline-block}
-  .btn-secondary:hover{border-color:var(--accent);transform:scale(1.02)}
-  .btn-whatsapp{background:var(--color-whatsapp)!important;color:#fff!important;margin-top:12px}
-  .btn-whatsapp:hover{background:var(--color-whatsapp-hover)!important}
-  .btn-primary:active,.btn-secondary:active{transform:scale(.97)!important;transition-duration:.1s!important}
+/* SKIP LINK */
+.skip-link{position:absolute;top:-60px;left:16px;padding:8px 16px;background:var(--accent);color:#fff;border-radius:var(--radius);font-size:13px;font-weight:500;text-decoration:none;z-index:10001;transition:top .2s}
+.skip-link:focus{top:8px}
 
-  /* STATS */
-  .stats{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 24px}
-  .stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
-  .stat-number{font-size:clamp(36px,5vw,52px);font-weight:700;letter-spacing:-.03em;color:var(--ink)}
-  .stat-label{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.4}
+/* FOCUS */
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 
-  /* SECTIONS */
-  section{padding:100px 24px}
-  .section-inner{max-width:980px;margin:0 auto}
-  .section-eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;text-align:center}
-  .section-title{font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.1;text-align:center;margin-bottom:16px;color:var(--ink)}
-  .section-sub{font-size:17px;font-weight:300;color:var(--ink-2);text-align:center;max-width:560px;margin:0 auto 64px;line-height:1.6}
+/* SCROLL PROGRESS */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(to right,var(--accent),#175B9A);z-index:10000;pointer-events:none}
 
-  /* PROBLEMS */
-  .problems{background:var(--bg)}
-  .problems-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;background:var(--border);border-radius:18px;overflow:hidden}
-  .problem-card{background:var(--surface);padding:40px 32px;transition:background .25s,border-color .3s;border:1px solid transparent}
-  .problem-card:hover{background:var(--elevated);border-color:rgba(var(--accent-rgb),.2)}
-  .problem-icon{font-size:32px;margin-bottom:20px;display:block}
-  .problem-title{font-size:19px;font-weight:600;margin-bottom:12px;color:var(--ink)}
-  .problem-desc{font-size:14px;font-weight:300;color:var(--ink-2);line-height:1.65}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,21,32,.88);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(142,139,128,.15)}
+.nav-logo{font-size:17px;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:13px;font-weight:400;color:var(--ink-2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{color:var(--accent)!important;font-weight:500}
+.burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;background:none;border:none;padding:4px;position:relative;z-index:200}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.dropdown-menu{position:fixed;top:52px;right:0;width:260px;background:rgba(10,18,28,.98);backdrop-filter:blur(20px);border-left:1px solid var(--border);border-bottom:1px solid var(--border);padding:12px 0;z-index:199;transform:translateX(100%);transition:transform .3s ease;border-radius:0 0 0 16px;box-shadow:0 16px 40px rgba(13,21,32,.7)}
+.dropdown-menu.open{transform:translateX(0)}
+.dropdown-menu a{display:block;padding:13px 28px;font-size:14px;font-weight:400;color:var(--ink-2);text-decoration:none;transition:color .2s,background .2s}
+.dropdown-menu a:hover{color:var(--ink);background:rgba(232,230,224,.05)}
+.dropdown-menu .menu-section{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:16px 28px 8px;margin-top:4px}
+.dropdown-menu .menu-divider{height:1px;background:var(--border);margin:8px 0}
+.dropdown-menu .menu-cta{color:var(--accent)!important;font-weight:500}
 
-  /* PROCESS */
-  .process{background:var(--elevated)}
-  .process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}
-  .step{padding:32px;background:var(--bg);border-radius:18px;border:1px solid var(--border);transition:border-color .2s,transform .2s;box-shadow:0 1px 4px rgba(13,20,32,.05)}
-  .step:hover{border-color:rgba(var(--accent-rgb),.3);transform:translateY(-4px);box-shadow:0 8px 24px rgba(13,20,32,.08)}
-  .step-num{font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--accent);margin-bottom:16px;text-transform:uppercase}
-  .step-title{font-size:18px;font-weight:600;margin-bottom:10px;color:var(--ink)}
-  .step-desc{font-size:14px;font-weight:300;color:var(--ink-2);line-height:1.65}
+/* HERO */
+.hero{min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden;position:relative}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 22% 52%,rgba(238,106,27,.13) 0%,transparent 68%);pointer-events:none;animation:heroGlow 10s ease-in-out infinite}
+@keyframes heroGlow{0%,100%{opacity:.14;transform:translate(0,0) scale(1)}50%{opacity:.22;transform:translate(24px,-18px) scale(1.08)}}
+.hero-left{padding:120px 48px 80px 10%;position:relative;z-index:1}
+.hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero-title{font-size:clamp(44px,5.5vw,72px);font-weight:700;line-height:1.04;letter-spacing:-.03em;margin-bottom:24px;color:var(--ink);opacity:0;animation:fadeUp .8s .4s forwards;text-wrap:balance}
+.hero-sub{font-size:17px;font-weight:300;line-height:1.65;color:var(--ink-2);margin-bottom:40px;max-width:460px;opacity:0;animation:fadeUp .8s .6s forwards}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .8s forwards}
+.hero-right{position:relative;height:100dvh;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;opacity:0;animation:fadeIn 1s .4s forwards}
+.hero-photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;will-change:transform}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(13,21,32,.72) 0%,rgba(13,21,32,.15) 30%,transparent 55%)}
+.hero-label{position:absolute;bottom:28px;right:24px;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.scroll-hint{position:absolute;bottom:36px;left:calc(25% + 48px);z-index:2;transition:opacity .4s}
+.scroll-hint span{display:block;width:18px;height:18px;border-right:1.5px solid rgba(255,255,255,.3);border-bottom:1.5px solid rgba(255,255,255,.3);transform:rotate(45deg);animation:scrollBounce 1.6s ease-in-out infinite}
+@keyframes scrollBounce{0%,100%{transform:rotate(45deg) translateY(0);opacity:.4}50%{transform:rotate(45deg) translateY(6px);opacity:.9}}
 
-  /* ABOUT */
-  .about{background:var(--bg)}
-  .about-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:980px;margin:0 auto}
-  .about-photo-wrap{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 24px 60px rgba(13,20,32,.14)}
-  .about-photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;filter:brightness(.96) contrast(1.02);transition:transform .5s}
-  .about-photo-wrap:hover .about-photo{transform:scale(1.03)}
-  .about-photo-badge{position:absolute;bottom:16px;left:16px;background:rgba(13,20,32,.72);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 16px}
-  .badge-title{font-size:13px;font-weight:600;color:#fff}
-  .badge-sub{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
-  .about-eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
-  .about-title{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-bottom:20px;color:var(--ink)}
-  .about-text{font-size:15px;font-weight:300;color:var(--ink-2);line-height:1.75;margin-bottom:14px}
-  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
-  .tag{padding:6px 14px;background:rgba(var(--accent-rgb),.07);border:1px solid rgba(var(--accent-rgb),.18);border-radius:980px;font-size:12px;font-weight:500;color:var(--accent);min-height:28px}
+/* BUTTONS */
+.btn-primary{padding:13px 28px;background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:var(--radius);text-decoration:none;transition:background .2s,transform .15s;display:inline-block}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.btn-primary:active{transform:scale(.96) translateY(1px)!important;transition-duration:.06s!important}
+.btn-secondary{padding:13px 28px;color:var(--ink);font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:var(--radius);text-decoration:none;border:1px solid rgba(23,91,154,.45);transition:border-color .2s,color .2s,transform .15s;display:inline-block}
+.btn-secondary:hover{border-color:#175B9A;color:#e8e6e0;transform:translateY(-1px)}
+.btn-secondary:active{transform:scale(.96) translateY(1px)!important;transition-duration:.06s!important}
+.btn-wa{background:var(--color-whatsapp)!important}
+.btn-wa:hover{background:var(--color-whatsapp-hover)!important}
 
-  /* RESULTS */
-  .results{background:var(--surface)}
-  .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
-  .result-card{background:var(--elevated);border-radius:18px;padding:32px;border:1px solid var(--border);transition:border-color .2s,transform .2s,box-shadow .2s;box-shadow:0 1px 4px rgba(13,20,32,.06)}
-  .result-card:hover{border-color:rgba(var(--accent-rgb),.25);transform:translateY(-4px);box-shadow:0 12px 32px rgba(13,20,32,.1)}
-  .result-quote{font-size:15px;font-weight:300;color:var(--ink-2);line-height:1.7;margin-bottom:24px;font-style:italic}
-  .result-number{font-size:36px;font-weight:700;color:var(--accent);letter-spacing:-.02em;margin-bottom:4px}
-  .result-desc{font-size:13px;color:var(--ink-3)}
-  .result-author{display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
-  .result-author-avatar{width:34px;height:34px;border-radius:50%;background:rgba(var(--accent-rgb),.08);border:1px solid rgba(var(--accent-rgb),.18);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--accent);flex-shrink:0}
-  .result-author-name{font-size:13px;font-weight:500;color:var(--ink)}
-  .result-author-role{font-size:11px;color:var(--ink-3);margin-top:2px}
+/* STATS */
+.stats{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 24px}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
+.stat-number{font-size:clamp(40px,5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1;background:linear-gradient(135deg,#fff 20%,rgba(255,255,255,.5) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:13px;font-weight:400;color:var(--gray);margin-top:8px;line-height:1.4}
 
-  /* HUMAN — intentionally dark for contrast and weight */
-  .human{background:#0d1420;padding:0;overflow:hidden;color:#fff}
-  .human-inner{display:grid;grid-template-columns:1fr 1fr;min-height:420px}
-  .human-photo-wrap{position:relative;overflow:hidden;min-height:380px}
-  .human-photo{width:100%;height:100%;object-fit:cover;object-position:center 5%;filter:brightness(.85) saturate(.9);display:block;transition:transform .6s}
-  .human-photo-wrap:hover .human-photo{transform:scale(1.03)}
-  .human-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 55%,rgba(13,20,32,.85) 100%)}
-  .human-text{background:#161e2e;display:flex;flex-direction:column;justify-content:center;padding:64px 56px;border-left:1px solid rgba(255,255,255,.07)}
-  .human-eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--accent-rgb),1);color:#4d8fec;margin-bottom:20px}
-  .human-quote{font-size:clamp(20px,2.2vw,26px);font-weight:600;line-height:1.35;letter-spacing:-.01em;margin-bottom:20px;color:#fff}
-  .human-body{font-size:15px;font-weight:300;color:rgba(255,255,255,.58);line-height:1.7}
+/* SECTION SHARED */
+section{padding:104px 24px}
+.section-inner{max-width:980px;margin:0 auto}
+.section-eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;text-align:center}
+.section-title{font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-.025em;line-height:1.08;text-align:center;margin-bottom:16px;color:var(--ink);text-wrap:balance}
+.section-sub{font-size:17px;font-weight:300;color:var(--gray);text-align:center;max-width:520px;margin:0 auto 64px;line-height:1.6;text-wrap:balance}
 
-  /* CTA */
-  .cta-section{background:var(--bg);text-align:center}
-  .cta-card{max-width:680px;margin:0 auto;padding:72px 48px;background:var(--elevated);border-radius:28px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(13,20,32,.07)}
-  .cta-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-.02em;margin-bottom:16px;color:var(--ink)}
-  .cta-sub{font-size:17px;font-weight:300;color:var(--ink-2);margin-bottom:36px;line-height:1.55}
-  .cta-link{font-size:15px;font-weight:500;color:var(--accent);text-decoration:none;display:block;margin-top:14px}
-  .cta-link:hover{opacity:.75}
-  .cta-available{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:rgba(52,199,89,.07);border:1px solid rgba(52,199,89,.2);border-radius:980px;font-size:12px;font-weight:500;color:#1a8a3a;margin-bottom:20px}
-  .cta-dot{width:6px;height:6px;background:var(--color-success);border-radius:50%;flex-shrink:0;animation:dot-pulse 2.4s ease-in-out infinite}
-  @keyframes dot-pulse{0%,100%{opacity:1}50%{opacity:.3}}
-  .cta-microcopy{font-size:13px;color:var(--ink-3);margin-top:14px;line-height:1.5}
+/* SECTION SEPARATORS */
+.stats,.problems,.process,.about,.results,.cta-section{position:relative}
+.stats::before,.problems::before,.process::before,.about::before,.results::before,.cta-section::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(to right,transparent,rgba(142,139,128,.38),transparent);pointer-events:none}
 
-  /* FOOTER */
-  footer{background:var(--surface);border-top:1px solid var(--border);padding:28px 24px;text-align:center}
-  .footer-text{font-size:13px;font-weight:300;color:var(--ink-2)}
+/* PROBLEMS — bento grid */
+.problems{background:var(--black)}
+.problems-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:dense;gap:1px;background:rgba(142,139,128,.1);border-radius:16px;overflow:hidden}
+.problem-card{background:var(--surface);padding:40px 32px;transition:background .25s}
+.problem-card:hover{background:var(--elevated)}
+.problem-card:first-child{grid-column:span 2;background:rgba(238,106,27,.07)}
+.problem-card:first-child:hover{background:rgba(238,106,27,.11)}
+.problem-card:last-child{grid-column:span 2;background:rgba(238,106,27,.07)}
+.problem-card:last-child:hover{background:rgba(238,106,27,.11)}
+.problem-icon{margin-bottom:20px;display:block}
+.problem-title{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px;color:var(--ink)}
+.problem-desc{font-size:14px;font-weight:300;color:var(--ink-2);line-height:1.68}
 
-  /* ANIMATIONS */
-  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-  .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
-  .reveal.visible{opacity:1;transform:translateY(0)}
+/* PROCESS — editorial numbered */
+.process{background:var(--surface)}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(142,139,128,.22);border-radius:16px;overflow:hidden}
+.step{padding:40px 32px;border-right:1px solid rgba(142,139,128,.16);position:relative;overflow:hidden;transition:background .25s}
+.step:last-child{border-right:none}
+.step:hover{background:rgba(232,230,224,.04)}
+.step-num{font-size:56px;font-weight:700;letter-spacing:-.04em;line-height:1;color:rgba(142,139,128,.25);margin-bottom:24px;transition:color .3s}
+.step:hover .step-num{color:rgba(23,91,154,.55)}
+.step-title{font-size:17px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px;color:var(--ink)}
+.step-desc{font-size:14px;font-weight:300;color:var(--ink-2);line-height:1.68}
+.step::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1)}
+.step.visible::after{transform:scaleX(1)}
 
-  /* MOBILE */
-  @media(max-width:768px){
-    .hero{grid-template-columns:1fr;min-height:auto;padding-top:60px}
-    .hero-right{order:-1;height:80vw;min-height:300px;opacity:1!important;animation:none!important}
-    .hero-left{padding:24px 24px 48px}
-    .hero-eyebrow,.hero-title,.hero-sub,.hero-buttons{animation:none!important;opacity:1!important}
-    .nav-links{display:none}
-    .stats-inner{grid-template-columns:1fr;gap:32px}
-    .about-inner{grid-template-columns:1fr;gap:40px}
-    .human-inner{grid-template-columns:1fr}
-    .human-photo-wrap{height:280px}
-    .human-text{padding:40px 28px}
-    .cta-card{padding:48px 24px}
-  }
+/* ABOUT */
+.about{background:var(--black)}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:980px;margin:0 auto}
+.about-photo-wrap{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 32px 80px rgba(13,21,32,.7)}
+.about-photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;filter:brightness(.92) contrast(1.04);transition:transform .5s cubic-bezier(.23,1,.32,1)}
+.about-photo-wrap:hover .about-photo{transform:scale(1.03)}
+.about-photo-badge{position:absolute;bottom:16px;left:16px;background:rgba(13,21,32,.88);backdrop-filter:blur(12px);border:1px solid var(--border-strong);border-radius:12px;padding:10px 16px}
+.badge-title{font-size:13px;font-weight:600;color:var(--ink)}
+.badge-sub{font-size:11px;color:var(--gray);margin-top:2px}
+.about-eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.about-title{font-size:clamp(26px,3.2vw,40px);font-weight:700;letter-spacing:-.025em;line-height:1.08;margin-bottom:20px;color:var(--ink)}
+.about-text{font-size:15px;font-weight:300;color:var(--ink-2);line-height:1.75;margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tag{padding:6px 14px;background:var(--accent-2-dim);border:1px solid var(--accent-2-border);border-radius:6px;font-size:12px;font-weight:500;color:rgba(255,255,255,.8)}
 
-  /* MOBILE CTA BAR */
-  .mobile-cta-bar{display:none}
-  @media(max-width:768px){
-    .mobile-cta-bar{display:flex;position:fixed;bottom:0;left:0;right:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(240,243,248,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:98;gap:10px}
-    .mobile-cta-bar .mcta-tg,.mobile-cta-bar .mcta-wa{flex:1;display:flex;align-items:center;justify-content:center;padding:13px 8px;border-radius:12px;font-size:14px;font-weight:500;text-decoration:none;color:#fff}
-    .mobile-cta-bar .mcta-tg{background:var(--accent)}
-    .mobile-cta-bar .mcta-wa{background:var(--color-whatsapp)}
-    .cta-section{padding-bottom:110px}
-    footer{padding-bottom:80px}
-  }
+/* RESULTS */
+.results{background:var(--surface)}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.result-card{background:var(--black);border-radius:16px;padding:32px;border:1px solid var(--border);transition:border-color .25s,transform .25s}
+.result-card:hover{border-color:rgba(23,91,154,.45);transform:translateY(-3px)}
+.result-quote{font-size:15px;font-weight:300;color:var(--ink-2);line-height:1.72;margin-bottom:24px;font-style:italic}
+.result-number{font-size:40px;font-weight:700;color:var(--accent);letter-spacing:-.03em;margin-bottom:4px;line-height:1}
+.result-desc{font-size:13px;font-weight:400;color:var(--gray);margin-bottom:20px}
+.result-author{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid var(--border)}
+.result-author-avatar{width:34px;height:34px;border-radius:8px;background:rgba(23,91,154,.18);border:1px solid rgba(23,91,154,.35);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#e8e6e0;flex-shrink:0}
+.result-author-name{font-size:13px;font-weight:500;color:var(--ink)}
+.result-author-role{font-size:11px;color:var(--gray);margin-top:2px}
 
-  /* SECTION SEPARATORS */
-  .stats,.problems,.process,.about,.results,.cta-section{position:relative}
-  .stats::before,.problems::before,.process::before,.about::before,.results::before,.cta-section::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(to right,transparent,rgba(var(--accent-rgb),.18),transparent);pointer-events:none}
+/* HUMAN */
+.human{background:var(--black);padding:0;overflow:hidden}
+.human-inner{display:grid;grid-template-columns:1fr 1fr;min-height:440px}
+.human-photo-wrap{position:relative;overflow:hidden;min-height:380px}
+.human-photo{width:100%;height:100%;object-fit:cover;object-position:center 5%;filter:brightness(.88) saturate(.85);display:block;transition:transform .6s cubic-bezier(.23,1,.32,1)}
+.human-photo-wrap:hover .human-photo{transform:scale(1.03)}
+.human-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 55%,rgba(13,21,32,.88) 100%)}
+.human-text{background:var(--surface);display:flex;flex-direction:column;justify-content:center;padding:64px 56px;border-left:1px solid var(--border)}
+.human-eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.human-quote{font-size:clamp(20px,2.2vw,27px);font-weight:600;line-height:1.3;letter-spacing:-.02em;margin-bottom:20px;color:var(--ink)}
+.human-body{font-size:15px;font-weight:300;color:var(--ink-2);line-height:1.72}
 
-  /* HERO PARALLAX + SCROLL HINT */
-  .hero-photo{will-change:transform}
-  @keyframes scrollBounce{0%,100%{transform:rotate(45deg) translateY(0);opacity:.4}50%{transform:rotate(45deg) translateY(6px);opacity:.9}}
-  .scroll-hint{position:absolute;bottom:36px;left:calc(25% + 48px);z-index:2;transition:opacity .4s}
-  .scroll-hint span{display:block;width:18px;height:18px;border-right:1.5px solid rgba(13,20,32,.3);border-bottom:1.5px solid rgba(13,20,32,.3);transform:rotate(45deg);animation:scrollBounce 1.6s ease-in-out infinite}
+/* CTA — clean glass, no gradient */
+.cta-section{background:var(--black);text-align:center}
+.cta-card{max-width:680px;margin:0 auto;padding:72px 56px;background:rgba(232,230,224,.04);border-radius:20px;border:1px solid rgba(142,139,128,.2);position:relative;overflow:hidden}
+.cta-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:280px;height:1px;background:linear-gradient(to right,transparent,rgba(238,106,27,.6),transparent)}
+.cta-available{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(142,139,128,.07);border:1px solid rgba(142,139,128,.18);border-radius:var(--radius);font-size:12px;font-weight:500;color:rgba(142,139,128,.9);margin-bottom:20px}
+.cta-dot{width:6px;height:6px;background:var(--color-success);border-radius:50%;flex-shrink:0;animation:dotPulse 2.4s ease-in-out infinite}
+@keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.25}}
+.cta-title{font-size:clamp(26px,4vw,44px);font-weight:700;letter-spacing:-.025em;line-height:1.08;margin-bottom:16px;color:var(--ink);text-wrap:balance}
+.cta-sub{font-size:17px;font-weight:300;color:var(--ink-2);margin-bottom:36px;line-height:1.55}
+.cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.cta-link{font-size:15px;font-weight:500;color:var(--accent);text-decoration:none;display:block;margin-top:16px;transition:opacity .2s}
+.cta-link:hover{opacity:.7}
+.cta-microcopy{font-size:13px;color:var(--gray);margin-top:14px;line-height:1.5}
 
-  /* CTA GLOW */
-  @keyframes ctaGlow{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-48%,-52%) scale(1.2)}}
-  .cta-section::after{content:'';position:absolute;top:50%;left:50%;width:700px;height:700px;background:radial-gradient(circle,rgba(var(--accent-rgb),.04) 0%,transparent 65%);pointer-events:none;animation:ctaGlow 14s ease-in-out infinite}
+/* MID-PAGE CTA */
+.mid-cta{text-align:center;margin-top:52px;padding-top:48px;border-top:1px solid rgba(232,230,224,.07)}
+.mid-cta-label{font-size:14px;font-weight:300;color:var(--gray);margin-bottom:18px}
 
-  /* REDUCED MOTION */
-  @media(prefers-reduced-motion:reduce){
-    .hero-eyebrow,.hero-title,.hero-sub,.hero-buttons,.hero-right,.cta-dot{animation:none!important;opacity:1!important}
-    .reveal{opacity:1!important;transform:none!important;transition:none!important}
-    .scroll-hint,.cta-section::after{display:none}
-    .hero-photo{will-change:auto}
-  }
-  @media(max-width:768px){.scroll-hint{display:none}}
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:28px 24px;text-align:center}
+.footer-text{font-size:13px;font-weight:300;color:var(--gray)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.23,1,.32,1),transform .7s cubic-bezier(.23,1,.32,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-48px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.reveal-right{opacity:0;transform:translateX(48px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1)}
+.reveal-scale{opacity:0;transform:scale(.94) translateY(16px);transition:opacity .65s cubic-bezier(.23,1,.32,1),transform .65s cubic-bezier(.23,1,.32,1)}
+.reveal-left.visible,.reveal-right.visible,.reveal-scale.visible{opacity:1;transform:none}
+
+/* MOBILE CTA BAR */
+.mobile-cta-bar{display:none}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .process-steps{grid-template-columns:repeat(2,1fr)}
+  .step:nth-child(2){border-right:none}
+  .step:nth-child(3){border-top:1px solid var(--border)}
+  .step:nth-child(4){border-top:1px solid var(--border)}
+}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:60px}
+  .hero-right{order:-1;height:80vw;min-height:300px;opacity:1!important;animation:none!important}
+  .hero-left{padding:28px 24px 56px}
+  .hero-eyebrow,.hero-title,.hero-sub,.hero-buttons{animation:none!important;opacity:1!important}
+  .nav-links{display:none}
+  .stats-inner{grid-template-columns:1fr;gap:32px}
+  .problems-grid{grid-template-columns:1fr}
+  .problem-card:first-child,.problem-card:last-child{grid-column:span 1}
+  .process-steps{grid-template-columns:1fr}
+  .step{border-right:none;border-top:1px solid var(--border)}
+  .step:first-child{border-top:none}
+  .about-inner{grid-template-columns:1fr;gap:40px}
+  .human-inner{grid-template-columns:1fr}
+  .human-photo-wrap{height:280px;min-height:unset}
+  .human-text{padding:40px 28px}
+  .cta-card{padding:48px 24px}
+  .scroll-hint{display:none}
+  .reveal-left,.reveal-right{transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .mobile-cta-bar{display:flex;position:fixed;bottom:0;left:0;right:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(13,21,32,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:98;gap:10px}
+  .mobile-cta-bar .mcta-tg,.mobile-cta-bar .mcta-wa{flex:1;display:flex;align-items:center;justify-content:center;padding:13px 8px;border-radius:var(--radius);font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;text-decoration:none;color:#fff}
+  .mobile-cta-bar .mcta-tg{background:var(--accent)}
+  .mobile-cta-bar .mcta-wa{background:var(--color-whatsapp)}
+  .cta-section{padding-bottom:110px}
+  footer{padding-bottom:80px}
+}
+
+/* REDUCED MOTION */
+@media(prefers-reduced-motion:reduce){
+  .hero-eyebrow,.hero-title,.hero-sub,.hero-buttons,.hero-right,.cta-dot{animation:none!important;opacity:1!important}
+  .reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1!important;transform:none!important;transition:none!important}
+  .step::after{transition:none}
+  .scroll-hint,.scroll-progress{display:none}
+  .hero-bg{animation:none!important}
+  .hero-photo{will-change:auto}
+}
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link rel="stylesheet" href="/assets/shared.css">
 </head>
 <body>
@@ -326,40 +327,40 @@
   </button>
 </nav>
 
-<div class="dropdown-menu" id="dropdown">
-  <a href="#problems">Проблемы</a>
-  <a href="#process">Процесс</a>
-  <a href="#about">Обо мне</a>
+<div class="dropdown-menu" id="dropdown" role="menu">
+  <a href="#problems" role="menuitem">Проблемы</a>
+  <a href="#process" role="menuitem">Процесс</a>
+  <a href="#about" role="menuitem">Обо мне</a>
   <div class="menu-divider"></div>
   <div class="menu-section">Услуги</div>
-  <a href="/onboarding/">Автоматизация онбординга</a>
-  <a href="/naim/">Автоматизация найма</a>
-  <a href="/kadry/">Кадровый учёт</a>
-  <a href="/malyj-biznes/">HR для малого бизнеса</a>
+  <a href="/onboarding/" role="menuitem">Автоматизация онбординга</a>
+  <a href="/naim/" role="menuitem">Автоматизация найма</a>
+  <a href="/kadry/" role="menuitem">Кадровый учёт</a>
+  <a href="/malyj-biznes/" role="menuitem">HR для малого бизнеса</a>
   <div class="menu-divider"></div>
-  <a href="#contact" class="menu-cta">Связаться →</a>
+  <a href="#contact" class="menu-cta" role="menuitem">Связаться →</a>
 </div>
 
 <script>
   const burger = document.getElementById('burger');
   const dropdown = document.getElementById('dropdown');
-  function setMenuState(open) {
+  function setMenu(open) {
     burger.classList.toggle('open', open);
     dropdown.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
   }
-  burger.addEventListener('click', () => setMenuState(!dropdown.classList.contains('open')));
-  document.querySelectorAll('.dropdown-menu a').forEach(a => {
-    a.addEventListener('click', () => setMenuState(false));
-  });
+  burger.addEventListener('click', () => setMenu(!dropdown.classList.contains('open')));
+  dropdown.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
   document.addEventListener('click', e => {
-    if (!burger.contains(e.target) && !dropdown.contains(e.target)) setMenuState(false);
+    if (!burger.contains(e.target) && !dropdown.contains(e.target)) setMenu(false);
   });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 </script>
 
 <main id="main-content">
+
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-left">
     <p class="hero-eyebrow">HRBP · Консультант · 25 лет</p>
     <h1 class="hero-title">Ваш бизнес теряет деньги прямо сейчас.</h1>
@@ -370,18 +371,18 @@
     </div>
   </div>
   <div class="hero-right">
-    <img class="hero-photo" src="/assets/hero.jpeg" alt="Игнатий Филатов на фоне ночного города" width="933" height="1400">
-    <div class="hero-overlay"></div>
-    <span class="hero-label">Игнатий · HRBP</span>
+    <img class="hero-photo" src="/assets/hero.jpeg" alt="Игнатий Филатов — HR консультант" width="933" height="1400">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <span class="hero-label" aria-hidden="true">Игнатий · HRBP</span>
   </div>
   <div class="scroll-hint" aria-hidden="true"><span></span></div>
 </section>
 
-<div class="stats">
+<div class="stats" aria-label="Ключевые результаты">
   <div class="stats-inner">
     <div class="reveal"><div class="stat-number" data-to="3" data-suffix="×">3×</div><div class="stat-label">ускорение HR-процессов<br>после автоматизации</div></div>
-    <div class="reveal"><div class="stat-number" data-to="40" data-prefix="−" data-suffix="%">−40%</div><div class="stat-label">затрат на подбор<br>и адаптацию персонала</div></div>
-    <div class="reveal"><div class="stat-number" data-to="25" data-suffix="+">25+</div><div class="stat-label">проанализированных<br>компаний</div></div>
+    <div class="reveal" style="transition-delay:.1s"><div class="stat-number" data-to="40" data-prefix="−" data-suffix="%">−40%</div><div class="stat-label">затрат на подбор<br>и адаптацию персонала</div></div>
+    <div class="reveal" style="transition-delay:.2s"><div class="stat-number" data-to="25" data-suffix="+">25+</div><div class="stat-label">проанализированных<br>компаний</div></div>
   </div>
 </div>
 
@@ -390,25 +391,80 @@
     <p class="section-eyebrow reveal">Где бизнес теряет деньги</p>
     <h2 class="section-title reveal">Узнаёте свою компанию?</h2>
     <p class="section-sub reveal">Большинство HR-проблем невидимы — пока не посчитать потери.</p>
-    <div class="problems-grid reveal">
-      <div class="problem-card"><span class="problem-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7h11"/><path d="M6.5 17h11"/><path d="M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1-1 1h-10a1 1 0 0 1-1-1"/><path d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0-1-1h-10a1 1 0 0 0-1 1"/></svg></span><h3 class="problem-title">Ручные рутинные процессы</h3><p class="problem-desc">Онбординг, кадровый учёт, согласования — всё делается вручную и занимает часы там, где нужны минуты.</p></div>
-      <div class="problem-card"><span class="problem-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6l4-4l8 8"/><path d="M21 10v7h-7"/></svg></span><h3 class="problem-title">Высокая текучесть</h3><p class="problem-desc">Каждый уволившийся — это 30–150% его зарплаты потерь. Причины чаще всего системные, не личные.</p></div>
-      <div class="problem-card"><span class="problem-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0-14 0"/><path d="M21 21l-6-6"/></svg></span><h3 class="problem-title">Долгий и дорогой найм</h3><p class="problem-desc">Вакансии висят месяцами, а кандидаты уходят к конкурентам. Воронка не настроена и никто не считает конверсию.</p></div>
-      <div class="problem-card"><span class="problem-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h3l2 2h5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2"/><path d="M17 16v2a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2"/></svg></span><h3 class="problem-title">Хаос в данных</h3><p class="problem-desc">HR-аналитика ведётся в Excel или не ведётся вовсе. Решения принимаются на ощущениях, а не цифрах.</p></div>
-      <div class="problem-card"><span class="problem-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9h8"/><path d="M8 13h6"/><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-5l-5 3v-3h-2a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3h12"/></svg></span><h3 class="problem-title">Низкая вовлечённость</h3><p class="problem-desc">Сотрудники работают «от звонка до звонка». Нет понимания причин — нет инструментов их измерить.</p></div>
-      <div class="problem-card"><span class="problem-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6"/><path d="M11 6l.463-.536a5 5 0 0 1 7.071 7.072l-.534.464"/><path d="M13 18l-.397.534a5.068 5.068 0 0 1-7.127 0a4.972 4.972 0 0 1 0-7.071l.524-.463"/></svg></span><h3 class="problem-title">HR не связан с бизнесом</h3><p class="problem-desc">Отдел кадров существует сам по себе. Нет связи между HR-метриками и финансовым результатом.</p></div>
+    <div class="problems-grid">
+      <div class="problem-card reveal" style="transition-delay:0ms">
+        <span class="problem-icon" aria-hidden="true"><i class="ti ti-hourglass" style="font-size:28px;color:var(--accent)"></i></span>
+        <h3 class="problem-title">Ручные рутинные процессы</h3>
+        <p class="problem-desc">Онбординг, кадровый учёт, согласования — всё делается вручную и занимает часы там, где нужны минуты.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:80ms">
+        <span class="problem-icon" aria-hidden="true"><i class="ti ti-trending-down" style="font-size:28px;color:var(--accent)"></i></span>
+        <h3 class="problem-title">Высокая текучесть</h3>
+        <p class="problem-desc">Каждый уволившийся — это 30–150% его зарплаты потерь. Причины чаще всего системные, не личные.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:160ms">
+        <span class="problem-icon" aria-hidden="true"><i class="ti ti-search" style="font-size:28px;color:var(--accent)"></i></span>
+        <h3 class="problem-title">Долгий и дорогой найм</h3>
+        <p class="problem-desc">Вакансии висят месяцами, а кандидаты уходят к конкурентам. Воронка не настроена и никто не считает конверсию.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:240ms">
+        <span class="problem-icon" aria-hidden="true"><i class="ti ti-folders" style="font-size:28px;color:var(--accent)"></i></span>
+        <h3 class="problem-title">Хаос в данных</h3>
+        <p class="problem-desc">HR-аналитика ведётся в Excel или не ведётся вовсе. Решения принимаются на ощущениях, а не цифрах.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:320ms">
+        <span class="problem-icon" aria-hidden="true"><i class="ti ti-message" style="font-size:28px;color:var(--accent)"></i></span>
+        <h3 class="problem-title">Низкая вовлечённость</h3>
+        <p class="problem-desc">Сотрудники работают «от звонка до звонка». Нет понимания причин — нет инструментов их измерить.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:400ms">
+        <span class="problem-icon" aria-hidden="true"><i class="ti ti-link" style="font-size:28px;color:var(--accent)"></i></span>
+        <h3 class="problem-title">HR не связан с бизнесом</h3>
+        <p class="problem-desc">Отдел кадров существует сам по себе. Нет связи между HR-метриками и финансовым результатом.</p>
+      </div>
+      <div class="problem-card reveal" style="transition-delay:480ms">
+        <span class="problem-icon" aria-hidden="true"><i class="ti ti-door-enter" style="font-size:28px;color:var(--accent)"></i></span>
+        <h3 class="problem-title">Слабый онбординг — люди уходят до конца испытательного срока</h3>
+        <p class="problem-desc">До 30% новых сотрудников покидают компанию в первые 90 дней — из-за хаотичной адаптации, не потому что плохо работают. Каждый такой уход стоит 100–150% его зарплаты ещё до того, как человек начал давать результат.</p>
+      </div>
+    </div>
+    <div class="mid-cta reveal">
+      <p class="mid-cta-label">Узнайте, сколько из этого есть в вашей компании</p>
+      <a href="https://t.me/HR_Ignatiy" class="btn-primary">Разобрать вашу ситуацию →</a>
     </div>
   </div>
 </section>
 
 <section class="process" id="process">
   <div class="section-inner">
-    <h2 class="section-title reveal" style="margin-bottom:52px">Четыре шага.<br>Никакой воды.</h2>
+    <p class="section-eyebrow reveal">Как я работаю</p>
+    <h2 class="section-title reveal">Четыре шага.<br>Никакой воды.</h2>
+    <p class="section-sub reveal">Без презентаций — только конкретная автоматизация HR и реальные изменения.</p>
     <div class="process-steps">
-      <div class="step reveal"><div class="step-num">Шаг 01</div><h3 class="step-title">Диагностика</h3><p class="step-desc">Анализирую все HR-процессы: найм, онбординг, удержание, увольнения. Нахожу, где утекают деньги и время.</p></div>
-      <div class="step reveal"><div class="step-num">Шаг 02</div><h3 class="step-title">Аудит данных</h3><p class="step-desc">Смотрю на метрики, которые бизнес не считает. Строю базовую аналитику и нахожу точки роста.</p></div>
-      <div class="step reveal"><div class="step-num">Шаг 03</div><h3 class="step-title">Стратегия</h3><p class="step-desc">Предлагаю конкретный план: что автоматизировать, что перестроить, что убрать. С цифрами и сроками.</p></div>
-      <div class="step reveal"><div class="step-num">Шаг 04</div><h3 class="step-title">Внедрение</h3><p class="step-desc">Помогаю реализовать изменения — от выбора инструментов до обучения команды и настройки процессов.</p></div>
+      <div class="step reveal" style="transition-delay:0ms">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Диагностика</h3>
+        <p class="step-desc">Анализирую все HR-процессы: найм, онбординг, удержание, увольнения. Нахожу, где утекают деньги и время.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:100ms">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Аудит данных</h3>
+        <p class="step-desc">Смотрю на метрики, которые бизнес не считает. Строю базовую аналитику и нахожу точки роста.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:200ms">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Стратегия</h3>
+        <p class="step-desc">Предлагаю конкретный план: что автоматизировать, что перестроить, что убрать. С цифрами и сроками.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:300ms">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Внедрение</h3>
+        <p class="step-desc">Помогаю реализовать изменения — от выбора инструментов до обучения команды и настройки процессов.</p>
+      </div>
+    </div>
+    <div class="mid-cta reveal">
+      <p class="mid-cta-label">Первый шаг — диагностика. Это бесплатно</p>
+      <a href="https://t.me/HR_Ignatiy" class="btn-primary">Начать с диагностики →</a>
     </div>
   </div>
 </section>
@@ -416,15 +472,25 @@
 <section class="about" id="about">
   <div class="about-inner">
     <div class="about-photo-wrap reveal-left">
-      <img class="about-photo" src="/assets/about.jpeg" alt="Портрет Игнатия Филатова" width="600" height="900" loading="lazy">
-      <div class="about-photo-badge"><div class="badge-title">Работаю удалённо</div><div class="badge-sub">Батуми, Грузия</div></div>
+      <img class="about-photo" src="/assets/about.jpeg" alt="Игнатий Филатов за работой" width="600" height="450" loading="lazy">
+      <div class="about-photo-badge">
+        <div class="badge-title">Работаю удалённо</div>
+        <div class="badge-sub">Батуми, Грузия</div>
+      </div>
     </div>
     <div class="about-content">
       <p class="about-eyebrow reveal">Обо мне</p>
       <h2 class="about-title reveal-right">Игнатий.<br>HRBP с практическим взглядом.</h2>
       <p class="about-text reveal-right">Мне 25, и я действующий HRBP. Специализируюсь на автоматизации HR процессов для русскоязычных компаний до 300 человек. Работаю на стыке HR и бизнеса — помогаю не просто «управлять людьми», а выстраивать процессы, которые реально влияют на результат.</p>
       <p class="about-text reveal-right">Я не из тех, кто делает красивые отчёты в стол. Моя задача — найти, где ваш бизнес теряет деньги на HR, и исправить это с помощью автоматизации и здравого смысла.</p>
-      <div class="tags reveal-right"><span class="tag">HRBP</span><span class="tag">HR-аналитика</span><span class="tag">Автоматизация</span><span class="tag">Найм и онбординг</span><span class="tag">Снижение текучести</span><span class="tag">HR-стратегия</span></div>
+      <div class="tags reveal-right">
+        <span class="tag">HRBP</span>
+        <span class="tag">HR-аналитика</span>
+        <span class="tag">Автоматизация</span>
+        <span class="tag">Найм и онбординг</span>
+        <span class="tag">Снижение текучести</span>
+        <span class="tag">HR-стратегия</span>
+      </div>
     </div>
   </div>
 </section>
@@ -435,18 +501,49 @@
     <h2 class="section-title reveal">Не слова. Цифры.</h2>
     <p class="section-sub reveal">Примеры того, что происходит после работы со мной.</p>
     <div class="results-grid">
-      <div class="result-card reveal-scale"><p class="result-quote">«Найм строился на ручном сорсинге и занимал 5 недель. После перестройки процесса перешли на входящий поток — срок закрытия сократился до 3 недель.»</p><div class="result-number">−40%</div><div class="result-desc">Сокращение срока закрытия вакансий</div><div class="result-author"><div class="result-author-avatar" aria-hidden="true">HR</div><div><div class="result-author-name">HR-директор</div><div class="result-author-role">Геймдев · 80+ сотрудников</div></div></div></div>
-      <div class="result-card reveal-scale"><p class="result-quote">«Рутинные коммуникации с кандидатами съедали часы каждую неделю. После автоматизации команда перестала тратить время на то, что можно делегировать боту.»</p><div class="result-number">180 000 ₽/год</div><div class="result-desc">Экономия на HR-рутине</div><div class="result-author"><div class="result-author-avatar" aria-hidden="true">СЕО</div><div><div class="result-author-name">CEO</div><div class="result-author-role">Геймдев · 80+ сотрудников</div></div></div></div>
-      <div class="result-card reveal-scale"><p class="result-quote">«Руководители тратили время на встречи с нерелевантными кандидатами. После внедрения системы отбора стали видеть только тех, кто реально подходит.»</p><div class="result-number">×2</div><div class="result-desc">Снижение нерелевантных интервью</div><div class="result-author"><div class="result-author-avatar" aria-hidden="true">ОД</div><div><div class="result-author-name">Операционный директор</div><div class="result-author-role">Геймдев · 100+ сотрудников</div></div></div></div>
+      <div class="result-card reveal-scale" style="transition-delay:0ms">
+        <p class="result-quote">«Найм строился на ручном сорсинге и занимал 5 недель. После перестройки процесса перешли на входящий поток — срок закрытия сократился до 3 недель.»</p>
+        <div class="result-number">−40%</div>
+        <div class="result-desc">Сокращение срока закрытия вакансий</div>
+        <div class="result-author">
+          <div class="result-author-avatar" aria-hidden="true">HR</div>
+          <div><div class="result-author-name">HR-директор</div><div class="result-author-role">Геймдев · 80+ сотрудников</div></div>
+        </div>
+      </div>
+      <div class="result-card reveal-scale" style="transition-delay:120ms">
+        <p class="result-quote">«Рутинные коммуникации с кандидатами съедали часы каждую неделю. После автоматизации команда перестала тратить время на то, что можно делегировать боту.»</p>
+        <div class="result-number">180 000 ₽</div>
+        <div class="result-desc">Экономия в год на HR-рутине</div>
+        <div class="result-author">
+          <div class="result-author-avatar" aria-hidden="true">CEO</div>
+          <div><div class="result-author-name">CEO</div><div class="result-author-role">Геймдев · 80+ сотрудников</div></div>
+        </div>
+      </div>
+      <div class="result-card reveal-scale" style="transition-delay:240ms">
+        <p class="result-quote">«Руководители тратили время на встречи с нерелевантными кандидатами. После внедрения системы отбора стали видеть только тех, кто реально подходит.»</p>
+        <div class="result-number">×2</div>
+        <div class="result-desc">Снижение нерелевантных интервью</div>
+        <div class="result-author">
+          <div class="result-author-avatar" aria-hidden="true">ОД</div>
+          <div><div class="result-author-name">Операционный директор</div><div class="result-author-role">Геймдев · 100+ сотрудников</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="mid-cta reveal">
+      <p class="mid-cta-label">Хотите такой же результат для своей компании?</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="https://t.me/HR_Ignatiy" class="btn-primary">Написать в Telegram</a>
+        <a href="https://wa.me/995557602599" class="btn-primary btn-wa">WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="human" aria-label="Почему я">
+<div class="human" aria-label="Почему я">
   <div class="human-inner">
     <div class="human-photo-wrap reveal-left">
-      <img class="human-photo" src="/assets/human.jpeg" alt="Игнатий за ноутбуком в кафе" width="1000" height="666" loading="lazy">
-      <div class="human-overlay"></div>
+      <img class="human-photo" src="/assets/human.jpeg" alt="Игнатий Филатов" width="1000" height="666" loading="lazy">
+      <div class="human-overlay" aria-hidden="true"></div>
     </div>
     <div class="human-text reveal-right">
       <p class="human-eyebrow">Почему я</p>
@@ -454,16 +551,18 @@
       <p class="human-body">Я работаю быстро, говорю прямо и считаю деньги. Мне важно, чтобы после нашей работы у вас был реальный результат, а не папка с рекомендациями, которая пылится на полке.</p>
     </div>
   </div>
-</section>
+</div>
 
 <section class="cta-section" id="contact">
   <div class="section-inner">
     <div class="cta-card reveal">
-      <div class="cta-available"><span class="cta-dot"></span>Принимаю новые проекты</div>
+      <div class="cta-available"><span class="cta-dot" aria-hidden="true"></span>Принимаю новые проекты</div>
       <h2 class="cta-title">Готовы узнать,<br>где теряет деньги ваш бизнес?</h2>
       <p class="cta-sub">Первый разговор — бесплатно. 30 минут, и у вас будет чёткое понимание, с чего начать.</p>
-      <a href="https://t.me/HR_Ignatiy" class="btn-primary">Написать в Telegram</a>
-      <a href="https://wa.me/995557602599" class="btn-primary btn-whatsapp">WhatsApp</a>
+      <div class="cta-btns">
+        <a href="https://t.me/HR_Ignatiy" class="btn-primary">Написать в Telegram</a>
+        <a href="https://wa.me/995557602599" class="btn-primary btn-wa">WhatsApp</a>
+      </div>
       <a href="mailto:ignatiygeo@gmail.com" class="cta-link">или написать на почту →</a>
       <p class="cta-microcopy">Без обязательств · Ответ в течение 24 часов</p>
     </div>
@@ -471,17 +570,13 @@
 </section>
 
 </main>
+
 <footer>
-  <p class="footer-text">© 2026 Игнатий Филатов — HRBP, HR-консультант, автоматизация HR процессов. Все права защищены.</p>
+  <p class="footer-text">© 2026 Игнатий Филатов — HRBP, HR-консультант, автоматизация HR процессов</p>
+  <p class="footer-text" style="margin-top:6px"><a href="/privacy/" class="footer-link">Политика конфиденциальности</a></p>
 </footer>
 
 <script src="/assets/shared.js"></script>
-<script>
-  // Problem cards stagger (index-specific)
-  document.querySelectorAll('.problems-grid .problem-card').forEach((c, i) => {
-    c.style.transitionDelay = (i * 75) + 'ms';
-  });
-</script>
 
 <div class="mobile-cta-bar" aria-label="Быстрый контакт">
   <a href="https://t.me/HR_Ignatiy" class="mcta-tg">Telegram</a>
