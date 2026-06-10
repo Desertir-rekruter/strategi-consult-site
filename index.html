@@ -55,6 +55,46 @@
   "author": {"@type": "Person","name": "Игнатий Филатов"}
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Игнатию 25 лет — достаточно ли у него опыта для HR консультирования?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Игнатий — действующий HRBP, а не теоретик. В HR с 20 лет, работал внутри компаний разного масштаба. Провёл 25+ аудитов HR-процессов — это реальная практика, а не кейсы из учебника."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Сколько стоит HR консультирование и автоматизация HR процессов?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Стоимость зависит от масштаба задачи и размера компании. Первичная диагностика HR процессов — бесплатно. После неё Игнатий называет конкретную стоимость без размытых диапазонов. Большинство клиентов окупают вложение в первый месяц за счёт экономии на рутине."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Подойдёт ли автоматизация HR для нашей сферы деятельности?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Игнатий работает с компаниями до 300 человек в IT, ритейле, строительстве, производстве и сфере услуг. HR-процессы ломаются одинаково в любой отрасли: ручная рутина, хаос в найме, слабый онбординг. Если в компании есть сотрудники — автоматизация HR процессов даст результат."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Мы уже пробовали автоматизацию HR — почему в этот раз будет иначе?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Чаще всего причина неудачи — внедряли инструмент без изменения самого процесса. CRM не работает, если воронка найма не настроена. Бот не помогает, если онбординг хаотичный. Игнатий начинает с диагностики и перестройки процесса, и только потом выбирает инструменты автоматизации."
+      }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -136,12 +176,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:52px;d
 @keyframes scrollBounce{0%,100%{transform:rotate(45deg) translateY(0);opacity:.4}50%{transform:rotate(45deg) translateY(6px);opacity:.9}}
 
 /* BUTTONS */
-.btn-primary{padding:13px 28px;background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:var(--radius);text-decoration:none;transition:background .2s,transform .15s;display:inline-block}
-.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}
-.btn-primary:active{transform:scale(.96) translateY(1px)!important;transition-duration:.06s!important}
-.btn-secondary{padding:13px 28px;color:var(--ink);font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:var(--radius);text-decoration:none;border:1px solid rgba(23,91,154,.45);transition:border-color .2s,color .2s,transform .15s;display:inline-block}
-.btn-secondary:hover{border-color:#175B9A;color:#e8e6e0;transform:translateY(-1px)}
-.btn-secondary:active{transform:scale(.96) translateY(1px)!important;transition-duration:.06s!important}
+.btn-primary{padding:13px 28px;background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:var(--radius);text-decoration:none;transition:background .2s,transform 160ms cubic-bezier(.23,1,.32,1);display:inline-block}
+.btn-primary:active{transform:scale(.96) translateY(1px)}
+.btn-secondary{padding:13px 28px;color:var(--ink);font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;border-radius:var(--radius);text-decoration:none;border:1px solid rgba(23,91,154,.45);transition:border-color .2s,color .2s,transform 160ms cubic-bezier(.23,1,.32,1);display:inline-block}
+.btn-secondary:active{transform:scale(.96) translateY(1px)}
+@media(hover:hover) and (pointer:fine){.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}.btn-secondary:hover{border-color:#175B9A;color:#e8e6e0;transform:translateY(-1px)}}
 .btn-wa{background:var(--color-whatsapp)!important}
 .btn-wa:hover{background:var(--color-whatsapp-hover)!important}
 
@@ -159,18 +198,16 @@ section{padding:104px 24px}
 .section-sub{font-size:17px;font-weight:300;color:var(--gray);text-align:center;max-width:520px;margin:0 auto 64px;line-height:1.6;text-wrap:balance}
 
 /* SECTION SEPARATORS */
-.stats,.problems,.process,.about,.results,.cta-section{position:relative}
-.stats::before,.problems::before,.process::before,.about::before,.results::before,.cta-section::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(to right,transparent,rgba(142,139,128,.38),transparent);pointer-events:none}
+.stats,.problems,.process,.about,.results,.faq,.cta-section{position:relative}
+.stats::before,.problems::before,.process::before,.about::before,.results::before,.faq::before,.cta-section::before{content:'';position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(to right,transparent,rgba(142,139,128,.38),transparent);pointer-events:none}
 
 /* PROBLEMS — bento grid */
 .problems{background:var(--black)}
 .problems-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:dense;gap:1px;background:rgba(142,139,128,.1);border-radius:16px;overflow:hidden}
 .problem-card{background:var(--surface);padding:40px 32px;transition:background .25s}
-.problem-card:hover{background:var(--elevated)}
 .problem-card:first-child{grid-column:span 2;background:rgba(238,106,27,.07)}
-.problem-card:first-child:hover{background:rgba(238,106,27,.11)}
 .problem-card:last-child{grid-column:span 2;background:rgba(238,106,27,.07)}
-.problem-card:last-child:hover{background:rgba(238,106,27,.11)}
+@media(hover:hover) and (pointer:fine){.problem-card:hover{background:var(--elevated)}.problem-card:first-child:hover{background:rgba(238,106,27,.11)}.problem-card:last-child:hover{background:rgba(238,106,27,.11)}}
 .problem-icon{margin-bottom:20px;display:block}
 .problem-title{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px;color:var(--ink)}
 .problem-desc{font-size:14px;font-weight:300;color:var(--ink-2);line-height:1.68}
@@ -180,9 +217,8 @@ section{padding:104px 24px}
 .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(142,139,128,.22);border-radius:16px;overflow:hidden}
 .step{padding:40px 32px;border-right:1px solid rgba(142,139,128,.16);position:relative;overflow:hidden;transition:background .25s}
 .step:last-child{border-right:none}
-.step:hover{background:rgba(232,230,224,.04)}
 .step-num{font-size:56px;font-weight:700;letter-spacing:-.04em;line-height:1;color:rgba(142,139,128,.25);margin-bottom:24px;transition:color .3s}
-.step:hover .step-num{color:rgba(23,91,154,.55)}
+@media(hover:hover) and (pointer:fine){.step:hover{background:rgba(232,230,224,.04)}.step:hover .step-num{color:rgba(23,91,154,.55)}}
 .step-title{font-size:17px;font-weight:600;letter-spacing:-.01em;margin-bottom:10px;color:var(--ink)}
 .step-desc{font-size:14px;font-weight:300;color:var(--ink-2);line-height:1.68}
 .step::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.23,1,.32,1)}
@@ -192,8 +228,8 @@ section{padding:104px 24px}
 .about{background:var(--black)}
 .about-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:980px;margin:0 auto}
 .about-photo-wrap{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 32px 80px rgba(13,21,32,.7)}
-.about-photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;filter:brightness(.92) contrast(1.04);transition:transform .5s cubic-bezier(.23,1,.32,1)}
-.about-photo-wrap:hover .about-photo{transform:scale(1.03)}
+.about-photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;filter:brightness(.92) contrast(1.04);transition:transform 250ms cubic-bezier(.23,1,.32,1)}
+@media(hover:hover) and (pointer:fine){.about-photo-wrap:hover .about-photo{transform:scale(1.03)}}
 .about-photo-badge{position:absolute;bottom:16px;left:16px;background:rgba(13,21,32,.88);backdrop-filter:blur(12px);border:1px solid var(--border-strong);border-radius:12px;padding:10px 16px}
 .badge-title{font-size:13px;font-weight:600;color:var(--ink)}
 .badge-sub{font-size:11px;color:var(--gray);margin-top:2px}
@@ -206,8 +242,8 @@ section{padding:104px 24px}
 /* RESULTS */
 .results{background:var(--surface)}
 .results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.result-card{background:var(--black);border-radius:16px;padding:32px;border:1px solid var(--border);transition:border-color .25s,transform .25s}
-.result-card:hover{border-color:rgba(23,91,154,.45);transform:translateY(-3px)}
+.result-card{background:var(--black);border-radius:16px;padding:32px;border:1px solid var(--border);transition:border-color .25s,transform 250ms cubic-bezier(.23,1,.32,1)}
+@media(hover:hover) and (pointer:fine){.result-card:hover{border-color:rgba(23,91,154,.45);transform:translateY(-3px)}}
 .result-quote{font-size:15px;font-weight:300;color:var(--ink-2);line-height:1.72;margin-bottom:24px;font-style:italic}
 .result-number{font-size:40px;font-weight:700;color:var(--accent);letter-spacing:-.03em;margin-bottom:4px;line-height:1}
 .result-desc{font-size:13px;font-weight:400;color:var(--gray);margin-bottom:20px}
@@ -220,8 +256,8 @@ section{padding:104px 24px}
 .human{background:var(--black);padding:0;overflow:hidden}
 .human-inner{display:grid;grid-template-columns:1fr 1fr;min-height:440px}
 .human-photo-wrap{position:relative;overflow:hidden;min-height:380px}
-.human-photo{width:100%;height:100%;object-fit:cover;object-position:center 5%;filter:brightness(.88) saturate(.85);display:block;transition:transform .6s cubic-bezier(.23,1,.32,1)}
-.human-photo-wrap:hover .human-photo{transform:scale(1.03)}
+.human-photo{width:100%;height:100%;object-fit:cover;object-position:center 5%;filter:brightness(.88) saturate(.85);display:block;transition:transform 250ms cubic-bezier(.23,1,.32,1)}
+@media(hover:hover) and (pointer:fine){.human-photo-wrap:hover .human-photo{transform:scale(1.03)}}
 .human-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 55%,rgba(13,21,32,.88) 100%)}
 .human-text{background:var(--surface);display:flex;flex-direction:column;justify-content:center;padding:64px 56px;border-left:1px solid var(--border)}
 .human-eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
@@ -245,6 +281,14 @@ section{padding:104px 24px}
 /* MID-PAGE CTA */
 .mid-cta{text-align:center;margin-top:52px;padding-top:48px;border-top:1px solid rgba(232,230,224,.07)}
 .mid-cta-label{font-size:14px;font-weight:300;color:var(--gray);margin-bottom:18px}
+
+/* FAQ */
+.faq{background:var(--surface)}
+.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(142,139,128,.1);border-radius:16px;overflow:hidden}
+.faq-item{background:var(--black);padding:36px 32px;transition:background .25s}
+.faq-q{font-size:17px;font-weight:600;letter-spacing:-.01em;color:var(--ink);margin-bottom:12px;line-height:1.35}
+.faq-a{font-size:14px;font-weight:300;color:var(--ink-2);line-height:1.72}
+@media(hover:hover) and (pointer:fine){.faq-item:hover{background:var(--elevated)}}
 
 /* FOOTER */
 footer{background:var(--surface);border-top:1px solid var(--border);padding:28px 24px;text-align:center}
@@ -286,6 +330,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:28px
   .human-inner{grid-template-columns:1fr}
   .human-photo-wrap{height:280px;min-height:unset}
   .human-text{padding:40px 28px}
+  .faq-grid{grid-template-columns:1fr}
   .cta-card{padding:48px 24px}
   .scroll-hint{display:none}
   .reveal-left,.reveal-right{transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
@@ -364,9 +409,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:28px
   <div class="hero-left">
     <p class="hero-eyebrow">HRBP · Консультант · 25 лет</p>
     <h1 class="hero-title">Ваш бизнес теряет деньги прямо сейчас.</h1>
-    <p class="hero-sub">Провожу HR-аудит, нахожу где утекают деньги — и внедряю автоматизацию HR процессов: найм, онбординг, кадровый учёт.</p>
+    <p class="hero-sub">Нахожу, где HR съедает деньги — и выстраиваю процессы, которые это останавливают. Клиенты экономят от 150&nbsp;000&nbsp;₽ в год уже на первом этапе.</p>
     <div class="hero-buttons">
-      <a href="#contact" class="btn-primary">Обсудить задачу</a>
+      <a href="#contact" class="btn-primary">Получить бесплатный аудит</a>
       <a href="#process" class="btn-secondary">Как я работаю</a>
     </div>
   </div>
@@ -429,8 +474,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:28px
       </div>
     </div>
     <div class="mid-cta reveal">
-      <p class="mid-cta-label">Узнайте, сколько из этого есть в вашей компании</p>
-      <a href="https://t.me/HR_Ignatiy" class="btn-primary">Разобрать вашу ситуацию →</a>
+      <p class="mid-cta-label">Узнайте за 30 минут, где именно теряет деньги ваша компания</p>
+      <a href="https://t.me/HR_Ignatiy" class="btn-primary">Узнать, где теряет деньги мой бизнес →</a>
     </div>
   </div>
 </section>
@@ -463,34 +508,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:28px
       </div>
     </div>
     <div class="mid-cta reveal">
-      <p class="mid-cta-label">Первый шаг — диагностика. Это бесплатно</p>
+      <p class="mid-cta-label">Диагностика бесплатна — уже на звонке вы поймёте, с чего начать</p>
       <a href="https://t.me/HR_Ignatiy" class="btn-primary">Начать с диагностики →</a>
-    </div>
-  </div>
-</section>
-
-<section class="about" id="about">
-  <div class="about-inner">
-    <div class="about-photo-wrap reveal-left">
-      <img class="about-photo" src="/assets/about.jpeg" alt="Игнатий Филатов за работой" width="600" height="450" loading="lazy">
-      <div class="about-photo-badge">
-        <div class="badge-title">Работаю удалённо</div>
-        <div class="badge-sub">Батуми, Грузия</div>
-      </div>
-    </div>
-    <div class="about-content">
-      <p class="about-eyebrow reveal">Обо мне</p>
-      <h2 class="about-title reveal-right">Игнатий.<br>HRBP с практическим взглядом.</h2>
-      <p class="about-text reveal-right">Мне 25, и я действующий HRBP. Специализируюсь на автоматизации HR процессов для русскоязычных компаний до 300 человек. Работаю на стыке HR и бизнеса — помогаю не просто «управлять людьми», а выстраивать процессы, которые реально влияют на результат.</p>
-      <p class="about-text reveal-right">Я не из тех, кто делает красивые отчёты в стол. Моя задача — найти, где ваш бизнес теряет деньги на HR, и исправить это с помощью автоматизации и здравого смысла.</p>
-      <div class="tags reveal-right">
-        <span class="tag">HRBP</span>
-        <span class="tag">HR-аналитика</span>
-        <span class="tag">Автоматизация</span>
-        <span class="tag">Найм и онбординг</span>
-        <span class="tag">Снижение текучести</span>
-        <span class="tag">HR-стратегия</span>
-      </div>
     </div>
   </div>
 </section>
@@ -530,10 +549,36 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:28px
       </div>
     </div>
     <div class="mid-cta reveal">
-      <p class="mid-cta-label">Хотите такой же результат для своей компании?</p>
+      <p class="mid-cta-label">Хотите такой же результат? Начнём с бесплатной диагностики</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="https://t.me/HR_Ignatiy" class="btn-primary">Написать в Telegram</a>
+        <a href="https://t.me/HR_Ignatiy" class="btn-primary">Получить бесплатный аудит</a>
         <a href="https://wa.me/995557602599" class="btn-primary btn-wa">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-photo-wrap reveal-left">
+      <img class="about-photo" src="/assets/about.jpeg" alt="Игнатий Филатов за работой" width="600" height="450" loading="lazy">
+      <div class="about-photo-badge">
+        <div class="badge-title">Работаю удалённо</div>
+        <div class="badge-sub">Батуми, Грузия</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <p class="about-eyebrow reveal">Обо мне</p>
+      <h2 class="about-title reveal-right">Игнатий.<br>HRBP с практическим взглядом.</h2>
+      <p class="about-text reveal-right">Мне 25, и я действующий HRBP. Специализируюсь на автоматизации HR процессов для русскоязычных компаний до 300 человек. Работаю на стыке HR и бизнеса — помогаю не просто «управлять людьми», а выстраивать процессы, которые реально влияют на результат.</p>
+      <p class="about-text reveal-right">Я не из тех, кто делает красивые отчёты в стол. Моя задача — найти, где ваш бизнес теряет деньги на HR, и исправить это с помощью автоматизации и здравого смысла.</p>
+      <div class="tags reveal-right">
+        <span class="tag">HRBP</span>
+        <span class="tag">HR-аналитика</span>
+        <span class="tag">Автоматизация</span>
+        <span class="tag">Найм и онбординг</span>
+        <span class="tag">Снижение текучести</span>
+        <span class="tag">HR-стратегия</span>
       </div>
     </div>
   </div>
@@ -553,18 +598,44 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:28px
   </div>
 </div>
 
+<section class="faq">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Вопросы</p>
+    <h2 class="section-title reveal">Частые сомнения</h2>
+    <p class="section-sub reveal">Отвечаю честно.</p>
+    <div class="faq-grid">
+      <div class="faq-item reveal" style="transition-delay:0ms">
+        <h3 class="faq-q">Тебе 25 лет — достаточно ли у тебя опыта?</h3>
+        <p class="faq-a">Я действующий HRBP, а не теоретик. В HR с 20 лет, работал внутри компаний разного масштаба. 25+ аудитов — это реальная практика, а не кейсы из учебника. Молодость здесь плюс: не тащу с собой устаревшие подходы.</p>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:80ms">
+        <h3 class="faq-q">Сколько это стоит?</h3>
+        <p class="faq-a">Стоимость зависит от масштаба задачи. Диагностика — бесплатно. После неё скажу, что конкретно нужно и сколько стоит — без размытых диапазонов. Большинство клиентов окупают вложение в первый же месяц за счёт экономии на рутине.</p>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:160ms">
+        <h3 class="faq-q">Подойдёт ли это для нашей сферы?</h3>
+        <p class="faq-a">Работаю с компаниями до 300 человек в IT, ритейле, строительстве, производстве и сервисе. HR-процессы везде ломаются одинаково: ручная рутина, хаос в найме, слабый онбординг. Если у вас есть сотрудники — это работает.</p>
+      </div>
+      <div class="faq-item reveal" style="transition-delay:240ms">
+        <h3 class="faq-q">Мы уже пробовали автоматизацию — не зашло</h3>
+        <p class="faq-a">Обычно это значит, что внедряли инструмент без изменения процесса. CRM не работает, если воронка не настроена. Бот не помогает, если онбординг хаотичный. Я начинаю с процесса — потом выбираем инструмент, а не наоборот.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta-section" id="contact">
   <div class="section-inner">
     <div class="cta-card reveal">
-      <div class="cta-available"><span class="cta-dot" aria-hidden="true"></span>Принимаю новые проекты</div>
+      <div class="cta-available"><span class="cta-dot" aria-hidden="true"></span>Беру 2–3 клиента в месяц · сейчас есть место</div>
       <h2 class="cta-title">Готовы узнать,<br>где теряет деньги ваш бизнес?</h2>
-      <p class="cta-sub">Первый разговор — бесплатно. 30 минут, и у вас будет чёткое понимание, с чего начать.</p>
+      <p class="cta-sub">30-минутный разбор вашей ситуации — бесплатно. Уже в конце звонка вы поймёте, где утекают деньги и что с этим делать.</p>
       <div class="cta-btns">
-        <a href="https://t.me/HR_Ignatiy" class="btn-primary">Написать в Telegram</a>
+        <a href="https://t.me/HR_Ignatiy" class="btn-primary">Получить бесплатный аудит</a>
         <a href="https://wa.me/995557602599" class="btn-primary btn-wa">WhatsApp</a>
       </div>
       <a href="mailto:ignatiygeo@gmail.com" class="cta-link">или написать на почту →</a>
-      <p class="cta-microcopy">Без обязательств · Ответ в течение 24 часов</p>
+      <p class="cta-microcopy">Напишите «Хочу аудит» — отвечу с уточняющими вопросами · без обязательств · ответ за 24 часа</p>
     </div>
   </div>
 </section>
