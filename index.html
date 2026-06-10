@@ -145,18 +145,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:52px;d
 .nav-links a{font-size:13px;font-weight:400;color:var(--ink-2);text-decoration:none;transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
 .nav-cta{color:var(--accent)!important;font-weight:500}
-.burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;background:none;border:none;padding:4px;position:relative;z-index:200}
-.burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:transform .3s,opacity .3s}
-.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.dropdown-menu{position:fixed;top:52px;right:0;width:260px;background:rgba(10,18,28,.98);backdrop-filter:blur(20px);border-left:1px solid var(--border);border-bottom:1px solid var(--border);padding:12px 0;z-index:199;transform:translateX(100%);transition:transform .3s ease;border-radius:0 0 0 16px;box-shadow:0 16px 40px rgba(13,21,32,.7)}
-.dropdown-menu.open{transform:translateX(0)}
-.dropdown-menu a{display:block;padding:13px 28px;font-size:14px;font-weight:400;color:var(--ink-2);text-decoration:none;transition:color .2s,background .2s}
-.dropdown-menu a:hover{color:var(--ink);background:rgba(232,230,224,.05)}
-.dropdown-menu .menu-section{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:16px 28px 8px;margin-top:4px}
-.dropdown-menu .menu-divider{height:1px;background:var(--border);margin:8px 0}
-.dropdown-menu .menu-cta{color:var(--accent)!important;font-weight:500}
 
 /* HERO */
 .hero{min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden;position:relative}
@@ -367,40 +355,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:28px
     <li><a href="#about">Обо мне</a></li>
     <li><a href="#contact" class="nav-cta">Связаться →</a></li>
   </ul>
-  <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="dropdown">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<div class="dropdown-menu" id="dropdown" role="menu">
-  <a href="#problems" role="menuitem">Проблемы</a>
-  <a href="#process" role="menuitem">Процесс</a>
-  <a href="#about" role="menuitem">Обо мне</a>
-  <div class="menu-divider"></div>
-  <div class="menu-section">Услуги</div>
-  <a href="/onboarding/" role="menuitem">Автоматизация онбординга</a>
-  <a href="/naim/" role="menuitem">Автоматизация найма</a>
-  <a href="/kadry/" role="menuitem">Кадровый учёт</a>
-  <a href="/malyj-biznes/" role="menuitem">HR для малого бизнеса</a>
-  <div class="menu-divider"></div>
-  <a href="#contact" class="menu-cta" role="menuitem">Связаться →</a>
-</div>
-
-<script>
-  const burger = document.getElementById('burger');
-  const dropdown = document.getElementById('dropdown');
-  function setMenu(open) {
-    burger.classList.toggle('open', open);
-    dropdown.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-  }
-  burger.addEventListener('click', () => setMenu(!dropdown.classList.contains('open')));
-  dropdown.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('click', e => {
-    if (!burger.contains(e.target) && !dropdown.contains(e.target)) setMenu(false);
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
-</script>
 
 <main id="main-content">
 
