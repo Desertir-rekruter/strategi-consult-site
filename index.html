@@ -340,32 +340,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 .node:hover .node-inner{transform:scale(1.06)}
 
 .node-dot{
-  width:10px;height:10px;
+  width:4px;height:4px;
   border-radius:50%;
   background:var(--accent);
   position:relative;
-  box-shadow:0 0 8px var(--accent-60),0 0 20px var(--accent-30);
-  transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s;
+  box-shadow:0 0 6px var(--accent-60);
+  transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s,opacity .3s;
+  opacity:.7;
 }
-.node-dot::before{
-  content:'';
-  position:absolute;inset:-7px;
-  border-radius:50%;
-  border:1px solid var(--accent-30);
-  transition:all .4s cubic-bezier(.23,1,.32,1);
-}
-.node-dot::after{
-  content:'';
-  position:absolute;inset:-18px;
-  border-radius:50%;
-  border:1px solid var(--accent-15);
-  transition:all .4s cubic-bezier(.23,1,.32,1);
-}
-.node:hover .node-dot{transform:scale(1.5);box-shadow:0 0 14px var(--accent-60),0 0 40px var(--accent-30)}
-.node:hover .node-dot::before{inset:-10px;border-color:var(--accent-60)}
-.node:hover .node-dot::after{inset:-24px;border-color:var(--accent-30)}
-.node.active .node-dot{transform:scale(2);box-shadow:0 0 20px var(--accent),0 0 60px var(--accent-60)}
-.node.active .node-dot::before{inset:-12px;border-color:var(--accent)}
+.node:hover .node-dot{opacity:1;transform:scale(1.6);box-shadow:0 0 10px var(--accent-60),0 0 22px var(--accent-30)}
+.node.active .node-dot{opacity:1;transform:scale(2.2);box-shadow:0 0 14px var(--accent),0 0 40px var(--accent-60)}
 
 .node-label{
   font-family:'Barlow Condensed',sans-serif;
@@ -413,30 +397,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 /* ─── STARK HUD CHROME ─── */
 #universe{cursor:crosshair}
 
-/* Halo around each node — only spins on hover */
-.node-ring{
-  position:absolute;
-  width:52px;height:52px;
-  border-radius:50%;
-  border:1px solid var(--accent-15);
-  top:50%;left:50%;
-  transform:translate(-50%,-50%) rotate(0deg);
-  animation:nodeRingSpin 7s linear infinite;
-  animation-play-state:paused;
-  pointer-events:none;
-}
-.node-ring::before{
-  content:'';position:absolute;
-  width:4px;height:4px;
-  background:var(--accent);
-  border-radius:50%;
-  top:-2px;left:50%;
-  transform:translateX(-50%);
-  box-shadow:0 0 6px var(--accent);
-}
-@keyframes nodeRingSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.node:hover .node-ring,.node.active .node-ring{animation-play-state:running;border-color:var(--accent-30)}
-.node:nth-child(3n) .node-ring{animation-direction:reverse}
+/* node-ring removed — particles form the visual cluster */
 .node:nth-child(3n+1) .node-ring{animation-duration:10s}
 
 /* Tech coordinate readout per node */
@@ -733,8 +694,7 @@ const SERVICES = [
     id: 'audit',
     label: 'АУДИТ',
     sub: 'точка входа',
-    angle: 270,
-    radius: 0.26,
+    px: 0.20, py: 0.27,
     related: ['naim','onboarding','crm'],
     eyebrow: '01 · АУДИТ ПРОЦЕССОВ',
     title: 'АУДИТ',
@@ -750,8 +710,7 @@ const SERVICES = [
     id: 'naim',
     label: 'НАЙМ',
     sub: 'поток кандидатов',
-    angle: 330,
-    radius: 0.28,
+    px: 0.76, py: 0.20,
     related: ['audit','onboarding','crm'],
     eyebrow: '02 · СИСТЕМА НАЙМА',
     title: 'НАЙМ',
@@ -767,8 +726,7 @@ const SERVICES = [
     id: 'onboarding',
     label: 'ОНБОРДИНГ',
     sub: 'первые 30 дней',
-    angle: 30,
-    radius: 0.27,
+    px: 0.84, py: 0.52,
     related: ['naim','adaptation','communications'],
     eyebrow: '03 · ОНБОРДИНГ',
     title: 'ОНБ‑ОРДИНГ',
@@ -784,8 +742,7 @@ const SERVICES = [
     id: 'adaptation',
     label: 'АДАПТАЦИЯ',
     sub: 'испытательный срок',
-    angle: 90,
-    radius: 0.27,
+    px: 0.70, py: 0.78,
     related: ['onboarding','communications','kpi'],
     eyebrow: '04 · АДАПТАЦИЯ',
     title: 'АДАПТ‑АЦИЯ',
@@ -801,8 +758,7 @@ const SERVICES = [
     id: 'communications',
     label: 'КОММУНИКАЦИИ',
     sub: 'внутри компании',
-    angle: 150,
-    radius: 0.29,
+    px: 0.44, py: 0.84,
     related: ['adaptation','kpi','audit'],
     eyebrow: '05 · ВНУТРЕННИЕ КОММУНИКАЦИИ',
     title: 'КОММ‑УНИК‑АЦИИ',
@@ -818,8 +774,7 @@ const SERVICES = [
     id: 'kpi',
     label: 'KPI',
     sub: 'измеримость',
-    angle: 210,
-    radius: 0.26,
+    px: 0.22, py: 0.76,
     related: ['communications','crm','audit'],
     eyebrow: '06 · СИСТЕМА KPI',
     title: 'KPI',
@@ -835,8 +790,7 @@ const SERVICES = [
     id: 'crm',
     label: 'CRM',
     sub: 'система под ключ',
-    angle: 240,
-    radius: 0.28,
+    px: 0.10, py: 0.50,
     related: ['naim','kpi','audit'],
     eyebrow: '07 · CRM ПОД КЛЮЧ',
     title: 'CRM',
@@ -852,8 +806,7 @@ const SERVICES = [
     id: 'consult',
     label: 'КОНСУЛЬТАЦИЯ',
     sub: 'разовый разбор',
-    angle: 300,
-    radius: 0.25,
+    px: 0.50, py: 0.42,
     related: ['audit','naim','kpi'],
     eyebrow: '08 · HR-КОНСУЛЬТАЦИЯ',
     title: 'КОНСУЛЬТ‑АЦИЯ',
@@ -871,14 +824,72 @@ const SERVICES = [
 let universeActive = false;
 let activeNode = null;
 let panelOpen = false;
-let mouseX = 0, mouseY = 0;       // normalized -1..1 for parallax
+let mouseX = 0, mouseY = 0;
 let animFrame = null;
 const isMobile = () => window.innerWidth <= 768;
-
-// Mouse-driven energy state
-let activityLevel = 0;    // 0–1, boosted by mouse movement, decays to 0
-let arcAccum = 0;         // accumulated rotation angle (radians), driven by activity
 let prevRawX = 0, prevRawY = 0;
+
+// ─── PARTICLE SYSTEM ─────────────────────────────────────
+let particles = [];
+const PCOUNT    = 680;
+const SPRING    = 0.028;
+const DAMP      = 0.91;
+const REPEL_R   = 105;
+const REPEL_F   = 3.2;
+const JITTER_R  = 52;
+
+function attractorPos(s) {
+  return { x: s.px * window.innerWidth, y: s.py * window.innerHeight };
+}
+
+function initParticles() {
+  const W = window.innerWidth, H = window.innerHeight;
+  particles = [];
+  for (let i = 0; i < PCOUNT; i++) {
+    const s = SERVICES[i % SERVICES.length];
+    const ap = attractorPos(s);
+    const a = Math.random() * Math.PI * 2;
+    const r = Math.random() * JITTER_R;
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 4,
+      vy: (Math.random() - 0.5) * 4,
+      offX: Math.cos(a) * r,
+      offY: Math.sin(a) * r,
+      sid: s.id,
+      size: 0.7 + Math.random() * 1.4,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+}
+
+function updateParticles() {
+  const mx = rawMouseX, my = rawMouseY;
+  const hasMouse = mx > -9000;
+  particles.forEach(p => {
+    const s = SERVICES.find(sv => sv.id === p.sid);
+    if (!s) return;
+    const ap = attractorPos(s);
+    const hx = ap.x + p.offX;
+    const hy = ap.y + p.offY;
+    p.vx += (hx - p.x) * SPRING;
+    p.vy += (hy - p.y) * SPRING;
+    if (hasMouse) {
+      const mdx = p.x - mx, mdy = p.y - my;
+      const md = Math.hypot(mdx, mdy);
+      if (md < REPEL_R && md > 1) {
+        const f = ((REPEL_R - md) / REPEL_R) * REPEL_F;
+        p.vx += (mdx / md) * f;
+        p.vy += (mdy / md) * f;
+      }
+    }
+    p.vx *= DAMP;
+    p.vy *= DAMP;
+    p.x += p.vx;
+    p.y += p.vy;
+  });
+}
 
 // ─── ELEMENTS ───────────────────────────────────────────
 const enterBtn = document.getElementById('enter-btn');
@@ -896,8 +907,8 @@ const heroSection = document.getElementById('hero');
 
 // ─── BUILD NODES ─────────────────────────────────────────
 function nodeCoord(s) {
-  const lat = (41 + (s.angle % 90) * 0.1).toFixed(1);
-  const lon = (41 + s.radius * 100 * 0.15).toFixed(1);
+  const lat = (41 + s.py * 8).toFixed(1);
+  const lon = (41 + s.px * 8).toFixed(1);
   return `${lat}°N · ${lon}°E`;
 }
 
@@ -914,10 +925,9 @@ function buildNodes() {
     node.setAttribute('tabindex', '0');
     node.setAttribute('aria-label', s.label);
     node.style.opacity = '1';
-    node.style.transform = 'translate(-50%,-50%) scale(1)';
+    node.style.transform = 'translate(-50%,-50%)';
     node.innerHTML = `
       <div class="node-inner">
-        <div class="node-ring" aria-hidden="true"></div>
         <div class="node-dot"></div>
         <span class="node-label">${s.label}</span>
         <span class="node-sub">${s.sub}</span>
@@ -927,7 +937,6 @@ function buildNodes() {
     node.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') openPanel(s) });
     orbit.appendChild(node);
 
-    // Mobile node
     if (mobile && isMobile()) {
       mobile.style.display = 'flex';
       const mn = document.createElement('div');
@@ -939,82 +948,41 @@ function buildNodes() {
   });
 
   positionNodes();
-  materializeNodes();
-}
-
-function materializeNodes() {
-  if (isMobile()) return;
-  orbit.querySelectorAll('.node').forEach(node => {
-    node.style.transition = 'none';
-    node.style.opacity = '1';
-    node.style.transform = 'translate(-50%,-50%) scale(1)';
-  });
 }
 
 function positionNodes() {
   if (isMobile()) return;
-  const W = window.innerWidth, H = window.innerHeight;
-  const cx = W / 2, cy = H / 2;
-
   SERVICES.forEach(s => {
     const node = orbit.querySelector(`[data-id="${s.id}"]`);
     if (!node) return;
-    const rad = (s.angle * Math.PI) / 180;
-    const rx = Math.min(W, 1400) * s.radius;
-    const ry = Math.min(H, 900) * s.radius * 0.72;
-    const x = cx + rx * Math.cos(rad);
-    const y = cy + ry * Math.sin(rad);
-    node.style.left = x + 'px';
-    node.style.top = y + 'px';
+    node.style.left = (s.px * 100) + '%';
+    node.style.top  = (s.py * 100) + '%';
   });
 }
 
 // ─── HELPERS ─────────────────────────────────────────────
 function getNodeCenter(id) {
-  const node = orbit.querySelector(`[data-id="${id}"]`);
-  if (!node) return null;
-  const rect = node.getBoundingClientRect();
-  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  const s = SERVICES.find(sv => sv.id === id);
+  if (!s) return null;
+  return { x: s.px * window.innerWidth, y: s.py * window.innerHeight };
 }
 
 // ─── UNIFIED ANIMATION LOOP ───────────────────────────────
 let uniLastTs = null;
 let rawMouseX = -9999, rawMouseY = -9999;
-let dashOffset = 0;       // animated only while activity > 0
-let particlePhases = {};  // per-service particle phase (stops when mouse stops)
 
 function uniFrame(ts) {
   if (!universeActive) return;
-  const dt = uniLastTs ? Math.min((ts - uniLastTs) / 1000, 0.05) : 0.016;
   uniLastTs = ts;
-
-  // Decay activity toward 0 (energy drains when mouse stops)
-  activityLevel = Math.max(0, activityLevel - dt * 1.4);
-
-  // Accumulate rotation and dash offset driven by activity only
-  arcAccum += activityLevel * dt * 2.2;
-  if (activityLevel > 0.01) dashOffset -= activityLevel * dt * 22;
-
-  // Advance particle phases only while mouse moves
-  SERVICES.forEach(s => {
-    if (!particlePhases[s.id]) particlePhases[s.id] = s.angle / 360;
-    const isActive = activeNode === s.id;
-    const spd = isActive ? 0.55 : 0.28;
-    particlePhases[s.id] = (particlePhases[s.id] + activityLevel * spd * dt) % 1;
-  });
-
-  // Parallax orbit tilt — stays at last mouse position, updates on move
+  updateParticles();
   if (!panelOpen && !isMobile()) {
-    const tiltX = mouseY * 12;
-    const tiltY = mouseX * -12;
-    orbit.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    orbit.style.transform = `rotateX(${mouseY * 5}deg) rotateY(${mouseX * -5}deg)`;
   }
-
-  drawUniverse();
+  drawParticles(ts);
   animFrame = requestAnimationFrame(uniFrame);
 }
 
-function drawUniverse() {
+function drawParticles(ts) {
   const W = window.innerWidth;
   const H = window.innerHeight;
   if (canvas.width !== W) canvas.width = W;
@@ -1022,209 +990,88 @@ function drawUniverse() {
   ctx.clearRect(0, 0, W, H);
   if (isMobile()) return;
 
-  const cx = W / 2, cy = H / 2;
-  const act = activityLevel; // 0–1
-
-  // ── 1. DOT GRID ──────────────────────────────────────────
-  const gridStep = 58;
-  for (let gx = gridStep / 2; gx < W; gx += gridStep) {
-    for (let gy = gridStep / 2; gy < H; gy += gridStep) {
-      const d = Math.hypot(gx - cx, gy - cy);
-      const alpha = 0.07 * Math.max(0, 1 - d / 540);
-      if (alpha < 0.003) continue;
+  // ── PARTICLE WEB (active cluster only, batched) ───────────
+  const activePs = activeNode ? particles.filter(p => p.sid === activeNode) : [];
+  if (activePs.length > 0) {
+    [{ maxD: 22, a: 0.28 }, { maxD: 40, a: 0.10 }].forEach(({ maxD, a }) => {
       ctx.beginPath();
-      ctx.arc(gx, gy, 1, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,146,42,${alpha})`;
-      ctx.fill();
-    }
+      ctx.lineWidth = 0.3;
+      for (let i = 0; i < activePs.length; i++) {
+        for (let j = i + 1; j < activePs.length; j++) {
+          const pa = activePs[i], pb = activePs[j];
+          if (Math.hypot(pa.x - pb.x, pa.y - pb.y) < maxD) {
+            ctx.moveTo(pa.x, pa.y);
+            ctx.lineTo(pb.x, pb.y);
+          }
+        }
+      }
+      ctx.strokeStyle = `rgba(200,146,42,${a})`;
+      ctx.stroke();
+    });
   }
 
-  // ── 2. ARC RINGS ─────────────────────────────────────────
-  [
-    { r: 68,  segs: 4, dir:  1, len: 0.28, w: 1,   a: 0.14 + act * 0.1 },
-    { r: 125, segs: 3, dir: -1, len: 0.22, w: 0.6, a: 0.1  + act * 0.08 },
-    { r: 195, segs: 5, dir:  1, len: 0.16, w: 0.7, a: 0.07 + act * 0.06 },
-    { r: 275, segs: 2, dir: -1, len: 0.40, w: 0.5, a: 0.05 + act * 0.05 },
-  ].forEach(ring => {
-    const rot = arcAccum * ring.dir * (1 + ring.r * 0.002);
-    for (let s = 0; s < ring.segs; s++) {
-      const a0 = (s / ring.segs) * Math.PI * 2 + rot;
-      const a1 = a0 + Math.PI * 2 * ring.len;
-      ctx.beginPath();
-      ctx.arc(cx, cy, ring.r, a0, a1);
-      ctx.strokeStyle = `rgba(200,146,42,${ring.a})`;
-      ctx.lineWidth = ring.w;
-      ctx.stroke();
-    }
-  });
+  // ── PARTICLE DOTS ─────────────────────────────────────────
+  particles.forEach(p => {
+    const svc = SERVICES.find(sv => sv.id === p.sid);
+    if (!svc) return;
+    const isActive   = p.sid === activeNode;
+    const relSvc     = activeNode ? SERVICES.find(sv => sv.id === activeNode) : null;
+    const isRelated  = relSvc?.related?.includes(p.sid);
 
-  // ── 3. CENTER CROSSHAIR ───────────────────────────────────
-  ctx.save();
-  ctx.translate(cx, cy);
-  ctx.rotate(arcAccum * 0.6);
-  [0, 90, 180, 270].forEach(deg => {
-    const r = deg * Math.PI / 180;
-    ctx.beginPath();
-    ctx.moveTo(Math.cos(r) * 6, Math.sin(r) * 6);
-    ctx.lineTo(Math.cos(r) * 26, Math.sin(r) * 26);
-    ctx.strokeStyle = `rgba(200,146,42,${0.28 + act * 0.3})`;
-    ctx.lineWidth = 0.9;
-    ctx.stroke();
-  });
-  ctx.restore();
+    const ap = attractorPos(svc);
+    const distH = Math.hypot(p.x - (ap.x + p.offX), p.y - (ap.y + p.offY));
+    const homeNorm = Math.max(0, 1 - distH / (JITTER_R * 2.4));
+    const flicker  = 0.82 + 0.18 * Math.sin(ts * 0.0014 + p.phase);
 
-  // ── 4. CORNER HUD BRACKETS ───────────────────────────────
-  const cLen = 20, cPad = 40;
-  [
-    [cPad, 68, 1, 1], [W - cPad, 68, -1, 1],
-    [cPad, H - cPad, 1, -1], [W - cPad, H - cPad, -1, -1],
-  ].forEach(([x, y, sx, sy]) => {
-    const a = 0.18 + act * 0.2;
-    ctx.strokeStyle = `rgba(200,146,42,${a})`;
-    ctx.lineWidth = 0.9;
+    let alpha;
+    if (isActive)        alpha = (0.32 + homeNorm * 0.68) * flicker;
+    else if (isRelated)  alpha = (0.08 + homeNorm * 0.22) * flicker;
+    else if (activeNode) alpha = homeNorm * 0.055 * flicker;
+    else                 alpha = (0.055 + homeNorm * 0.30) * flicker;
+
+    if (alpha < 0.012) return;
+
+    if (isActive) { ctx.shadowColor = 'rgba(200,146,42,0.5)'; ctx.shadowBlur = 7; }
     ctx.beginPath();
-    ctx.moveTo(x + sx * cLen, y);
-    ctx.lineTo(x, y);
-    ctx.lineTo(x, y + sy * cLen);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(200,146,42,${a * 1.5})`;
+    ctx.arc(p.x, p.y, isActive ? p.size * 1.25 : p.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,146,42,${alpha})`;
     ctx.fill();
-  });
-
-  // ── 5. LINES + PARTICLES ─────────────────────────────────
-  const drawn = new Set();
-  SERVICES.forEach(s => {
-    const from = getNodeCenter(s.id);
-    if (!from) return;
-
-    const isActive = activeNode === s.id;
-    const relSvc = activeNode ? SERVICES.find(sv => sv.id === activeNode) : null;
-    const isRelated = relSvc?.related?.includes(s.id);
-
-    const lAlpha = isActive ? 0.55 : isRelated ? 0.32 : 0.12;
-
-    // Gradient line with amber glow when active
-    const grad = ctx.createLinearGradient(cx, cy, from.x, from.y);
-    grad.addColorStop(0, `rgba(200,146,42,${lAlpha * 0.1})`);
-    grad.addColorStop(0.5, `rgba(200,146,42,${lAlpha * 0.45})`);
-    grad.addColorStop(1, `rgba(200,146,42,${lAlpha})`);
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(from.x, from.y);
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = isActive ? 1.5 : isRelated ? 1 : 0.6;
-    if (isActive) { ctx.shadowColor = 'rgba(200,146,42,0.5)'; ctx.shadowBlur = 6; }
-    ctx.stroke();
     ctx.shadowBlur = 0;
-
-    // Particles
-    if (act > 0.02 || isActive) {
-      const numP = isActive ? 3 : 1;
-      for (let p = 0; p < numP; p++) {
-        const basePhase = particlePhases[s.id] || 0;
-        const ph = (basePhase + p / numP) % 1;
-        const px = cx + (from.x - cx) * ph;
-        const py = cy + (from.y - cy) * ph;
-        const pa = Math.sin(ph * Math.PI) * (isActive ? 0.95 : act * 0.5);
-        const pr = isActive ? 3 : 2;
-        if (pa < 0.02) continue;
-        ctx.shadowColor = 'rgba(200,146,42,0.8)';
-        ctx.shadowBlur = isActive ? 10 : 4;
-        ctx.beginPath();
-        ctx.arc(px, py, pr, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(200,146,42,${pa})`;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-    }
-
-    // Cross-node dashed connections
-    s.related.forEach(rid => {
-      const key = [s.id, rid].sort().join('-');
-      if (drawn.has(key)) return;
-      drawn.add(key);
-      const to = getNodeCenter(rid);
-      if (!to) return;
-
-      const both = activeNode === s.id || activeNode === rid;
-      ctx.beginPath();
-      ctx.moveTo(from.x, from.y);
-      ctx.lineTo(to.x, to.y);
-      ctx.strokeStyle = `rgba(200,146,42,${both ? 0.28 : 0.07})`;
-      ctx.lineWidth = both ? 1 : 0.4;
-      ctx.setLineDash(both ? [6, 8] : [3, 14]);
-      ctx.lineDashOffset = dashOffset;
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.lineDashOffset = 0;
-
-      if (both && act > 0.05) {
-        const ph2 = (particlePhases[s.id] || 0);
-        const px2 = from.x + (to.x - from.x) * ph2;
-        const py2 = from.y + (to.y - from.y) * ph2;
-        ctx.shadowColor = 'rgba(200,146,42,0.8)';
-        ctx.shadowBlur = 8;
-        ctx.beginPath();
-        ctx.arc(px2, py2, 2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(200,146,42,${act * 0.8})`;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-    });
   });
 
-  // ── 6. HUD READOUT ────────────────────────────────────────
-  ctx.font = '500 9px "Barlow", sans-serif';
-  const hudY = H - 72;
-  ctx.fillStyle = `rgba(200,146,42,${0.35 + act * 0.25})`;
-  ctx.fillText('SYS · ONLINE', 40, hudY);
-  ctx.fillStyle = `rgba(200,146,42,${0.2 + act * 0.1})`;
-  ctx.fillText('NODES · 08', 40, hudY + 15);
-  ctx.fillText(`ACT · ${Math.round(act * 100).toString().padStart(3, '0')}%`, 40, hudY + 30);
-
-  // ── 7. MOUSE RETICLE ─────────────────────────────────────
-  if (rawMouseX > 0 && rawMouseY > 0 && !panelOpen) {
+  // ── MOUSE RETICLE ─────────────────────────────────────────
+  if (rawMouseX > -9000 && !panelOpen) {
     const mx = rawMouseX, my = rawMouseY;
-    const rs = 12 + act * 6;
-    const ra = 0.2 + act * 0.4;
-    ctx.strokeStyle = `rgba(200,146,42,${ra})`;
-    ctx.lineWidth = 0.8;
+    ctx.strokeStyle = 'rgba(200,146,42,0.22)';
+    ctx.lineWidth = 0.7;
     [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([sx, sy]) => {
       ctx.beginPath();
-      ctx.moveTo(mx + sx * rs, my + sy * (rs - 7));
-      ctx.lineTo(mx + sx * rs, my + sy * rs);
-      ctx.lineTo(mx + sx * (rs - 7), my + sy * rs);
+      ctx.moveTo(mx + sx * 14, my + sy * 6);
+      ctx.lineTo(mx + sx * 14, my + sy * 14);
+      ctx.lineTo(mx + sx * 6,  my + sy * 14);
       ctx.stroke();
     });
-    ctx.shadowColor = 'rgba(200,146,42,0.6)';
-    ctx.shadowBlur = act * 8;
     ctx.beginPath();
-    ctx.arc(mx, my, 1.5 + act * 2, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(200,146,42,${0.3 + act * 0.4})`;
+    ctx.arc(mx, my, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(200,146,42,0.32)';
     ctx.fill();
-    ctx.shadowBlur = 0;
   }
+
+  // ── HUD ───────────────────────────────────────────────────
+  ctx.font = '500 9px "Barlow", sans-serif';
+  ctx.fillStyle = 'rgba(200,146,42,0.28)';
+  ctx.fillText('SYS · ONLINE', 40, H - 72);
+  ctx.fillStyle = 'rgba(200,146,42,0.18)';
+  ctx.fillText('NODES · 08', 40, H - 57);
+  ctx.fillText(`PTL · ${PCOUNT}`, 40, H - 42);
 }
 
-// ─── PARALLAX ────────────────────────────────────────────
+// ─── MOUSE ───────────────────────────────────────────────
 function onMouseMove(e) {
   if (!universeActive || isMobile()) return;
-
-  const dx = e.clientX - prevRawX;
-  const dy = e.clientY - prevRawY;
-  const speed = Math.hypot(dx, dy);
-  // Boost activity by movement speed (capped at 1)
-  activityLevel = Math.min(1, activityLevel + speed * 0.038);
-
-  prevRawX = e.clientX;
-  prevRawY = e.clientY;
-  rawMouseX = e.clientX;
-  rawMouseY = e.clientY;
-
-  // Normalized position for parallax
-  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+  prevRawX = e.clientX; prevRawY = e.clientY;
+  rawMouseX = e.clientX; rawMouseY = e.clientY;
+  mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
   mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
 }
 
@@ -1238,11 +1085,8 @@ function openUniverse() {
   setTimeout(() => {
     universe.classList.add('active');
     buildNodes();
-    // Reset state and start loop
+    initParticles();
     uniLastTs = null;
-    arcAccum = 0;
-    activityLevel = 0;
-    particlePhases = {};
     animFrame = requestAnimationFrame(uniFrame);
   }, 130);
 }
@@ -1271,12 +1115,11 @@ function openPanel(service) {
   activeNode = service.id;
   panelOpen = true;
 
-  // Fly orbit toward the clicked node's direction
-  const rad = (service.angle * Math.PI) / 180;
-  const flyX = Math.cos(rad) * 70;
-  const flyY = Math.sin(rad) * 50;
+  // Subtle shift toward service position
+  const flyX = (service.px - 0.5) * -55;
+  const flyY = (service.py - 0.5) * -55;
   orbit.style.transition = 'transform .45s cubic-bezier(.76,0,.24,1)';
-  orbit.style.transform = `translate(${flyX}px,${flyY}px) scale(1.1)`;
+  orbit.style.transform = `translate(${flyX}px,${flyY}px)`;
 
   // Dim other nodes, emphasise active
   orbit.querySelectorAll('.node').forEach(n => {
