@@ -7,7 +7,6 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <title>Игнатий Филатов — системы и процессы для бизнеса</title>
 <meta name="description" content="Выстраиваю системы которые останавливают потери. Найм, онбординг, адаптация, внутренние коммуникации, CRM под ключ. Бесплатный аудит за 30 минут.">
-<meta name="keywords" content="выстраивание процессов, бизнес-процессы, найм персонала, онбординг, адаптация сотрудников, внутренние коммуникации, CRM система, Игнатий Филатов">
 <meta name="author" content="Игнатий Филатов">
 <meta name="yandex-verification" content="b1efe23b301d7008" />
 <meta property="og:title" content="Игнатий Филатов — системы и процессы для бизнеса">
@@ -18,1255 +17,896 @@
 <link rel="canonical" href="https://strategi-consult.com/">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:site_name" content="Игнатий Филатов">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Игнатий Филатов — системы и процессы для бизнеса">
-<meta name="twitter:description" content="Нахожу где бизнес теряет деньги без процессов — и выстраиваю системы которые это останавливают.">
 <meta name="twitter:image" content="https://strategi-consult.com/assets/og-image.jpeg">
+
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Игнатий Филатов",
-  "jobTitle": "Консультант по системам и процессам",
-  "description": "Выстраиваю системы которые останавливают потери бизнеса. Найм, онбординг, адаптация, коммуникации, CRM.",
-  "url": "https://strategi-consult.com",
-  "image": "https://strategi-consult.com/assets/hero.jpeg",
-  "sameAs": ["https://t.me/HR_Ignatiy"],
-  "address": {"@type": "PostalAddress","addressLocality": "Батуми","addressCountry": "GE"},
-  "knowsAbout": ["Выстраивание бизнес-процессов","Найм персонала","Онбординг","Адаптация сотрудников","Внутренние коммуникации","CRM системы"],
-  "offers": [
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Выстраивание процессов найма","url":"https://strategi-consult.com/naim/"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Система онбординга","url":"https://strategi-consult.com/onboarding/"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Адаптация персонала","url":"https://strategi-consult.com/"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"CRM под ключ","url":"https://strategi-consult.com/"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"HR консультация","url":"https://strategi-consult.com/malyj-biznes/"}}
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Игнатий Филатов",
-  "url": "https://strategi-consult.com",
-  "description": "Системы и процессы для бизнеса.",
-  "inLanguage": "ru-RU",
-  "author": {"@type": "Person","name": "Игнатий Филатов"}
-}
+{"@context":"https://schema.org","@type":"Person","name":"Игнатий Филатов","jobTitle":"Консультант по системам и процессам","url":"https://strategi-consult.com","sameAs":["https://t.me/HR_Ignatiy"]}
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,900;1,300&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
+/* ─── RESET ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 
+/* ─── DESIGN TOKENS ─── */
 :root{
-  --bg:    #060608;
-  --bg-2:  #0C0C11;
-  --bg-3:  #141418;
   --accent:      #C8922A;
-  --accent-60:   rgba(200,146,42,.6);
-  --accent-30:   rgba(200,146,42,.3);
-  --accent-15:   rgba(200,146,42,.15);
-  --accent-08:   rgba(200,146,42,.08);
-  --text:        #E8E0D0;
-  --text-60:     rgba(232,224,208,.6);
-  --text-30:     rgba(232,224,208,.3);
-  --text-12:     rgba(232,224,208,.12);
-  --dim:         #3A3830;
+  --accent-glow: rgba(200,146,42,.35);
+  --accent-dim:  rgba(200,146,42,.18);
+
+  /* Glass system */
+  --glass:        rgba(255,255,255,.14);
+  --glass-mid:    rgba(255,255,255,.20);
+  --glass-strong: rgba(255,255,255,.26);
+  --glass-border: rgba(255,255,255,.28);
+  --glass-shine:  rgba(255,255,255,.55);
+  --glass-shadow: 0 4px 32px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.50);
+  --glass-blur:   blur(36px) saturate(180%);
+  --glass-blur-heavy: blur(52px) saturate(200%);
+
+  /* Text */
+  --on-bg:     #ffffff;
+  --on-bg-60:  rgba(255,255,255,.62);
+  --on-bg-35:  rgba(255,255,255,.35);
+  --on-glass:  #12122a;
+  --on-glass-60: rgba(18,18,42,.6);
+
+  /* Layout */
+  --radius:    22px;
+  --radius-sm: 14px;
+  --nav-h:     60px;
 }
 
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:default}
+/* ─── BACKGROUND ─── */
+body{
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,'Barlow','Segoe UI',system-ui,sans-serif;
+  font-weight:400;
+  color:var(--on-bg);
+  background:#06051a;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
-/* ─── SKIP LINK ─── */
-.skip-link{position:absolute;top:-60px;left:16px;padding:8px 16px;background:var(--accent);color:var(--bg);font-size:13px;font-weight:500;text-decoration:none;z-index:10001;transition:top .2s}
-.skip-link:focus{top:8px}
+/* Animated gradient orbs — the macOS Tahoe atmosphere */
+.bg-orbs{
+  position:fixed;inset:0;
+  pointer-events:none;z-index:0;
+  overflow:hidden;
+}
+.orb{
+  position:absolute;border-radius:50%;
+  filter:blur(90px);
+  will-change:transform;
+}
+.orb-1{
+  width:70vmax;height:70vmax;
+  background:radial-gradient(circle,rgba(80,40,220,.55) 0%,transparent 65%);
+  top:-20%;left:-15%;
+  animation:drift1 22s ease-in-out infinite;
+}
+.orb-2{
+  width:55vmax;height:55vmax;
+  background:radial-gradient(circle,rgba(0,80,255,.45) 0%,transparent 65%);
+  bottom:-15%;right:-10%;
+  animation:drift2 28s ease-in-out infinite;
+}
+.orb-3{
+  width:40vmax;height:40vmax;
+  background:radial-gradient(circle,rgba(160,40,255,.32) 0%,transparent 65%);
+  top:30%;right:15%;
+  animation:drift3 18s ease-in-out infinite;
+}
+.orb-4{
+  width:30vmax;height:30vmax;
+  background:radial-gradient(circle,rgba(200,146,42,.12) 0%,transparent 65%);
+  bottom:20%;left:10%;
+  animation:drift4 24s ease-in-out infinite;
+}
+@keyframes drift1{0%,100%{transform:translate(0,0)}40%{transform:translate(5vw,4vh)}70%{transform:translate(-3vw,7vh)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}35%{transform:translate(-4vw,-5vh)}65%{transform:translate(3vw,-2vh)}}
+@keyframes drift3{0%,100%{transform:translate(0,0)}50%{transform:translate(-5vw,3vh)}}
+@keyframes drift4{0%,100%{transform:translate(0,0)}45%{transform:translate(4vw,-4vh)}}
 
 /* ─── NAV ─── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--text-12)}
-.nav-logo{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--text);text-decoration:none}
-.nav-contact{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-30);padding-bottom:1px;transition:border-color .2s,color .2s}
-.nav-contact:hover{color:var(--text);border-color:var(--text-30)}
+nav{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 48px);max-width:1200px;
+  height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:100px;
+  box-shadow:var(--glass-shadow);
+  z-index:200;
+}
+.nav-logo{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--on-bg);text-decoration:none;
+  opacity:.9;
+}
+.nav-logo:hover{opacity:1}
+.nav-contact{
+  font-size:13px;font-weight:500;
+  letter-spacing:.05em;
+  color:var(--on-bg);text-decoration:none;
+  background:var(--glass-mid);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  border-radius:100px;
+  padding:8px 20px;
+  transition:background .25s,border-color .25s;
+  box-shadow:inset 0 1px 0 var(--glass-shine);
+}
+.nav-contact:hover{background:var(--glass-strong);border-color:rgba(255,255,255,.45)}
 
 /* ─── HERO ─── */
-.hero{position:relative;height:100dvh;background:var(--bg);overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:48px}
-
-/* ambient glow behind photo */
-.hero::before{
-  content:'';position:absolute;
-  right:-10%;bottom:0;
-  width:60%;height:80%;
-  background:radial-gradient(ellipse at 60% 80%, rgba(200,146,42,.06) 0%, transparent 65%);
-  z-index:1;pointer-events:none;
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:calc(var(--nav-h) + 48px) 5vw 80px;
+  gap:60px;
 }
-
-.hero-label{position:absolute;top:80px;left:40px;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--text-30);z-index:10}
-
-.hero-photo{
-  position:absolute;
-  right: 0;
-  bottom: 0;
-  height: 95%;
-  width: auto;
-  object-fit: contain;
-  object-position: bottom right;
-  z-index: 2;
-  pointer-events: none;
-  filter: grayscale(1) brightness(.65) contrast(1.1);
-  mix-blend-mode: screen;
-  opacity:.75;
+.hero-content{
+  flex:1;max-width:640px;
 }
-
+.hero-eyebrow{
+  font-size:11px;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--on-bg-60);
+  margin-bottom:32px;
+}
 .hero-headline{
-  position:relative;
-  z-index:5;
-  padding:0 40px;
-  line-height:.86;
-  pointer-events:none;
-  flex-shrink:0;
-}
-.hero-headline-line{
-  display:block;
   font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(64px,10vw,130px);
   font-weight:900;
-  font-size:clamp(64px, 11vw, 155px);
+  line-height:.96;
+  letter-spacing:-.02em;
   text-transform:uppercase;
-  letter-spacing:-.01em;
-  color:var(--text);
-  white-space:nowrap;
+  color:var(--on-bg);
+  margin-bottom:48px;
 }
-.hero-headline-line.line-indent{padding-left:clamp(32px, 7vw, 120px)}
-.hero-headline-line.line-end{padding-left:clamp(64px, 13vw, 220px)}
+.hero-headline span{display:block}
+.hero-headline .indent{padding-left:.28em}
 
-.hero-sub-wrap{
-  position:relative;
-  z-index:10;
-  padding:28px 40px 0;
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:24px;
+.hero-glass{
+  background:var(--glass-mid);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  padding:32px 36px;
+  box-shadow:var(--glass-shadow);
 }
 .hero-sub{
-  font-size:14px;
-  font-weight:300;
+  font-size:16px;font-weight:300;
   line-height:1.65;
-  color:var(--text-60);
-  max-width:320px;
+  color:var(--on-bg-60);
+  margin-bottom:28px;
 }
-.hero-cta-wrap{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-end;
-  gap:10px;
-  flex-shrink:0;
+.hero-cta-row{
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
 }
-.hero-cta{
-  display:inline-flex;
-  align-items:center;
-  gap:16px;
-  padding:16px 36px;
-  background:transparent;
-  color:var(--accent);
-  font-family:'Barlow',sans-serif;
-  font-size:12px;
-  font-weight:500;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  text-decoration:none;
+.hero-hint{
+  font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--on-bg-35);
+}
+
+/* ─── AMBER BUTTON ─── */
+.btn-amber{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(200,146,42,.85);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(200,146,42,.5);
+  border-radius:100px;
+  padding:14px 28px;
+  color:#fff;
+  font-size:13px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;
   cursor:pointer;
-  border:1px solid var(--accent-30);
+  box-shadow:0 4px 24px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,.28);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+.btn-amber:hover{
+  transform:scale(1.05);
+  box-shadow:0 8px 36px rgba(200,146,42,.55), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn-amber svg{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.btn-amber:hover svg{transform:translateX(4px)}
+
+/* ─── HERO PHOTO ─── */
+.hero-photo-wrap{
+  flex:0 0 auto;
   position:relative;
-  overflow:hidden;
-  transition:border-color .3s, background .3s, transform .3s cubic-bezier(.23,1,.32,1);
 }
-.hero-cta::before{
-  content:'';
-  position:absolute;inset:0;
-  background:var(--accent-08);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .35s cubic-bezier(.23,1,.32,1);
+.hero-photo{
+  width:clamp(240px,28vw,380px);
+  height:auto;
+  border-radius:var(--radius);
+  display:block;
+  filter:grayscale(.15);
+  box-shadow:0 24px 80px rgba(0,0,0,.5);
 }
-.hero-cta:hover{border-color:var(--accent)}
-.hero-cta:hover::before{transform:scaleX(1)}
-.hero-cta:active{transform:scale(.98)}
-.hero-cta-arrow{
-  width:20px;height:1px;background:var(--accent);
-  position:relative;flex-shrink:0;
-  transition:width .3s ease;
-}
-.hero-cta-arrow::after{
-  content:'';position:absolute;right:0;top:-3px;
-  width:6px;height:6px;
-  border-right:1px solid var(--accent);
-  border-bottom:1px solid var(--accent);
-  transform:rotate(-45deg);
-}
-.hero-cta:hover .hero-cta-arrow{width:32px}
-.hero-cta-hint{
-  font-size:10px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--text-30);
-}
-
-.hero-enter-hint{
+.hero-photo-glow{
   position:absolute;
-  bottom:0;left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
-  padding:12px 24px 20px;
-  cursor:pointer;
-  z-index:10;
-  animation:hintBounce 2.2s ease-in-out infinite;
-  color:var(--accent);
-  opacity:.5;
-  transition:opacity .2s;
-}
-.hero-enter-hint:hover{opacity:1}
-@keyframes hintBounce{
-  0%,100%{transform:translateX(-50%) translateY(0)}
-  50%{transform:translateX(-50%) translateY(6px)}
-}
-.hero-enter-hint-label{
-  font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
-  white-space:nowrap;
-}
-
-.hero-side-label{
-  position:absolute;
-  right:40px;
-  top:50%;
-  transform:translateY(-50%) rotate(90deg);
-  transform-origin:center center;
-  font-size:10px;
-  font-weight:500;
-  letter-spacing:.3em;
-  text-transform:uppercase;
-  color:var(--black-40);
-  white-space:nowrap;
-  z-index:1;
-}
-
-.hero-stat{
-  position:absolute;
-  bottom:60px;
-  left:40px;
-  z-index:10;
-}
-.hero-stat-num{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:900;line-height:1;color:var(--black)}
-.hero-stat-label{font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-top:4px}
-
-/* ─── HERO EXIT ─── */
-.hero.leaving{
+  inset:-20px;
+  background:radial-gradient(ellipse at 50% 60%, rgba(200,146,42,.15) 0%, transparent 65%);
+  border-radius:50%;
   pointer-events:none;
-  animation:heroLeave .7s cubic-bezier(.76,0,.24,1) forwards;
-}
-@keyframes heroLeave{
-  0%{transform:translate(0,0) scale(1);opacity:1}
-  100%{transform:translate(-7vw,-5vh) scale(.93);opacity:0}
 }
 
-/* ─── UNIVERSE ─── */
-#universe{
-  position:fixed;inset:0;background:var(--bg);z-index:100;
-  opacity:0;pointer-events:none;
-  transform:translate(5vw,4vh);
-  will-change:transform,opacity;
+/* ─── SECTION COMMON ─── */
+.section{
+  position:relative;z-index:1;
+  padding:100px 5vw;
 }
-#universe.active{
-  opacity:1;pointer-events:all;
-  animation:universeIn .7s cubic-bezier(.23,1,.32,1) forwards;
+.section-eyebrow{
+  font-size:11px;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--on-bg-60);
+  margin-bottom:16px;
 }
-@keyframes universeIn{
-  from{opacity:0;transform:translate(5vw,4vh)}
-  to{opacity:1;transform:translate(0,0)}
-}
-
-#universe-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
-
-.universe-label{
-  position:absolute;top:80px;left:40px;
-  font-size:10px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--text-30);
-  z-index:10;
-}
-.universe-hint{
-  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
-  font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-60);
-  z-index:10;text-align:center;
-  animation:hintPulse 3s ease-in-out infinite;
-}
-@keyframes hintPulse{0%,100%{opacity:.4}50%{opacity:1}}
-
-.universe-back{
-  position:absolute;top:80px;right:40px;z-index:20;
-  font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);text-decoration:none;cursor:pointer;border:none;background:none;
-  border-bottom:1px solid var(--accent-30);padding-bottom:1px;
-  opacity:0;transition:opacity .4s;
-  display:none;
-}
-.universe-back.visible{opacity:1;display:block}
-
-/* ─── NODES ─── */
-.scene{
-  position:absolute;inset:0;z-index:5;
-  transform-style:preserve-3d;
-  perspective:1200px;
-}
-.orbit{
-  position:absolute;inset:0;
-  transform-style:preserve-3d;
-  transition:transform .8s cubic-bezier(.23,1,.32,1);
-}
-
-.node{
-  position:absolute;
-  transform:translate(-50%,-50%);
-  cursor:pointer;
-  z-index:5;
-  transition:opacity .4s;
-}
-.node-inner{
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  transition:transform .4s cubic-bezier(.23,1,.32,1);
-}
-.node:hover .node-inner{transform:scale(1.06)}
-
-.node-dot{
-  width:4px;height:4px;
-  border-radius:50%;
-  background:var(--accent);
-  position:relative;
-  box-shadow:0 0 6px var(--accent-60);
-  transition:transform .4s cubic-bezier(.23,1,.32,1),box-shadow .4s,opacity .3s;
-  opacity:.7;
-}
-.node:hover .node-dot{opacity:1;transform:scale(1.6);box-shadow:0 0 10px var(--accent-60),0 0 22px var(--accent-30)}
-.node.active .node-dot{opacity:1;transform:scale(2.2);box-shadow:0 0 14px var(--accent),0 0 40px var(--accent-60)}
-
-.node-label{
+.section-title{
   font-family:'Barlow Condensed',sans-serif;
-  font-size:11px;font-weight:700;
-  letter-spacing:.28em;text-transform:uppercase;
-  color:var(--text-60);white-space:nowrap;
-  transition:letter-spacing .4s,color .3s;
+  font-size:clamp(36px,5vw,56px);
+  font-weight:900;text-transform:uppercase;
+  letter-spacing:-.01em;
+  color:var(--on-bg);
+  margin-bottom:60px;
 }
-.node:hover .node-label{letter-spacing:.38em;color:var(--accent)}
-.node.active .node-label{letter-spacing:.4em;color:var(--accent)}
 
-.node-sub{
-  font-size:9px;font-weight:300;
+/* ─── SERVICES GRID ─── */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;
+}
+
+/* ─── SERVICE CARD ─── */
+.service-card{
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  padding:32px;
+  cursor:pointer;
+  position:relative;overflow:hidden;
+  box-shadow:var(--glass-shadow);
+  transition:transform .35s cubic-bezier(.34,1.2,.64,1), background .25s, box-shadow .3s;
+  /* reveal animation */
+  opacity:0;transform:translateY(30px) scale(.98);
+}
+.service-card.revealed{
+  opacity:1;transform:translateY(0) scale(1);
+  transition:opacity .55s ease, transform .55s cubic-bezier(.23,1,.32,1), background .25s, box-shadow .3s;
+}
+.service-card:hover{
+  background:var(--glass-mid);
+  transform:translateY(-3px) scale(1.01) !important;
+  box-shadow:0 12px 48px rgba(0,0,0,.22), inset 0 1px 0 var(--glass-shine);
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  opacity:.6;
+}
+
+.card-num{
+  font-size:11px;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);
+  display:block;margin-bottom:20px;
+}
+.card-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:32px;font-weight:900;
+  text-transform:uppercase;letter-spacing:-.01em;
+  color:var(--on-bg);
+  margin-bottom:8px;
+}
+.card-sub{
+  font-size:11px;font-weight:400;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--on-bg-60);
+  margin-bottom:20px;
+}
+.card-lead{
+  font-size:14px;font-weight:300;
+  line-height:1.6;color:var(--on-bg-60);
+  margin-bottom:28px;
+  display:-webkit-box;-webkit-line-clamp:3;
+  -webkit-box-orient:vertical;overflow:hidden;
+}
+.card-arrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:500;
   letter-spacing:.1em;text-transform:uppercase;
-  color:var(--text-30);white-space:nowrap;
-  opacity:0;transform:translateY(4px);
-  transition:opacity .3s,transform .3s;
+  color:var(--on-bg-60);
+  transition:color .2s, gap .2s;
 }
-.node:hover .node-sub{opacity:1;transform:translateY(0)}
-
-/* center pulse */
-.center-pulse{
-  position:absolute;
-  width:6px;height:6px;
-  background:var(--accent);
-  border-radius:50%;
-  transform:translate(-50%,-50%);
-  left:50%;top:50%;
-  z-index:4;
-  box-shadow:0 0 10px var(--accent),0 0 30px var(--accent-60);
-}
-.center-pulse::before,.center-pulse::after{
-  content:'';position:absolute;
-  border-radius:50%;border:1px solid var(--accent-30);
-  inset:-12px;
-  animation:pulsering 2s ease-out infinite;
-}
-.center-pulse::after{
-  inset:-26px;
-  border-color:var(--accent-15);
-  animation-delay:.65s;
-}
-@keyframes pulsering{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.8)}}
-
-/* ─── STARK HUD CHROME ─── */
-#universe{cursor:crosshair}
-
-/* node-ring removed — particles form the visual cluster */
-.node:nth-child(3n+1) .node-ring{animation-duration:10s}
-
-/* Tech coordinate readout per node */
-.node-coord{
-  font-size:8px;font-weight:400;letter-spacing:.12em;
-  text-transform:uppercase;color:rgba(10,10,10,.35);
-  white-space:nowrap;
-  opacity:0;transform:translateY(3px);
-  transition:opacity .25s,transform .25s;
-}
-.node:hover .node-coord,.node.active .node-coord{opacity:1;transform:translateY(0)}
+.service-card:hover .card-arrow{color:var(--accent);gap:14px}
 
 /* ─── PANEL BACKDROP ─── */
 #panel-backdrop{
-  position:fixed;inset:0;z-index:148;
-  background:rgba(4,4,6,.7);
+  position:fixed;inset:0;z-index:300;
+  background:rgba(6,5,26,.5);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
   opacity:0;pointer-events:none;
-  transition:opacity .45s ease;
+  transition:opacity .4s ease;
 }
 #panel-backdrop.visible{opacity:1;pointer-events:all}
 
 /* ─── SERVICE PANEL ─── */
 #service-panel{
   position:fixed;top:0;right:0;bottom:0;
-  width:min(720px,62vw);
-  z-index:150;
-  background:var(--bg-2);
-  border-left:1px solid var(--accent-15);
+  width:min(700px,94vw);
+  background:var(--glass-strong);
+  backdrop-filter:var(--glass-blur-heavy);
+  -webkit-backdrop-filter:var(--glass-blur-heavy);
+  border-left:1px solid var(--glass-border);
+  box-shadow:-12px 0 60px rgba(0,0,0,.25);
+  z-index:400;
   transform:translateX(102%);
   transition:transform .55s cubic-bezier(.23,1,.32,1);
   overflow-y:auto;
-  display:flex;flex-direction:column;
 }
 #service-panel.open{transform:translateX(0)}
+#service-panel::before{
+  content:'';position:sticky;top:0;left:0;right:0;height:1px;
+  display:block;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+}
+
+.panel-inner{padding:56px 48px 80px}
 
 .panel-close{
-  position:fixed;top:40px;right:40px;z-index:160;
-  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--accent-30);border-radius:0;
-  background:none;cursor:pointer;
-  transition:border-color .2s,background .2s,transform .3s cubic-bezier(.23,1,.32,1);
+  position:sticky;top:24px;
+  float:right;
+  width:36px;height:36px;
+  border-radius:50%;
+  background:var(--glass-mid);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  color:var(--on-bg);
+  font-size:18px;line-height:1;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .2s;
+  box-shadow:inset 0 1px 0 var(--glass-shine);
+  margin-bottom:32px;
 }
-.panel-close:hover{border-color:var(--accent);background:var(--accent-08);transform:rotate(90deg)}
-.panel-close-line{
-  position:absolute;width:14px;height:1px;background:var(--accent);
-}
-.panel-close-line:first-child{transform:rotate(45deg)}
-.panel-close-line:last-child{transform:rotate(-45deg)}
+.panel-close:hover{background:var(--glass-strong);transform:scale(1.08)}
 
-.panel-inner{
-  max-width:860px;margin:0 auto;padding:120px 40px 80px;
-  flex:1;
-}
 .panel-eyebrow{
-  font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:20px;opacity:.7;
+  font-size:11px;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
 }
 .panel-title{
   font-family:'Barlow Condensed',sans-serif;
-  font-size:clamp(56px,8vw,120px);
+  font-size:clamp(48px,7vw,72px);
   font-weight:900;text-transform:uppercase;
-  line-height:.88;letter-spacing:-.01em;
-  color:var(--text);margin-bottom:48px;
+  letter-spacing:-.02em;line-height:.93;
+  color:var(--on-bg);margin-bottom:28px;
 }
 .panel-lead{
-  font-size:20px;font-weight:300;line-height:1.6;
-  color:var(--text-60);max-width:560px;margin-bottom:56px;
-  border-left:2px solid var(--accent);padding-left:24px;
+  font-size:16px;font-weight:300;line-height:1.7;
+  color:var(--on-bg-60);margin-bottom:48px;
+  border-left:2px solid var(--accent-dim);
+  padding-left:20px;
 }
+
 .panel-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:1px;
-  background:var(--accent-15);margin-bottom:56px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-bottom:48px;
 }
 .panel-item{
-  background:var(--bg-2);padding:28px;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-sm);
+  padding:22px;
+  box-shadow:var(--glass-shadow);
+}
+.panel-item::before{
+  content:'';display:block;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+  margin-bottom:16px;
 }
 .panel-item-num{
+  font-size:10px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+.panel-item-title{
   font-family:'Barlow Condensed',sans-serif;
-  font-size:32px;font-weight:900;color:var(--accent-30);
-  margin-bottom:12px;line-height:1;
+  font-size:18px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.02em;
+  color:var(--on-bg);margin-bottom:8px;
 }
-.panel-item-title{font-size:15px;font-weight:500;margin-bottom:8px;color:var(--text)}
-.panel-item-text{font-size:13px;font-weight:300;line-height:1.7;color:var(--text-60)}
+.panel-item-text{
+  font-size:13px;font-weight:300;line-height:1.6;
+  color:var(--on-bg-60);
+}
 
-.panel-related{margin-bottom:48px;}
+.panel-related{margin-bottom:40px}
 .panel-related-label{
-  font-size:10px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--text-30);margin-bottom:16px;
+  font-size:10px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--on-bg-35);
+  margin-bottom:14px;
 }
-.panel-related-nodes{display:flex;gap:10px;flex-wrap:wrap}
+.panel-related-nodes{display:flex;flex-wrap:wrap;gap:8px}
 .panel-related-node{
-  padding:9px 18px;border:1px solid var(--accent-30);
-  font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--accent);cursor:pointer;background:none;
-  transition:background .2s,border-color .2s,color .2s;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:100px;
+  padding:8px 18px;
+  font-size:12px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--on-bg-60);
+  cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3);
 }
-.panel-related-node:hover{background:var(--accent-15);border-color:var(--accent);color:var(--text)}
+.panel-related-node:hover{
+  background:var(--glass-strong);
+  border-color:rgba(255,255,255,.5);
+  color:var(--on-bg);
+}
 
 .panel-cta{
-  display:inline-flex;align-items:center;gap:12px;
-  padding:16px 40px;
-  background:var(--accent);color:var(--bg);
-  font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;padding:18px;
+  background:rgba(200,146,42,.82);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(200,146,42,.45);
+  border-radius:var(--radius-sm);
+  color:#fff;font-size:13px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
   text-decoration:none;
-  transition:opacity .2s,transform .2s;
+  box-shadow:0 4px 28px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .3s;
 }
-.panel-cta:hover{opacity:.85;transform:translateX(4px)}
+.panel-cta:hover{
+  transform:scale(1.02);
+  box-shadow:0 8px 40px rgba(200,146,42,.5), inset 0 1px 0 rgba(255,255,255,.35);
+}
 
-/* ─── CONTACT SECTION ─── */
-#contact-section{
-  position:fixed;bottom:0;left:0;
-  width:calc(100% - min(720px,62vw));
-  z-index:499;
-  background:var(--bg-3);
-  border-top:1px solid var(--accent-15);
-  color:var(--text);
-  transform:translateY(100%);
-  transition:transform .5s cubic-bezier(.23,1,.32,1);
-  padding:18px 40px;
-}
-#contact-section.visible{transform:translateY(0)}
+/* stagger reveal */
+.stagger-item{opacity:0;transform:translateY(18px);transition:opacity .4s ease, transform .4s cubic-bezier(.23,1,.32,1)}
+.stagger-item.in{opacity:1;transform:translateY(0)}
 
-.contact-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:100%}
-.contact-left{flex:1;min-width:0}
-.contact-label{font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);opacity:.7;margin-bottom:4px}
-.contact-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(20px,2.2vw,28px);font-weight:900;text-transform:uppercase;line-height:1;color:var(--text)}
-.contact-microcopy{font-size:12px;font-weight:300;color:var(--text-30);margin-top:4px}
-.contact-btns{display:flex;gap:8px;align-items:center;flex-shrink:0}
-.contact-btn{
-  display:inline-block;padding:10px 20px;border:1px solid var(--accent-30);
-  font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--accent);text-decoration:none;white-space:nowrap;
-  transition:background .2s,border-color .2s,color .2s;
+/* ─── CONTACT FLOAT ─── */
+.contact-section{
+  position:relative;z-index:1;
+  padding:0 5vw 100px;
 }
-.contact-btn:hover{background:var(--accent-15);border-color:var(--accent);color:var(--text)}
-.contact-btn.primary{background:var(--accent);color:var(--bg);border-color:var(--accent)}
-.contact-btn.primary:hover{opacity:.85}
+.contact-glass{
+  background:var(--glass-mid);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  padding:60px;
+  box-shadow:var(--glass-shadow);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:48px;flex-wrap:wrap;
+}
+.contact-glass::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+}
+.contact-eyebrow{
+  font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;
+}
+.contact-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(28px,4vw,42px);font-weight:900;
+  text-transform:uppercase;letter-spacing:-.01em;
+  color:var(--on-bg);margin-bottom:8px;
+}
+.contact-sub{
+  font-size:14px;font-weight:300;color:var(--on-bg-60);
+}
+.contact-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-glass{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--glass-mid);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);
+  border-radius:100px;
+  padding:14px 28px;
+  color:var(--on-bg);
+  font-size:13px;font-weight:500;
+  letter-spacing:.06em;
+  text-decoration:none;
+  box-shadow:inset 0 1px 0 var(--glass-shine);
+  transition:background .25s,transform .25s;
+}
+.btn-glass:hover{background:var(--glass-strong);transform:scale(1.03)}
+
+/* ─── SCROLL DOWN HINT ─── */
+.scroll-hint{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--on-bg-35);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  animation:bounceDown 2.2s ease-in-out infinite;
+  cursor:pointer;
+}
+.scroll-hint svg{opacity:.5}
+@keyframes bounceDown{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(8px)}
+}
 
 /* ─── MOBILE ─── */
 @media(max-width:768px){
-  nav{padding:0 20px}
-  .hero-label{left:20px;top:72px}
-  .hero-headline{padding:0 20px}
-  .hero-headline-line{font-size:clamp(52px,16vw,80px)}
-  .hero-headline-line.line-indent{padding-left:clamp(20px,6vw,60px)}
-  .hero-headline-line.line-end{padding-left:clamp(40px,10vw,100px)}
-  .hero-sub-wrap{flex-direction:column;align-items:flex-start;padding:24px 20px 0;gap:20px}
-  .hero-photo{height:70%;right:-5%}
-  .hero-stat{bottom:auto;top:auto;display:none}
-  .hero-side-label{display:none}
-
-  /* Mobile universe = scrollable cards */
-  #universe{overflow-y:auto;padding:80px 20px 120px}
-  .scene{display:none}
-  #universe-canvas{display:none}
-  .center-pulse{display:none}
-  .universe-hint{display:none}
-  .universe-label{left:20px}
-  .universe-back{right:20px}
-  .mobile-nodes{display:flex!important;flex-direction:column;gap:1px;background:var(--accent-15);margin-top:60px}
-  .mobile-node{
-    background:var(--bg-2);padding:24px 20px;
-    display:flex;align-items:center;justify-content:space-between;
-    cursor:pointer;transition:background .2s;
-  }
-  .mobile-node:hover{background:var(--bg-3)}
-  .mobile-node-title{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;letter-spacing:.02em;color:var(--text)}
-  .mobile-node-num{font-size:10px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
-
-  .panel-inner{padding:80px 20px 60px}
+  nav{width:calc(100% - 24px);top:10px;padding:0 16px}
+  .hero{flex-direction:column;padding-top:calc(var(--nav-h) + 80px);gap:32px}
+  .hero-photo-wrap{order:-1;align-self:flex-start}
+  .hero-photo{width:clamp(140px,45vw,220px);border-radius:var(--radius-sm)}
+  .hero-glass{padding:24px}
+  .panel-inner{padding:40px 24px 60px}
   .panel-grid{grid-template-columns:1fr}
-  #service-panel{width:100%;border-left:none}
-  #contact-section{width:100%;padding:16px 20px}
-  .contact-btns{flex-direction:row;flex-wrap:wrap}
-  .panel-close{top:20px;right:20px}
+  .contact-glass{padding:36px 24px;flex-direction:column;gap:28px}
+  .services-grid{grid-template-columns:1fr}
+  .section{padding:60px 5vw}
 }
 
 /* ─── REDUCED MOTION ─── */
 @media(prefers-reduced-motion:reduce){
-  .center-pulse::before,.center-pulse::after,.universe-hint{animation:none}
-  #transition-overlay,#universe,#service-panel{transition:none}
-  .orbit{transition:none}
-  .node,.node-inner,.node-dot,.node-label,.node-sub{transition:none}
+  .orb{animation:none}
+  .service-card,.btn-amber,.btn-glass,.panel-cta{transition:none}
+  .scroll-hint{animation:none}
 }
 </style>
 </head>
 <body>
-<a href="#main-content" class="skip-link">Перейти к содержимому</a>
 
-<!-- ─── NAV ─── -->
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+</div>
+
 <nav>
-  <a href="/" class="nav-logo">Игнатий</a>
-  <a href="https://t.me/HR_Ignatiy" class="nav-contact" target="_blank" rel="noopener">Связаться</a>
+  <a href="/" class="nav-logo">Игнатий Филатов</a>
+  <a href="https://t.me/HR_Ignatiy" class="nav-contact" target="_blank" rel="noopener">Связаться →</a>
 </nav>
 
-<!-- ─── TRANSITION OVERLAY ─── -->
-<div id="transition-overlay" aria-hidden="true"></div>
+<main id="main-content">
 
 <!-- ─── HERO ─── -->
-<main id="main-content">
 <section class="hero" id="hero">
-  <p class="hero-label">ИГНАТИЙ ФИЛАТОВ · СИСТЕМЫ И ПРОЦЕССЫ</p>
-  <span class="hero-side-label" aria-hidden="true">БАТУМИ · ГРУЗИЯ · 2026</span>
-
-  <img
-    class="hero-photo"
-    src="/assets/hero.jpeg"
-    alt="Игнатий Филатов"
-    width="933" height="1400"
-    fetchpriority="high"
-  >
-
-  <div class="hero-headline" aria-label="Ваш бизнес теряет деньги без процессов">
-    <span class="hero-headline-line">ВАШ БИЗНЕС</span>
-    <span class="hero-headline-line line-indent">ТЕРЯЕТ ДЕНЬГИ</span>
-    <span class="hero-headline-line">БЕЗ</span>
-    <span class="hero-headline-line line-indent">ПРОЦЕССОВ.</span>
-  </div>
-
-  <div class="hero-sub-wrap">
-    <p class="hero-sub">Нахожу где система ломается — и выстраиваю процессы которые это останавливают. Клиенты видят результат уже на первом этапе.</p>
-    <div class="hero-cta-wrap">
-      <span class="hero-cta-hint">8 систем · нажмите чтобы войти</span>
-      <button class="hero-cta" id="enter-btn" aria-label="Войти в систему и посмотреть услуги">
-        ВОЙТИ В СИСТЕМУ
-        <span class="hero-cta-arrow"></span>
-      </button>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Системы и процессы · Батуми, Грузия</p>
+    <h1 class="hero-headline">
+      <span>Ваш бизнес</span>
+      <span class="indent">теряет деньги</span>
+      <span>без</span>
+      <span class="indent">процессов.</span>
+    </h1>
+    <div class="hero-glass">
+      <p class="hero-sub">Нахожу где система ломается — и выстраиваю процессы которые это останавливают. Клиенты видят результат уже на первом этапе.</p>
+      <div class="hero-cta-row">
+        <button class="btn-amber" id="enter-btn" aria-label="Перейти к услугам">
+          Войти в систему
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="hero-hint">8 систем</span>
+      </div>
     </div>
   </div>
 
-  <div class="hero-enter-hint" id="enter-hint" aria-hidden="true">
-    <span class="hero-enter-hint-label">ПЕРЕЙТИ К СИСТЕМАМ</span>
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 4v16M5 13l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-glow"></div>
+    <img class="hero-photo" src="/assets/hero.jpeg" alt="Игнатий Филатов" width="933" height="1400" fetchpriority="high">
+  </div>
+
+  <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
+    <span>прокрутить</span>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 4v12M5 11l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
     </svg>
   </div>
 </section>
 
-<!-- ─── UNIVERSE ─── -->
-<div id="universe" role="region" aria-label="Система процессов">
-  <canvas id="universe-canvas"></canvas>
-  <p class="universe-label">СИСТЕМА ПРОЦЕССОВ</p>
-  <p class="universe-hint">КЛИКНИТЕ НА ПРОЦЕСС · ИССЛЕДУЙТЕ СИСТЕМУ</p>
-  <button class="universe-back" id="universe-back" aria-label="Вернуться к обзору">← ОБЗОР</button>
-  <div class="center-pulse" aria-hidden="true"></div>
+<!-- ─── SERVICES ─── -->
+<section class="section" id="services">
+  <p class="section-eyebrow">Выберите вашу точку входа</p>
+  <p class="section-title">8 систем</p>
+  <div class="services-grid" id="services-grid"></div>
+</section>
 
-  <div class="scene">
-    <div class="orbit" id="orbit">
-      <!-- Nodes will be positioned by JS -->
+<!-- ─── CONTACT ─── -->
+<section class="contact-section" id="contact">
+  <div class="contact-glass">
+    <div>
+      <p class="contact-eyebrow">Бесплатный аудит · 30 минут</p>
+      <p class="contact-title">Найдём где утекают деньги</p>
+      <p class="contact-sub">Никаких обязательств — только конкретный разбор</p>
+    </div>
+    <div class="contact-btns">
+      <a href="https://t.me/HR_Ignatiy" class="btn-amber" target="_blank" rel="noopener">
+        Telegram
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="https://wa.me/995557602599" class="btn-glass" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
+</section>
 
-  <!-- Mobile fallback -->
-  <div class="mobile-nodes" aria-label="Список процессов" style="display:none">
-    <!-- filled by JS -->
-  </div>
-</div>
+</main>
 
 <!-- ─── PANEL BACKDROP ─── -->
 <div id="panel-backdrop" aria-hidden="true"></div>
 
 <!-- ─── SERVICE PANEL ─── -->
 <div id="service-panel" role="dialog" aria-modal="true" aria-hidden="true">
-  <button class="panel-close" id="panel-close" aria-label="Закрыть">
-    <span class="panel-close-line"></span>
-    <span class="panel-close-line"></span>
-  </button>
-  <div class="panel-inner" id="panel-content">
-    <!-- filled by JS -->
-  </div>
+  <div class="panel-inner" id="panel-content"></div>
 </div>
-
-<!-- ─── CONTACT ─── -->
-<div id="contact-section" role="complementary">
-  <div class="contact-inner">
-    <div class="contact-left">
-      <p class="contact-label">БЕСПЛАТНЫЙ АУДИТ · 30 МИН</p>
-      <p class="contact-title">НАЙДЁМ ГДЕ УТЕКАЮТ ДЕНЬГИ</p>
-      <p class="contact-microcopy">Никаких обязательств — только конкретный разбор</p>
-    </div>
-    <div class="contact-btns">
-      <a href="https://t.me/HR_Ignatiy" class="contact-btn primary" target="_blank" rel="noopener">Telegram →</a>
-      <a href="https://wa.me/995557602599" class="contact-btn" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
-  </div>
-</div>
-
-</main>
 
 <script>
-// ─── DATA ───────────────────────────────────────────────
+// ─── SERVICE DATA ────────────────────────────────────────
 const SERVICES = [
   {
-    id: 'audit',
-    label: 'АУДИТ',
-    sub: 'точка входа',
-    px: 0.20, py: 0.27,
-    related: ['naim','onboarding','crm'],
-    eyebrow: '01 · АУДИТ ПРОЦЕССОВ',
-    title: 'АУДИТ',
-    lead: 'Нахожу где бизнес теряет деньги. Анализирую все точки — найм, адаптация, коммуникации, данные. Строю карту потерь с цифрами.',
-    items: [
-      {num:'01', title:'Карта процессов', text:'Полная схема того как устроены процессы сейчас — от найма до увольнения.'},
-      {num:'02', title:'Точки потерь', text:'Конкретные места где бизнес тратит деньги впустую или не зарабатывает.'},
-      {num:'03', title:'Приоритеты', text:'Что исправить в первую очередь чтобы получить результат быстро.'},
-      {num:'04', title:'Дорожная карта', text:'Конкретный план действий с цифрами, сроками и ожидаемым эффектом.'},
-    ]
+    id:'audit', label:'АУДИТ', sub:'точка входа',
+    eyebrow:'01 · Аудит процессов',
+    title:'АУДИТ',
+    lead:'Нахожу где бизнес теряет деньги. Анализирую все точки — найм, адаптация, коммуникации, данные. Строю карту потерь с цифрами.',
+    items:[
+      {num:'01',title:'Карта процессов',text:'Полная схема того как устроены процессы сейчас — от найма до увольнения.'},
+      {num:'02',title:'Точки потерь',text:'Конкретные места где бизнес тратит деньги впустую или не зарабатывает.'},
+      {num:'03',title:'Приоритеты',text:'Что исправить в первую очередь чтобы получить результат быстро.'},
+      {num:'04',title:'Дорожная карта',text:'Конкретный план действий с цифрами, сроками и ожидаемым эффектом.'},
+    ],
+    related:['naim','onboarding','crm']
   },
   {
-    id: 'naim',
-    label: 'НАЙМ',
-    sub: 'поток кандидатов',
-    px: 0.76, py: 0.20,
-    related: ['audit','onboarding','crm'],
-    eyebrow: '02 · СИСТЕМА НАЙМА',
-    title: 'НАЙМ',
-    lead: 'Выстраиваю воронку найма которая приносит нужных людей без ручного сорсинга. Закрытие вакансий быстрее на 40%.',
-    items: [
-      {num:'01', title:'Воронка найма', text:'Настраиваю входящий поток, отбор и оценку кандидатов по прозрачным критериям.'},
-      {num:'02', title:'Описание вакансий', text:'Создаю тексты которые привлекают нужных и отсекают лишних ещё до отклика.'},
-      {num:'03', title:'Процесс оценки', text:'Структурированные интервью и тестовые задания вместо интуиции.'},
-      {num:'04', title:'Автоматизация', text:'Первичный скрининг и коммуникация с кандидатами — без ручной работы.'},
-    ]
+    id:'naim', label:'НАЙМ', sub:'поток кандидатов',
+    eyebrow:'02 · Система найма',
+    title:'НАЙМ',
+    lead:'Выстраиваю воронку найма которая приносит нужных людей без ручного сорсинга. Закрытие вакансий быстрее на 40%.',
+    items:[
+      {num:'01',title:'Воронка найма',text:'Настраиваю входящий поток, отбор и оценку кандидатов по прозрачным критериям.'},
+      {num:'02',title:'Описание вакансий',text:'Создаю тексты которые привлекают нужных и отсекают лишних ещё до отклика.'},
+      {num:'03',title:'Процесс оценки',text:'Структурированные интервью и тестовые задания вместо интуиции.'},
+      {num:'04',title:'Автоматизация',text:'Первичный скрининг и коммуникация с кандидатами — без ручной работы.'},
+    ],
+    related:['audit','onboarding','crm']
   },
   {
-    id: 'onboarding',
-    label: 'ОНБОРДИНГ',
-    sub: 'первые 30 дней',
-    px: 0.84, py: 0.52,
-    related: ['naim','adaptation','communications'],
-    eyebrow: '03 · ОНБОРДИНГ',
-    title: 'ОНБ‑ОРДИНГ',
-    lead: 'Первые 30 дней определяют останется ли человек. Выстраиваю систему которая снижает отток в первые 90 дней на 60%.',
-    items: [
-      {num:'01', title:'Welcome-процесс', text:'Первый день без хаоса. Человек знает что делать, кому звонить, где что лежит.'},
-      {num:'02', title:'База знаний', text:'Структурированная документация вместо "спроси у Маши".'},
-      {num:'03', title:'Чек-листы', text:'Понедельные задачи для нового сотрудника и его руководителя.'},
-      {num:'04', title:'Контроль прохождения', text:'Автоматические напоминания и точки обратной связи в 7, 30, 90 дней.'},
-    ]
+    id:'onboarding', label:'ОНБОРДИНГ', sub:'первые 30 дней',
+    eyebrow:'03 · Онбординг',
+    title:'ОНБОРДИНГ',
+    lead:'Первые 30 дней определяют останется ли человек. Выстраиваю систему которая снижает отток в первые 90 дней на 60%.',
+    items:[
+      {num:'01',title:'Welcome-процесс',text:'Первый день без хаоса. Человек знает что делать, кому звонить, где что лежит.'},
+      {num:'02',title:'База знаний',text:'Структурированная документация вместо "спроси у Маши".'},
+      {num:'03',title:'Чек-листы',text:'Понедельные задачи для нового сотрудника и его руководителя.'},
+      {num:'04',title:'Контроль прохождения',text:'Автоматические напоминания и точки обратной связи в 7, 30, 90 дней.'},
+    ],
+    related:['naim','adaptation','communications']
   },
   {
-    id: 'adaptation',
-    label: 'АДАПТАЦИЯ',
-    sub: 'испытательный срок',
-    px: 0.70, py: 0.78,
-    related: ['onboarding','communications','kpi'],
-    eyebrow: '04 · АДАПТАЦИЯ',
-    title: 'АДАПТ‑АЦИЯ',
-    lead: 'Испытательный срок — это не просто "он нам подходит?" но и "мы ему подходим?". Выстраиваю процесс где оба ответа появляются вовремя.',
-    items: [
-      {num:'01', title:'Цели на испытательный', text:'Измеримые результаты на 30/60/90 дней вместо расплывчатых ожиданий.'},
-      {num:'02', title:'Наставничество', text:'Система менторинга которая не превращается в "поговори с кем-нибудь".'},
-      {num:'03', title:'1-on-1', text:'Структурированные встречи руководителя с новым сотрудником.'},
-      {num:'04', title:'Обратная связь', text:'Двусторонняя оценка в конце испытательного срока с конкретными выводами.'},
-    ]
+    id:'adaptation', label:'АДАПТАЦИЯ', sub:'испытательный срок',
+    eyebrow:'04 · Адаптация',
+    title:'АДАПТАЦИЯ',
+    lead:'Испытательный срок — это не просто "он нам подходит?" но и "мы ему подходим?". Выстраиваю процесс где оба ответа появляются вовремя.',
+    items:[
+      {num:'01',title:'Цели на испытательный',text:'Измеримые результаты на 30/60/90 дней вместо расплывчатых ожиданий.'},
+      {num:'02',title:'Наставничество',text:'Система менторинга которая не превращается в "поговори с кем-нибудь".'},
+      {num:'03',title:'1-on-1',text:'Структурированные встречи руководителя с новым сотрудником.'},
+      {num:'04',title:'Обратная связь',text:'Двусторонняя оценка в конце испытательного срока с конкретными выводами.'},
+    ],
+    related:['onboarding','communications','kpi']
   },
   {
-    id: 'communications',
-    label: 'КОММУНИКАЦИИ',
-    sub: 'внутри компании',
-    px: 0.44, py: 0.84,
-    related: ['adaptation','kpi','audit'],
-    eyebrow: '05 · ВНУТРЕННИЕ КОММУНИКАЦИИ',
-    title: 'КОММ‑УНИК‑АЦИИ',
-    lead: 'Когда информация не доходит — люди работают вслепую. Строю систему коммуникаций которая работает без постоянного ручного контроля.',
-    items: [
-      {num:'01', title:'Каналы коммуникаций', text:'Чёткая структура: что где обсуждается, кто кому пишет, какие форматы встреч.'},
-      {num:'02', title:'Ритм команды', text:'Еженедельные ритуалы которые держат команду в синхроне без лишних совещаний.'},
-      {num:'03', title:'Обмен знаниями', text:'Как важная информация передаётся внутри и не уходит вместе с людьми.'},
-      {num:'04', title:'Фидбэк-культура', text:'Процессы обратной связи которые люди реально используют.'},
-    ]
+    id:'communications', label:'КОММУНИКАЦИИ', sub:'внутри компании',
+    eyebrow:'05 · Внутренние коммуникации',
+    title:'КОММ-УНИКАЦИИ',
+    lead:'Когда информация не доходит — люди работают вслепую. Строю систему коммуникаций которая работает без постоянного ручного контроля.',
+    items:[
+      {num:'01',title:'Каналы коммуникаций',text:'Чёткая структура: что где обсуждается, кто кому пишет, какие форматы встреч.'},
+      {num:'02',title:'Ритм команды',text:'Еженедельные ритуалы которые держат команду в синхроне без лишних совещаний.'},
+      {num:'03',title:'Обмен знаниями',text:'Как важная информация передаётся внутри и не уходит вместе с людьми.'},
+      {num:'04',title:'Фидбэк-культура',text:'Процессы обратной связи которые люди реально используют.'},
+    ],
+    related:['adaptation','kpi','audit']
   },
   {
-    id: 'kpi',
-    label: 'KPI',
-    sub: 'измеримость',
-    px: 0.22, py: 0.76,
-    related: ['communications','crm','audit'],
-    eyebrow: '06 · СИСТЕМА KPI',
-    title: 'KPI',
-    lead: 'Метрики которые люди понимают и на которые реально влияют. Не цифры ради цифр — а система которая связывает действия с результатом.',
-    items: [
-      {num:'01', title:'Выбор метрик', text:'Только те показатели которые реально отражают результат и на которые можно влиять.'},
-      {num:'02', title:'Декомпозиция', text:'От цели компании до конкретных действий каждого сотрудника.'},
-      {num:'03', title:'Дашборды', text:'Визуализация которую команда видит и понимает без экспертизы в аналитике.'},
-      {num:'04', title:'Ревью-процесс', text:'Регулярные встречи по результатам которые мотивируют а не пугают.'},
-    ]
+    id:'kpi', label:'KPI / OKR', sub:'измеримость',
+    eyebrow:'06 · Система KPI',
+    title:'KPI',
+    lead:'Метрики которые люди понимают и на которые реально влияют. Не цифры ради цифр — а система которая связывает действия с результатом.',
+    items:[
+      {num:'01',title:'Выбор метрик',text:'Только те показатели которые реально отражают результат и на которые можно влиять.'},
+      {num:'02',title:'Декомпозиция',text:'От цели компании до конкретных действий каждого сотрудника.'},
+      {num:'03',title:'Дашборды',text:'Визуализация которую команда видит и понимает без экспертизы в аналитике.'},
+      {num:'04',title:'Ревью-процесс',text:'Регулярные встречи по результатам которые мотивируют а не пугают.'},
+    ],
+    related:['communications','crm','audit']
   },
   {
-    id: 'crm',
-    label: 'CRM',
-    sub: 'система под ключ',
-    px: 0.10, py: 0.50,
-    related: ['naim','kpi','audit'],
-    eyebrow: '07 · CRM ПОД КЛЮЧ',
-    title: 'CRM',
-    lead: 'Строю CRM-систему под процессы компании — не подстраиваю процессы под шаблон. От выбора инструмента до обучения команды.',
-    items: [
-      {num:'01', title:'Анализ и выбор', text:'Подбираю инструмент под задачи компании: Notion, Bitrix, AmoCRM, Airtable или custom.'},
-      {num:'02', title:'Настройка', text:'Воронки, автоматизации, интеграции — всё под ваши процессы а не под шаблон.'},
-      {num:'03', title:'Миграция данных', text:'Переносим всё что есть без потери истории.'},
-      {num:'04', title:'Обучение команды', text:'Инструкции и сессии обучения чтобы система реально использовалась.'},
-    ]
+    id:'crm', label:'CRM', sub:'система под ключ',
+    eyebrow:'07 · CRM под ключ',
+    title:'CRM',
+    lead:'Строю CRM-систему под процессы компании — не подстраиваю процессы под шаблон. От выбора инструмента до обучения команды.',
+    items:[
+      {num:'01',title:'Анализ и выбор',text:'Подбираю инструмент под задачи компании: Notion, Bitrix, AmoCRM, Airtable или custom.'},
+      {num:'02',title:'Настройка',text:'Воронки, автоматизации, интеграции — всё под ваши процессы а не под шаблон.'},
+      {num:'03',title:'Миграция данных',text:'Переносим всё что есть без потери истории.'},
+      {num:'04',title:'Обучение команды',text:'Инструкции и сессии обучения чтобы система реально использовалась.'},
+    ],
+    related:['naim','kpi','audit']
   },
   {
-    id: 'consult',
-    label: 'КОНСУЛЬТАЦИЯ',
-    sub: 'разовый разбор',
-    px: 0.50, py: 0.42,
-    related: ['audit','naim','kpi'],
-    eyebrow: '08 · HR-КОНСУЛЬТАЦИЯ',
-    title: 'КОНСУЛЬТ‑АЦИЯ',
-    lead: 'Разовая стратегическая сессия — когда нужен взгляд снаружи на конкретную проблему. Без долгосрочных обязательств.',
-    items: [
-      {num:'01', title:'Разбор ситуации', text:'60-90 минут на детальный анализ вашей конкретной проблемы.'},
-      {num:'02', title:'Практические решения', text:'Не теория — конкретные шаги которые можно начать делать сразу.'},
-      {num:'03', title:'Приоритизация', text:'Что делать в первую очередь чтобы получить результат быстро.'},
-      {num:'04', title:'Документация', text:'Итоги встречи и план действий в письменном виде.'},
-    ]
+    id:'consult', label:'КОНСУЛЬТАЦИЯ', sub:'разовый разбор',
+    eyebrow:'08 · HR-консультация',
+    title:'КОНСУЛЬТАЦИЯ',
+    lead:'Разовая стратегическая сессия — когда нужен взгляд снаружи на конкретную проблему. Без долгосрочных обязательств.',
+    items:[
+      {num:'01',title:'Разбор ситуации',text:'60-90 минут на детальный анализ вашей конкретной проблемы.'},
+      {num:'02',title:'Практические решения',text:'Не теория — конкретные шаги которые можно начать делать сразу.'},
+      {num:'03',title:'Приоритизация',text:'Что делать в первую очередь чтобы получить результат быстро.'},
+      {num:'04',title:'Документация',text:'Итоги встречи и план действий в письменном виде.'},
+    ],
+    related:['audit','naim','kpi']
   }
 ];
 
 // ─── STATE ──────────────────────────────────────────────
-let universeActive = false;
-let activeNode = null;
 let panelOpen = false;
-let mouseX = 0, mouseY = 0;
-let animFrame = null;
-const isMobile = () => window.innerWidth <= 768;
-let prevRawX = 0, prevRawY = 0;
+const grid     = document.getElementById('services-grid');
+const panel    = document.getElementById('service-panel');
+const backdrop = document.getElementById('panel-backdrop');
+const content  = document.getElementById('panel-content');
 
-// ─── PARTICLE SYSTEM ─────────────────────────────────────
-let particles = [];
-const PCOUNT    = 680;
-const SPRING    = 0.028;
-const DAMP      = 0.91;
-const REPEL_R   = 105;
-const REPEL_F   = 3.2;
-const JITTER_R  = 52;
-
-function attractorPos(s) {
-  return { x: s.px * window.innerWidth, y: s.py * window.innerHeight };
-}
-
-function initParticles() {
-  const W = window.innerWidth, H = window.innerHeight;
-  particles = [];
-  for (let i = 0; i < PCOUNT; i++) {
-    const s = SERVICES[i % SERVICES.length];
-    const ap = attractorPos(s);
-    const a = Math.random() * Math.PI * 2;
-    const r = Math.random() * JITTER_R;
-    particles.push({
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 4,
-      vy: (Math.random() - 0.5) * 4,
-      offX: Math.cos(a) * r,
-      offY: Math.sin(a) * r,
-      sid: s.id,
-      size: 0.7 + Math.random() * 1.4,
-      phase: Math.random() * Math.PI * 2,
-    });
-  }
-}
-
-function updateParticles() {
-  const mx = rawMouseX, my = rawMouseY;
-  const hasMouse = mx > -9000;
-  particles.forEach(p => {
-    const s = SERVICES.find(sv => sv.id === p.sid);
-    if (!s) return;
-    const ap = attractorPos(s);
-    const hx = ap.x + p.offX;
-    const hy = ap.y + p.offY;
-    p.vx += (hx - p.x) * SPRING;
-    p.vy += (hy - p.y) * SPRING;
-    if (hasMouse) {
-      const mdx = p.x - mx, mdy = p.y - my;
-      const md = Math.hypot(mdx, mdy);
-      if (md < REPEL_R && md > 1) {
-        const f = ((REPEL_R - md) / REPEL_R) * REPEL_F;
-        p.vx += (mdx / md) * f;
-        p.vy += (mdy / md) * f;
-      }
-    }
-    p.vx *= DAMP;
-    p.vy *= DAMP;
-    p.x += p.vx;
-    p.y += p.vy;
+// ─── BUILD SERVICE GRID ──────────────────────────────────
+SERVICES.forEach((s, i) => {
+  const card = document.createElement('div');
+  card.className = 'service-card';
+  card.setAttribute('role','button');
+  card.setAttribute('tabindex','0');
+  card.setAttribute('aria-label', s.label);
+  card.innerHTML = `
+    <span class="card-num">0${i+1}</span>
+    <h2 class="card-title">${s.label}</h2>
+    <p class="card-sub">${s.sub}</p>
+    <p class="card-lead">${s.lead}</p>
+    <span class="card-arrow">Подробнее →</span>
+  `;
+  card.addEventListener('click', () => openPanel(s));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') openPanel(s);
   });
-}
+  grid.appendChild(card);
+});
 
-// ─── ELEMENTS ───────────────────────────────────────────
-const enterBtn = document.getElementById('enter-btn');
-const universe = document.getElementById('universe');
-const orbit = document.getElementById('orbit');
-const canvas = document.getElementById('universe-canvas');
-const ctx = canvas.getContext('2d');
-const servicePanel = document.getElementById('service-panel');
-const panelContent = document.getElementById('panel-content');
-const panelClose = document.getElementById('panel-close');
-const universeBack = document.getElementById('universe-back');
-const contactSection = document.getElementById('contact-section');
-const panelBackdrop = document.getElementById('panel-backdrop');
-const heroSection = document.getElementById('hero');
-
-// ─── BUILD NODES ─────────────────────────────────────────
-function nodeCoord(s) {
-  const lat = (41 + s.py * 8).toFixed(1);
-  const lon = (41 + s.px * 8).toFixed(1);
-  return `${lat}°N · ${lon}°E`;
-}
-
-function buildNodes() {
-  orbit.innerHTML = '';
-  const mobile = document.querySelector('.mobile-nodes');
-  if (mobile) mobile.innerHTML = '';
-
-  SERVICES.forEach((s, i) => {
-    const node = document.createElement('div');
-    node.className = 'node';
-    node.dataset.id = s.id;
-    node.setAttribute('role', 'button');
-    node.setAttribute('tabindex', '0');
-    node.setAttribute('aria-label', s.label);
-    node.style.opacity = '1';
-    node.style.transform = 'translate(-50%,-50%)';
-    node.innerHTML = `
-      <div class="node-inner">
-        <div class="node-dot"></div>
-        <span class="node-label">${s.label}</span>
-        <span class="node-sub">${s.sub}</span>
-        <span class="node-coord" aria-hidden="true">${nodeCoord(s)}</span>
-      </div>`;
-    node.addEventListener('click', () => openPanel(s));
-    node.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') openPanel(s) });
-    orbit.appendChild(node);
-
-    if (mobile && isMobile()) {
-      mobile.style.display = 'flex';
-      const mn = document.createElement('div');
-      mn.className = 'mobile-node';
-      mn.innerHTML = `<span class="mobile-node-title">${s.label}</span><span class="mobile-node-num">0${i+1}</span>`;
-      mn.addEventListener('click', () => openPanel(s));
-      mobile.appendChild(mn);
-    }
+// ─── SCROLL REVEAL ───────────────────────────────────────
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (!e.isIntersecting) return;
+    const delay = Array.from(grid.children).indexOf(e.target) * 60;
+    setTimeout(() => e.target.classList.add('revealed'), delay);
+    revealObs.unobserve(e.target);
   });
+}, { threshold: 0.08 });
 
-  positionNodes();
-}
+document.querySelectorAll('.service-card').forEach(c => revealObs.observe(c));
 
-function positionNodes() {
-  if (isMobile()) return;
-  SERVICES.forEach(s => {
-    const node = orbit.querySelector(`[data-id="${s.id}"]`);
-    if (!node) return;
-    node.style.left = (s.px * 100) + '%';
-    node.style.top  = (s.py * 100) + '%';
-  });
-}
-
-// ─── HELPERS ─────────────────────────────────────────────
-function getNodeCenter(id) {
-  const s = SERVICES.find(sv => sv.id === id);
-  if (!s) return null;
-  return { x: s.px * window.innerWidth, y: s.py * window.innerHeight };
-}
-
-// ─── UNIFIED ANIMATION LOOP ───────────────────────────────
-let uniLastTs = null;
-let rawMouseX = -9999, rawMouseY = -9999;
-
-function uniFrame(ts) {
-  if (!universeActive) return;
-  uniLastTs = ts;
-  updateParticles();
-  if (!panelOpen && !isMobile()) {
-    orbit.style.transform = `rotateX(${mouseY * 5}deg) rotateY(${mouseX * -5}deg)`;
-  }
-  drawParticles(ts);
-  animFrame = requestAnimationFrame(uniFrame);
-}
-
-function drawParticles(ts) {
-  const W = window.innerWidth;
-  const H = window.innerHeight;
-  if (canvas.width !== W) canvas.width = W;
-  if (canvas.height !== H) canvas.height = H;
-  ctx.clearRect(0, 0, W, H);
-  if (isMobile()) return;
-
-  // ── PARTICLE WEB (active cluster only, batched) ───────────
-  const activePs = activeNode ? particles.filter(p => p.sid === activeNode) : [];
-  if (activePs.length > 0) {
-    [{ maxD: 22, a: 0.28 }, { maxD: 40, a: 0.10 }].forEach(({ maxD, a }) => {
-      ctx.beginPath();
-      ctx.lineWidth = 0.3;
-      for (let i = 0; i < activePs.length; i++) {
-        for (let j = i + 1; j < activePs.length; j++) {
-          const pa = activePs[i], pb = activePs[j];
-          if (Math.hypot(pa.x - pb.x, pa.y - pb.y) < maxD) {
-            ctx.moveTo(pa.x, pa.y);
-            ctx.lineTo(pb.x, pb.y);
-          }
-        }
-      }
-      ctx.strokeStyle = `rgba(200,146,42,${a})`;
-      ctx.stroke();
-    });
-  }
-
-  // ── PARTICLE DOTS ─────────────────────────────────────────
-  particles.forEach(p => {
-    const svc = SERVICES.find(sv => sv.id === p.sid);
-    if (!svc) return;
-    const isActive   = p.sid === activeNode;
-    const relSvc     = activeNode ? SERVICES.find(sv => sv.id === activeNode) : null;
-    const isRelated  = relSvc?.related?.includes(p.sid);
-
-    const ap = attractorPos(svc);
-    const distH = Math.hypot(p.x - (ap.x + p.offX), p.y - (ap.y + p.offY));
-    const homeNorm = Math.max(0, 1 - distH / (JITTER_R * 2.4));
-    const flicker  = 0.82 + 0.18 * Math.sin(ts * 0.0014 + p.phase);
-
-    let alpha;
-    if (isActive)        alpha = (0.32 + homeNorm * 0.68) * flicker;
-    else if (isRelated)  alpha = (0.08 + homeNorm * 0.22) * flicker;
-    else if (activeNode) alpha = homeNorm * 0.055 * flicker;
-    else                 alpha = (0.055 + homeNorm * 0.30) * flicker;
-
-    if (alpha < 0.012) return;
-
-    if (isActive) { ctx.shadowColor = 'rgba(200,146,42,0.5)'; ctx.shadowBlur = 7; }
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, isActive ? p.size * 1.25 : p.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(200,146,42,${alpha})`;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-  });
-
-  // ── MOUSE RETICLE ─────────────────────────────────────────
-  if (rawMouseX > -9000 && !panelOpen) {
-    const mx = rawMouseX, my = rawMouseY;
-    ctx.strokeStyle = 'rgba(200,146,42,0.22)';
-    ctx.lineWidth = 0.7;
-    [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([sx, sy]) => {
-      ctx.beginPath();
-      ctx.moveTo(mx + sx * 14, my + sy * 6);
-      ctx.lineTo(mx + sx * 14, my + sy * 14);
-      ctx.lineTo(mx + sx * 6,  my + sy * 14);
-      ctx.stroke();
-    });
-    ctx.beginPath();
-    ctx.arc(mx, my, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(200,146,42,0.32)';
-    ctx.fill();
-  }
-
-  // ── HUD ───────────────────────────────────────────────────
-  ctx.font = '500 9px "Barlow", sans-serif';
-  ctx.fillStyle = 'rgba(200,146,42,0.28)';
-  ctx.fillText('SYS · ONLINE', 40, H - 72);
-  ctx.fillStyle = 'rgba(200,146,42,0.18)';
-  ctx.fillText('NODES · 08', 40, H - 57);
-  ctx.fillText(`PTL · ${PCOUNT}`, 40, H - 42);
-}
-
-// ─── MOUSE ───────────────────────────────────────────────
-function onMouseMove(e) {
-  if (!universeActive || isMobile()) return;
-  prevRawX = e.clientX; prevRawY = e.clientY;
-  rawMouseX = e.clientX; rawMouseY = e.clientY;
-  mouseX = (e.clientX / window.innerWidth  - 0.5) * 2;
-  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-}
-
-// ─── ENTER UNIVERSE ──────────────────────────────────────
-function openUniverse() {
-  if (universeActive) return;
-  universeActive = true;
-  document.body.style.overflow = 'hidden';
-  heroSection.classList.add('leaving');
-
-  setTimeout(() => {
-    universe.classList.add('active');
-    buildNodes();
-    initParticles();
-    uniLastTs = null;
-    animFrame = requestAnimationFrame(uniFrame);
-  }, 130);
-}
-
-enterBtn.addEventListener('click', openUniverse);
-const enterHint = document.getElementById('enter-hint');
-if (enterHint) enterHint.addEventListener('click', openUniverse);
-
-// ─── SCROLL DOWN / SWIPE UP TO ENTER ─────────────────────
-let touchStartY = 0;
-
-window.addEventListener('wheel', e => {
-  if (!universeActive && e.deltaY > 30) openUniverse();
-}, { passive: true });
-
-window.addEventListener('touchstart', e => {
-  touchStartY = e.touches[0].clientY;
-}, { passive: true });
-
-window.addEventListener('touchend', e => {
-  if (!universeActive && touchStartY - e.changedTouches[0].clientY > 55) openUniverse();
-}, { passive: true });
-
-// ─── OPEN PANEL ──────────────────────────────────────────
+// ─── OPEN PANEL ─────────────────────────────────────────
 function openPanel(service) {
-  activeNode = service.id;
   panelOpen = true;
+  panel.setAttribute('aria-hidden','false');
+  backdrop.classList.add('visible');
 
-  // Subtle shift toward service position
-  const flyX = (service.px - 0.5) * -55;
-  const flyY = (service.py - 0.5) * -55;
-  orbit.style.transition = 'transform .45s cubic-bezier(.76,0,.24,1)';
-  orbit.style.transform = `translate(${flyX}px,${flyY}px)`;
-
-  // Dim other nodes, emphasise active
-  orbit.querySelectorAll('.node').forEach(n => {
-    n.style.transition = 'opacity .3s ease';
-    n.style.opacity = n.dataset.id === service.id ? '1' : '0.12';
-    n.classList.toggle('active', n.dataset.id === service.id);
-  });
-
-  // Build panel content with stagger markers
-  panelContent.innerHTML = `
+  content.innerHTML = `
+    <button class="panel-close" id="panel-close" aria-label="Закрыть">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
     <p class="panel-eyebrow stagger-item">${service.eyebrow}</p>
     <h2 class="panel-title stagger-item">${service.title}</h2>
     <p class="panel-lead stagger-item">${service.lead}</p>
     <div class="panel-grid stagger-item">
       ${service.items.map(item => `
         <div class="panel-item">
-          <div class="panel-item-num">${item.num}</div>
+          <p class="panel-item-num">${item.num}</p>
           <h3 class="panel-item-title">${item.title}</h3>
           <p class="panel-item-text">${item.text}</p>
         </div>`).join('')}
     </div>
     <div class="panel-related stagger-item">
-      <p class="panel-related-label">СВЯЗАННЫЕ ПРОЦЕССЫ</p>
+      <p class="panel-related-label">Связанные системы</p>
       <div class="panel-related-nodes">
         ${service.related.map(rid => {
-          const rel = SERVICES.find(s => s.id === rid);
+          const rel = SERVICES.find(sv => sv.id === rid);
           return rel ? `<button class="panel-related-node" data-id="${rid}">${rel.label}</button>` : '';
         }).join('')}
       </div>
     </div>
     <a href="https://t.me/HR_Ignatiy" class="panel-cta stagger-item" target="_blank" rel="noopener">
-      ОБСУДИТЬ ЭТОТ ПРОЦЕСС →
-    </a>`;
+      Обсудить этот процесс →
+    </a>
+  `;
 
-  // Set initial hidden state for stagger items
-  panelContent.querySelectorAll('.stagger-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(22px)';
-  });
+  document.getElementById('panel-close').addEventListener('click', closePanel);
 
-  // Related node clicks
-  panelContent.querySelectorAll('.panel-related-node').forEach(btn => {
+  content.querySelectorAll('.panel-related-node').forEach(btn => {
     btn.addEventListener('click', () => {
-      const rel = SERVICES.find(s => s.id === btn.dataset.id);
-      if (rel) { closePanel(); setTimeout(() => openPanel(rel), 300); }
+      const rel = SERVICES.find(sv => sv.id === btn.dataset.id);
+      if (rel) { closePanel(); setTimeout(() => openPanel(rel), 320); }
     });
   });
 
-  // Open panel after orbit starts flying
-  setTimeout(() => {
-    servicePanel.classList.add('open');
-    servicePanel.removeAttribute('aria-hidden');
-    panelBackdrop.classList.add('visible');
-    universeBack.classList.add('visible');
-    servicePanel.scrollTop = 0;
-
-    // Stagger reveal content
-    panelContent.querySelectorAll('.stagger-item').forEach((el, i) => {
-      setTimeout(() => {
-        el.style.transition = 'opacity .45s ease, transform .45s cubic-bezier(.23,1,.32,1)';
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      }, 200 + i * 90);
-    });
-  }, 180);
-
-  // Show compact contact bar
-  setTimeout(() => { contactSection.classList.add('visible'); }, 500);
+  // Open panel then stagger content
+  requestAnimationFrame(() => {
+    panel.classList.add('open');
+    setTimeout(() => {
+      content.querySelectorAll('.stagger-item').forEach((el, i) => {
+        setTimeout(() => el.classList.add('in'), 160 + i * 80);
+      });
+    }, 80);
+  });
 }
 
-// Click backdrop to close panel
-panelBackdrop.addEventListener('click', closePanel);
-
+// ─── CLOSE PANEL ────────────────────────────────────────
 function closePanel() {
   panelOpen = false;
-  activeNode = null;
-  servicePanel.classList.remove('open');
-  servicePanel.setAttribute('aria-hidden', 'true');
-  panelBackdrop.classList.remove('visible');
-  contactSection.classList.remove('visible');
-
-  // Return orbit to center
-  orbit.style.transition = 'transform .5s cubic-bezier(.23,1,.32,1)';
-  orbit.style.transform = 'translate(0,0) scale(1)';
-
-  orbit.querySelectorAll('.node').forEach(n => {
-    n.style.opacity = '1';
-    n.classList.remove('active');
-  });
-
-  universeBack.classList.remove('visible');
-  // Remove explicit transition after orbit returns so parallax takes over cleanly
-  setTimeout(() => { orbit.style.transition = ''; }, 520);
+  panel.classList.remove('open');
+  panel.setAttribute('aria-hidden','true');
+  backdrop.classList.remove('visible');
 }
 
-panelClose.addEventListener('click', closePanel);
-universeBack.addEventListener('click', closePanel);
-document.addEventListener('keydown', e => { if(e.key === 'Escape' && panelOpen) closePanel(); });
+backdrop.addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && panelOpen) closePanel(); });
 
-// ─── RESIZE ──────────────────────────────────────────────
-let resizeTimer;
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => { positionNodes(); }, 150);
+// ─── SCROLL / CTA ────────────────────────────────────────
+document.getElementById('enter-btn').addEventListener('click', () => {
+  document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+});
+document.getElementById('scroll-hint')?.addEventListener('click', () => {
+  document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
 });
 
-window.addEventListener('mousemove', onMouseMove);
-
-// ─── HERO ENTRANCE ANIMATION ─────────────────────────────
+// ─── HERO ENTRANCE ───────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  const lines = document.querySelectorAll('.hero-headline-line');
-  const sub = document.querySelector('.hero-sub');
-  const cta = document.querySelector('.hero-cta');
-  const label = document.querySelector('.hero-label');
-
-  label.style.opacity = '0';
-  lines.forEach(l => { l.style.opacity='0'; l.style.transform='translateY(40px)'; });
-  if(sub) { sub.style.opacity='0'; sub.style.transform='translateY(20px)'; }
-  if(cta) { cta.style.opacity='0'; }
-
-  setTimeout(() => {
-    label.style.transition = 'opacity .8s ease';
-    label.style.opacity = '1';
-  }, 100);
-
-  lines.forEach((l, i) => {
-    setTimeout(() => {
-      l.style.transition = 'opacity .7s cubic-bezier(.23,1,.32,1), transform .7s cubic-bezier(.23,1,.32,1)';
-      l.style.opacity = '1';
-      l.style.transform = 'translateY(0)';
-    }, 200 + i * 80);
+  const els = document.querySelectorAll('.hero-eyebrow,.hero-headline span,.hero-glass,.hero-photo-wrap');
+  els.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity .65s ease ${i * 80 + 100}ms, transform .65s cubic-bezier(.23,1,.32,1) ${i * 80 + 100}ms`;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    });
   });
-
-  setTimeout(() => {
-    if(sub) {
-      sub.style.transition = 'opacity .6s ease, transform .6s ease';
-      sub.style.opacity = '1';
-      sub.style.transform = 'translateY(0)';
-    }
-  }, 800);
-
-  setTimeout(() => {
-    if(cta) {
-      cta.style.transition = 'opacity .5s ease';
-      cta.style.opacity = '1';
-    }
-  }, 1000);
 });
 </script>
 </body>
