@@ -899,9 +899,8 @@ function buildNodes() {
     node.setAttribute('role', 'button');
     node.setAttribute('tabindex', '0');
     node.setAttribute('aria-label', s.label);
-    // Start hidden for materialization
-    node.style.opacity = '0';
-    node.style.transform = 'translate(-50%,-50%) scale(0.4)';
+    node.style.opacity = '1';
+    node.style.transform = 'translate(-50%,-50%) scale(1)';
     node.innerHTML = `
       <div class="node-inner">
         <div class="node-ring" aria-hidden="true"></div>
@@ -931,12 +930,10 @@ function buildNodes() {
 
 function materializeNodes() {
   if (isMobile()) return;
-  orbit.querySelectorAll('.node').forEach((node, i) => {
-    setTimeout(() => {
-      node.style.transition = 'opacity .5s ease, transform .7s cubic-bezier(.23,1,.32,1)';
-      node.style.opacity = '1';
-      node.style.transform = 'translate(-50%,-50%) scale(1)';
-    }, 200 + i * 90);
+  orbit.querySelectorAll('.node').forEach(node => {
+    node.style.transition = 'none';
+    node.style.opacity = '1';
+    node.style.transform = 'translate(-50%,-50%) scale(1)';
   });
 }
 
@@ -1233,6 +1230,21 @@ function openUniverse() {
 enterBtn.addEventListener('click', openUniverse);
 const enterHint = document.getElementById('enter-hint');
 if (enterHint) enterHint.addEventListener('click', openUniverse);
+
+// ─── SCROLL DOWN / SWIPE UP TO ENTER ─────────────────────
+let touchStartY = 0;
+
+window.addEventListener('wheel', e => {
+  if (!universeActive && e.deltaY > 30) openUniverse();
+}, { passive: true });
+
+window.addEventListener('touchstart', e => {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+window.addEventListener('touchend', e => {
+  if (!universeActive && touchStartY - e.changedTouches[0].clientY > 55) openUniverse();
+}, { passive: true });
 
 // ─── OPEN PANEL ──────────────────────────────────────────
 function openPanel(service) {
