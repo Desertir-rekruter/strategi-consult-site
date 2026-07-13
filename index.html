@@ -170,12 +170,14 @@ nav{
 .hero{
   position:relative;z-index:1;
   min-height:100vh;
-  display:flex;align-items:center;
-  padding:calc(var(--nav-h) + 48px) 5vw 80px;
-  gap:60px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  padding:calc(var(--nav-h) + 48px) 6vw 80px;
+  gap:48px;
 }
 .hero-content{
-  flex:1;max-width:640px;
+  min-width:0;
 }
 .hero-eyebrow{
   font-size:11px;font-weight:500;
@@ -185,7 +187,7 @@ nav{
 }
 .hero-headline{
   font-family:'Barlow Condensed',sans-serif;
-  font-size:clamp(64px,10vw,130px);
+  font-size:clamp(52px,7.5vw,108px);
   font-weight:900;
   line-height:.96;
   letter-spacing:-.02em;
@@ -248,12 +250,12 @@ nav{
   position:relative;
 }
 .hero-photo{
-  width:clamp(240px,28vw,380px);
+  width:clamp(200px,22vw,320px);
   height:auto;
   border-radius:var(--radius);
   display:block;
-  filter:grayscale(.15);
-  box-shadow:0 24px 80px rgba(0,0,0,.5);
+  filter:grayscale(.1);
+  box-shadow:0 20px 60px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.3);
 }
 .hero-photo-glow{
   position:absolute;
@@ -573,9 +575,9 @@ nav{
 /* ─── MOBILE ─── */
 @media(max-width:768px){
   nav{width:calc(100% - 24px);top:10px;padding:0 16px}
-  .hero{flex-direction:column;padding-top:calc(var(--nav-h) + 80px);gap:32px}
+  .hero{grid-template-columns:1fr;padding-top:calc(var(--nav-h) + 80px);gap:28px}
   .hero-photo-wrap{order:-1;align-self:flex-start}
-  .hero-photo{width:clamp(140px,45vw,220px);border-radius:var(--radius-sm)}
+  .hero-photo{width:clamp(140px,42vw,200px);border-radius:var(--radius-sm)}
   .hero-glass{padding:24px}
   .panel-inner{padding:40px 24px 60px}
   .panel-grid{grid-template-columns:1fr}
