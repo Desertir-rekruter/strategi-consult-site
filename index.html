@@ -401,7 +401,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 /* ─── STARK HUD CHROME ─── */
 #universe{cursor:crosshair}
 
-/* Rotating halo around each node */
+/* Halo around each node — only spins on hover */
 .node-ring{
   position:absolute;
   width:52px;height:52px;
@@ -409,7 +409,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
   border:1px solid rgba(10,10,10,.1);
   top:50%;left:50%;
   transform:translate(-50%,-50%) rotate(0deg);
-  animation:nodeRingSpin 11s linear infinite;
+  animation:nodeRingSpin 7s linear infinite;
+  animation-play-state:paused;
   pointer-events:none;
 }
 .node-ring::before{
@@ -421,8 +422,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
   transform:translateX(-50%);
 }
 @keyframes nodeRingSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.node:nth-child(3n) .node-ring{animation-duration:7s;animation-direction:reverse}
-.node:nth-child(3n+1) .node-ring{animation-duration:15s}
+.node:hover .node-ring,.node.active .node-ring{animation-play-state:running}
+.node:nth-child(3n) .node-ring{animation-direction:reverse}
+.node:nth-child(3n+1) .node-ring{animation-duration:10s}
 
 /* Tech coordinate readout per node */
 .node-coord{
@@ -855,9 +857,14 @@ const SERVICES = [
 let universeActive = false;
 let activeNode = null;
 let panelOpen = false;
-let mouseX = 0, mouseY = 0;
+let mouseX = 0, mouseY = 0;       // normalized -1..1 for parallax
 let animFrame = null;
 const isMobile = () => window.innerWidth <= 768;
+
+// Mouse-driven energy state
+let activityLevel = 0;    // 0–1, boosted by mouse movement, decays to 0
+let arcAccum = 0;         // accumulated rotation angle (radians), driven by activity
+let prevRawX = 0, prevRawY = 0;
 
 // ─── ELEMENTS ───────────────────────────────────────────
 const enterBtn = document.getElementById('enter-btn');
@@ -960,28 +967,43 @@ function getNodeCenter(id) {
 }
 
 // ─── UNIFIED ANIMATION LOOP ───────────────────────────────
-let uniT = 0;
 let uniLastTs = null;
 let rawMouseX = -9999, rawMouseY = -9999;
+let dashOffset = 0;       // animated only while activity > 0
+let particlePhases = {};  // per-service particle phase (stops when mouse stops)
 
 function uniFrame(ts) {
   if (!universeActive) return;
-  if (!uniLastTs) uniLastTs = ts;
-  uniT += (ts - uniLastTs) / 1000;
+  const dt = uniLastTs ? Math.min((ts - uniLastTs) / 1000, 0.05) : 0.016;
   uniLastTs = ts;
 
-  // Smooth parallax orbit tilt (skip while panel is flying)
+  // Decay activity toward 0 (energy drains when mouse stops)
+  activityLevel = Math.max(0, activityLevel - dt * 1.4);
+
+  // Accumulate rotation and dash offset driven by activity only
+  arcAccum += activityLevel * dt * 2.2;
+  if (activityLevel > 0.01) dashOffset -= activityLevel * dt * 22;
+
+  // Advance particle phases only while mouse moves
+  SERVICES.forEach(s => {
+    if (!particlePhases[s.id]) particlePhases[s.id] = s.angle / 360;
+    const isActive = activeNode === s.id;
+    const spd = isActive ? 0.55 : 0.28;
+    particlePhases[s.id] = (particlePhases[s.id] + activityLevel * spd * dt) % 1;
+  });
+
+  // Parallax orbit tilt — stays at last mouse position, updates on move
   if (!panelOpen && !isMobile()) {
     const tiltX = mouseY * 12;
     const tiltY = mouseX * -12;
     orbit.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
   }
 
-  drawUniverse(uniT);
+  drawUniverse();
   animFrame = requestAnimationFrame(uniFrame);
 }
 
-function drawUniverse(t) {
+function drawUniverse() {
   const W = window.innerWidth;
   const H = window.innerHeight;
   if (canvas.width !== W) canvas.width = W;
@@ -990,15 +1012,15 @@ function drawUniverse(t) {
   if (isMobile()) return;
 
   const cx = W / 2, cy = H / 2;
+  const act = activityLevel; // 0–1
 
-  // ── 1. PULSING DOT GRID ──────────────────────────────────
+  // ── 1. STATIC DOT GRID (no pulse) ────────────────────────
   const gridStep = 58;
   for (let gx = gridStep / 2; gx < W; gx += gridStep) {
     for (let gy = gridStep / 2; gy < H; gy += gridStep) {
       const d = Math.hypot(gx - cx, gy - cy);
-      const wave = 0.5 + 0.5 * Math.sin(t * 0.55 - d * 0.009);
-      const alpha = 0.055 * wave * Math.max(0, 1 - d / 560);
-      if (alpha < 0.004) continue;
+      const alpha = 0.045 * Math.max(0, 1 - d / 540);
+      if (alpha < 0.003) continue;
       ctx.beginPath();
       ctx.arc(gx, gy, 1, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(10,10,10,${alpha})`;
@@ -1006,14 +1028,14 @@ function drawUniverse(t) {
     }
   }
 
-  // ── 2. ROTATING ARC RINGS ────────────────────────────────
+  // ── 2. ARC RINGS (rotate only with mouse energy) ──────────
   [
-    { r: 68,  segs: 4, speed:  0.20, len: 0.28, w: 0.9, a: 0.18 },
-    { r: 125, segs: 3, speed: -0.12, len: 0.22, w: 0.5, a: 0.13 },
-    { r: 195, segs: 5, speed:  0.07, len: 0.16, w: 0.6, a: 0.08 },
-    { r: 275, segs: 2, speed: -0.04, len: 0.40, w: 0.4, a: 0.05 },
+    { r: 68,  segs: 4, dir:  1, len: 0.28, w: 0.9, a: 0.12 + act * 0.08 },
+    { r: 125, segs: 3, dir: -1, len: 0.22, w: 0.5, a: 0.09 + act * 0.07 },
+    { r: 195, segs: 5, dir:  1, len: 0.16, w: 0.6, a: 0.06 + act * 0.05 },
+    { r: 275, segs: 2, dir: -1, len: 0.40, w: 0.4, a: 0.04 + act * 0.04 },
   ].forEach(ring => {
-    const rot = t * ring.speed;
+    const rot = arcAccum * ring.dir * (1 + ring.r * 0.002);
     for (let s = 0; s < ring.segs; s++) {
       const a0 = (s / ring.segs) * Math.PI * 2 + rot;
       const a1 = a0 + Math.PI * 2 * ring.len;
@@ -1025,29 +1047,28 @@ function drawUniverse(t) {
     }
   });
 
-  // ── 3. ROTATING CENTER CROSSHAIR ─────────────────────────
+  // ── 3. CENTER CROSSHAIR (rotates with mouse energy) ───────
   ctx.save();
   ctx.translate(cx, cy);
-  ctx.rotate(t * 0.14);
+  ctx.rotate(arcAccum * 0.6);
   [0, 90, 180, 270].forEach(deg => {
     const r = deg * Math.PI / 180;
     ctx.beginPath();
     ctx.moveTo(Math.cos(r) * 6, Math.sin(r) * 6);
     ctx.lineTo(Math.cos(r) * 26, Math.sin(r) * 26);
-    ctx.strokeStyle = 'rgba(10,10,10,0.38)';
+    ctx.strokeStyle = `rgba(10,10,10,${0.2 + act * 0.22})`;
     ctx.lineWidth = 0.9;
     ctx.stroke();
   });
   ctx.restore();
 
-  // ── 4. CORNER HUD BRACKETS ───────────────────────────────
-  const cLen = 20;
-  const cPad = 40;
+  // ── 4. CORNER HUD BRACKETS (static, brighter with activity) ─
+  const cLen = 20, cPad = 40;
   [
     [cPad, 68, 1, 1], [W - cPad, 68, -1, 1],
     [cPad, H - cPad, 1, -1], [W - cPad, H - cPad, -1, -1],
-  ].forEach(([x, y, sx, sy], i) => {
-    const a = 0.12 + 0.05 * Math.sin(t * 0.8 + i * 1.2);
+  ].forEach(([x, y, sx, sy]) => {
+    const a = 0.1 + act * 0.12;
     ctx.strokeStyle = `rgba(10,10,10,${a})`;
     ctx.lineWidth = 0.9;
     ctx.beginPath();
@@ -1057,7 +1078,7 @@ function drawUniverse(t) {
     ctx.stroke();
     ctx.beginPath();
     ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(10,10,10,${a * 1.8})`;
+    ctx.fillStyle = `rgba(10,10,10,${a * 1.6})`;
     ctx.fill();
   });
 
@@ -1071,42 +1092,44 @@ function drawUniverse(t) {
     const relSvc = activeNode ? SERVICES.find(sv => sv.id === activeNode) : null;
     const isRelated = relSvc?.related?.includes(s.id);
 
-    const lAlpha = isActive ? 0.55 : isRelated ? 0.32 : 0.09 + 0.04 * Math.sin(t * 0.5 + s.angle * 0.02);
+    const lAlpha = isActive ? 0.5 : isRelated ? 0.28 : 0.09;
 
-    // Gradient line center → node
     const grad = ctx.createLinearGradient(cx, cy, from.x, from.y);
-    grad.addColorStop(0, `rgba(10,10,10,${lAlpha * 0.12})`);
-    grad.addColorStop(0.55, `rgba(10,10,10,${lAlpha * 0.5})`);
+    grad.addColorStop(0, `rgba(10,10,10,${lAlpha * 0.1})`);
+    grad.addColorStop(0.55, `rgba(10,10,10,${lAlpha * 0.45})`);
     grad.addColorStop(1, `rgba(10,10,10,${lAlpha})`);
     ctx.beginPath();
     ctx.moveTo(cx, cy);
     ctx.lineTo(from.x, from.y);
     ctx.strokeStyle = grad;
-    ctx.lineWidth = isActive ? 1.5 : isRelated ? 1 : 0.55;
+    ctx.lineWidth = isActive ? 1.4 : isRelated ? 0.9 : 0.5;
     ctx.stroke();
 
-    // Traveling particles on line
-    const numP = isActive ? 3 : 1;
-    const spd = isActive ? 0.55 : 0.28;
-    for (let p = 0; p < numP; p++) {
-      const ph = ((t * spd + s.angle / 360 + p / numP) % 1);
-      const px = cx + (from.x - cx) * ph;
-      const py = cy + (from.y - cy) * ph;
-      const pa = Math.sin(ph * Math.PI) * (isActive ? 0.9 : 0.4);
-      const pr = isActive ? 2.5 : 1.8;
-      ctx.beginPath();
-      ctx.arc(px, py, pr, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(10,10,10,${pa})`;
-      ctx.fill();
-      if (isActive && pa > 0.3) {
+    // Particles only move while mouse is active
+    if (act > 0.02 || isActive) {
+      const numP = isActive ? 3 : 1;
+      for (let p = 0; p < numP; p++) {
+        const basePhase = particlePhases[s.id] || 0;
+        const ph = (basePhase + p / numP) % 1;
+        const px = cx + (from.x - cx) * ph;
+        const py = cy + (from.y - cy) * ph;
+        const pa = Math.sin(ph * Math.PI) * (isActive ? 0.85 : act * 0.45);
+        const pr = isActive ? 2.5 : 1.8;
+        if (pa < 0.02) continue;
         ctx.beginPath();
-        ctx.arc(px, py, pr * 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(10,10,10,0.04)`;
+        ctx.arc(px, py, pr, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(10,10,10,${pa})`;
         ctx.fill();
+        if (isActive && pa > 0.3) {
+          ctx.beginPath();
+          ctx.arc(px, py, pr * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(10,10,10,0.04)`;
+          ctx.fill();
+        }
       }
     }
 
-    // Animated dashed cross-node connections
+    // Cross-node dashed connections (dash moves with mouse activity)
     s.related.forEach(rid => {
       const key = [s.id, rid].sort().join('-');
       if (drawn.has(key)) return;
@@ -1118,67 +1141,52 @@ function drawUniverse(t) {
       ctx.beginPath();
       ctx.moveTo(from.x, from.y);
       ctx.lineTo(to.x, to.y);
-      ctx.strokeStyle = `rgba(10,10,10,${both ? 0.28 : 0.06})`;
+      ctx.strokeStyle = `rgba(10,10,10,${both ? 0.25 : 0.06})`;
       ctx.lineWidth = both ? 0.9 : 0.3;
       ctx.setLineDash(both ? [6, 8] : [3, 14]);
-      ctx.lineDashOffset = -(t * 18);
+      ctx.lineDashOffset = dashOffset;
       ctx.stroke();
       ctx.setLineDash([]);
       ctx.lineDashOffset = 0;
 
-      if (both) {
-        const ph2 = ((t * 0.38 + s.angle / 360) % 1);
+      if (both && act > 0.05) {
+        const ph2 = (particlePhases[s.id] || 0);
         const px2 = from.x + (to.x - from.x) * ph2;
         const py2 = from.y + (to.y - from.y) * ph2;
         ctx.beginPath();
         ctx.arc(px2, py2, 1.8, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(10,10,10,0.5)';
+        ctx.fillStyle = `rgba(10,10,10,${act * 0.55})`;
         ctx.fill();
       }
     });
   });
 
-  // ── 6. SCAN LINE ─────────────────────────────────────────
-  const scanPeriod = 9;
-  const scanPh = (t % scanPeriod) / scanPeriod;
-  if (scanPh < 0.28) {
-    const prog = scanPh / 0.28;
-    const sY = H * 0.08 + H * 0.84 * prog;
-    const sa = Math.sin(prog * Math.PI) * 0.09;
-    ctx.fillStyle = `rgba(10,10,10,${sa})`;
-    ctx.fillRect(0, sY - 1.5, W, 3);
-    ctx.fillStyle = `rgba(10,10,10,${sa * 0.5})`;
-    ctx.fillRect(0, sY - 8, W, 6);
-  }
-
-  // ── 7. HUD READOUT ────────────────────────────────────────
+  // ── 6. HUD READOUT (static) ───────────────────────────────
   ctx.font = '500 9px "Barlow", sans-serif';
-  ctx.letterSpacing = '0.12em';
-  const blink = Math.floor(t * 1.5) % 2 === 0;
   const hudY = H - 72;
-  ctx.fillStyle = `rgba(10,10,10,${blink ? 0.28 : 0.16})`;
+  ctx.fillStyle = `rgba(10,10,10,${0.14 + act * 0.14})`;
   ctx.fillText('SYS · ONLINE', 40, hudY);
-  ctx.fillStyle = 'rgba(10,10,10,0.16)';
-  ctx.fillText(`NODES · 08`, 40, hudY + 15);
-  ctx.fillText(`T+${String(Math.floor(t)).padStart(4, '0')}`, 40, hudY + 30);
+  ctx.fillStyle = 'rgba(10,10,10,0.13)';
+  ctx.fillText('NODES · 08', 40, hudY + 15);
+  ctx.fillText(`ACT · ${Math.round(act * 100).toString().padStart(3, '0')}%`, 40, hudY + 30);
 
-  // ── 8. MOUSE RETICLE ─────────────────────────────────────
+  // ── 7. MOUSE RETICLE ─────────────────────────────────────
   if (rawMouseX > 0 && rawMouseY > 0 && !panelOpen) {
     const mx = rawMouseX, my = rawMouseY;
-    const reticleSize = 14;
-    ctx.strokeStyle = 'rgba(10,10,10,0.22)';
+    const rs = 12 + act * 6;
+    const ra = 0.12 + act * 0.25;
+    ctx.strokeStyle = `rgba(10,10,10,${ra})`;
     ctx.lineWidth = 0.8;
-    // Outer square corners
     [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([sx, sy]) => {
       ctx.beginPath();
-      ctx.moveTo(mx + sx * reticleSize, my + sy * (reticleSize - 6));
-      ctx.lineTo(mx + sx * reticleSize, my + sy * reticleSize);
-      ctx.lineTo(mx + (sx < 0 ? sx*(reticleSize-6) : sx*(reticleSize-6)), my + sy * reticleSize);
+      ctx.moveTo(mx + sx * rs, my + sy * (rs - 7));
+      ctx.lineTo(mx + sx * rs, my + sy * rs);
+      ctx.lineTo(mx + sx * (rs - 7), my + sy * rs);
       ctx.stroke();
     });
     ctx.beginPath();
-    ctx.arc(mx, my, 2, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(10,10,10,0.25)';
+    ctx.arc(mx, my, 1.5 + act * 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(10,10,10,${0.2 + act * 0.3})`;
     ctx.fill();
   }
 }
@@ -1186,10 +1194,21 @@ function drawUniverse(t) {
 // ─── PARALLAX ────────────────────────────────────────────
 function onMouseMove(e) {
   if (!universeActive || isMobile()) return;
-  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+  const dx = e.clientX - prevRawX;
+  const dy = e.clientY - prevRawY;
+  const speed = Math.hypot(dx, dy);
+  // Boost activity by movement speed (capped at 1)
+  activityLevel = Math.min(1, activityLevel + speed * 0.038);
+
+  prevRawX = e.clientX;
+  prevRawY = e.clientY;
   rawMouseX = e.clientX;
   rawMouseY = e.clientY;
+
+  // Normalized position for parallax
+  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
 }
 
 // ─── ENTER UNIVERSE ──────────────────────────────────────
@@ -1202,9 +1221,11 @@ function openUniverse() {
   setTimeout(() => {
     universe.classList.add('active');
     buildNodes();
-    // Reset loop timer and start unified animation
+    // Reset state and start loop
     uniLastTs = null;
-    uniT = 0;
+    arcAccum = 0;
+    activityLevel = 0;
+    particlePhases = {};
     animFrame = requestAnimationFrame(uniFrame);
   }, 130);
 }
