@@ -253,20 +253,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 .hero-stat-num{font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:900;line-height:1;color:var(--black)}
 .hero-stat-label{font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-top:4px}
 
-/* ─── TRANSITION OVERLAY ─── */
-#transition-overlay{
-  position:fixed;inset:0;background:var(--black);z-index:999;
-  clip-path:circle(0% at 50% 50%);
+/* ─── HERO EXIT ─── */
+.hero.leaving{
   pointer-events:none;
+  animation:heroLeave .7s cubic-bezier(.76,0,.24,1) forwards;
+}
+@keyframes heroLeave{
+  0%{transform:translate(0,0) scale(1);opacity:1}
+  100%{transform:translate(-7vw,-5vh) scale(.93);opacity:0}
 }
 
 /* ─── UNIVERSE ─── */
 #universe{
   position:fixed;inset:0;background:var(--cream);z-index:100;
   opacity:0;pointer-events:none;
-  transition:opacity .6s ease;
+  transform:translate(5vw,4vh);
+  will-change:transform,opacity;
 }
-#universe.active{opacity:1;pointer-events:all}
+#universe.active{
+  opacity:1;pointer-events:all;
+  animation:universeIn .7s cubic-bezier(.23,1,.32,1) forwards;
+}
+@keyframes universeIn{
+  from{opacity:0;transform:translate(5vw,4vh)}
+  to{opacity:1;transform:translate(0,0)}
+}
 
 #universe-canvas{position:absolute;inset:0;z-index:1;pointer-events:none}
 
@@ -387,16 +398,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 }
 @keyframes pulsering{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.5)}}
 
+/* ─── PANEL BACKDROP ─── */
+#panel-backdrop{
+  position:fixed;inset:0;z-index:148;
+  background:rgba(10,10,10,.18);
+  opacity:0;pointer-events:none;
+  transition:opacity .45s ease;
+}
+#panel-backdrop.visible{opacity:1;pointer-events:all}
+
 /* ─── SERVICE PANEL ─── */
 #service-panel{
-  position:fixed;inset:0;z-index:150;
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(720px,62vw);
+  z-index:150;
   background:var(--cream);
-  clip-path:circle(0% at 50% 50%);
-  transition:clip-path .6s cubic-bezier(.23,1,.32,1);
+  border-left:1px solid var(--black-12);
+  transform:translateX(102%);
+  transition:transform .55s cubic-bezier(.23,1,.32,1);
   overflow-y:auto;
   display:flex;flex-direction:column;
 }
-#service-panel.open{clip-path:circle(150% at 50% 50%)}
+#service-panel.open{transform:translateX(0)}
 
 .panel-close{
   position:fixed;top:40px;right:40px;z-index:160;
@@ -474,22 +497,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 
 /* ─── CONTACT SECTION ─── */
 #contact-section{
-  position:fixed;bottom:0;left:0;right:0;z-index:500;
+  position:fixed;bottom:0;left:0;
+  width:calc(100% - min(720px,62vw));
+  z-index:499;
   background:var(--black);color:var(--cream);
   transform:translateY(100%);
-  transition:transform .6s cubic-bezier(.23,1,.32,1);
-  padding:64px 40px;
+  transition:transform .5s cubic-bezier(.23,1,.32,1);
+  padding:20px 40px;
 }
 #contact-section.visible{transform:translateY(0)}
 
-.contact-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
-.contact-label{font-size:10px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:rgba(242,237,230,.4);margin-bottom:12px}
-.contact-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;text-transform:uppercase;line-height:.9;color:var(--cream)}
-.contact-microcopy{font-size:13px;font-weight:300;color:rgba(242,237,230,.5);margin-top:16px;line-height:1.6}
-.contact-btns{display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.contact-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:100%}
+.contact-left{flex:1;min-width:0}
+.contact-label{font-size:10px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,237,230,.4);margin-bottom:4px}
+.contact-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;text-transform:uppercase;line-height:1;color:var(--cream)}
+.contact-microcopy{font-size:12px;font-weight:300;color:rgba(242,237,230,.45);margin-top:4px}
+.contact-btns{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .contact-btn{
-  display:inline-block;padding:14px 32px;border:1px solid rgba(242,237,230,.2);
-  font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  display:inline-block;padding:10px 20px;border:1px solid rgba(242,237,230,.2);
+  font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;
   color:var(--cream);text-decoration:none;white-space:nowrap;
   transition:background .2s,border-color .2s;
 }
@@ -530,9 +556,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 
   .panel-inner{padding:80px 20px 60px}
   .panel-grid{grid-template-columns:1fr}
-  .contact-inner{grid-template-columns:1fr}
-  .contact-btns{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
-  #contact-section{padding:40px 20px}
+  #service-panel{width:100%;border-left:none}
+  #contact-section{width:100%;padding:16px 20px}
+  .contact-btns{flex-direction:row;flex-wrap:wrap}
   .panel-close{top:20px;right:20px}
 }
 
@@ -617,6 +643,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
   </div>
 </div>
 
+<!-- ─── PANEL BACKDROP ─── -->
+<div id="panel-backdrop" aria-hidden="true"></div>
+
 <!-- ─── SERVICE PANEL ─── -->
 <div id="service-panel" role="dialog" aria-modal="true" aria-hidden="true">
   <button class="panel-close" id="panel-close" aria-label="Закрыть">
@@ -631,15 +660,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 <!-- ─── CONTACT ─── -->
 <div id="contact-section" role="complementary">
   <div class="contact-inner">
-    <div>
-      <p class="contact-label">ГОТОВЫ НАЧАТЬ</p>
-      <h2 class="contact-title">БЕСПЛАТНЫЙ<br>АУДИТ<br>ЗА 30 МИН.</h2>
-      <p class="contact-microcopy">Уже в конце звонка вы поймёте<br>где утекают деньги и что с этим делать.<br>Никаких обязательств.</p>
+    <div class="contact-left">
+      <p class="contact-label">БЕСПЛАТНЫЙ АУДИТ · 30 МИН</p>
+      <p class="contact-title">НАЙДЁМ ГДЕ УТЕКАЮТ ДЕНЬГИ</p>
+      <p class="contact-microcopy">Никаких обязательств — только конкретный разбор</p>
     </div>
     <div class="contact-btns">
       <a href="https://t.me/HR_Ignatiy" class="contact-btn primary" target="_blank" rel="noopener">Telegram →</a>
       <a href="https://wa.me/995557602599" class="contact-btn" target="_blank" rel="noopener">WhatsApp</a>
-      <a href="mailto:ignatiygeo@gmail.com" class="contact-btn">E-mail</a>
     </div>
   </div>
 </div>
@@ -806,6 +834,8 @@ const panelContent = document.getElementById('panel-content');
 const panelClose = document.getElementById('panel-close');
 const universeBack = document.getElementById('universe-back');
 const contactSection = document.getElementById('contact-section');
+const panelBackdrop = document.getElementById('panel-backdrop');
+const heroSection = document.getElementById('hero');
 
 // ─── BUILD NODES ─────────────────────────────────────────
 function buildNodes() {
@@ -940,14 +970,22 @@ function animateOrbit() {
 
 // ─── ENTER UNIVERSE ──────────────────────────────────────
 function openUniverse() {
+  if (universeActive) return;
   universeActive = true;
-  universe.classList.add('active');
-  buildNodes();
-  setTimeout(() => {
-    animateOrbit();
-    drawLines();
-  }, 100);
   document.body.style.overflow = 'hidden';
+
+  // Hero slides diagonally away
+  heroSection.classList.add('leaving');
+
+  // Universe slides in from opposite direction after brief delay
+  setTimeout(() => {
+    universe.classList.add('active');
+    buildNodes();
+    setTimeout(() => {
+      animateOrbit();
+      drawLines();
+    }, 120);
+  }, 120);
 }
 
 enterBtn.addEventListener('click', openUniverse);
@@ -960,18 +998,29 @@ function openPanel(service) {
   activeNode = service.id;
   panelOpen = true;
 
-  // Dim other nodes
+  // Cancel parallax loop
+  cancelAnimationFrame(animFrame);
+
+  // Fly orbit toward the clicked node's direction
+  const rad = (service.angle * Math.PI) / 180;
+  const flyX = Math.cos(rad) * 70;
+  const flyY = Math.sin(rad) * 50;
+  orbit.style.transition = 'transform .45s cubic-bezier(.76,0,.24,1)';
+  orbit.style.transform = `translate(${flyX}px,${flyY}px) scale(1.1)`;
+
+  // Dim other nodes, emphasise active
   orbit.querySelectorAll('.node').forEach(n => {
-    n.style.opacity = n.dataset.id === service.id ? '1' : '0.25';
+    n.style.transition = 'opacity .3s ease';
+    n.style.opacity = n.dataset.id === service.id ? '1' : '0.12';
     n.classList.toggle('active', n.dataset.id === service.id);
   });
 
-  // Build panel content
+  // Build panel content with stagger markers
   panelContent.innerHTML = `
-    <p class="panel-eyebrow">${service.eyebrow}</p>
-    <h2 class="panel-title">${service.title}</h2>
-    <p class="panel-lead">${service.lead}</p>
-    <div class="panel-grid">
+    <p class="panel-eyebrow stagger-item">${service.eyebrow}</p>
+    <h2 class="panel-title stagger-item">${service.title}</h2>
+    <p class="panel-lead stagger-item">${service.lead}</p>
+    <div class="panel-grid stagger-item">
       ${service.items.map(item => `
         <div class="panel-item">
           <div class="panel-item-num">${item.num}</div>
@@ -979,7 +1028,7 @@ function openPanel(service) {
           <p class="panel-item-text">${item.text}</p>
         </div>`).join('')}
     </div>
-    <div class="panel-related">
+    <div class="panel-related stagger-item">
       <p class="panel-related-label">СВЯЗАННЫЕ ПРОЦЕССЫ</p>
       <div class="panel-related-nodes">
         ${service.related.map(rid => {
@@ -988,33 +1037,60 @@ function openPanel(service) {
         }).join('')}
       </div>
     </div>
-    <a href="https://t.me/HR_Ignatiy" class="panel-cta" target="_blank" rel="noopener">
+    <a href="https://t.me/HR_Ignatiy" class="panel-cta stagger-item" target="_blank" rel="noopener">
       ОБСУДИТЬ ЭТОТ ПРОЦЕСС →
     </a>`;
+
+  // Set initial hidden state for stagger items
+  panelContent.querySelectorAll('.stagger-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(22px)';
+  });
 
   // Related node clicks
   panelContent.querySelectorAll('.panel-related-node').forEach(btn => {
     btn.addEventListener('click', () => {
       const rel = SERVICES.find(s => s.id === btn.dataset.id);
-      if (rel) openPanel(rel);
+      if (rel) { closePanel(); setTimeout(() => openPanel(rel), 300); }
     });
   });
 
-  servicePanel.classList.add('open');
-  servicePanel.removeAttribute('aria-hidden');
-  universeBack.classList.add('visible');
-  panelClose.focus();
+  // Open panel after orbit starts flying
+  setTimeout(() => {
+    servicePanel.classList.add('open');
+    servicePanel.removeAttribute('aria-hidden');
+    panelBackdrop.classList.add('visible');
+    universeBack.classList.add('visible');
+    servicePanel.scrollTop = 0;
 
-  // Show contact at bottom
-  setTimeout(() => { contactSection.classList.add('visible'); }, 600);
+    // Stagger reveal content
+    panelContent.querySelectorAll('.stagger-item').forEach((el, i) => {
+      setTimeout(() => {
+        el.style.transition = 'opacity .45s ease, transform .45s cubic-bezier(.23,1,.32,1)';
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 200 + i * 90);
+    });
+  }, 180);
+
+  // Show compact contact bar
+  setTimeout(() => { contactSection.classList.add('visible'); }, 500);
 }
+
+// Click backdrop to close panel
+panelBackdrop.addEventListener('click', closePanel);
 
 function closePanel() {
   panelOpen = false;
   activeNode = null;
   servicePanel.classList.remove('open');
   servicePanel.setAttribute('aria-hidden', 'true');
+  panelBackdrop.classList.remove('visible');
   contactSection.classList.remove('visible');
+
+  // Return orbit to center
+  orbit.style.transition = 'transform .5s cubic-bezier(.23,1,.32,1)';
+  orbit.style.transform = 'translate(0,0) scale(1)';
 
   orbit.querySelectorAll('.node').forEach(n => {
     n.style.opacity = '1';
@@ -1022,6 +1098,12 @@ function closePanel() {
   });
 
   universeBack.classList.remove('visible');
+
+  // Restart parallax
+  setTimeout(() => {
+    orbit.style.transition = '';
+    animateOrbit();
+  }, 520);
 }
 
 panelClose.addEventListener('click', closePanel);
