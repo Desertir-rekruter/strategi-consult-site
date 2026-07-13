@@ -378,7 +378,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 /* center pulse */
 .center-pulse{
   position:absolute;
-  width:6px;height:6px;
+  width:8px;height:8px;
   background:var(--black);
   border-radius:50%;
   transform:translate(-50%,-50%);
@@ -388,15 +388,51 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 40px;height:56px;d
 .center-pulse::before,.center-pulse::after{
   content:'';position:absolute;
   border-radius:50%;border:1px solid var(--black-40);
-  inset:-10px;
-  animation:pulsering 2.4s ease-out infinite;
+  inset:-12px;
+  animation:pulsering 2s ease-out infinite;
 }
 .center-pulse::after{
-  inset:-20px;
+  inset:-26px;
   border-color:var(--black-12);
-  animation-delay:.8s;
+  animation-delay:.65s;
 }
-@keyframes pulsering{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.5)}}
+@keyframes pulsering{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.8)}}
+
+/* ─── STARK HUD CHROME ─── */
+#universe{cursor:crosshair}
+
+/* Rotating halo around each node */
+.node-ring{
+  position:absolute;
+  width:52px;height:52px;
+  border-radius:50%;
+  border:1px solid rgba(10,10,10,.1);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(0deg);
+  animation:nodeRingSpin 11s linear infinite;
+  pointer-events:none;
+}
+.node-ring::before{
+  content:'';position:absolute;
+  width:4px;height:4px;
+  background:rgba(10,10,10,.5);
+  border-radius:50%;
+  top:-2px;left:50%;
+  transform:translateX(-50%);
+}
+@keyframes nodeRingSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.node:nth-child(3n) .node-ring{animation-duration:7s;animation-direction:reverse}
+.node:nth-child(3n+1) .node-ring{animation-duration:15s}
+
+/* Tech coordinate readout per node */
+.node-coord{
+  font-size:8px;font-weight:400;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(10,10,10,.35);
+  white-space:nowrap;
+  opacity:0;transform:translateY(3px);
+  transition:opacity .25s,transform .25s;
+}
+.node:hover .node-coord,.node.active .node-coord{opacity:1;transform:translateY(0)}
 
 /* ─── PANEL BACKDROP ─── */
 #panel-backdrop{
@@ -838,24 +874,34 @@ const panelBackdrop = document.getElementById('panel-backdrop');
 const heroSection = document.getElementById('hero');
 
 // ─── BUILD NODES ─────────────────────────────────────────
+function nodeCoord(s) {
+  const lat = (41 + (s.angle % 90) * 0.1).toFixed(1);
+  const lon = (41 + s.radius * 100 * 0.15).toFixed(1);
+  return `${lat}°N · ${lon}°E`;
+}
+
 function buildNodes() {
   orbit.innerHTML = '';
   const mobile = document.querySelector('.mobile-nodes');
   if (mobile) mobile.innerHTML = '';
 
   SERVICES.forEach((s, i) => {
-    // Desktop node
     const node = document.createElement('div');
     node.className = 'node';
     node.dataset.id = s.id;
     node.setAttribute('role', 'button');
     node.setAttribute('tabindex', '0');
     node.setAttribute('aria-label', s.label);
+    // Start hidden for materialization
+    node.style.opacity = '0';
+    node.style.transform = 'translate(-50%,-50%) scale(0.4)';
     node.innerHTML = `
       <div class="node-inner">
+        <div class="node-ring" aria-hidden="true"></div>
         <div class="node-dot"></div>
         <span class="node-label">${s.label}</span>
         <span class="node-sub">${s.sub}</span>
+        <span class="node-coord" aria-hidden="true">${nodeCoord(s)}</span>
       </div>`;
     node.addEventListener('click', () => openPanel(s));
     node.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') openPanel(s) });
@@ -873,6 +919,18 @@ function buildNodes() {
   });
 
   positionNodes();
+  materializeNodes();
+}
+
+function materializeNodes() {
+  if (isMobile()) return;
+  orbit.querySelectorAll('.node').forEach((node, i) => {
+    setTimeout(() => {
+      node.style.transition = 'opacity .5s ease, transform .7s cubic-bezier(.23,1,.32,1)';
+      node.style.opacity = '1';
+      node.style.transform = 'translate(-50%,-50%) scale(1)';
+    }, 200 + i * 90);
+  });
 }
 
 function positionNodes() {
@@ -893,45 +951,162 @@ function positionNodes() {
   });
 }
 
-// ─── CANVAS LINES ────────────────────────────────────────
+// ─── HELPERS ─────────────────────────────────────────────
 function getNodeCenter(id) {
   const node = orbit.querySelector(`[data-id="${id}"]`);
   if (!node) return null;
   const rect = node.getBoundingClientRect();
-  return {
-    x: rect.left + rect.width / 2,
-    y: rect.top + rect.height / 2
-  };
+  return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
 }
 
-function getCenterPoint() {
-  return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+// ─── UNIFIED ANIMATION LOOP ───────────────────────────────
+let uniT = 0;
+let uniLastTs = null;
+let rawMouseX = -9999, rawMouseY = -9999;
+
+function uniFrame(ts) {
+  if (!universeActive) return;
+  if (!uniLastTs) uniLastTs = ts;
+  uniT += (ts - uniLastTs) / 1000;
+  uniLastTs = ts;
+
+  // Smooth parallax orbit tilt (skip while panel is flying)
+  if (!panelOpen && !isMobile()) {
+    const tiltX = mouseY * 12;
+    const tiltY = mouseX * -12;
+    orbit.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+  }
+
+  drawUniverse(uniT);
+  animFrame = requestAnimationFrame(uniFrame);
 }
 
-function drawLines() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+function drawUniverse(t) {
+  const W = window.innerWidth;
+  const H = window.innerHeight;
+  if (canvas.width !== W) canvas.width = W;
+  if (canvas.height !== H) canvas.height = H;
+  ctx.clearRect(0, 0, W, H);
+  if (isMobile()) return;
 
-  if (isMobile() || !universeActive) return;
+  const cx = W / 2, cy = H / 2;
 
-  const center = getCenterPoint();
+  // ── 1. PULSING DOT GRID ──────────────────────────────────
+  const gridStep = 58;
+  for (let gx = gridStep / 2; gx < W; gx += gridStep) {
+    for (let gy = gridStep / 2; gy < H; gy += gridStep) {
+      const d = Math.hypot(gx - cx, gy - cy);
+      const wave = 0.5 + 0.5 * Math.sin(t * 0.55 - d * 0.009);
+      const alpha = 0.055 * wave * Math.max(0, 1 - d / 560);
+      if (alpha < 0.004) continue;
+      ctx.beginPath();
+      ctx.arc(gx, gy, 1, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(10,10,10,${alpha})`;
+      ctx.fill();
+    }
+  }
+
+  // ── 2. ROTATING ARC RINGS ────────────────────────────────
+  [
+    { r: 68,  segs: 4, speed:  0.20, len: 0.28, w: 0.9, a: 0.18 },
+    { r: 125, segs: 3, speed: -0.12, len: 0.22, w: 0.5, a: 0.13 },
+    { r: 195, segs: 5, speed:  0.07, len: 0.16, w: 0.6, a: 0.08 },
+    { r: 275, segs: 2, speed: -0.04, len: 0.40, w: 0.4, a: 0.05 },
+  ].forEach(ring => {
+    const rot = t * ring.speed;
+    for (let s = 0; s < ring.segs; s++) {
+      const a0 = (s / ring.segs) * Math.PI * 2 + rot;
+      const a1 = a0 + Math.PI * 2 * ring.len;
+      ctx.beginPath();
+      ctx.arc(cx, cy, ring.r, a0, a1);
+      ctx.strokeStyle = `rgba(10,10,10,${ring.a})`;
+      ctx.lineWidth = ring.w;
+      ctx.stroke();
+    }
+  });
+
+  // ── 3. ROTATING CENTER CROSSHAIR ─────────────────────────
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(t * 0.14);
+  [0, 90, 180, 270].forEach(deg => {
+    const r = deg * Math.PI / 180;
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(r) * 6, Math.sin(r) * 6);
+    ctx.lineTo(Math.cos(r) * 26, Math.sin(r) * 26);
+    ctx.strokeStyle = 'rgba(10,10,10,0.38)';
+    ctx.lineWidth = 0.9;
+    ctx.stroke();
+  });
+  ctx.restore();
+
+  // ── 4. CORNER HUD BRACKETS ───────────────────────────────
+  const cLen = 20;
+  const cPad = 40;
+  [
+    [cPad, 68, 1, 1], [W - cPad, 68, -1, 1],
+    [cPad, H - cPad, 1, -1], [W - cPad, H - cPad, -1, -1],
+  ].forEach(([x, y, sx, sy], i) => {
+    const a = 0.12 + 0.05 * Math.sin(t * 0.8 + i * 1.2);
+    ctx.strokeStyle = `rgba(10,10,10,${a})`;
+    ctx.lineWidth = 0.9;
+    ctx.beginPath();
+    ctx.moveTo(x + sx * cLen, y);
+    ctx.lineTo(x, y);
+    ctx.lineTo(x, y + sy * cLen);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(10,10,10,${a * 1.8})`;
+    ctx.fill();
+  });
+
+  // ── 5. LINES + PARTICLES ─────────────────────────────────
   const drawn = new Set();
-
   SERVICES.forEach(s => {
     const from = getNodeCenter(s.id);
     if (!from) return;
 
-    // Line from center to each node
-    ctx.beginPath();
-    ctx.moveTo(center.x, center.y);
-    ctx.lineTo(from.x, from.y);
     const isActive = activeNode === s.id;
-    ctx.strokeStyle = isActive ? 'rgba(10,10,10,0.35)' : 'rgba(10,10,10,0.08)';
-    ctx.lineWidth = isActive ? 1 : 0.5;
+    const relSvc = activeNode ? SERVICES.find(sv => sv.id === activeNode) : null;
+    const isRelated = relSvc?.related?.includes(s.id);
+
+    const lAlpha = isActive ? 0.55 : isRelated ? 0.32 : 0.09 + 0.04 * Math.sin(t * 0.5 + s.angle * 0.02);
+
+    // Gradient line center → node
+    const grad = ctx.createLinearGradient(cx, cy, from.x, from.y);
+    grad.addColorStop(0, `rgba(10,10,10,${lAlpha * 0.12})`);
+    grad.addColorStop(0.55, `rgba(10,10,10,${lAlpha * 0.5})`);
+    grad.addColorStop(1, `rgba(10,10,10,${lAlpha})`);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(from.x, from.y);
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = isActive ? 1.5 : isRelated ? 1 : 0.55;
     ctx.stroke();
 
-    // Lines between related nodes
+    // Traveling particles on line
+    const numP = isActive ? 3 : 1;
+    const spd = isActive ? 0.55 : 0.28;
+    for (let p = 0; p < numP; p++) {
+      const ph = ((t * spd + s.angle / 360 + p / numP) % 1);
+      const px = cx + (from.x - cx) * ph;
+      const py = cy + (from.y - cy) * ph;
+      const pa = Math.sin(ph * Math.PI) * (isActive ? 0.9 : 0.4);
+      const pr = isActive ? 2.5 : 1.8;
+      ctx.beginPath();
+      ctx.arc(px, py, pr, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(10,10,10,${pa})`;
+      ctx.fill();
+      if (isActive && pa > 0.3) {
+        ctx.beginPath();
+        ctx.arc(px, py, pr * 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(10,10,10,0.04)`;
+        ctx.fill();
+      }
+    }
+
+    // Animated dashed cross-node connections
     s.related.forEach(rid => {
       const key = [s.id, rid].sort().join('-');
       if (drawn.has(key)) return;
@@ -939,33 +1114,82 @@ function drawLines() {
       const to = getNodeCenter(rid);
       if (!to) return;
 
-      const bothActive = activeNode === s.id || activeNode === rid;
+      const both = activeNode === s.id || activeNode === rid;
       ctx.beginPath();
       ctx.moveTo(from.x, from.y);
       ctx.lineTo(to.x, to.y);
-      ctx.strokeStyle = bothActive ? 'rgba(10,10,10,0.2)' : 'rgba(10,10,10,0.05)';
-      ctx.lineWidth = bothActive ? 0.8 : 0.4;
-      ctx.setLineDash(bothActive ? [] : [4, 8]);
+      ctx.strokeStyle = `rgba(10,10,10,${both ? 0.28 : 0.06})`;
+      ctx.lineWidth = both ? 0.9 : 0.3;
+      ctx.setLineDash(both ? [6, 8] : [3, 14]);
+      ctx.lineDashOffset = -(t * 18);
       ctx.stroke();
       ctx.setLineDash([]);
+      ctx.lineDashOffset = 0;
+
+      if (both) {
+        const ph2 = ((t * 0.38 + s.angle / 360) % 1);
+        const px2 = from.x + (to.x - from.x) * ph2;
+        const py2 = from.y + (to.y - from.y) * ph2;
+        ctx.beginPath();
+        ctx.arc(px2, py2, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(10,10,10,0.5)';
+        ctx.fill();
+      }
     });
   });
+
+  // ── 6. SCAN LINE ─────────────────────────────────────────
+  const scanPeriod = 9;
+  const scanPh = (t % scanPeriod) / scanPeriod;
+  if (scanPh < 0.28) {
+    const prog = scanPh / 0.28;
+    const sY = H * 0.08 + H * 0.84 * prog;
+    const sa = Math.sin(prog * Math.PI) * 0.09;
+    ctx.fillStyle = `rgba(10,10,10,${sa})`;
+    ctx.fillRect(0, sY - 1.5, W, 3);
+    ctx.fillStyle = `rgba(10,10,10,${sa * 0.5})`;
+    ctx.fillRect(0, sY - 8, W, 6);
+  }
+
+  // ── 7. HUD READOUT ────────────────────────────────────────
+  ctx.font = '500 9px "Barlow", sans-serif';
+  ctx.letterSpacing = '0.12em';
+  const blink = Math.floor(t * 1.5) % 2 === 0;
+  const hudY = H - 72;
+  ctx.fillStyle = `rgba(10,10,10,${blink ? 0.28 : 0.16})`;
+  ctx.fillText('SYS · ONLINE', 40, hudY);
+  ctx.fillStyle = 'rgba(10,10,10,0.16)';
+  ctx.fillText(`NODES · 08`, 40, hudY + 15);
+  ctx.fillText(`T+${String(Math.floor(t)).padStart(4, '0')}`, 40, hudY + 30);
+
+  // ── 8. MOUSE RETICLE ─────────────────────────────────────
+  if (rawMouseX > 0 && rawMouseY > 0 && !panelOpen) {
+    const mx = rawMouseX, my = rawMouseY;
+    const reticleSize = 14;
+    ctx.strokeStyle = 'rgba(10,10,10,0.22)';
+    ctx.lineWidth = 0.8;
+    // Outer square corners
+    [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([sx, sy]) => {
+      ctx.beginPath();
+      ctx.moveTo(mx + sx * reticleSize, my + sy * (reticleSize - 6));
+      ctx.lineTo(mx + sx * reticleSize, my + sy * reticleSize);
+      ctx.lineTo(mx + (sx < 0 ? sx*(reticleSize-6) : sx*(reticleSize-6)), my + sy * reticleSize);
+      ctx.stroke();
+    });
+    ctx.beginPath();
+    ctx.arc(mx, my, 2, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(10,10,10,0.25)';
+    ctx.fill();
+  }
 }
 
 // ─── PARALLAX ────────────────────────────────────────────
 function onMouseMove(e) {
-  if (!universeActive || panelOpen || isMobile()) return;
+  if (!universeActive || isMobile()) return;
   mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
   mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-}
-
-function animateOrbit() {
-  if (!universeActive) return;
-  const tiltX = mouseY * 6;
-  const tiltY = mouseX * -6;
-  orbit.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-  drawLines();
-  animFrame = requestAnimationFrame(animateOrbit);
+  rawMouseX = e.clientX;
+  rawMouseY = e.clientY;
 }
 
 // ─── ENTER UNIVERSE ──────────────────────────────────────
@@ -973,23 +1197,19 @@ function openUniverse() {
   if (universeActive) return;
   universeActive = true;
   document.body.style.overflow = 'hidden';
-
-  // Hero slides diagonally away
   heroSection.classList.add('leaving');
 
-  // Universe slides in from opposite direction after brief delay
   setTimeout(() => {
     universe.classList.add('active');
     buildNodes();
-    setTimeout(() => {
-      animateOrbit();
-      drawLines();
-    }, 120);
-  }, 120);
+    // Reset loop timer and start unified animation
+    uniLastTs = null;
+    uniT = 0;
+    animFrame = requestAnimationFrame(uniFrame);
+  }, 130);
 }
 
 enterBtn.addEventListener('click', openUniverse);
-
 const enterHint = document.getElementById('enter-hint');
 if (enterHint) enterHint.addEventListener('click', openUniverse);
 
@@ -997,9 +1217,6 @@ if (enterHint) enterHint.addEventListener('click', openUniverse);
 function openPanel(service) {
   activeNode = service.id;
   panelOpen = true;
-
-  // Cancel parallax loop
-  cancelAnimationFrame(animFrame);
 
   // Fly orbit toward the clicked node's direction
   const rad = (service.angle * Math.PI) / 180;
@@ -1098,12 +1315,8 @@ function closePanel() {
   });
 
   universeBack.classList.remove('visible');
-
-  // Restart parallax
-  setTimeout(() => {
-    orbit.style.transition = '';
-    animateOrbit();
-  }, 520);
+  // Remove explicit transition after orbit returns so parallax takes over cleanly
+  setTimeout(() => { orbit.style.transition = ''; }, 520);
 }
 
 panelClose.addEventListener('click', closePanel);
@@ -1114,12 +1327,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape' && panelOpen) 
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    positionNodes();
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drawLines();
-  }, 150);
+  resizeTimer = setTimeout(() => { positionNodes(); }, 150);
 });
 
 window.addEventListener('mousemove', onMouseMove);
