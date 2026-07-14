@@ -1213,7 +1213,7 @@ void main(){
       float hSdf=length(max(hq,0.))+min(max(hq.x,hq.y),0.)-28.;
       float hClip=smoothstep(2.,-1.,hSdf);
       vec4 hTex=texture(uHeroTex,vec2(hRel.x,1.-hRel.y));
-      c=mix(c,hTex.rgb,hClip*step(.001,hClip));
+      c=mix(c,hTex.rgb*1.20,hClip*step(.001,hClip)); // brightness boost compensates for WebGL gamma
     }
   }
 
@@ -1234,7 +1234,6 @@ void main(){
   new THREE.TextureLoader().load('/assets/hero.jpeg',tex=>{
     tex.minFilter=THREE.LinearFilter;
     tex.magFilter=THREE.LinearFilter;
-    tex.colorSpace=THREE.SRGBColorSpace;
     bgMat.uniforms.uHeroTex.value=tex;
     bgMat.uniforms.uResBg.value.set(W(),H());
     heroLoaded=true;
@@ -1244,7 +1243,7 @@ void main(){
 
   // ── 2. Glass refraction shader — optical lens distortion + chromatic aberration ─
   const MX=14; // max glass elements tracked simultaneously
-  const gArr=new Float32Array(MX*5); // x,y,w,h,cornerRadius per element (CSS px)
+  const gArr=new Float32Array(MX*6); // x,y,w,h,cornerRadius,lensScale per element (CSS px)
 
   const glMat=new THREE.ShaderMaterial({
     glslVersion:THREE.GLSL3,
@@ -1262,7 +1261,7 @@ void main(){
 precision mediump float;
 uniform sampler2D uBg;
 uniform vec2 uRes;
-uniform float uG[${MX*5}];
+uniform float uG[${MX*6}];
 uniform int uN;
 uniform float uL,uBr,uCA;
 in vec2 vUv;
@@ -1279,7 +1278,7 @@ void main(){
   for(int i=0;i<${MX};i++){
     if(i>=uN) break;
 
-    float gx=uG[i*5],gy=uG[i*5+1],gw=uG[i*5+2],gh=uG[i*5+3],gr=uG[i*5+4];
+    float gx=uG[i*6],gy=uG[i*6+1],gw=uG[i*6+2],gh=uG[i*6+3],gr=uG[i*6+4],gs=uG[i*6+5];
     vec2 ctr=vec2(gx+gw*.5, gy+gh*.5);
     vec2 hs =vec2(gw*.5,    gh*.5);
     vec2 rel=css-ctr;
@@ -1292,11 +1291,9 @@ void main(){
     float d=length(n);
     vec2 dir=normalize(n+.0001);
 
-    // Nav (i==0) = magnifying glass: negative sign pulls pixels toward center → converging lens
-    // All other glass elements = barrel distortion (outward push)
-    float lSign=(i==0) ? -1.8 : 1.0;
+    // gs = per-element lens scale: negative = magnifying (nav), ~0 = no distortion, positive = barrel
     float lc=d*(1.+d)*0.52;
-    vec2 pxOff=dir*uL*lc*min(hs.x,hs.y)*lSign;
+    vec2 pxOff=dir*uL*lc*min(hs.x,hs.y)*gs;
     vec2 uvOff=vec2(pxOff.x,-pxOff.y)/uRes; // flip Y for UV space
 
     // Chromatic aberration: R/B channels shift in opposite directions → rainbow at edges
@@ -1319,23 +1316,24 @@ void main(){
   glS.add(new THREE.Mesh(quad,glMat));
 
   // ── 3. Glass element tracking — map DOM rects to shader uniforms ─────────
+  // [selector, borderRadius, lensScale]  lensScale: negative=magnifying, 0=flat, positive=barrel
   const TRACKED=[
-    ['nav',          100],
-    ['.hero-glass',   28],
-    ['.service-card', 28],
-    ['.contact-glass',28],
-    ['#service-panel', 0],
+    ['nav',           100, -1.8],  // magnifying loupe
+    ['.hero-glass',    28,  0.05], // nearly flat — won't pull photo into view
+    ['.service-card',  28,  1.0],  // full barrel distortion (rainbow refraction)
+    ['.contact-glass', 28,  1.0],
+    ['#service-panel',  0,  0.6],
   ];
 
   function syncGlasses(){
     let n=0;
-    TRACKED.forEach(([sel,r])=>{
+    TRACKED.forEach(([sel,r,ls])=>{
       document.querySelectorAll(sel).forEach(el=>{
         if(n>=MX) return;
         const rc=el.getBoundingClientRect();
         if(!rc.width || rc.bottom<-10 || rc.top>H()+10) return;
-        const i=n*5;
-        gArr[i]=rc.left; gArr[i+1]=rc.top; gArr[i+2]=rc.width; gArr[i+3]=rc.height; gArr[i+4]=r;
+        const i=n*6;
+        gArr[i]=rc.left; gArr[i+1]=rc.top; gArr[i+2]=rc.width; gArr[i+3]=rc.height; gArr[i+4]=r; gArr[i+5]=ls;
         n++;
       });
     });
