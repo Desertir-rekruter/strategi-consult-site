@@ -734,7 +734,8 @@ nav{
   .scroll-hint{animation:none}
 }
 
-/* ─── THREE.JS ACTIVE — remove CSS backdrop-filter, WebGL handles refraction ─── */
+/* ─── THREE.JS ACTIVE ─── */
+/* Safari fallback: displacement maps not supported, regular blur */
 .gl-active .service-card,
 .gl-active .hero-glass,
 .gl-active nav,
@@ -745,9 +746,25 @@ nav{
 .gl-active .btn-glass,
 .gl-active .nav-contact,
 .gl-active .panel-close{
-  /* SVG feDisplacementMap distorts ALL composited content: text, photos, waves */
-  backdrop-filter:url('#glass-lens') saturate(1.6)!important;
-  -webkit-backdrop-filter:url('#glass-lens') saturate(1.6)!important;
+  backdrop-filter:blur(6px) brightness(1.45) saturate(200%)!important;
+  -webkit-backdrop-filter:blur(6px) brightness(1.45) saturate(200%)!important;
+}
+/* Chrome/Firefox only: full SVG feDisplacementMap distortion */
+/* hanging-punctuation:first is Safari-only → @supports not = everything except Safari */
+@supports not (hanging-punctuation:first){
+  .gl-active .service-card,
+  .gl-active .hero-glass,
+  .gl-active nav,
+  .gl-active .contact-glass,
+  .gl-active #service-panel,
+  .gl-active .panel-item,
+  .gl-active .panel-related-node,
+  .gl-active .btn-glass,
+  .gl-active .nav-contact,
+  .gl-active .panel-close{
+    backdrop-filter:url('#glass-lens') blur(6px) saturate(1.6)!important;
+    -webkit-backdrop-filter:url('#glass-lens') blur(6px) saturate(1.6)!important;
+  }
 }
 </style>
 </head>
@@ -1377,7 +1394,7 @@ void main(){
         color-interpolation-filters="sRGB">
   <feImage id="glass-dismap" result="dmap" preserveAspectRatio="none"
            x="0%" y="0%" width="100%" height="100%"/>
-  <feDisplacementMap in="SourceGraphic" in2="dmap" scale="48"
+  <feDisplacementMap in="SourceGraphic" in2="dmap" scale="120"
                      xChannelSelector="R" yChannelSelector="G"/>
 </filter>
 </defs>
