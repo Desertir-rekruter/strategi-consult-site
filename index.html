@@ -1316,10 +1316,10 @@ void main(){
   glS.add(new THREE.Mesh(quad,glMat));
 
   // ── 3. Glass element tracking — map DOM rects to shader uniforms ─────────
-  // [selector, borderRadius, lensScale]  lensScale: negative=magnifying, 0=flat, positive=barrel
+  // [selector, borderRadius, lensScale]  positive=barrel distortion, negative=magnifying
   const TRACKED=[
-    ['nav',           100, -1.8],  // magnifying loupe
-    ['.hero-glass',    28,  0.05], // nearly flat — won't pull photo into view
+    ['nav',           100,  1.0],  // barrel distortion — same rainbow logic as cards
+    ['.hero-glass',    28,  0.60], // moderate barrel, visible rainbow, safe gap from photo
     ['.service-card',  28,  1.0],  // full barrel distortion (rainbow refraction)
     ['.contact-glass', 28,  1.0],
     ['#service-panel',  0,  0.6],
