@@ -665,6 +665,35 @@ nav{
 }
 .btn-glass:active{transform:scale(.96)}
 
+/* ─── NAV SERVICE TABS ─── */
+.nav-services{
+  display:flex;align-items:center;gap:2px;
+  flex:1;justify-content:center;
+  overflow-x:auto;scrollbar-width:none;
+  padding:0 8px;
+}
+.nav-services::-webkit-scrollbar{display:none}
+.nav-svc{
+  padding:7px 11px;
+  font-size:11px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.48);
+  background:none;border:none;
+  border-radius:100px;
+  cursor:pointer;white-space:nowrap;
+  transition:color .2s, background .2s, box-shadow .2s;
+  font-family:inherit;
+}
+.nav-svc:hover{
+  color:rgba(255,255,255,.85);
+  background:rgba(255,255,255,.07);
+}
+.nav-svc.active{
+  color:#fff;
+  background:rgba(255,255,255,.13);
+  box-shadow:0 0 0 1px rgba(255,255,255,.32), inset 0 1px 0 rgba(255,255,255,.50);
+}
+
 /* ─── SCROLL DOWN HINT ─── */
 .scroll-hint{
   position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
@@ -682,7 +711,9 @@ nav{
 
 /* ─── MOBILE ─── */
 @media(max-width:768px){
-  nav{width:calc(100% - 24px);top:10px;padding:0 16px}
+  nav{width:calc(100% - 24px);top:10px;padding:0 12px}
+  .nav-services{gap:1px}
+  .nav-svc{padding:6px 8px;font-size:9px;letter-spacing:.07em}
   .hero{grid-template-columns:1fr;padding-top:calc(var(--nav-h) + 80px);gap:28px}
   .hero-photo-wrap{order:-1;align-self:flex-start}
   .hero-photo{width:clamp(140px,42vw,200px);border-radius:var(--radius-sm)}
@@ -713,6 +744,16 @@ nav{
 
 <nav>
   <a href="/" class="nav-logo">Игнатий Филатов</a>
+  <div class="nav-services" role="tablist">
+    <button class="nav-svc" data-id="audit">Аудит</button>
+    <button class="nav-svc" data-id="naim">Найм</button>
+    <button class="nav-svc" data-id="onboarding">Онбординг</button>
+    <button class="nav-svc" data-id="adaptation">Адаптация</button>
+    <button class="nav-svc" data-id="communications">Комм.</button>
+    <button class="nav-svc" data-id="kpi">KPI/OKR</button>
+    <button class="nav-svc" data-id="crm">CRM</button>
+    <button class="nav-svc" data-id="consult">Разбор</button>
+  </div>
   <a href="https://t.me/HR_Ignatiy" class="nav-contact" target="_blank" rel="noopener">Связаться →</a>
 </nav>
 
@@ -1004,10 +1045,22 @@ function closePanel() {
   panel.classList.remove('open');
   panel.setAttribute('aria-hidden','true');
   backdrop.classList.remove('visible');
+  document.querySelectorAll('.nav-svc').forEach(b => b.classList.remove('active'));
 }
 
 backdrop.addEventListener('click', closePanel);
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && panelOpen) closePanel(); });
+
+// ─── NAV SERVICE TABS ────────────────────────────────────
+document.querySelectorAll('.nav-svc').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const svc = SERVICES.find(s => s.id === btn.dataset.id);
+    if (!svc) return;
+    document.querySelectorAll('.nav-svc').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    openPanel(svc);
+  });
+});
 
 // ─── SCROLL / CTA ────────────────────────────────────────
 document.getElementById('enter-btn').addEventListener('click', () => {
