@@ -679,7 +679,7 @@ nav{
   padding:7px 11px;
   font-size:11px;font-weight:600;
   letter-spacing:.09em;text-transform:uppercase;
-  color:rgba(255,255,255,.48);
+  color:rgba(255,255,255,.82);
   background:none;border:none;
   border-radius:100px;
   cursor:pointer;white-space:nowrap;
@@ -1210,9 +1210,9 @@ void main(){
       uRes:{value:new THREE.Vector2(W(),H())},
       uG:  {value:gArr},
       uN:  {value:0},
-      uL:  {value:0.26},   // lens distortion strength
-      uBr: {value:1.38},   // brightness — glass focuses/amplifies light like a lens
-      uCA: {value:0.020}   // chromatic aberration — R/B channels shift at glass edges
+      uL:  {value:0.28},   // lens distortion strength
+      uBr: {value:1.45},   // brightness — glass focuses/amplifies light like a lens
+      uCA: {value:0.022}   // chromatic aberration — R/B channels shift at glass edges
     },
     vertexShader:VERT,
     fragmentShader:`
@@ -1249,9 +1249,11 @@ void main(){
     float d=length(n);
     vec2 dir=normalize(n+.0001);
 
-    // Lens distortion: d*(1+d)*0.5 — strong throughout, peaks at edge (not just d^2)
+    // Nav (i==0) = magnifying glass: negative sign pulls pixels toward center → converging lens
+    // All other glass elements = barrel distortion (outward push)
+    float lSign=(i==0) ? -1.8 : 1.0;
     float lc=d*(1.+d)*0.52;
-    vec2 pxOff=dir*uL*lc*min(hs.x,hs.y);
+    vec2 pxOff=dir*uL*lc*min(hs.x,hs.y)*lSign;
     vec2 uvOff=vec2(pxOff.x,-pxOff.y)/uRes; // flip Y for UV space
 
     // Chromatic aberration: R/B channels shift in opposite directions → rainbow at edges
