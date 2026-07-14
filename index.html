@@ -748,6 +748,8 @@ nav{
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
 }
+/* Hero photo rendered in WebGL (bgRT) so glass lens can distort it */
+.gl-active .hero-photo-wrap{ visibility:hidden; }
 </style>
 </head>
 <body>
@@ -1126,11 +1128,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── 1. Background shader — recreates the CSS animated orbs in GLSL ──────
   const bgMat=new THREE.ShaderMaterial({
     glslVersion:THREE.GLSL3,
-    uniforms:{uT:{value:0}},
+    uniforms:{
+      uT:{value:0},
+      uHeroTex:{value:null},
+      uHeroRect:{value:new THREE.Vector4(0,0,0,0)},
+      uResBg:{value:new THREE.Vector2(0,0)},
+    },
     vertexShader:VERT,
     fragmentShader:`
 precision mediump float;
 uniform float uT;
+uniform sampler2D uHeroTex;
+uniform vec4 uHeroRect;
+uniform vec2 uResBg;
 in vec2 vUv;
 out vec4 fc;
 
@@ -1192,11 +1202,43 @@ void main(){
   float glow=smoothstep(.18,-.05,w1)*.22;
   c+=glow*vec3(.08,.18,.55);
 
+  // ── Hero photo composite — renders into bgRT so glass shader can distort it ──
+  if(uHeroRect.z>0.){
+    vec2 hRel=(u-uHeroRect.xy)/uHeroRect.zw;
+    if(all(greaterThanEqual(hRel,vec2(0.)))&&all(lessThan(hRel,vec2(1.)))){
+      // Rounded rect clip (28px radius) in pixel space for correct corners
+      vec2 hPx=(hRel-.5)*uHeroRect.zw*uResBg;
+      vec2 hHs=uHeroRect.zw*uResBg*.5;
+      vec2 hq=abs(hPx)-hHs+28.;
+      float hSdf=length(max(hq,0.))+min(max(hq.x,hq.y),0.)-28.;
+      float hClip=smoothstep(2.,-1.,hSdf);
+      vec4 hTex=texture(uHeroTex,vec2(hRel.x,1.-hRel.y));
+      c=mix(c,hTex.rgb,hClip*step(.001,hClip));
+    }
+  }
+
   fc=vec4(clamp(c,0.,1.),1.);
 }`
   });
   const bgS=new THREE.Scene();
   bgS.add(new THREE.Mesh(quad,bgMat));
+
+  // Hero photo as WebGL texture so glass refraction can distort it
+  const heroEl=document.querySelector('.hero-photo');
+  let heroLoaded=false;
+  function initHeroTex(){
+    if(!heroEl||!heroEl.complete||heroLoaded) return;
+    const tex=new THREE.Texture(heroEl);
+    tex.needsUpdate=true;
+    tex.minFilter=THREE.LinearFilter;
+    tex.magFilter=THREE.LinearFilter;
+    tex.colorSpace=THREE.SRGBColorSpace;
+    bgMat.uniforms.uHeroTex.value=tex;
+    bgMat.uniforms.uResBg.value.set(W(),H());
+    heroLoaded=true;
+  }
+  if(heroEl){ if(heroEl.complete) initHeroTex(); else heroEl.addEventListener('load',initHeroTex); }
+
   let bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
 
   // ── 2. Glass refraction shader — optical lens distortion + chromatic aberration ─
@@ -1309,6 +1351,11 @@ void main(){
 
     // Pass 1: render animated background to offscreen texture
     bgMat.uniforms.uT.value=t*.001;
+    if(heroLoaded){
+      const rc=heroEl.getBoundingClientRect();
+      const vw=W(),vh=H();
+      bgMat.uniforms.uHeroRect.value.set(rc.left/vw,rc.top/vh,rc.width/vw,rc.height/vh);
+    }
     rnd.setRenderTarget(bgRT);
     rnd.render(bgS,cam);
 
