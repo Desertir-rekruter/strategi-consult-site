@@ -1261,14 +1261,46 @@ void main(){
   bgS.add(new THREE.Mesh(quad,bgMat));
   let bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
 
-  // ── Load hero photo into WebGL ────────────────────────────────────────────
+  // ── Content loading flags (separate from visibility alpha) ───────────────
+  let photoLoaded=false, textLoaded=false;
+  let textCanvasTex=null;
+
+  // ── Sync content rects — called BEFORE each bgS render ───────────────────
+  function syncContent(){
+    if(photoLoaded){
+      const ph=document.querySelector('.hero-photo');
+      if(ph){
+        const rc=ph.getBoundingClientRect();
+        if(rc.bottom<0||rc.top>H()){
+          bgMat.uniforms.uPhotoA.value=0;
+        } else {
+          bgMat.uniforms.uPhotoA.value=1;
+          bgMat.uniforms.uPhotoRect.value.set(rc.left/W(),rc.top/H(),rc.width/W(),rc.height/H());
+        }
+      }
+    }
+    if(textLoaded){
+      const tx=document.querySelector('.hero-headline');
+      if(tx){
+        const rc=tx.getBoundingClientRect();
+        if(rc.bottom<0||rc.top>H()){
+          bgMat.uniforms.uTextA.value=0;
+        } else {
+          bgMat.uniforms.uTextA.value=1;
+          bgMat.uniforms.uTextRect.value.set(rc.left/W(),rc.top/H(),rc.width/W(),rc.height/H());
+        }
+      }
+    }
+  }
+
+  // ── Load hero photo ───────────────────────────────────────────────────────
   new THREE.TextureLoader().load('/assets/hero.jpeg',tex=>{
     bgMat.uniforms.uPhoto.value=tex;
-    bgMat.uniforms.uPhotoA.value=1.0;
+    photoLoaded=true;
+    syncContent(); // set rect immediately on load
   });
 
   // ── Render headline text to canvas texture ────────────────────────────────
-  let textCanvasTex=null;
   function buildTextTexture(){
     const el=document.querySelector('.hero-headline');
     if(!el) return;
@@ -1293,39 +1325,14 @@ void main(){
       ['ТЕРЯЕТ ДЕНЬГИ',true],
       ['БЕЗ',          false],
       ['ПРОЦЕССОВ.',   true],
-    ].forEach(([line,ind],i)=>{
-      ctx.fillText(line, ind?indent:0, i*lh);
-    });
+    ].forEach(([line,ind],i)=>ctx.fillText(line,ind?indent:0,i*lh));
     if(textCanvasTex) textCanvasTex.dispose();
     textCanvasTex=new THREE.CanvasTexture(cv);
     bgMat.uniforms.uText.value=textCanvasTex;
-    bgMat.uniforms.uTextA.value=1.0;
+    textLoaded=true;
+    syncContent(); // set rect immediately after build
   }
   document.fonts.ready.then(buildTextTexture);
-
-  // ── Sync content rects every frame ───────────────────────────────────────
-  function syncContent(){
-    const ph=document.querySelector('.hero-photo');
-    if(ph&&bgMat.uniforms.uPhotoA.value>0){
-      const rc=ph.getBoundingClientRect();
-      if(rc.bottom<0||rc.top>H()){
-        bgMat.uniforms.uPhotoA.value=0;
-      } else {
-        bgMat.uniforms.uPhotoA.value=1;
-        bgMat.uniforms.uPhotoRect.value.set(rc.left/W(),rc.top/H(),rc.width/W(),rc.height/H());
-      }
-    }
-    const tx=document.querySelector('.hero-headline');
-    if(tx&&bgMat.uniforms.uTextA.value>0){
-      const rc=tx.getBoundingClientRect();
-      if(rc.bottom<0||rc.top>H()){
-        bgMat.uniforms.uTextA.value=0;
-      } else {
-        bgMat.uniforms.uTextA.value=1;
-        bgMat.uniforms.uTextRect.value.set(rc.left/W(),rc.top/H(),rc.width/W(),rc.height/H());
-      }
-    }
-  }
 
   // ── 2. Glass refraction shader — optical lens distortion + chromatic aberration ─
   const MX=14; // max glass elements tracked simultaneously
@@ -1434,14 +1441,14 @@ void main(){
   function frame(t){
     requestAnimationFrame(frame);
 
-    // Pass 1: render animated background to offscreen texture
+    // Pass 1: sync content rects, then render background to offscreen texture
     bgMat.uniforms.uT.value=t*.001;
+    syncContent();
     rnd.setRenderTarget(bgRT);
     rnd.render(bgS,cam);
 
     // Pass 2: render glass refraction over background to screen
     glMat.uniforms.uBg.value=bgRT.texture;
-    syncContent();
     syncGlasses();
     rnd.setRenderTarget(null);
     rnd.render(glS,cam);
