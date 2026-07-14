@@ -245,12 +245,11 @@ nav{
   position:relative;overflow:hidden;
 }
 .hero-glass::before{
-  content:'';position:absolute;inset:0;
+  content:'';position:absolute;top:0;left:0;right:0;height:55%;
   background:
-    radial-gradient(ellipse 90% 22% at 50% 0%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.26) 45%, transparent 70%),
-    radial-gradient(ellipse 70% 20% at 50% 100%, rgba(180,220,255,.20) 0%, transparent 65%),
-    linear-gradient(180deg,rgba(255,255,255,.16) 0%,transparent 50%);
-  border-radius:inherit;
+    radial-gradient(ellipse 88% 26% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.20) 50%, transparent 72%),
+    linear-gradient(180deg,rgba(255,255,255,.12) 0%,transparent 100%);
+  border-radius:var(--radius) var(--radius) 0 0;
   pointer-events:none;
 }
 .hero-glass::after{
@@ -381,14 +380,13 @@ nav{
   filter:brightness(.98);
   transition:transform .1s ease, filter .1s ease !important;
 }
-/* Caustic top highlight — bright band at top edge (light entering through glass top) */
+/* Caustic top highlight — bright band at top edge */
 .service-card::before{
-  content:'';position:absolute;inset:0;
+  content:'';position:absolute;top:0;left:0;right:0;height:55%;
   background:
-    radial-gradient(ellipse 90% 22% at 50% 0%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.28) 45%, transparent 70%),
-    radial-gradient(ellipse 70% 20% at 50% 100%, rgba(180,220,255,.22) 0%, transparent 65%),
-    linear-gradient(180deg,rgba(255,255,255,.18) 0%,transparent 50%);
-  border-radius:inherit;
+    radial-gradient(ellipse 88% 26% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.22) 50%, transparent 72%),
+    linear-gradient(180deg,rgba(255,255,255,.14) 0%,transparent 100%);
+  border-radius:var(--radius) var(--radius) 0 0;
   pointer-events:none;
 }
 /* Grain/noise texture — makes glass feel physical, not flat */
@@ -618,12 +616,11 @@ nav{
   position:relative;overflow:hidden;
 }
 .contact-glass::before{
-  content:'';position:absolute;inset:0;
+  content:'';position:absolute;top:0;left:0;right:0;height:55%;
   background:
-    radial-gradient(ellipse 90% 22% at 50% 0%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.26) 45%, transparent 70%),
-    radial-gradient(ellipse 70% 20% at 50% 100%, rgba(180,220,255,.20) 0%, transparent 65%),
-    linear-gradient(180deg,rgba(255,255,255,.16) 0%,transparent 50%);
-  border-radius:inherit;
+    radial-gradient(ellipse 88% 26% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.20) 50%, transparent 72%),
+    linear-gradient(180deg,rgba(255,255,255,.12) 0%,transparent 100%);
+  border-radius:var(--radius) var(--radius) 0 0;
   pointer-events:none;
 }
 .contact-glass::after{
@@ -1136,24 +1133,32 @@ precision mediump float;
 uniform float uT;
 in vec2 vUv;
 out vec4 fc;
-// Soft elliptical gradient blob
 float el(vec2 p,vec2 c,vec2 r){vec2 d=(p-c)/r;return clamp(1.-dot(d,d),0.,1.);}
 void main(){
-  vec2 u=vec2(vUv.x,1.-vUv.y); // flip Y to match CSS (0=top)
+  vec2 u=vec2(vUv.x,1.-vUv.y);
   float t=uT;
-  vec3 c=vec3(.020,.051,.180); // deep navy base
 
-  // Static background gradient layers (from .bg-orbs CSS)
-  c+=el(u,vec2(.75,.10),vec2(.70,.55))*vec3(.157,.392,1.)*.90;
-  c+=el(u,vec2(.20,.25),vec2(.60,.50))*vec3(.235,.314,.941)*.85;
-  c+=el(u,vec2(.55,.65),vec2(.80,.65))*vec3(.078,.235,.784)*.80;
-  c+=el(u,vec2(.50,.50),vec2(.90,.75))*vec3(.039,.118,.549)*.70;
+  // Base: linear-gradient(160deg, #0a1a5c→#081448→#060e38→#050d2e)
+  float gp=clamp(u.x*.22+u.y*.78,0.,1.);
+  vec3 c=mix(mix(vec3(.039,.102,.361),vec3(.031,.078,.282),smoothstep(0.,.4,gp)),
+             mix(vec3(.024,.055,.220),vec3(.020,.051,.180),smoothstep(.7,1.,gp)),
+             smoothstep(.35,.65,gp));
 
-  // Animated orbs — sin() approximates the CSS keyframe drift animations
-  c+=el(u,vec2(-.08+.04*sin(t*.242),.05+.03*sin(t*.242+1.2)),vec2(.44,.40))*vec3(.235,.392,1.)*.90;
-  c+=el(u,vec2(1.06-.03*sin(t*.196),1.08-.04*sin(t*.196+.8)),vec2(.38,.42))*vec3(.392,.196,1.)*.85;
-  c+=el(u,vec2(.58+.05*sin(t*.314),.28-.03*sin(t*.314+.5)),vec2(.28,.26))*vec3(.078,.549,1.)*.80;
-  c+=el(u,vec2(.12-.04*sin(t*.224),.52+.04*sin(t*.224+1.5)),vec2(.25,.28))*vec3(.471,.235,1.)*.78;
+  // .bg-orbs layers — CSS composites with normal blend (mix, NOT additive)
+  c=mix(c,vec3(.039,.118,.549),el(u,vec2(.50,.50),vec2(.90,.75))*.70);
+  c=mix(c,vec3(.078,.235,.784),el(u,vec2(.55,.65),vec2(.80,.65))*.80);
+  c=mix(c,vec3(.235,.314,.941),el(u,vec2(.20,.25),vec2(.60,.50))*.85);
+  c=mix(c,vec3(.157,.392,1.00),el(u,vec2(.75,.10),vec2(.70,.55))*.90);
+
+  // .orb elements — mix-blend-mode:screen → c = src + dst - src*dst
+  vec3 o1=el(u,vec2(-.08+.04*sin(t*.242),.05+.03*sin(t*.242+1.2)),vec2(.44,.40))*vec3(.235,.392,1.)*.90;
+  c=c+o1-c*o1;
+  vec3 o2=el(u,vec2(1.06-.03*sin(t*.196),1.08-.04*sin(t*.196+.8)),vec2(.38,.42))*vec3(.392,.196,1.)*.85;
+  c=c+o2-c*o2;
+  vec3 o3=el(u,vec2(.58+.05*sin(t*.314),.28-.03*sin(t*.314+.5)),vec2(.28,.26))*vec3(.078,.549,1.)*.80;
+  c=c+o3-c*o3;
+  vec3 o4=el(u,vec2(.12-.04*sin(t*.224),.52+.04*sin(t*.224+1.5)),vec2(.25,.28))*vec3(.471,.235,1.)*.78;
+  c=c+o4-c*o4;
 
   fc=vec4(clamp(c,0.,1.),1.);
 }`
@@ -1173,7 +1178,7 @@ void main(){
       uRes:{value:new THREE.Vector2(W(),H())},
       uG:  {value:gArr},
       uN:  {value:0},
-      uL:  {value:0.38},   // lens distortion strength
+      uL:  {value:0.26},   // lens distortion strength
       uBr: {value:1.38},   // brightness — glass focuses/amplifies light like a lens
       uCA: {value:0.020}   // chromatic aberration — R/B channels shift at glass edges
     },
