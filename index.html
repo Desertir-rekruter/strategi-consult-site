@@ -1238,7 +1238,7 @@ void main(){
       vec2 pxC=(pUV-.5)*pxSz;
       float d=rrectSDF(pxC,pxSz*.5,28.);
       float mask=clamp(.5-d,0.,1.)*uPhotoA;
-      vec3 ph=texture(uPhoto,pUV).rgb;
+      vec3 ph=texture(uPhoto,vec2(pUV.x,1.-pUV.y)).rgb;
       ph=mix(ph,vec3(dot(ph,vec3(.299,.587,.114))),.10); // grayscale(.1)
       c=mix(c,ph*1.05,mask);
     }
@@ -1394,10 +1394,14 @@ void main(){
     float caStr=uCA*(d*d+0.4*d);
     vec2 ca=vec2(dir.x,-dir.y)*caStr;
     vec2 uv2=vUv+uvOff;
+    // Clamp sampling to glass element UV bounds — prevents adjacent content bleed
+    vec2 uvMin=vec2(gx/uRes.x, 1.-(gy+gh)/uRes.y);
+    vec2 uvMax=vec2((gx+gw)/uRes.x, 1.-gy/uRes.y);
+    uv2=clamp(uv2,uvMin,uvMax);
 
-    float r=texture(uBg,uv2+ca).r;
-    float g=texture(uBg,uv2   ).g;
-    float b=texture(uBg,uv2-ca).b;
+    float r=texture(uBg,clamp(uv2+ca,uvMin,uvMax)).r;
+    float g=texture(uBg,uv2).g;
+    float b=texture(uBg,clamp(uv2-ca,uvMin,uvMax)).b;
 
     // Blend: background → refracted+brightened, with AA at SDF edge
     col.rgb=mix(col.rgb, vec3(r,g,b)*uBr, smoothstep(2.,-1.,sdf));
