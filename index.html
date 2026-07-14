@@ -1133,42 +1133,64 @@ precision mediump float;
 uniform float uT;
 in vec2 vUv;
 out vec4 fc;
-// CSS-accurate gradient blob: smoothstep gives the same linear falloff as CSS radial-gradient
-float blob(vec2 p,vec2 c,vec2 r,float stop){
-  float d=length((p-c)/r);
-  return smoothstep(stop,0.,d); // 1 at center, 0 at stop radius, smooth
-}
+
 void main(){
   vec2 u=vec2(vUv.x,1.-vUv.y);
-  float t=uT;
+  float t=uT*.28;
 
-  // Base: linear-gradient(160deg, #0a1a5c→#081448→#060e38→#050d2e)
-  float gp=clamp(u.x*.25+u.y*.75,0.,1.);
-  vec3 c=mix(vec3(.039,.102,.361),vec3(.020,.051,.180),gp);
+  // ── Three large sweeping waves with organic sine undulation ──────────────
+  // Wave 1: main diagonal sweep (upper-left → lower-right)
+  float w1=u.y-(
+    .74-.40*u.x
+    +.14*sin(u.x*1.8+t*.26+.0)
+    +.06*sin(u.x*3.7+t*.17+1.5)
+    +.03*sin(u.x*7.3+t*.11+3.2)
+    +.04*sin(u.x*.68+t*.20+.8)
+  );
 
-  // .bg-orbs static layers (CSS normal blend = mix). Radii = ellipse_size/2, stop = gradient stop%
-  // radial-gradient(ellipse 90%,75% at 50%,50%, rgba(10,30,140,.70) 0%, transparent 70%)
-  c=mix(c,vec3(.039,.118,.549),blob(u,vec2(.50,.50),vec2(.45,.375),.70)*.70);
-  // radial-gradient(ellipse 80%,65% at 55%,65%, rgba(20,60,200,.80) 0%, transparent 60%)
-  c=mix(c,vec3(.078,.235,.784),blob(u,vec2(.55,.65),vec2(.40,.325),.60)*.80);
-  // radial-gradient(ellipse 60%,50% at 20%,25%, rgba(60,80,240,.85) 0%, transparent 55%)
-  c=mix(c,vec3(.235,.314,.941),blob(u,vec2(.20,.25),vec2(.30,.250),.55)*.85);
-  // radial-gradient(ellipse 70%,55% at 75%,10%, rgba(40,100,255,.90) 0%, transparent 55%)
-  c=mix(c,vec3(.157,.392,1.00),blob(u,vec2(.75,.10),vec2(.35,.275),.55)*.90);
+  // Wave 2: secondary wave with different curvature
+  float w2=u.y-(
+    .47-.22*u.x
+    +.11*sin(u.x*2.2+t*.23+2.2)
+    +.05*sin(u.x*4.8+t*.15+.7)
+    +.03*sin(u.x*1.1+t*.29+4.0)
+    +.02*sin(u.x*8.5+t*.10+1.8)
+  );
 
-  // .orb elements: mix-blend-mode:screen + filter:blur(32px) → smooth screen blobs
-  vec2 p1=vec2(-.08+.04*sin(t*.242),.05+.03*sin(t*.242+1.2));
-  vec3 o1=blob(u,p1,vec2(.38,.34),.70)*vec3(.235,.392,1.)*.90;
-  c=c+o1-c*o1;
-  vec2 p2=vec2(1.06-.03*sin(t*.196),1.08-.04*sin(t*.196+.8));
-  vec3 o2=blob(u,p2,vec2(.34,.38),.70)*vec3(.392,.196,1.)*.85;
-  c=c+o2-c*o2;
-  vec2 p3=vec2(.58+.05*sin(t*.314),.28-.03*sin(t*.314+.5));
-  vec3 o3=blob(u,p3,vec2(.28,.24),.68)*vec3(.078,.549,1.)*.80;
-  c=c+o3-c*o3;
-  vec2 p4=vec2(.12-.04*sin(t*.224),.52+.04*sin(t*.224+1.5));
-  vec3 o4=blob(u,p4,vec2(.24,.28),.68)*vec3(.471,.235,1.)*.78;
-  c=c+o4-c*o4;
+  // Wave 3: lower accent wave
+  float w3=u.y-(
+    .25+.09*u.x
+    +.08*sin(u.x*2.6+t*.31+1.2)
+    +.04*sin(u.x*5.4+t*.19+2.7)
+    +.02*sin(u.x*9.1+t*.09+.5)
+  );
+
+  // ── Color zones — dark navy palette with subtle hue shifts ───────────────
+  vec3 c1=mix(vec3(.010,.026,.140),vec3(.022,.055,.225),u.x*.4+u.y*.25); // above w1: deepest navy
+  vec3 c2=mix(vec3(.030,.072,.298),vec3(.044,.092,.362),u.x*.5+u.y*.3);  // w1→w2: medium blue
+  vec3 c3=mix(vec3(.018,.050,.232),vec3(.028,.068,.272),.25+u.x*.4);     // w2→w3: darker blue
+  vec3 c4=mix(vec3(.007,.018,.108),vec3(.014,.038,.158),u.x*.6);         // below w3: almost black
+
+  float eps=.007;
+  float s1=smoothstep(-eps,eps,w1);
+  float s2=smoothstep(-eps,eps,w2);
+  float s3=smoothstep(-eps,eps,w3);
+  vec3 c=mix(c1,mix(c2,mix(c3,c4,s3),s2),s1);
+
+  // ── Specular highlights — thin bright lines on wave crests ───────────────
+  // Stronger on the "above" (lit top) side of each wave
+  vec3 hiCol=vec3(.55,.78,1.); // cool blue-white
+  float b1=mix(.42,.90,1.-smoothstep(-.009,.009,w1));
+  float b2=mix(.38,.72,1.-smoothstep(-.007,.007,w2));
+  float b3=mix(.30,.58,1.-smoothstep(-.006,.006,w3));
+
+  c+=exp(-abs(w1)*98.)*b1*hiCol;
+  c+=exp(-abs(w2)*82.)*b2*hiCol;
+  c+=exp(-abs(w3)*68.)*b3*hiCol*.8;
+
+  // Subtle ambient glow behind wave 1 (blue haze on upper area)
+  float glow=smoothstep(.18,-.05,w1)*.22;
+  c+=glow*vec3(.08,.18,.55);
 
   fc=vec4(clamp(c,0.,1.),1.);
 }`
