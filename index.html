@@ -734,6 +734,12 @@ nav{
   .scroll-hint{animation:none}
 }
 
+/* ─── THREE.JS ACTIVE — hide DOM elements replaced by WebGL ─── */
+.gl-active .hero-photo,
+.gl-active .hero-headline{
+  visibility:hidden; /* keeps layout, WebGL renders them in bgRT */
+}
+
 /* ─── THREE.JS ACTIVE — remove CSS backdrop-filter, WebGL handles refraction ─── */
 .gl-active .service-card,
 .gl-active .hero-glass,
@@ -1124,16 +1130,34 @@ document.addEventListener('DOMContentLoaded', () => {
   // Shared vertex shader — fullscreen quad, passes UV
   const VERT=`out vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}`;
 
-  // ── 1. Background shader — recreates the CSS animated orbs in GLSL ──────
+  // ── 1. Background shader — waves + composited photo + headline text ────
   const bgMat=new THREE.ShaderMaterial({
     glslVersion:THREE.GLSL3,
-    uniforms:{uT:{value:0}},
+    uniforms:{
+      uT:{value:0},
+      uPhoto:{value:null},
+      uPhotoRect:{value:new THREE.Vector4(0,0,0,0)},
+      uPhotoA:{value:0.0},
+      uText:{value:null},
+      uTextRect:{value:new THREE.Vector4(0,0,0,0)},
+      uTextA:{value:0.0},
+      uRes:{value:new THREE.Vector2(W(),H())},
+    },
     vertexShader:VERT,
     fragmentShader:`
 precision mediump float;
 uniform float uT;
+uniform sampler2D uPhoto;
+uniform vec4 uPhotoRect;
+uniform float uPhotoA;
+uniform sampler2D uText;
+uniform vec4 uTextRect;
+uniform float uTextA;
+uniform vec2 uRes;
 in vec2 vUv;
 out vec4 fc;
+
+float rrectSDF(vec2 p,vec2 b,float r){vec2 q=abs(p)-(b-r);return length(max(q,0.))+min(max(q.x,q.y),0.)-r;}
 
 void main(){
   vec2 u=vec2(vUv.x,1.-vUv.y);
@@ -1204,12 +1228,104 @@ void main(){
   );
   c+=exp(-abs(w4)*155.)*.55*vec3(.62,.84,1.0);
 
+  // ── Hero photo composite ──────────────────────────────────────────────────
+  if(uPhotoA>0.01){
+    vec2 pMin=uPhotoRect.xy,pSz=uPhotoRect.zw;
+    vec2 pUV=(u-pMin)/pSz;
+    if(all(greaterThanEqual(pUV,vec2(-.03)))&&all(lessThanEqual(pUV,vec2(1.03)))){
+      pUV=clamp(pUV,0.,1.);
+      vec2 pxSz=pSz*uRes;
+      vec2 pxC=(pUV-.5)*pxSz;
+      float d=rrectSDF(pxC,pxSz*.5,28.);
+      float mask=clamp(.5-d,0.,1.)*uPhotoA;
+      vec3 ph=texture(uPhoto,pUV).rgb;
+      ph=mix(ph,vec3(dot(ph,vec3(.299,.587,.114))),.10); // grayscale(.1)
+      c=mix(c,ph*1.05,mask);
+    }
+  }
+
+  // ── Headline text composite ───────────────────────────────────────────────
+  if(uTextA>0.01){
+    vec2 tMin=uTextRect.xy,tSz=uTextRect.zw;
+    vec2 tUV=(u-tMin)/tSz;
+    if(all(greaterThanEqual(tUV,vec2(0.)))&&all(lessThanEqual(tUV,vec2(1.)))){
+      vec4 ts=texture(uText,vec2(tUV.x,1.-tUV.y));
+      c=mix(c,ts.rgb,ts.a*uTextA);
+    }
+  }
+
   fc=vec4(clamp(c,0.,1.),1.);
 }`
   });
   const bgS=new THREE.Scene();
   bgS.add(new THREE.Mesh(quad,bgMat));
   let bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
+
+  // ── Load hero photo into WebGL ────────────────────────────────────────────
+  new THREE.TextureLoader().load('/assets/hero.jpeg',tex=>{
+    bgMat.uniforms.uPhoto.value=tex;
+    bgMat.uniforms.uPhotoA.value=1.0;
+  });
+
+  // ── Render headline text to canvas texture ────────────────────────────────
+  let textCanvasTex=null;
+  function buildTextTexture(){
+    const el=document.querySelector('.hero-headline');
+    if(!el) return;
+    const rc=el.getBoundingClientRect();
+    if(!rc.width||!rc.height) return;
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const cv=document.createElement('canvas');
+    cv.width=Math.round(rc.width*dpr);
+    cv.height=Math.round(rc.height*dpr);
+    const ctx=cv.getContext('2d');
+    ctx.scale(dpr,dpr);
+    const cs=getComputedStyle(el);
+    const fz=parseFloat(cs.fontSize);
+    const lh=fz*0.96;
+    const indent=fz*0.28;
+    ctx.font=`900 ${fz}px "Barlow Condensed",sans-serif`;
+    if('letterSpacing' in ctx) ctx.letterSpacing=`${-0.02*fz}px`;
+    ctx.fillStyle='rgba(255,255,255,1)';
+    ctx.textBaseline='top';
+    [
+      ['ВАШ БИЗНЕС',   false],
+      ['ТЕРЯЕТ ДЕНЬГИ',true],
+      ['БЕЗ',          false],
+      ['ПРОЦЕССОВ.',   true],
+    ].forEach(([line,ind],i)=>{
+      ctx.fillText(line, ind?indent:0, i*lh);
+    });
+    if(textCanvasTex) textCanvasTex.dispose();
+    textCanvasTex=new THREE.CanvasTexture(cv);
+    bgMat.uniforms.uText.value=textCanvasTex;
+    bgMat.uniforms.uTextA.value=1.0;
+  }
+  document.fonts.ready.then(buildTextTexture);
+
+  // ── Sync content rects every frame ───────────────────────────────────────
+  function syncContent(){
+    const ph=document.querySelector('.hero-photo');
+    if(ph&&bgMat.uniforms.uPhotoA.value>0){
+      const rc=ph.getBoundingClientRect();
+      if(rc.bottom<0||rc.top>H()){
+        bgMat.uniforms.uPhotoA.value=0;
+      } else {
+        bgMat.uniforms.uPhotoA.value=1;
+        bgMat.uniforms.uPhotoRect.value.set(rc.left/W(),rc.top/H(),rc.width/W(),rc.height/H());
+      }
+    }
+    const tx=document.querySelector('.hero-headline');
+    if(tx&&bgMat.uniforms.uTextA.value>0){
+      const rc=tx.getBoundingClientRect();
+      if(rc.bottom<0||rc.top>H()){
+        bgMat.uniforms.uTextA.value=0;
+      } else {
+        bgMat.uniforms.uTextA.value=1;
+        bgMat.uniforms.uTextRect.value.set(rc.left/W(),rc.top/H(),rc.width/W(),rc.height/H());
+      }
+    }
+  }
 
   // ── 2. Glass refraction shader — optical lens distortion + chromatic aberration ─
   const MX=14; // max glass elements tracked simultaneously
@@ -1325,6 +1441,7 @@ void main(){
 
     // Pass 2: render glass refraction over background to screen
     glMat.uniforms.uBg.value=bgRT.texture;
+    syncContent();
     syncGlasses();
     rnd.setRenderTarget(null);
     rnd.render(glS,cam);
@@ -1340,6 +1457,8 @@ void main(){
     bgRT.dispose();
     bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
     glMat.uniforms.uRes.value.set(W(),H());
+    bgMat.uniforms.uRes.value.set(W(),H());
+    buildTextTexture();
   });
 
   // Apply .gl-active — switches backdrop-filter to SVG lens distortion
