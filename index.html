@@ -734,7 +734,8 @@ nav{
   .scroll-hint{animation:none}
 }
 
-/* ─── THREE.JS ACTIVE — remove CSS backdrop-filter, WebGL handles refraction ─── */
+/* ─── THREE.JS ACTIVE — glass distortion via SVG filter ─── */
+/* filter:url() works in Safari + Chrome; distorts the rendered element (blur+content) */
 .gl-active .service-card,
 .gl-active .hero-glass,
 .gl-active nav,
@@ -745,9 +746,9 @@ nav{
 .gl-active .btn-glass,
 .gl-active .nav-contact,
 .gl-active .panel-close{
-  /* SVG feDisplacementMap distorts ALL composited content: text, photos, waves */
-  backdrop-filter:url('#glass-lens') saturate(1.6)!important;
-  -webkit-backdrop-filter:url('#glass-lens') saturate(1.6)!important;
+  backdrop-filter:blur(6px) brightness(1.45) saturate(200%)!important;
+  -webkit-backdrop-filter:blur(6px) brightness(1.45) saturate(200%)!important;
+  filter:url('#glass-lens')!important;
 }
 </style>
 </head>
