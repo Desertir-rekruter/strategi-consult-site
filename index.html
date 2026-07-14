@@ -245,11 +245,12 @@ nav{
   position:relative;overflow:hidden;
 }
 .hero-glass::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:60%;
+  content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 90% 28% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.28) 40%, transparent 70%),
-    linear-gradient(180deg,rgba(255,255,255,.20) 0%,transparent 65%);
-  border-radius:var(--radius) var(--radius) 0 0;
+    radial-gradient(ellipse 90% 22% at 50% 0%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.26) 45%, transparent 70%),
+    radial-gradient(ellipse 70% 20% at 50% 100%, rgba(180,220,255,.20) 0%, transparent 65%),
+    linear-gradient(180deg,rgba(255,255,255,.16) 0%,transparent 50%);
+  border-radius:inherit;
   pointer-events:none;
 }
 .hero-glass::after{
@@ -380,13 +381,14 @@ nav{
   filter:brightness(.98);
   transition:transform .1s ease, filter .1s ease !important;
 }
-/* Caustic top highlight — the defining visual of real glass: bright band at top edge */
+/* Caustic top highlight — bright band at top edge (light entering through glass top) */
 .service-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:60%;
+  content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 90% 28% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.30) 40%, transparent 70%),
-    linear-gradient(180deg,rgba(255,255,255,.22) 0%,transparent 65%);
-  border-radius:var(--radius) var(--radius) 0 0;
+    radial-gradient(ellipse 90% 22% at 50% 0%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.28) 45%, transparent 70%),
+    radial-gradient(ellipse 70% 20% at 50% 100%, rgba(180,220,255,.22) 0%, transparent 65%),
+    linear-gradient(180deg,rgba(255,255,255,.18) 0%,transparent 50%);
+  border-radius:inherit;
   pointer-events:none;
 }
 /* Grain/noise texture — makes glass feel physical, not flat */
@@ -616,11 +618,12 @@ nav{
   position:relative;overflow:hidden;
 }
 .contact-glass::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:60%;
+  content:'';position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 90% 28% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.28) 40%, transparent 70%),
-    linear-gradient(180deg,rgba(255,255,255,.18) 0%,transparent 65%);
-  border-radius:var(--radius) var(--radius) 0 0;
+    radial-gradient(ellipse 90% 22% at 50% 0%, rgba(255,255,255,.92) 0%, rgba(255,255,255,.26) 45%, transparent 70%),
+    radial-gradient(ellipse 70% 20% at 50% 100%, rgba(180,220,255,.20) 0%, transparent 65%),
+    linear-gradient(180deg,rgba(255,255,255,.16) 0%,transparent 50%);
+  border-radius:inherit;
   pointer-events:none;
 }
 .contact-glass::after{
@@ -1170,9 +1173,9 @@ void main(){
       uRes:{value:new THREE.Vector2(W(),H())},
       uG:  {value:gArr},
       uN:  {value:0},
-      uL:  {value:0.09},   // lens distortion strength
-      uBr: {value:1.42},   // brightness — glass focuses/amplifies light like a lens
-      uCA: {value:0.003}   // chromatic aberration — R/B channels shift at glass edges
+      uL:  {value:0.38},   // lens distortion strength
+      uBr: {value:1.38},   // brightness — glass focuses/amplifies light like a lens
+      uCA: {value:0.020}   // chromatic aberration — R/B channels shift at glass edges
     },
     vertexShader:VERT,
     fragmentShader:`
@@ -1209,12 +1212,15 @@ void main(){
     float d=length(n);
     vec2 dir=normalize(n+.0001);
 
-    // Convex lens distortion: outward push increasing toward edge (d^2 curve)
-    vec2 pxOff=dir*uL*d*d*min(hs.x,hs.y);
+    // Lens distortion: d*(1+d)*0.5 — strong throughout, peaks at edge (not just d^2)
+    float lc=d*(1.+d)*0.52;
+    vec2 pxOff=dir*uL*lc*min(hs.x,hs.y);
     vec2 uvOff=vec2(pxOff.x,-pxOff.y)/uRes; // flip Y for UV space
 
-    // Chromatic aberration: R/B channels sampled at slight offset (rainbow fringing at edges)
-    vec2 ca=vec2(dir.x,-dir.y)*uCA*d;
+    // Chromatic aberration: R/B channels shift in opposite directions → rainbow at edges
+    // Stronger at corners (d>1 in corners of rounded rect)
+    float caStr=uCA*(d*d+0.4*d);
+    vec2 ca=vec2(dir.x,-dir.y)*caStr;
     vec2 uv2=vUv+uvOff;
 
     float r=texture(uBg,uv2+ca).r;
