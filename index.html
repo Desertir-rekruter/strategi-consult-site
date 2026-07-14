@@ -1240,7 +1240,7 @@ void main(){
       float mask=clamp(.5-d,0.,1.)*uPhotoA;
       vec3 ph=texture(uPhoto,vec2(pUV.x,1.-pUV.y)).rgb;
       ph=mix(ph,vec3(dot(ph,vec3(.299,.587,.114))),.10);
-      c=mix(c,ph*1.05,mask);
+      c=mix(c,ph,mask);
     }
   }
 
@@ -1295,6 +1295,7 @@ void main(){
 
   // ── Load hero photo ───────────────────────────────────────────────────────
   new THREE.TextureLoader().load('/assets/hero.jpeg',tex=>{
+    tex.colorSpace=THREE.SRGBColorSpace; // decode sRGB→linear, prevents washed-out look
     bgMat.uniforms.uPhoto.value=tex;
     photoLoaded=true;
     syncContent(); // set rect immediately on load
