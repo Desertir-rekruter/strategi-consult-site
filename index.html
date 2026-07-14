@@ -46,18 +46,20 @@ html{scroll-behavior:smooth}
   --glass-mid:    rgba(255,255,255,.06);
   --glass-strong: rgba(255,255,255,.09);
 
-  /* Liquid glass box-shadow: bright top caustic + inner volume + deep lift */
+  /* Liquid glass box-shadow: outer lens halo + inner bevel + deep lift */
   --glass-shadow:
-    inset 0 1.5px 0 rgba(255,255,255,.95),
-    inset 1.5px 0 0 rgba(255,255,255,.35),
-    inset 0 -1px 0 rgba(0,0,0,.28),
-    inset 0 -10px 24px rgba(0,10,60,.18),
-    0 22px 64px rgba(0,15,70,.60),
-    0 0 48px rgba(100,140,255,.10);
+    0 0 0 1px rgba(255,255,255,.55),
+    0 0 0 3px rgba(255,255,255,.08),
+    inset 0 1.5px 0 rgba(255,255,255,.98),
+    inset 1.5px 0 0 rgba(255,255,255,.45),
+    inset 0 -1px 0 rgba(0,0,0,.30),
+    inset 0 -12px 28px rgba(0,10,60,.20),
+    0 24px 70px rgba(0,15,70,.65),
+    0 0 50px rgba(100,140,255,.12);
 
-  /* Minimal blur — liquid glass shows through, NOT frosted/matted */
-  --glass-blur:        blur(2px) saturate(220%);
-  --glass-blur-heavy:  blur(4px) saturate(240%);
+  /* Liquid glass: blur + brightness is the KEY — glass brightens what's behind it like a lens */
+  --glass-blur:        blur(4px) brightness(1.45) saturate(220%);
+  --glass-blur-heavy:  blur(8px) brightness(1.55) saturate(250%);
 
   /* Text on dark vivid background */
   --on-bg:     #ffffff;
@@ -243,10 +245,10 @@ nav{
   position:relative;overflow:hidden;
 }
 .hero-glass::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:50%;
+  content:'';position:absolute;top:0;left:0;right:0;height:60%;
   background:
-    radial-gradient(ellipse 80% 32% at 50% -6%, rgba(255,255,255,.72) 0%, transparent 65%),
-    linear-gradient(180deg,rgba(255,255,255,.14) 0%,transparent 100%);
+    radial-gradient(ellipse 90% 28% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.28) 40%, transparent 70%),
+    linear-gradient(180deg,rgba(255,255,255,.20) 0%,transparent 65%);
   border-radius:var(--radius) var(--radius) 0 0;
   pointer-events:none;
 }
@@ -378,12 +380,12 @@ nav{
   filter:brightness(.98);
   transition:transform .1s ease, filter .1s ease !important;
 }
-/* Top specular caustic — light focusing through glass top edge */
+/* Caustic top highlight — the defining visual of real glass: bright band at top edge */
 .service-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:55%;
+  content:'';position:absolute;top:0;left:0;right:0;height:60%;
   background:
-    radial-gradient(ellipse 75% 30% at 50% -5%, rgba(255,255,255,.70) 0%, transparent 70%),
-    linear-gradient(180deg,rgba(255,255,255,.30) 0%,transparent 100%);
+    radial-gradient(ellipse 90% 28% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.30) 40%, transparent 70%),
+    linear-gradient(180deg,rgba(255,255,255,.22) 0%,transparent 65%);
   border-radius:var(--radius) var(--radius) 0 0;
   pointer-events:none;
 }
@@ -614,10 +616,10 @@ nav{
   position:relative;overflow:hidden;
 }
 .contact-glass::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:50%;
+  content:'';position:absolute;top:0;left:0;right:0;height:60%;
   background:
-    radial-gradient(ellipse 80% 32% at 50% -6%, rgba(255,255,255,.70) 0%, transparent 65%),
-    linear-gradient(180deg,rgba(255,255,255,.12) 0%,transparent 100%);
+    radial-gradient(ellipse 90% 28% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.28) 40%, transparent 70%),
+    linear-gradient(180deg,rgba(255,255,255,.18) 0%,transparent 65%);
   border-radius:var(--radius) var(--radius) 0 0;
   pointer-events:none;
 }
