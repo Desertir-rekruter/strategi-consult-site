@@ -1226,18 +1226,19 @@ void main(){
   // Hero photo as WebGL texture so glass refraction can distort it
   const heroEl=document.querySelector('.hero-photo');
   let heroLoaded=false;
-  function initHeroTex(){
-    if(!heroEl||!heroEl.complete||heroLoaded) return;
-    const tex=new THREE.Texture(heroEl);
-    tex.needsUpdate=true;
+  // Placeholder so sampler2D is never null (black 1×1 pixel)
+  const ph=new THREE.DataTexture(new Uint8Array([0,0,0,0]),1,1);
+  ph.needsUpdate=true;
+  bgMat.uniforms.uHeroTex.value=ph;
+  // TextureLoader is the reliable way to get an image into WebGL
+  new THREE.TextureLoader().load('/assets/hero.jpeg',tex=>{
     tex.minFilter=THREE.LinearFilter;
     tex.magFilter=THREE.LinearFilter;
     tex.colorSpace=THREE.SRGBColorSpace;
     bgMat.uniforms.uHeroTex.value=tex;
     bgMat.uniforms.uResBg.value.set(W(),H());
     heroLoaded=true;
-  }
-  if(heroEl){ if(heroEl.complete) initHeroTex(); else heroEl.addEventListener('load',initHeroTex); }
+  });
 
   let bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
 
