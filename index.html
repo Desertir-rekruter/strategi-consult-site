@@ -1232,14 +1232,14 @@ void main(){
   if(uPhotoA>0.01){
     vec2 pMin=uPhotoRect.xy,pSz=uPhotoRect.zw;
     vec2 pUV=(u-pMin)/pSz;
-    if(all(greaterThanEqual(pUV,vec2(-.03)))&&all(lessThanEqual(pUV,vec2(1.03)))){
-      pUV=clamp(pUV,0.,1.);
+    if(pUV.x>=0.&&pUV.x<=1.&&pUV.y>=0.&&pUV.y<=1.){
+      // SDF uses original pUV — outside rounded corners gets d>0 and mask→0
       vec2 pxSz=pSz*uRes;
       vec2 pxC=(pUV-.5)*pxSz;
       float d=rrectSDF(pxC,pxSz*.5,28.);
       float mask=clamp(.5-d,0.,1.)*uPhotoA;
       vec3 ph=texture(uPhoto,vec2(pUV.x,1.-pUV.y)).rgb;
-      ph=mix(ph,vec3(dot(ph,vec3(.299,.587,.114))),.10); // grayscale(.1)
+      ph=mix(ph,vec3(dot(ph,vec3(.299,.587,.114))),.10);
       c=mix(c,ph*1.05,mask);
     }
   }
