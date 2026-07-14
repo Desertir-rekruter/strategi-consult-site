@@ -733,6 +733,21 @@ nav{
   .service-card,.btn-amber,.btn-glass,.panel-cta{transition:none}
   .scroll-hint{animation:none}
 }
+
+/* ─── THREE.JS ACTIVE — remove CSS backdrop-filter, WebGL handles refraction ─── */
+.gl-active .service-card,
+.gl-active .hero-glass,
+.gl-active nav,
+.gl-active .contact-glass,
+.gl-active #service-panel,
+.gl-active .panel-item,
+.gl-active .panel-related-node,
+.gl-active .btn-glass,
+.gl-active .nav-contact,
+.gl-active .panel-close{
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
 </style>
 </head>
 <body>
@@ -835,6 +850,7 @@ nav{
   <div class="panel-inner" id="panel-content"></div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script>
 // ─── SERVICE DATA ────────────────────────────────────────
 const SERVICES = [
@@ -1087,6 +1103,192 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// ─── THREE.JS LIQUID GLASS ENGINE ────────────────────────────────────────────
+;(function(){
+  if(typeof THREE==='undefined') return;
+  const W=()=>window.innerWidth, H=()=>window.innerHeight;
+
+  // Create WebGL canvas — sits behind all HTML content
+  const glc=document.createElement('canvas');
+  glc.style.cssText='position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;';
+  document.body.insertBefore(glc, document.body.firstChild);
+
+  const rnd=new THREE.WebGLRenderer({canvas:glc,alpha:false,antialias:false,powerPreference:'high-performance'});
+  rnd.setPixelRatio(1); // CSS pixels — matches getBoundingClientRect()
+  rnd.setSize(W(),H());
+  const cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+  const quad=new THREE.PlaneGeometry(2,2);
+
+  // Shared vertex shader — fullscreen quad, passes UV
+  const VERT=`out vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}`;
+
+  // ── 1. Background shader — recreates the CSS animated orbs in GLSL ──────
+  const bgMat=new THREE.ShaderMaterial({
+    glslVersion:THREE.GLSL3,
+    uniforms:{uT:{value:0}},
+    vertexShader:VERT,
+    fragmentShader:`
+precision mediump float;
+uniform float uT;
+in vec2 vUv;
+out vec4 fc;
+// Soft elliptical gradient blob
+float el(vec2 p,vec2 c,vec2 r){vec2 d=(p-c)/r;return clamp(1.-dot(d,d),0.,1.);}
+void main(){
+  vec2 u=vec2(vUv.x,1.-vUv.y); // flip Y to match CSS (0=top)
+  float t=uT;
+  vec3 c=vec3(.020,.051,.180); // deep navy base
+
+  // Static background gradient layers (from .bg-orbs CSS)
+  c+=el(u,vec2(.75,.10),vec2(.70,.55))*vec3(.157,.392,1.)*.90;
+  c+=el(u,vec2(.20,.25),vec2(.60,.50))*vec3(.235,.314,.941)*.85;
+  c+=el(u,vec2(.55,.65),vec2(.80,.65))*vec3(.078,.235,.784)*.80;
+  c+=el(u,vec2(.50,.50),vec2(.90,.75))*vec3(.039,.118,.549)*.70;
+
+  // Animated orbs — sin() approximates the CSS keyframe drift animations
+  c+=el(u,vec2(-.08+.04*sin(t*.242),.05+.03*sin(t*.242+1.2)),vec2(.44,.40))*vec3(.235,.392,1.)*.90;
+  c+=el(u,vec2(1.06-.03*sin(t*.196),1.08-.04*sin(t*.196+.8)),vec2(.38,.42))*vec3(.392,.196,1.)*.85;
+  c+=el(u,vec2(.58+.05*sin(t*.314),.28-.03*sin(t*.314+.5)),vec2(.28,.26))*vec3(.078,.549,1.)*.80;
+  c+=el(u,vec2(.12-.04*sin(t*.224),.52+.04*sin(t*.224+1.5)),vec2(.25,.28))*vec3(.471,.235,1.)*.78;
+
+  fc=vec4(clamp(c,0.,1.),1.);
+}`
+  });
+  const bgS=new THREE.Scene();
+  bgS.add(new THREE.Mesh(quad,bgMat));
+  let bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
+
+  // ── 2. Glass refraction shader — optical lens distortion + chromatic aberration ─
+  const MX=14; // max glass elements tracked simultaneously
+  const gArr=new Float32Array(MX*5); // x,y,w,h,cornerRadius per element (CSS px)
+
+  const glMat=new THREE.ShaderMaterial({
+    glslVersion:THREE.GLSL3,
+    uniforms:{
+      uBg: {value:null},
+      uRes:{value:new THREE.Vector2(W(),H())},
+      uG:  {value:gArr},
+      uN:  {value:0},
+      uL:  {value:0.09},   // lens distortion strength
+      uBr: {value:1.42},   // brightness — glass focuses/amplifies light like a lens
+      uCA: {value:0.003}   // chromatic aberration — R/B channels shift at glass edges
+    },
+    vertexShader:VERT,
+    fragmentShader:`
+precision mediump float;
+uniform sampler2D uBg;
+uniform vec2 uRes;
+uniform float uG[${MX*5}];
+uniform int uN;
+uniform float uL,uBr,uCA;
+in vec2 vUv;
+out vec4 fc;
+
+// Rounded box SDF — returns px distance (negative = inside)
+float rb(vec2 p,vec2 b,float r){vec2 q=abs(p)-b+r;return length(max(q,0.))+min(max(q.x,q.y),0.)-r;}
+
+void main(){
+  // CSS pixel coords (0,0)=top-left — matches getBoundingClientRect()
+  vec2 css=vec2(vUv.x,1.-vUv.y)*uRes;
+  vec4 col=texture(uBg,vUv);
+
+  for(int i=0;i<${MX};i++){
+    if(i>=uN) break;
+
+    float gx=uG[i*5],gy=uG[i*5+1],gw=uG[i*5+2],gh=uG[i*5+3],gr=uG[i*5+4];
+    vec2 ctr=vec2(gx+gw*.5, gy+gh*.5);
+    vec2 hs =vec2(gw*.5,    gh*.5);
+    vec2 rel=css-ctr;
+
+    float sdf=rb(rel,hs,gr);
+    if(sdf>2.) continue; // skip pixels clearly outside
+
+    // Normalized position within glass element [-1..1]
+    vec2 n=rel/(hs+.001);
+    float d=length(n);
+    vec2 dir=normalize(n+.0001);
+
+    // Convex lens distortion: outward push increasing toward edge (d^2 curve)
+    vec2 pxOff=dir*uL*d*d*min(hs.x,hs.y);
+    vec2 uvOff=vec2(pxOff.x,-pxOff.y)/uRes; // flip Y for UV space
+
+    // Chromatic aberration: R/B channels sampled at slight offset (rainbow fringing at edges)
+    vec2 ca=vec2(dir.x,-dir.y)*uCA*d;
+    vec2 uv2=vUv+uvOff;
+
+    float r=texture(uBg,uv2+ca).r;
+    float g=texture(uBg,uv2   ).g;
+    float b=texture(uBg,uv2-ca).b;
+
+    // Blend: background → refracted+brightened, with AA at SDF edge
+    col.rgb=mix(col.rgb, vec3(r,g,b)*uBr, smoothstep(2.,-1.,sdf));
+  }
+  fc=col;
+}`
+  });
+  const glS=new THREE.Scene();
+  glS.add(new THREE.Mesh(quad,glMat));
+
+  // ── 3. Glass element tracking — map DOM rects to shader uniforms ─────────
+  const TRACKED=[
+    ['nav',          100],
+    ['.hero-glass',   28],
+    ['.service-card', 28],
+    ['.contact-glass',28],
+    ['#service-panel', 0],
+  ];
+
+  function syncGlasses(){
+    let n=0;
+    TRACKED.forEach(([sel,r])=>{
+      document.querySelectorAll(sel).forEach(el=>{
+        if(n>=MX) return;
+        const rc=el.getBoundingClientRect();
+        if(!rc.width || rc.bottom<-10 || rc.top>H()+10) return;
+        const i=n*5;
+        gArr[i]=rc.left; gArr[i+1]=rc.top; gArr[i+2]=rc.width; gArr[i+3]=rc.height; gArr[i+4]=r;
+        n++;
+      });
+    });
+    glMat.uniforms.uN.value=n;
+    glMat.uniforms.uG.needsUpdate=true;
+  }
+
+  // ── 4. Render loop ────────────────────────────────────────────────────────
+  const cssOrbs=document.querySelector('.bg-orbs');
+  let bgHidden=false;
+
+  function frame(t){
+    requestAnimationFrame(frame);
+
+    // Pass 1: render animated background to offscreen texture
+    bgMat.uniforms.uT.value=t*.001;
+    rnd.setRenderTarget(bgRT);
+    rnd.render(bgS,cam);
+
+    // Pass 2: render glass refraction over background to screen
+    glMat.uniforms.uBg.value=bgRT.texture;
+    syncGlasses();
+    rnd.setRenderTarget(null);
+    rnd.render(glS,cam);
+
+    // Hide CSS orbs once WebGL is running (first frame)
+    if(!bgHidden){ if(cssOrbs) cssOrbs.style.display='none'; bgHidden=true; }
+  }
+  requestAnimationFrame(frame);
+
+  // ── 5. Resize ─────────────────────────────────────────────────────────────
+  window.addEventListener('resize',()=>{
+    rnd.setSize(W(),H());
+    bgRT.dispose();
+    bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
+    glMat.uniforms.uRes.value.set(W(),H());
+  });
+
+  // Tell CSS to remove backdrop-filter (WebGL now handles the glass background)
+  document.documentElement.classList.add('gl-active');
+})();
 </script>
 </body>
 </html>
