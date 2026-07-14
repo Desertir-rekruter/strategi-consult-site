@@ -42,19 +42,19 @@ html{scroll-behavior:smooth}
   --accent-dim:  rgba(200,146,42,.20);
 
   /* Glass — light panels on vivid background */
-  --glass:        rgba(255,255,255,.06);
-  --glass-mid:    rgba(255,255,255,.10);
-  --glass-strong: rgba(255,255,255,.15);
-  --glass-border: rgba(255,255,255,.55);
-  --glass-shine:  rgba(255,255,255,.95);
+  --glass:        rgba(255,255,255,.04);
+  --glass-mid:    rgba(255,255,255,.07);
+  --glass-strong: rgba(255,255,255,.10);
+  --glass-border: rgba(255,255,255,.60);
+  --glass-shine:  rgba(255,255,255,.98);
   --glass-shadow:
-    0 0 0 1.5px rgba(255,255,255,.55),
-    inset 0 1.5px 0 rgba(255,255,255,.95),
-    inset 0 -1px 0 rgba(0,30,100,.08),
-    0 16px 56px rgba(0,10,60,.35),
-    0 4px 12px rgba(0,0,0,.15);
-  --glass-blur:        blur(48px) saturate(200%);
-  --glass-blur-heavy:  blur(72px) saturate(220%);
+    0 0 0 1.5px rgba(255,255,255,.58),
+    inset 0 1.5px 0 rgba(255,255,255,.98),
+    inset 0 -1px 0 rgba(0,20,80,.10),
+    0 16px 56px rgba(0,10,60,.40),
+    0 4px 12px rgba(0,0,0,.20);
+  --glass-blur:        blur(18px) saturate(180%);
+  --glass-blur-heavy:  blur(28px) saturate(200%);
 
   /* Text on vivid gradient background */
   --on-bg:     #ffffff;
@@ -99,33 +99,33 @@ body{
 }
 .orb{
   position:absolute;border-radius:50%;
-  filter:blur(100px);
+  filter:blur(32px);
   will-change:transform;
   mix-blend-mode:screen;
 }
 /* Fluid "wave" orbs — bright, vivid, like the actual Tahoe wallpaper */
 .orb-1{
-  width:65vmax;height:55vmax;
-  background:radial-gradient(ellipse,rgba(50,80,255,.75) 0%,transparent 60%);
-  top:-5%;left:-10%;
+  width:55vmax;height:50vmax;
+  background:radial-gradient(ellipse,rgba(60,100,255,.90) 0%,rgba(40,60,220,.50) 45%,transparent 70%);
+  top:-5%;left:-8%;
   animation:drift1 26s ease-in-out infinite;
 }
 .orb-2{
-  width:55vmax;height:60vmax;
-  background:radial-gradient(ellipse,rgba(80,40,220,.70) 0%,transparent 60%);
-  bottom:-10%;right:-8%;
+  width:48vmax;height:52vmax;
+  background:radial-gradient(ellipse,rgba(100,50,255,.85) 0%,rgba(70,30,200,.45) 45%,transparent 70%);
+  bottom:-8%;right:-6%;
   animation:drift2 32s ease-in-out infinite;
 }
 .orb-3{
-  width:50vmax;height:42vmax;
-  background:radial-gradient(ellipse,rgba(0,120,255,.65) 0%,transparent 58%);
-  top:30%;left:60%;
+  width:42vmax;height:38vmax;
+  background:radial-gradient(ellipse,rgba(20,140,255,.80) 0%,rgba(10,80,220,.40) 45%,transparent 68%);
+  top:28%;left:58%;
   animation:drift3 20s ease-in-out infinite;
 }
 .orb-4{
-  width:40vmax;height:45vmax;
-  background:radial-gradient(ellipse,rgba(100,50,240,.60) 0%,transparent 58%);
-  top:55%;left:15%;
+  width:36vmax;height:40vmax;
+  background:radial-gradient(ellipse,rgba(120,60,255,.78) 0%,rgba(80,30,200,.40) 45%,transparent 68%);
+  top:52%;left:12%;
   animation:drift4 28s ease-in-out infinite;
 }
 @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(4vw,3vh) scale(1.04)}70%{transform:translate(-2vw,6vh) scale(.97)}}
@@ -320,7 +320,7 @@ nav{
 .service-card{
   /* Gradient border: prismatic light-catch like real glass */
   background:
-    rgba(255,255,255,.06) padding-box,
+    rgba(255,255,255,.03) padding-box,
     linear-gradient(
       130deg,
       rgba(255,255,255,.88) 0%,
@@ -352,7 +352,7 @@ nav{
 }
 .service-card:hover{
   background:
-    rgba(255,255,255,.08) padding-box,
+    rgba(255,255,255,.04) padding-box,
     linear-gradient(
       130deg,
       rgba(255,255,255,.95) 0%,
