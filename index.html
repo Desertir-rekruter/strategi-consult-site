@@ -1321,12 +1321,43 @@ void main(){
     if('letterSpacing' in ctx) ctx.letterSpacing=`${-0.02*fz}px`;
     ctx.fillStyle='rgba(255,255,255,1)';
     ctx.textBaseline='top';
+
+    // Word-wrap each phrase to the space available in the canvas — mirrors how the
+    // (invisible) real DOM text would wrap. Without this, narrow viewports draw a
+    // single unbroken line wider than the canvas, clipping it at the right edge.
+    const rows=[];
     [
       ['ВАШ БИЗНЕС',   false],
       ['ТЕРЯЕТ ДЕНЬГИ',true],
       ['БЕЗ',          false],
       ['ПРОЦЕССОВ.',   true],
-    ].forEach(([line,ind],i)=>ctx.fillText(line,ind?indent:0,i*lh));
+    ].forEach(([line,ind])=>{
+      const x=ind?indent:0;
+      const maxW=rc.width-x;
+      const words=line.split(' ');
+      let cur=words[0];
+      for(let w=1;w<words.length;w++){
+        const test=cur+' '+words[w];
+        if(ctx.measureText(test).width<=maxW){ cur=test; }
+        else { rows.push([cur,x,maxW]); cur=words[w]; }
+      }
+      rows.push([cur,x,maxW]);
+    });
+    rows.forEach(([text,x,maxW],i)=>{
+      const y=i*lh;
+      const w=ctx.measureText(text).width;
+      if(w>maxW){
+        // Single word still too wide to break — squeeze it horizontally to fit
+        // rather than letting it overflow the canvas and get clipped.
+        ctx.save();
+        ctx.translate(x,y);
+        ctx.scale(maxW/w,1);
+        ctx.fillText(text,0,0);
+        ctx.restore();
+      } else {
+        ctx.fillText(text,x,y);
+      }
+    });
     if(textCanvasTex) textCanvasTex.dispose();
     textCanvasTex=new THREE.CanvasTexture(cv);
     bgMat.uniforms.uText.value=textCanvasTex;
