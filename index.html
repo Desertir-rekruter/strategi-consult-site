@@ -51,6 +51,8 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{ height:100%; }
+  /* keep the scrollbar's space while an overlay locks scrolling, so the page doesn't jump sideways */
+  html{ scrollbar-gutter: stable; }
   body{
     font-family: 'Century Gothic','Avenir Next','Futura','Poppins',sans-serif;
     color:var(--ink);
