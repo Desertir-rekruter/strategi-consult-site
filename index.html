@@ -376,14 +376,9 @@
   .funnel-overlay{
     position:fixed; inset:0; z-index:500;
     display:flex; visibility:hidden; pointer-events:none;
-    clip-path: circle(0% at var(--ox,50%) var(--oy,50%));
-    transition: clip-path .62s cubic-bezier(.65,0,.35,1), visibility 0s linear .62s;
   }
-  .funnel-overlay.open{
-    visibility:visible; pointer-events:auto;
-    clip-path: circle(150% at var(--ox,50%) var(--oy,50%));
-    transition: clip-path .62s cubic-bezier(.65,0,.35,1);
-  }
+  .funnel-overlay.open{ visibility:visible; pointer-events:auto; }
+  .flip-clone{ position:fixed !important; margin:0 !important; z-index:1; pointer-events:none; }
   .funnel-overlay-bg{
     position:absolute; inset:0;
     background-image: var(--bg-image);
@@ -404,10 +399,7 @@
     border-radius: 30px;
     padding:40px 40px 44px;
     color:#fff;
-    opacity:0; transform: translateY(18px);
-    transition: opacity .4s ease .2s, transform .4s ease .2s;
   }
-  .funnel-overlay.open .funnel-page{ opacity:1; transform:none; }
   .funnel-page-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:8px;}
   .funnel-page-head .eyebrow{ font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,0.65); font-weight:700; margin-bottom:6px;}
   .funnel-page-head h2{ font-size:46px; font-weight:300; letter-spacing:-1px; }
@@ -771,7 +763,6 @@
             </div>
             <div class="funnel-expand-icon">⤢</div>
           </div>
-          <p>Провожу exit- и стей-интервью, нахожу системную причину ухода — не всегда дело в деньгах. Строю процесс адаптации и обратной связи, который останавливает отток, а не просто фиксирует его в отчёте.</p>
           <div class="retention-chart">
             <svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
@@ -1553,63 +1544,14 @@
 </div>
 
 <script>
-  function syncOverlayBg(){
-    var bg = getComputedStyle(document.querySelector('.backdrop')).backgroundImage;
-    document.getElementById('funnelOverlay').style.setProperty('--bg-image', bg);
-  }
-  function openFunnel(e){
-    var card = document.getElementById('funnelCard');
-    var overlay = document.getElementById('funnelOverlay');
-    var r = card.getBoundingClientRect();
-    var ox = r.left + r.width/2;
-    var oy = r.top + r.height/2;
-    overlay.style.setProperty('--ox', ox + 'px');
-    overlay.style.setProperty('--oy', oy + 'px');
-    syncOverlayBg();
-    card.classList.add('is-hidden');
-    document.body.classList.add('funnel-lock');
-    requestAnimationFrame(function(){
-      overlay.classList.add('open');
-    });
-  }
-  function closeFunnel(){
-    var overlay = document.getElementById('funnelOverlay');
-    var card = document.getElementById('funnelCard');
-    overlay.classList.remove('open');
-    document.body.classList.remove('funnel-lock');
-    setTimeout(function(){
-      card.classList.remove('is-hidden');
-    }, 620);
-  }
+  function openFunnel(e){ openCardOverlay('funnelCard','funnelOverlay'); }
+  function closeFunnel(){ closeCardOverlay('funnelCard','funnelOverlay'); }
   function handleOverlayClick(e){
     if(e.target.id === 'funnelOverlayScroll'){ closeFunnel(); }
   }
 
-  function openKB(e){
-    var card = document.getElementById('kbCard');
-    var overlay = document.getElementById('kbOverlay');
-    var r = card.getBoundingClientRect();
-    var ox = r.left + r.width/2;
-    var oy = r.top + r.height/2;
-    overlay.style.setProperty('--ox', ox + 'px');
-    overlay.style.setProperty('--oy', oy + 'px');
-    var bg = getComputedStyle(document.querySelector('.backdrop')).backgroundImage;
-    overlay.style.setProperty('--bg-image', bg);
-    card.classList.add('is-hidden');
-    document.body.classList.add('funnel-lock');
-    requestAnimationFrame(function(){
-      overlay.classList.add('open');
-    });
-  }
-  function closeKB(){
-    var overlay = document.getElementById('kbOverlay');
-    var card = document.getElementById('kbCard');
-    overlay.classList.remove('open');
-    document.body.classList.remove('funnel-lock');
-    setTimeout(function(){
-      card.classList.remove('is-hidden');
-    }, 620);
-  }
+  function openKB(e){ openCardOverlay('kbCard','kbOverlay'); }
+  function closeKB(){ closeCardOverlay('kbCard','kbOverlay'); }
   function handleKBOverlayClick(e){
     if(e.target.id === 'kbOverlayScroll'){ closeKB(); }
   }
@@ -1632,24 +1574,105 @@
   });
 
   /* ============ generic card-overlay system (Результаты / Как я работаю) ============ */
+  /* Open: the card grows toward the centre while flipping edge-on, then the
+     overlay page (already filled with text) turns in from -90deg and grows to
+     full size. Close plays the same motion backwards. */
+  var cardFlip = {};
+  function copyComputedStyle(from, to){
+    var cs = getComputedStyle(from);
+    for(var i = 0; i < cs.length; i++){
+      to.style.setProperty(cs[i], cs.getPropertyValue(cs[i]));
+    }
+    to.style.animation = 'none';
+    to.style.transition = 'none';
+    for(var j = 0; j < from.children.length; j++){
+      if(to.children[j]) copyComputedStyle(from.children[j], to.children[j]);
+    }
+  }
   function openCardOverlay(cardId, overlayId){
     var card = document.getElementById(cardId);
     var overlay = document.getElementById(overlayId);
-    var r = card.getBoundingClientRect();
-    overlay.style.setProperty('--ox', (r.left + r.width/2) + 'px');
-    overlay.style.setProperty('--oy', (r.top + r.height/2) + 'px');
+    if(cardFlip[overlayId]) return;
     var bg = getComputedStyle(document.querySelector('.backdrop')).backgroundImage;
     overlay.style.setProperty('--bg-image', bg);
+    var c = card.getBoundingClientRect();
+
+    var clone = card.cloneNode(true);
+    copyComputedStyle(card, clone);
+    clone.removeAttribute('id');
+    clone.removeAttribute('onclick');
+    clone.querySelectorAll('[id]').forEach(function(el){ el.removeAttribute('id'); });
+    clone.setAttribute('aria-hidden', 'true');
+    clone.classList.add('flip-clone');
+    clone.style.left = c.left + 'px'; clone.style.top = c.top + 'px';
+    clone.style.width = c.width + 'px'; clone.style.height = c.height + 'px';
+    clone.style.visibility = 'visible';
+    clone.style.transform = 'none';
+
+    var scroll = overlay.querySelector('.funnel-overlay-scroll');
+    var page = overlay.querySelector('.funnel-page');
+    var bgLayer = overlay.querySelector('.funnel-overlay-bg');
+    overlay.insertBefore(clone, scroll);
     card.classList.add('is-hidden');
     document.body.classList.add('funnel-lock');
-    requestAnimationFrame(function(){ overlay.classList.add('open'); });
+    overlay.classList.add('open');
+    scroll.scrollTop = 0;
+
+    var anims;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      clone.style.display = 'none';
+      anims = [overlay.animate([{opacity:0},{opacity:1}], {duration:180, fill:'both'})];
+    } else {
+      var p = page.getBoundingClientRect();
+      var ccx = c.left + c.width/2, ccy = c.top + c.height/2;
+      var pcx = p.left + p.width/2, pcy = p.top + p.height/2;
+      var k = (c.width + (p.width - c.width) * .5) / p.width;   // page scaled uniformly, text never squashed
+      var mw = p.width * k, mh = p.height * k;
+      var mcx = (ccx + pcx) / 2, mcy = (ccy + pcy) / 2;
+      var cardMid = 'perspective(1800px) translate(' + (mcx-ccx) + 'px,' + (mcy-ccy) + 'px) scale(' + (mw/c.width) + ',' + (mh/c.height) + ') rotateY(90deg)';
+      var pageMid = 'perspective(1800px) translate(' + (mcx-pcx) + 'px,' + (mcy-pcy) + 'px) scale(' + k + ') rotateY(-90deg)';
+      anims = [
+        bgLayer.animate([{opacity:0},{opacity:1}], {duration:420, easing:'ease-out', fill:'both'}),
+        clone.animate([
+          {transform:'perspective(1800px) translate(0,0) scale(1,1) rotateY(0)', opacity:1},
+          {transform:cardMid, opacity:1, offset:.99},
+          {transform:cardMid, opacity:0}
+        ], {duration:300, easing:'cubic-bezier(.45,0,.8,.4)', fill:'both'}),
+        page.animate([
+          {transform:pageMid, opacity:0},
+          {transform:pageMid, opacity:1, offset:.01},
+          {transform:'perspective(1800px) translate(0px,0px) scale(1) rotateY(0deg)', opacity:1}
+        ], {duration:440, delay:290, easing:'cubic-bezier(.2,.6,.3,1)', fill:'both'})
+      ];
+      var cta = overlay.querySelector('.funnel-cta');
+      if(cta) anims.push(cta.animate(
+        [{opacity:0, transform:'translateY(12px)'}, {opacity:1, transform:'none'}],
+        {duration:280, delay:600, easing:'ease-out', fill:'both'}));
+    }
+    cardFlip[overlayId] = {card:card, clone:clone, anims:anims, closing:false};
   }
   function closeCardOverlay(cardId, overlayId){
+    var st = cardFlip[overlayId];
     var overlay = document.getElementById(overlayId);
-    var card = document.getElementById(cardId);
-    overlay.classList.remove('open');
-    document.body.classList.remove('funnel-lock');
-    setTimeout(function(){ card.classList.remove('is-hidden'); }, 620);
+    if(!st || st.closing) return;
+    st.closing = true;
+    var longest = 0;
+    st.anims.forEach(function(a){
+      longest = Math.max(longest, a.effect.getComputedTiming().endTime);
+      a.reverse(); a.updatePlaybackRate(-1.3);
+    });
+    var done = false;
+    function finish(){
+      if(done) return; done = true;
+      overlay.classList.remove('open');
+      st.anims.forEach(function(a){ a.cancel(); });
+      st.clone.remove();
+      st.card.classList.remove('is-hidden');
+      document.body.classList.remove('funnel-lock');
+      delete cardFlip[overlayId];
+    }
+    Promise.all(st.anims.map(function(a){ return a.finished; })).then(finish, finish);
+    setTimeout(finish, longest/1.3 + 250);
   }
   function handleCardOverlayClick(e, scrollId, cardId, overlayId){
     if(e.target.id === scrollId){ closeCardOverlay(cardId, overlayId); }
