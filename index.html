@@ -1617,6 +1617,10 @@
         [{opacity:0, transform:'translateY(12px)'}, {opacity:1, transform:'none'}],
         {duration:280, delay:600, easing:'ease-out', fill:'both'}));
     }
+    // one shared timeline: pad every effect to the same end, so reverse() rewinds them in sync
+    var end = 0;
+    anims.forEach(function(a){ end = Math.max(end, a.effect.getComputedTiming().endTime); });
+    anims.forEach(function(a){ a.effect.updateTiming({endDelay: end - a.effect.getComputedTiming().endTime}); });
     cardFlip[overlayId] = {card:card, clone:clone, anims:anims, closing:false};
   }
   function closeCardOverlay(cardId, overlayId){
