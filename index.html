@@ -245,12 +245,6 @@
   .funnel-card{ cursor:pointer; }
   .funnel-card.is-hidden{ visibility:hidden; }
   .funnel-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
-  .funnel-expand-icon{
-    width:26px; height:26px; border-radius:50%; flex:0 0 auto;
-    display:flex; align-items:center; justify-content:center;
-    background: var(--accent-soft); border:1px solid rgba(47,95,224,0.22);
-    font-size:13px; color:var(--accent);
-  }
 
   /* ---------- week chart ---------- */
   .week-top{ display:flex; justify-content:space-between; align-items:flex-start; }
@@ -631,7 +625,6 @@
       <aside class="card about-mini funnel-card anim-in" id="aboutCard" role="button" tabindex="0" aria-label="Обо мне: открыть подробнее" onclick="openCardOverlay('aboutCard','aboutOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('aboutCard','aboutOverlay');}" style="animation-delay:.08s;">
         <div class="about-mini-head">
           <h3>Обо мне</h3>
-          <div class="funnel-expand-icon">⤢</div>
         </div>
         <p class="about-text">Мне 25, и я действующий HRBP. Нахожу, где бизнес теряет деньги на HR, и исправляю это автоматизацией.</p>
         <div class="about-tags">
@@ -665,7 +658,6 @@
             </div>
             <div class="week-top-right">
               <div class="week-num">16<span style="font-size:16px;">ч</span></div>
-              <div class="funnel-expand-icon">⤢</div>
             </div>
           </div>
           <div class="kbr-cap">Свободное время руководителей</div>
@@ -693,7 +685,6 @@
               <h3>Найм</h3>
               <div class="sub">Экономлю 16,5 часов на одной вакансии</div>
             </div>
-            <div class="funnel-expand-icon">⤢</div>
           </div>
           <div class="funnel-wrap">
             <svg class="funnel-svg" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
@@ -718,7 +709,6 @@
               <h3>Аудит процессов</h3>
               <div class="sub">Узнайте за 30 минут, где именно теряет деньги ваша компания</div>
             </div>
-            <div class="funnel-expand-icon">⤢</div>
           </div>
           <div class="audit-teaser">
             <div class="audit-num">30<span style="font-size:14px;">мин</span></div>
@@ -766,7 +756,6 @@
               <h3>Снижение текучести</h3>
               <div class="sub">Разбираюсь, почему уходят, и выстраиваю удержание</div>
             </div>
-            <div class="funnel-expand-icon">⤢</div>
           </div>
           <div class="retention-chart">
             <svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -792,7 +781,6 @@
               <h3>HR-метрики и юнит-экономика</h3>
               <div class="sub">Считаю, сколько стоит и когда окупается каждый сотрудник</div>
             </div>
-            <div class="funnel-expand-icon">⤢</div>
           </div>
           <p>Строю дашборд ключевых HR-метрик (time-to-hire, cost-per-hire, текучесть, eNPS) и юнит-экономику по каждой роли — сколько сотрудник стоит компании и когда выходит в плюс. Решения на цифрах, а не на ощущениях.</p>
         </div>
@@ -804,7 +792,6 @@
               <h3 style="color:#f2f2f2;">HRBP по подписке</h3>
               <div class="sub">HR-директор на part-time, без найма в штат</div>
             </div>
-            <div class="funnel-expand-icon">⤢</div>
           </div>
           <p>Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
         </div>
@@ -816,7 +803,6 @@
               <h3>Исследование рынка</h3>
               <div class="sub">Сколько платят конкуренты и где искать людей</div>
             </div>
-            <div class="funnel-expand-icon">⤢</div>
           </div>
           <p>Анализирую зарплатные вилки по рынку, конкурентов за таланты и реальную доступность кандидатов в вашей нише — чтобы оффер не проигрывал ещё до собеседования.</p>
         </div>
@@ -828,7 +814,6 @@
               <h3>Кастомные HR-системы и боты</h3>
               <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
             </div>
-            <div class="funnel-expand-icon">⤢</div>
           </div>
           <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
         </div>
@@ -876,7 +861,6 @@
                   <h3>Результаты</h3>
                   <div class="sub">По кейсам с реальными клиентами</div>
                 </div>
-                <div class="funnel-expand-icon">⤢</div>
               </div>
               <div class="donuts">
                 <div class="donut-col">
