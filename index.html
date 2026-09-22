@@ -757,44 +757,74 @@
         </div>
 
         <!-- NEW SERVICE: RETENTION -->
-        <div class="card svc-card anim-in" style="animation-delay:.4s">
-          <h3>Снижение текучести</h3>
-          <div class="sub">Разбираюсь, почему уходят, и выстраиваю удержание</div>
+        <div class="card svc-card funnel-card anim-in" style="animation-delay:.4s" id="retentionCard" onclick="openCardOverlay('retentionCard','retentionOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3>Снижение текучести</h3>
+              <div class="sub">Разбираюсь, почему уходят, и выстраиваю удержание</div>
+            </div>
+            <div class="funnel-expand-icon">⤢</div>
+          </div>
           <p>Провожу exit- и стей-интервью, нахожу системную причину ухода — не всегда дело в деньгах. Строю процесс адаптации и обратной связи, который останавливает отток, а не просто фиксирует его в отчёте.</p>
         </div>
 
         <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS -->
-        <div class="card svc-card gc2 anim-in" style="animation-delay:.42s">
-          <h3>HR-метрики и юнит-экономика</h3>
-          <div class="sub">Считаю, сколько стоит и когда окупается каждый сотрудник</div>
+        <div class="card svc-card gc2 funnel-card anim-in" style="animation-delay:.42s" id="metricsCard" onclick="openCardOverlay('metricsCard','metricsOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3>HR-метрики и юнит-экономика</h3>
+              <div class="sub">Считаю, сколько стоит и когда окупается каждый сотрудник</div>
+            </div>
+            <div class="funnel-expand-icon">⤢</div>
+          </div>
           <p>Строю дашборд ключевых HR-метрик (time-to-hire, cost-per-hire, текучесть, eNPS) и юнит-экономику по каждой роли — сколько сотрудник стоит компании и когда выходит в плюс. Решения на цифрах, а не на ощущениях.</p>
         </div>
 
         <!-- NEW SERVICE: HRBP SUBSCRIPTION -->
-        <div class="card dark svc-card anim-in" style="animation-delay:.44s">
-          <h3 style="color:#f2f2f2;">HRBP по подписке</h3>
-          <div class="sub">HR-директор на part-time, без найма в штат</div>
+        <div class="card dark svc-card funnel-card anim-in" style="animation-delay:.44s" id="hrbpCard" onclick="openCardOverlay('hrbpCard','hrbpOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3 style="color:#f2f2f2;">HRBP по подписке</h3>
+              <div class="sub">HR-директор на part-time, без найма в штат</div>
+            </div>
+            <div class="funnel-expand-icon">⤢</div>
+          </div>
           <p>Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
         </div>
 
         <!-- NEW SERVICE: MARKET RESEARCH -->
-        <div class="card svc-card anim-in" style="animation-delay:.46s">
-          <h3>Исследование рынка</h3>
-          <div class="sub">Сколько платят конкуренты и где искать людей</div>
+        <div class="card svc-card funnel-card anim-in" style="animation-delay:.46s" id="marketCard" onclick="openCardOverlay('marketCard','marketOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3>Исследование рынка</h3>
+              <div class="sub">Сколько платят конкуренты и где искать людей</div>
+            </div>
+            <div class="funnel-expand-icon">⤢</div>
+          </div>
           <p>Анализирую зарплатные вилки по рынку, конкурентов за таланты и реальную доступность кандидатов в вашей нише — чтобы оффер не проигрывал ещё до собеседования.</p>
         </div>
 
         <!-- NEW SERVICE: CUSTOM DEV -->
-        <div class="card dark2 svc-card anim-in" style="animation-delay:.48s">
-          <h3>Кастомные HR-системы</h3>
-          <div class="sub" style="color:#b8b8ba;">Пишу инструменты под компанию, а не подбираю готовые</div>
+        <div class="card dark2 svc-card funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3>Кастомные HR-системы</h3>
+              <div class="sub" style="color:#b8b8ba;">Пишу инструменты под компанию, а не подбираю готовые</div>
+            </div>
+            <div class="funnel-expand-icon">⤢</div>
+          </div>
           <p style="color:#c7c7c9;">Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта.</p>
         </div>
 
         <!-- NEW SERVICE: BOTS -->
-        <div class="card svc-card gc2 anim-in" style="animation-delay:.5s">
-          <h3>HR и бизнес-боты</h3>
-          <div class="sub">Автоматизирую рутину ботами, а не инструкциями</div>
+        <div class="card svc-card gc2 funnel-card anim-in" style="animation-delay:.5s" id="botsCard" onclick="openCardOverlay('botsCard','botsOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3>HR и бизнес-боты</h3>
+              <div class="sub">Автоматизирую рутину ботами, а не инструкциями</div>
+            </div>
+            <div class="funnel-expand-icon">⤢</div>
+          </div>
           <p>Собираю Telegram-ботов для скрининга кандидатов, онбординга новых сотрудников и ответов на частые кадровые вопросы — рутина исчезает, а не переезжает в очередной чат.</p>
         </div>
 
@@ -1315,6 +1345,192 @@
   </div>
 </div>
 
+<!-- ============ FULLSCREEN RETENTION OVERLAY ============ -->
+<div class="funnel-overlay" id="retentionOverlay">
+  <div class="funnel-overlay-bg"></div>
+  <div class="funnel-overlay-scroll" id="retentionOverlayScroll" onclick="handleCardOverlayClick(event,'retentionOverlayScroll','retentionCard','retentionOverlay')">
+    <div class="funnel-page">
+      <div class="funnel-page-head">
+        <div>
+          <div class="eyebrow">HR Consulting Studio · Услуга</div>
+          <h2>Снижение текучести</h2>
+        </div>
+        <div class="funnel-close" onclick="closeCardOverlay('retentionCard','retentionOverlay')">✕</div>
+      </div>
+      <p class="funnel-lead">Провожу exit- и стей-интервью, нахожу системную причину ухода — не всегда дело в деньгах. Строю процесс адаптации и обратной связи, который останавливает отток, а не просто фиксирует его в отчёте.</p>
+
+      <div class="funnel-page-section">
+        <h4>Что входит</h4>
+        <div class="kb-cards c3">
+          <div class="kb-card"><div class="ktitle">Exit-интервью</div><div class="ktext">Честный разбор причин ухода — не для галочки в отчёте, а чтобы найти системную проблему.</div></div>
+          <div class="kb-card"><div class="ktitle">Стей-интервью</div><div class="ktext">Узнаю, что удерживает сильных сотрудников, пока они ещё с вами, а не когда уже написали заявление.</div></div>
+          <div class="kb-card"><div class="ktitle">Процесс удержания</div><div class="ktext">Строю систему адаптации и обратной связи, которая останавливает отток, а не просто фиксирует его в отчёте.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-cta">
+      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
+      <span>Отвечаю в течение рабочего дня</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FULLSCREEN METRICS OVERLAY ============ -->
+<div class="funnel-overlay" id="metricsOverlay">
+  <div class="funnel-overlay-bg"></div>
+  <div class="funnel-overlay-scroll" id="metricsOverlayScroll" onclick="handleCardOverlayClick(event,'metricsOverlayScroll','metricsCard','metricsOverlay')">
+    <div class="funnel-page">
+      <div class="funnel-page-head">
+        <div>
+          <div class="eyebrow">HR Consulting Studio · Услуга</div>
+          <h2>HR-метрики и юнит-экономика</h2>
+        </div>
+        <div class="funnel-close" onclick="closeCardOverlay('metricsCard','metricsOverlay')">✕</div>
+      </div>
+      <p class="funnel-lead">Строю дашборд ключевых HR-метрик и юнит-экономику по каждой роли — сколько сотрудник стоит компании и когда выходит в плюс. Решения на цифрах, а не на ощущениях.</p>
+
+      <div class="funnel-page-section">
+        <h4>Что входит</h4>
+        <div class="kb-cards c3">
+          <div class="kb-card"><div class="ktitle">Дашборд метрик</div><div class="ktext">Time-to-hire, cost-per-hire, текучесть, eNPS — в одном месте, а не разбросано по таблицам.</div></div>
+          <div class="kb-card"><div class="ktitle">Юнит-экономика роли</div><div class="ktext">Сколько сотрудник стоит компании и когда выходит в плюс — по каждой ключевой роли отдельно.</div></div>
+          <div class="kb-card"><div class="ktitle">Регулярные срезы</div><div class="ktext">Не разовый отчёт, а живая картина — чтобы решения принимались на актуальных цифрах.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-cta">
+      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
+      <span>Отвечаю в течение рабочего дня</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FULLSCREEN HRBP SUBSCRIPTION OVERLAY ============ -->
+<div class="funnel-overlay" id="hrbpOverlay">
+  <div class="funnel-overlay-bg"></div>
+  <div class="funnel-overlay-scroll" id="hrbpOverlayScroll" onclick="handleCardOverlayClick(event,'hrbpOverlayScroll','hrbpCard','hrbpOverlay')">
+    <div class="funnel-page">
+      <div class="funnel-page-head">
+        <div>
+          <div class="eyebrow">HR Consulting Studio · Услуга</div>
+          <h2>HRBP по подписке</h2>
+        </div>
+        <div class="funnel-close" onclick="closeCardOverlay('hrbpCard','hrbpOverlay')">✕</div>
+      </div>
+      <p class="funnel-lead">Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
+
+      <div class="funnel-page-section">
+        <h4>Что входит</h4>
+        <div class="kb-cards c3">
+          <div class="kb-card"><div class="ktitle">HR-функция на part-time</div><div class="ktext">Формат часов в месяц — без найма в штат и расходов на полную ставку HR-директора.</div></div>
+          <div class="kb-card"><div class="ktitle">Весь цикл, а не куски</div><div class="ktext">Найм, онбординг, кадровые процессы и стратегия — под одним HRBP, а не набор разрозненных подрядчиков.</div></div>
+          <div class="kb-card"><div class="ktitle">Кому подходит</div><div class="ktext">Компаниям, которым рано под штатного HRBP, но HR уже нужен системно, а не по остаточному принципу.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-cta">
+      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
+      <span>Отвечаю в течение рабочего дня</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FULLSCREEN MARKET RESEARCH OVERLAY ============ -->
+<div class="funnel-overlay" id="marketOverlay">
+  <div class="funnel-overlay-bg"></div>
+  <div class="funnel-overlay-scroll" id="marketOverlayScroll" onclick="handleCardOverlayClick(event,'marketOverlayScroll','marketCard','marketOverlay')">
+    <div class="funnel-page">
+      <div class="funnel-page-head">
+        <div>
+          <div class="eyebrow">HR Consulting Studio · Услуга</div>
+          <h2>Исследование рынка</h2>
+        </div>
+        <div class="funnel-close" onclick="closeCardOverlay('marketCard','marketOverlay')">✕</div>
+      </div>
+      <p class="funnel-lead">Анализирую зарплатные вилки по рынку, конкурентов за таланты и реальную доступность кандидатов в вашей нише — чтобы оффер не проигрывал ещё до собеседования.</p>
+
+      <div class="funnel-page-section">
+        <h4>Что входит</h4>
+        <div class="kb-cards c3">
+          <div class="kb-card"><div class="ktitle">Зарплатные вилки</div><div class="ktext">Актуальные вилки по рынку и конкретно по вашей нише — не усреднённые данные из открытых источников.</div></div>
+          <div class="kb-card"><div class="ktitle">Конкуренты за таланты</div><div class="ktext">Кто ещё охотится за теми же кандидатами и чем переманивает — зарплатой, условиями или брендом.</div></div>
+          <div class="kb-card"><div class="ktitle">Доступность кандидатов</div><div class="ktext">Сколько подходящих людей вообще есть на рынке — чтобы требования к вакансии были реалистичными.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-cta">
+      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
+      <span>Отвечаю в течение рабочего дня</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FULLSCREEN CUSTOM SYSTEMS OVERLAY ============ -->
+<div class="funnel-overlay" id="customOverlay">
+  <div class="funnel-overlay-bg"></div>
+  <div class="funnel-overlay-scroll" id="customOverlayScroll" onclick="handleCardOverlayClick(event,'customOverlayScroll','customCard','customOverlay')">
+    <div class="funnel-page">
+      <div class="funnel-page-head">
+        <div>
+          <div class="eyebrow">HR Consulting Studio · Услуга</div>
+          <h2>Кастомные HR-системы</h2>
+        </div>
+        <div class="funnel-close" onclick="closeCardOverlay('customCard','customOverlay')">✕</div>
+      </div>
+      <p class="funnel-lead">Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта.</p>
+
+      <div class="funnel-page-section">
+        <h4>Что входит</h4>
+        <div class="kb-cards c3">
+          <div class="kb-card"><div class="ktitle">CRM под процесс</div><div class="ktext">Система найма строится под ваш реальный процесс, а не подгоняет процесс под чужой шаблон.</div></div>
+          <div class="kb-card"><div class="ktitle">Кадровый учёт</div><div class="ktext">Внутренние инструменты для КДП, когда готовые сервисы избыточны или не покрывают нужный кейс.</div></div>
+          <div class="kb-card"><div class="ktitle">Сначала процесс</div><div class="ktext">Пишу под задачу, а не подбираю задачу под готовый инструмент — иначе система не приживётся.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-cta">
+      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
+      <span>Отвечаю в течение рабочего дня</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FULLSCREEN BOTS OVERLAY ============ -->
+<div class="funnel-overlay" id="botsOverlay">
+  <div class="funnel-overlay-bg"></div>
+  <div class="funnel-overlay-scroll" id="botsOverlayScroll" onclick="handleCardOverlayClick(event,'botsOverlayScroll','botsCard','botsOverlay')">
+    <div class="funnel-page">
+      <div class="funnel-page-head">
+        <div>
+          <div class="eyebrow">HR Consulting Studio · Услуга</div>
+          <h2>HR и бизнес-боты</h2>
+        </div>
+        <div class="funnel-close" onclick="closeCardOverlay('botsCard','botsOverlay')">✕</div>
+      </div>
+      <p class="funnel-lead">Собираю Telegram-ботов для скрининга кандидатов, онбординга новых сотрудников и ответов на частые кадровые вопросы — рутина исчезает, а не переезжает в очередной чат.</p>
+
+      <div class="funnel-page-section">
+        <h4>Что входит</h4>
+        <div class="kb-cards c3">
+          <div class="kb-card"><div class="ktitle">Скрининг кандидатов</div><div class="ktext">Бот отсеивает нерелевантные отклики по вашим критериям до того, как они попадут к рекрутеру.</div></div>
+          <div class="kb-card"><div class="ktitle">Онбординг</div><div class="ktext">Новый сотрудник получает ответы и материалы сразу, а не ждёт, пока до него дойдут руки HR.</div></div>
+          <div class="kb-card"><div class="ktitle">Частые вопросы</div><div class="ktext">Бот отвечает на повторяющиеся кадровые вопросы команды — рутина не оседает в личных чатах.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="funnel-cta">
+      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
+      <span>Отвечаю в течение рабочего дня</span>
+    </div>
+  </div>
+</div>
+
 <script>
   function syncOverlayBg(){
     var bg = getComputedStyle(document.querySelector('.backdrop')).backgroundImage;
@@ -1385,6 +1601,12 @@
       if(document.getElementById('processOverlay').classList.contains('open')) closeCardOverlay('processCard','processOverlay');
       if(document.getElementById('auditOverlay').classList.contains('open')) closeCardOverlay('auditCard','auditOverlay');
       if(document.getElementById('aboutOverlay').classList.contains('open')) closeCardOverlay('aboutCard','aboutOverlay');
+      if(document.getElementById('retentionOverlay').classList.contains('open')) closeCardOverlay('retentionCard','retentionOverlay');
+      if(document.getElementById('metricsOverlay').classList.contains('open')) closeCardOverlay('metricsCard','metricsOverlay');
+      if(document.getElementById('hrbpOverlay').classList.contains('open')) closeCardOverlay('hrbpCard','hrbpOverlay');
+      if(document.getElementById('marketOverlay').classList.contains('open')) closeCardOverlay('marketCard','marketOverlay');
+      if(document.getElementById('customOverlay').classList.contains('open')) closeCardOverlay('customCard','customOverlay');
+      if(document.getElementById('botsOverlay').classList.contains('open')) closeCardOverlay('botsCard','botsOverlay');
     }
   });
 
