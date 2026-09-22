@@ -51,8 +51,6 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{ height:100%; }
-  /* keep the scrollbar's space while an overlay locks scrolling, so the page doesn't jump sideways */
-  html{ scrollbar-gutter: stable; }
   body{
     font-family: 'Century Gothic','Avenir Next','Futura','Poppins',sans-serif;
     color:var(--ink);
@@ -377,6 +375,11 @@
     display:flex; visibility:hidden; pointer-events:none;
   }
   .funnel-overlay.open{ visibility:visible; pointer-events:auto; }
+  /* overlay's own scrollbar: transparent track, glassy thumb (no light strip on the right) */
+  .funnel-overlay-scroll{ scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.35) transparent; }
+  .funnel-overlay-scroll::-webkit-scrollbar{ width:10px; background:transparent; }
+  .funnel-overlay-scroll::-webkit-scrollbar-track{ background:transparent; }
+  .funnel-overlay-scroll::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.35); border-radius:10px; border:3px solid transparent; background-clip:padding-box; }
   .flip-clone{ position:fixed !important; margin:0 !important; z-index:1; pointer-events:none; }
   .funnel-overlay-bg{
     position:absolute; inset:0;
@@ -1568,6 +1571,9 @@
     var bgLayer = overlay.querySelector('.funnel-overlay-bg');
     overlay.insertBefore(clone, scroll);
     card.classList.add('is-hidden');
+    // locking scroll hides the scrollbar; pad the body by its width so the page doesn't shift sideways
+    var sbw = window.innerWidth - document.documentElement.clientWidth;
+    if(sbw > 0) document.body.style.paddingRight = sbw + 'px';
     document.body.classList.add('funnel-lock');
     overlay.classList.add('open');
     scroll.scrollTop = 0;
@@ -1627,6 +1633,7 @@
       st.clone.remove();
       st.card.classList.remove('is-hidden');
       document.body.classList.remove('funnel-lock');
+      document.body.style.paddingRight = '';
       delete cardFlip[overlayId];
     }
     Promise.all(st.anims.map(function(a){ return a.finished; })).then(finish, finish);
