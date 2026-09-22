@@ -320,6 +320,12 @@
   .svc-card p{ margin-top:10px; font-size:12.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
   .svc-card.dark p{ color:#c7c7c9; }
 
+  /* ---------- retention declining chart ---------- */
+  .retention-chart{ margin-top:14px; }
+  .retention-chart svg{ width:100%; height:auto; display:block; }
+  .retention-chart-labels{ display:flex; justify-content:space-between; margin-top:6px; font-size:11px; font-weight:700; color:var(--ink-soft); }
+  .retention-chart-labels span:last-child{ color:var(--accent); }
+
   /* ---------- audit overlay: hero stat ---------- */
   .audit-hero-stat{ text-align:center; margin:4px 0 36px; }
   .audit-hero-num{ font-size:clamp(40px,7vw,60px); font-weight:800; color:var(--accent-light); letter-spacing:-1px; line-height:1; }
@@ -766,6 +772,21 @@
             <div class="funnel-expand-icon">⤢</div>
           </div>
           <p>Провожу exit- и стей-интервью, нахожу системную причину ухода — не всегда дело в деньгах. Строю процесс адаптации и обратной связи, который останавливает отток, а не просто фиксирует его в отчёте.</p>
+          <div class="retention-chart">
+            <svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="retentionFade" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2F5FE0" stop-opacity="0.18"/>
+                  <stop offset="100%" stop-color="#2F5FE0" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M10,22 C55,20 85,42 125,54 C160,64 188,70 210,74 L210,86 L10,86 Z" fill="url(#retentionFade)"/>
+              <path d="M10,22 C55,20 85,42 125,54 C160,64 188,70 210,74" fill="none" stroke="#2F5FE0" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="10" cy="22" r="4.5" fill="#9a9a9d"/>
+              <circle cx="210" cy="74" r="4.5" fill="#2F5FE0"/>
+            </svg>
+            <div class="retention-chart-labels"><span>Было</span><span>Стало</span></div>
+          </div>
         </div>
 
         <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS -->
