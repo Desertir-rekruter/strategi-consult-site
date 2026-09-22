@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<title>Игнатий Филатов — системы и процессы для бизнеса</title>
+<meta name="description" content="Выстраиваю системы которые останавливают потери. Найм, онбординг, адаптация, внутренние коммуникации, CRM под ключ. Бесплатный аудит за 30 минут.">
+<meta name="author" content="Игнатий Филатов">
+<meta name="yandex-verification" content="b1efe23b301d7008" />
+<meta property="og:title" content="Игнатий Филатов — системы и процессы для бизнеса">
+<meta property="og:description" content="Нахожу где бизнес теряет деньги без процессов — и выстраиваю системы которые это останавливают.">
+<meta property="og:url" content="https://strategi-consult.com">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://strategi-consult.com/assets/og-image.jpeg">
+<link rel="canonical" href="https://strategi-consult.com/">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Игнатий Филатов — системы и процессы для бизнеса">
+<meta name="twitter:image" content="https://strategi-consult.com/assets/og-image.jpeg">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Игнатий Филатов","jobTitle":"Консультант по системам и процессам","url":"https://strategi-consult.com","sameAs":["https://t.me/HR_Ignatiy"]}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ─── RESET ─── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+/* ─── DESIGN TOKENS ─── */
+:root{
+  --accent:      #C8922A;
+  --accent-glow: rgba(200,146,42,.4);
+  --accent-dim:  rgba(200,146,42,.20);
+
+  /* LIQUID glass — nearly zero fill, effect comes from border + caustic highlight */
+  --glass:        rgba(255,255,255,.04);
+  --glass-mid:    rgba(255,255,255,.06);
+  --glass-strong: rgba(255,255,255,.09);
+
+  /* Liquid glass box-shadow: outer lens halo + inner bevel + deep lift */
+  --glass-shadow:
+    0 0 0 1px rgba(255,255,255,.55),
+    0 0 0 3px rgba(255,255,255,.08),
+    inset 0 1.5px 0 rgba(255,255,255,.98),
+    inset 1.5px 0 0 rgba(255,255,255,.45),
+    inset 0 -1px 0 rgba(0,0,0,.30),
+    inset 0 -12px 28px rgba(0,10,60,.20),
+    0 24px 70px rgba(0,15,70,.65),
+    0 0 50px rgba(100,140,255,.12);
+
+  /* Liquid glass: blur + brightness is the KEY — glass brightens what's behind it like a lens */
+  --glass-blur:        blur(4px) brightness(1.45) saturate(220%);
+  --glass-blur-heavy:  blur(8px) brightness(1.55) saturate(250%);
+
+  /* Text on dark vivid background */
+  --on-bg:     #ffffff;
+  --on-bg-60:  rgba(255,255,255,.72);
+  --on-bg-35:  rgba(255,255,255,.42);
+
+  /* Text inside glass — white because background shows through dark */
+  --on-glass:     rgba(255,255,255,.96);
+  --on-glass-60:  rgba(255,255,255,.68);
+  --on-glass-35:  rgba(255,255,255,.42);
+
+  /* Rainbow iridescent border — prismatic light refraction through glass edge */
+  --iridescent:
+    linear-gradient(
+      135deg,
+      rgba(255,100,100,.90) 0%,
+      rgba(255,185,60,.85) 10%,
+      rgba(255,240,90,.80) 18%,
+      rgba(255,255,255,1) 24%,
+      rgba(130,235,175,.85) 32%,
+      rgba(75,205,245,.95) 42%,
+      rgba(255,255,255,1) 51%,
+      rgba(155,100,255,.90) 61%,
+      rgba(225,75,185,.85) 71%,
+      rgba(255,255,255,1) 80%,
+      rgba(255,115,100,.85) 90%,
+      rgba(255,255,255,.95) 100%
+    );
+
+  /* Layout */
+  --radius:    28px;
+  --radius-sm: 18px;
+  --nav-h:     58px;
+}
+
+/* ─── BACKGROUND ─── */
+body{
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,'Barlow','Segoe UI',system-ui,sans-serif;
+  font-weight:400;
+  color:var(--on-bg);
+  /* Base — macOS Tahoe deep blue */
+  background: #050d2e;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Fluid wallpaper — macOS Tahoe deep vivid blue */
+.bg-orbs{
+  position:fixed;inset:0;
+  pointer-events:none;z-index:0;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 70% 55% at 75% 10%, rgba(40,100,255,.90) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 20% 25%, rgba(60,80,240,.85) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 65% at 55% 65%, rgba(20,60,200,.80) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 75% at 50% 50%, rgba(10,30,140,.70) 0%, transparent 70%),
+    linear-gradient(160deg, #0a1a5c 0%, #081448 40%, #060e38 70%, #050d2e 100%);
+}
+.orb{
+  position:absolute;border-radius:50%;
+  filter:blur(32px);
+  will-change:transform;
+  mix-blend-mode:screen;
+}
+.orb-1{
+  width:55vmax;height:50vmax;
+  background:radial-gradient(ellipse,rgba(60,100,255,.90) 0%,rgba(40,60,220,.50) 45%,transparent 70%);
+  top:-5%;left:-8%;
+  animation:drift1 26s ease-in-out infinite;
+}
+.orb-2{
+  width:48vmax;height:52vmax;
+  background:radial-gradient(ellipse,rgba(100,50,255,.85) 0%,rgba(70,30,200,.45) 45%,transparent 70%);
+  bottom:-8%;right:-6%;
+  animation:drift2 32s ease-in-out infinite;
+}
+.orb-3{
+  width:42vmax;height:38vmax;
+  background:radial-gradient(ellipse,rgba(20,140,255,.80) 0%,rgba(10,80,220,.40) 45%,transparent 68%);
+  top:28%;left:58%;
+  animation:drift3 20s ease-in-out infinite;
+}
+.orb-4{
+  width:36vmax;height:40vmax;
+  background:radial-gradient(ellipse,rgba(120,60,255,.78) 0%,rgba(80,30,200,.40) 45%,transparent 68%);
+  top:52%;left:12%;
+  animation:drift4 28s ease-in-out infinite;
+}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(4vw,3vh) scale(1.04)}70%{transform:translate(-2vw,6vh) scale(.97)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}35%{transform:translate(-3vw,-4vh) scale(1.05)}65%{transform:translate(2vw,-2vh) scale(.98)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5vw,-3vh) scale(1.06)}}
+@keyframes drift4{0%,100%{transform:translate(0,0) scale(1)}45%{transform:translate(-4vw,4vh) scale(.96)}}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 48px);max-width:1200px;
+  height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;
+  background:
+    rgba(255,255,255,.05) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border-radius:100px;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.90),
+    0 8px 36px rgba(0,40,160,.22),
+    0 2px 8px rgba(0,0,0,.10);
+  z-index:200;
+}
+.nav-logo{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--on-bg);text-decoration:none;
+  opacity:.9;
+}
+.nav-logo:hover{opacity:1}
+.nav-contact{
+  font-size:13px;font-weight:500;
+  letter-spacing:.05em;
+  color:var(--on-bg);text-decoration:none;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(16px);
+  border-radius:100px;
+  padding:8px 20px;
+  transition:background .25s, box-shadow .25s, transform .2s;
+  box-shadow:0 0 0 1px rgba(255,255,255,.45), inset 0 1.5px 0 rgba(255,255,255,.95), 0 4px 16px rgba(0,40,140,.18);
+}
+.nav-contact:hover{
+  background:rgba(255,255,255,.13);
+  box-shadow:0 0 0 1px rgba(255,255,255,.60), inset 0 1.5px 0 rgba(255,255,255,.98), 0 6px 22px rgba(0,40,160,.26);
+  transform:translateY(-1px);
+}
+.nav-contact:active{transform:scale(.95)}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  padding:calc(var(--nav-h) + 48px) 6vw 80px;
+  gap:48px;
+}
+.hero-content{
+  min-width:0;
+}
+.hero-eyebrow{
+  font-size:11px;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--on-bg-60);
+  margin-bottom:32px;
+}
+.hero-headline{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(52px,7.5vw,108px);
+  font-weight:900;
+  line-height:.96;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  color:var(--on-bg);
+  margin-bottom:48px;
+}
+.hero-headline span{display:block}
+.hero-headline .indent{padding-left:.28em}
+
+.hero-glass{
+  background:
+    rgba(255,255,255,.05) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border-radius:var(--radius);
+  padding:32px 36px;
+  box-shadow:var(--glass-shadow);
+  position:relative;overflow:hidden;
+}
+.hero-glass::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:55%;
+  background:
+    radial-gradient(ellipse 88% 26% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.20) 50%, transparent 72%),
+    linear-gradient(180deg,rgba(255,255,255,.12) 0%,transparent 100%);
+  border-radius:var(--radius) var(--radius) 0 0;
+  pointer-events:none;
+}
+.hero-glass::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.028;mix-blend-mode:overlay;pointer-events:none;
+}
+.hero-sub{
+  font-size:16px;font-weight:400;
+  line-height:1.65;
+  color:var(--on-glass-60);
+  margin-bottom:28px;
+}
+.hero-cta-row{
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.hero-hint{
+  font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--on-glass-35);
+}
+
+/* ─── AMBER BUTTON ─── */
+.btn-amber{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(200,146,42,.85);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(200,146,42,.5);
+  border-radius:100px;
+  padding:14px 28px;
+  color:#fff;
+  font-size:13px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 4px 24px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,.28);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s ease;
+}
+.btn-amber:hover{
+  transform:scale(1.05);
+  box-shadow:0 8px 36px rgba(200,146,42,.55), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.btn-amber svg{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.btn-amber:hover svg{transform:translateX(4px)}
+
+/* ─── HERO PHOTO ─── */
+.hero-photo-wrap{
+  flex:0 0 auto;
+  position:relative;
+}
+.hero-photo{
+  width:clamp(200px,22vw,320px);
+  height:auto;
+  border-radius:var(--radius);
+  display:block;
+  filter:grayscale(.1);
+  box-shadow:0 20px 60px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.3);
+}
+.hero-photo-glow{
+  position:absolute;
+  inset:-20px;
+  background:radial-gradient(ellipse at 50% 60%, rgba(200,146,42,.15) 0%, transparent 65%);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+/* ─── SECTION COMMON ─── */
+.section{
+  position:relative;z-index:1;
+  padding:100px 5vw;
+}
+.section-eyebrow{
+  font-size:11px;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--on-bg-60);
+  margin-bottom:16px;
+}
+.section-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(36px,5vw,56px);
+  font-weight:900;text-transform:uppercase;
+  letter-spacing:-.01em;
+  color:var(--on-bg);
+  margin-bottom:60px;
+}
+
+/* ─── SERVICES GRID ─── */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;
+}
+
+/* ─── SERVICE CARD ─── */
+.service-card{
+  /* LIQUID glass — nearly zero fill, effect is the border + caustic, not the fill */
+  background:
+    rgba(255,255,255,.04) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border-radius:var(--radius);
+  padding:32px;
+  cursor:pointer;
+  position:relative;overflow:hidden;
+  box-shadow:var(--glass-shadow);
+  transition:transform .45s cubic-bezier(.34,1.2,.64,1), box-shadow .35s, filter .25s;
+  /* reveal animation */
+  opacity:0;transform:translateY(30px) scale(.98);
+}
+.service-card.revealed{
+  opacity:1;transform:translateY(0) scale(1);
+  transition:opacity .55s ease, transform .55s cubic-bezier(.23,1,.32,1), box-shadow .35s, filter .25s;
+}
+.service-card:hover{
+  transform:translateY(-5px) scale(1.018) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.98),
+    inset 1.5px 0 0 rgba(255,255,255,.90),
+    inset 0 -1.5px 0 rgba(0,0,80,.08),
+    0 16px 56px rgba(0,20,100,.18),
+    0 4px 14px rgba(0,0,0,.10),
+    0 0 0 0.5px rgba(0,0,80,.08);
+  filter:brightness(1.02);
+}
+.service-card:active{
+  transform:scale(0.97) !important;
+  filter:brightness(.98);
+  transition:transform .1s ease, filter .1s ease !important;
+}
+/* Caustic top highlight — bright band at top edge */
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:55%;
+  background:
+    radial-gradient(ellipse 88% 26% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.22) 50%, transparent 72%),
+    linear-gradient(180deg,rgba(255,255,255,.14) 0%,transparent 100%);
+  border-radius:var(--radius) var(--radius) 0 0;
+  pointer-events:none;
+}
+/* Grain/noise texture — makes glass feel physical, not flat */
+.service-card::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.030;mix-blend-mode:overlay;pointer-events:none;
+}
+
+.card-num{
+  font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);
+  display:block;margin-bottom:20px;
+}
+.card-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:32px;font-weight:900;
+  text-transform:uppercase;letter-spacing:-.01em;
+  color:var(--on-glass);
+  margin-bottom:8px;
+}
+.card-sub{
+  font-size:11px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--on-glass-60);
+  margin-bottom:20px;
+}
+.card-lead{
+  font-size:14px;font-weight:400;
+  line-height:1.6;color:var(--on-glass-60);
+  margin-bottom:28px;
+  display:-webkit-box;-webkit-line-clamp:3;
+  -webkit-box-orient:vertical;overflow:hidden;
+}
+.card-arrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--on-glass-35);
+  transition:color .2s, gap .25s;
+}
+.service-card:hover .card-arrow{color:var(--accent);gap:14px}
+
+/* ─── PANEL BACKDROP ─── */
+#panel-backdrop{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(6,5,26,.55);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  opacity:0;pointer-events:none;
+  transition:opacity .4s ease;
+}
+#panel-backdrop.visible{opacity:1;pointer-events:all}
+
+/* ─── SERVICE PANEL ─── */
+#service-panel{
+  position:fixed;top:0;right:0;bottom:0;
+  width:min(700px,94vw);
+  background:
+    rgba(255,255,255,.06) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  backdrop-filter:var(--glass-blur-heavy);
+  -webkit-backdrop-filter:var(--glass-blur-heavy);
+  box-shadow:
+    -12px 0 80px rgba(0,20,100,.45),
+    -4px 0 20px rgba(0,0,0,.20);
+  z-index:400;
+  transform:translateX(102%);
+  transition:transform .55s cubic-bezier(.23,1,.32,1);
+  overflow-y:auto;
+}
+#service-panel.open{transform:translateX(0)}
+#service-panel::before{
+  content:'';position:sticky;top:0;left:0;right:0;height:1px;
+  display:block;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+}
+
+.panel-inner{padding:56px 48px 80px}
+
+.panel-close{
+  position:sticky;top:24px;
+  float:right;
+  width:36px;height:36px;
+  border-radius:50%;
+  background:
+    rgba(255,255,255,.07) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  backdrop-filter:blur(16px);
+  color:var(--on-glass);
+  font-size:18px;line-height:1;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:box-shadow .2s,transform .2s;
+  box-shadow:var(--glass-shadow);
+  margin-bottom:32px;
+}
+.panel-close:hover{box-shadow:inset 0 1.5px 0 rgba(255,255,255,.95),0 6px 20px rgba(0,40,160,.30);transform:scale(1.08)}
+.panel-close:active{transform:scale(.93)}
+
+.panel-eyebrow{
+  font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+}
+.panel-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(48px,7vw,72px);
+  font-weight:900;text-transform:uppercase;
+  letter-spacing:-.02em;line-height:.93;
+  color:var(--on-glass);margin-bottom:28px;
+}
+.panel-lead{
+  font-size:16px;font-weight:400;line-height:1.7;
+  color:var(--on-glass-60);margin-bottom:48px;
+  border-left:2px solid var(--accent-dim);
+  padding-left:20px;
+}
+
+.panel-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-bottom:48px;
+}
+.panel-item{
+  background:
+    rgba(255,255,255,.07) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  border-radius:var(--radius-sm);
+  padding:22px;
+  box-shadow:var(--glass-shadow);
+}
+.panel-item::before{
+  content:'';display:block;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
+  margin-bottom:16px;
+}
+.panel-item-num{
+  font-size:10px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+.panel-item-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:18px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.02em;
+  color:var(--on-glass);margin-bottom:8px;
+}
+.panel-item-text{
+  font-size:13px;font-weight:400;line-height:1.6;
+  color:var(--on-glass-60);
+}
+
+.panel-related{margin-bottom:40px}
+.panel-related-label{
+  font-size:10px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--on-glass-35);
+  margin-bottom:14px;
+}
+.panel-related-nodes{display:flex;flex-wrap:wrap;gap:8px}
+.panel-related-node{
+  background:
+    rgba(255,255,255,.06) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  border-radius:100px;
+  padding:8px 18px;
+  font-size:12px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--on-glass-60);
+  cursor:pointer;
+  transition:box-shadow .2s, color .2s, transform .15s;
+  box-shadow:var(--glass-shadow);
+}
+.panel-related-node:hover{
+  color:var(--on-glass);
+  transform:translateY(-1px);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.98),
+    inset 1.5px 0 0 rgba(255,255,255,.85),
+    0 6px 20px rgba(0,20,80,.14);
+}
+.panel-related-node:active{transform:scale(.95)}
+
+.panel-cta{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;padding:18px;
+  background:rgba(200,146,42,.82);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(200,146,42,.45);
+  border-radius:var(--radius-sm);
+  color:#fff;font-size:13px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;
+  box-shadow:0 4px 28px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .3s;
+}
+.panel-cta:hover{
+  transform:scale(1.02);
+  box-shadow:0 8px 40px rgba(200,146,42,.5), inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+/* stagger reveal */
+.stagger-item{opacity:0;transform:translateY(18px);transition:opacity .4s ease, transform .4s cubic-bezier(.23,1,.32,1)}
+.stagger-item.in{opacity:1;transform:translateY(0)}
+
+/* ─── CONTACT FLOAT ─── */
+.contact-section{
+  position:relative;z-index:1;
+  padding:0 5vw 100px;
+}
+.contact-glass{
+  background:
+    rgba(255,255,255,.05) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border-radius:var(--radius);
+  padding:60px;
+  box-shadow:var(--glass-shadow);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:48px;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.contact-glass::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:55%;
+  background:
+    radial-gradient(ellipse 88% 26% at 50% 0%, rgba(255,255,255,.88) 0%, rgba(255,255,255,.20) 50%, transparent 72%),
+    linear-gradient(180deg,rgba(255,255,255,.12) 0%,transparent 100%);
+  border-radius:var(--radius) var(--radius) 0 0;
+  pointer-events:none;
+}
+.contact-glass::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.025;mix-blend-mode:overlay;pointer-events:none;
+}
+.contact-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;
+}
+.contact-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(28px,4vw,42px);font-weight:900;
+  text-transform:uppercase;letter-spacing:-.01em;
+  color:var(--on-glass);margin-bottom:8px;
+}
+.contact-sub{
+  font-size:14px;font-weight:400;color:var(--on-glass-60);
+}
+.contact-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-glass{
+  display:inline-flex;align-items:center;gap:8px;
+  background:
+    rgba(255,255,255,.06) padding-box,
+    var(--iridescent) border-box;
+  border:1.5px solid transparent;
+  backdrop-filter:blur(20px);
+  border-radius:100px;
+  padding:14px 28px;
+  color:var(--on-glass);
+  font-size:13px;font-weight:500;
+  letter-spacing:.06em;
+  text-decoration:none;
+  box-shadow:var(--glass-shadow);
+  transition:transform .25s, box-shadow .25s;
+}
+.btn-glass:hover{
+  transform:scale(1.03);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.98),
+    inset 1.5px 0 0 rgba(255,255,255,.88),
+    0 8px 28px rgba(0,20,80,.14);
+}
+.btn-glass:active{transform:scale(.96)}
+
+/* ─── NAV SERVICE TABS ─── */
+.nav-services{
+  display:flex;align-items:center;gap:2px;
+  flex:1;justify-content:center;
+  overflow-x:auto;scrollbar-width:none;
+  padding:0 8px;
+}
+.nav-services::-webkit-scrollbar{display:none}
+.nav-svc{
+  padding:7px 11px;
+  font-size:11px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;
+  color:rgba(255,255,255,.82);
+  background:none;border:none;
+  border-radius:100px;
+  cursor:pointer;white-space:nowrap;
+  transition:color .2s, background .2s, box-shadow .2s;
+  font-family:inherit;
+}
+.nav-svc:hover{
+  color:rgba(255,255,255,.85);
+  background:rgba(255,255,255,.07);
+}
+.nav-svc.active{
+  color:#fff;
+  background:rgba(255,255,255,.13);
+  box-shadow:0 0 0 1px rgba(255,255,255,.32), inset 0 1px 0 rgba(255,255,255,.50);
+}
+
+/* ─── SCROLL DOWN HINT ─── */
+.scroll-hint{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--on-bg-35);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  animation:bounceDown 2.2s ease-in-out infinite;
+  cursor:pointer;
+}
+.scroll-hint svg{opacity:.5}
+@keyframes bounceDown{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(8px)}
+}
+
+/* ─── MOBILE ─── */
+@media(max-width:768px){
+  nav{width:calc(100% - 24px);top:10px;padding:0 12px}
+  .nav-services{gap:1px}
+  .nav-svc{padding:6px 8px;font-size:9px;letter-spacing:.07em}
+  .hero{grid-template-columns:1fr;padding-top:calc(var(--nav-h) + 80px);gap:28px}
+  .hero-photo-wrap{order:-1;align-self:flex-start}
+  .hero-photo{width:clamp(140px,42vw,200px);border-radius:var(--radius-sm)}
+  .hero-glass{padding:24px}
+  .panel-inner{padding:40px 24px 60px}
+  .panel-grid{grid-template-columns:1fr}
+  .contact-glass{padding:36px 24px;flex-direction:column;gap:28px}
+  .services-grid{grid-template-columns:1fr}
+  .section{padding:60px 5vw}
+}
+
+/* ─── REDUCED MOTION ─── */
+@media(prefers-reduced-motion:reduce){
+  .orb{animation:none}
+  .service-card,.btn-amber,.btn-glass,.panel-cta{transition:none}
+  .scroll-hint{animation:none}
+}
+
+/* ─── THREE.JS ACTIVE — hide DOM elements replaced by WebGL ─── */
+.gl-active .hero-photo,
+.gl-active .hero-headline{
+  visibility:hidden; /* keeps layout, WebGL renders them in bgRT */
+}
+
+/* ─── THREE.JS ACTIVE — remove CSS backdrop-filter, WebGL handles refraction ─── */
+.gl-active .service-card,
+.gl-active .hero-glass,
+.gl-active nav,
+.gl-active .contact-glass,
+.gl-active #service-panel,
+.gl-active .panel-item,
+.gl-active .panel-related-node,
+.gl-active .btn-glass,
+.gl-active .nav-contact,
+.gl-active .panel-close{
+  /* SVG feDisplacementMap distorts ALL composited content: text, photos, waves */
+  backdrop-filter:url('#glass-lens') saturate(1.6)!important;
+  -webkit-backdrop-filter:url('#glass-lens') saturate(1.6)!important;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+</div>
+
+<nav>
+  <a href="/" class="nav-logo">Игнатий Филатов</a>
+  <div class="nav-services" role="tablist">
+    <button class="nav-svc" data-id="audit">Аудит</button>
+    <button class="nav-svc" data-id="naim">Найм</button>
+    <button class="nav-svc" data-id="onboarding">Онбординг</button>
+    <button class="nav-svc" data-id="adaptation">Адаптация</button>
+    <button class="nav-svc" data-id="communications">Комм.</button>
+    <button class="nav-svc" data-id="kpi">KPI/OKR</button>
+    <button class="nav-svc" data-id="crm">CRM</button>
+    <button class="nav-svc" data-id="consult">Разбор</button>
+  </div>
+  <a href="https://t.me/HR_Ignatiy" class="nav-contact" target="_blank" rel="noopener">Связаться →</a>
+</nav>
+
+<main id="main-content">
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Системы и процессы · Батуми, Грузия</p>
+    <h1 class="hero-headline">
+      <span>Ваш бизнес</span>
+      <span class="indent">теряет деньги</span>
+      <span>без</span>
+      <span class="indent">процессов.</span>
+    </h1>
+    <div class="hero-glass">
+      <p class="hero-sub">Нахожу где система ломается — и выстраиваю процессы которые это останавливают. Клиенты видят результат уже на первом этапе.</p>
+      <div class="hero-cta-row">
+        <button class="btn-amber" id="enter-btn" aria-label="Перейти к услугам">
+          Войти в систему
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span class="hero-hint">8 систем</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-glow"></div>
+    <img class="hero-photo" src="/assets/hero.jpeg" alt="Игнатий Филатов" width="933" height="1400" fetchpriority="high">
+  </div>
+
+  <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
+    <span>прокрутить</span>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 4v12M5 11l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section class="section" id="services">
+  <p class="section-eyebrow">Выберите вашу точку входа</p>
+  <p class="section-title">8 систем</p>
+  <div class="services-grid" id="services-grid"></div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact-section" id="contact">
+  <div class="contact-glass">
+    <div>
+      <p class="contact-eyebrow">Бесплатный аудит · 30 минут</p>
+      <p class="contact-title">Найдём где утекают деньги</p>
+      <p class="contact-sub">Никаких обязательств — только конкретный разбор</p>
+    </div>
+    <div class="contact-btns">
+      <a href="https://t.me/HR_Ignatiy" class="btn-amber" target="_blank" rel="noopener">
+        Telegram
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="https://wa.me/995557602599" class="btn-glass" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── PANEL BACKDROP ─── -->
+<div id="panel-backdrop" aria-hidden="true"></div>
+
+<!-- ─── SERVICE PANEL ─── -->
+<div id="service-panel" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="panel-inner" id="panel-content"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+// ─── SERVICE DATA ────────────────────────────────────────
+const SERVICES = [
+  {
+    id:'audit', label:'АУДИТ', sub:'точка входа',
+    eyebrow:'01 · Аудит процессов',
+    title:'АУДИТ',
+    lead:'Нахожу где бизнес теряет деньги. Анализирую все точки — найм, адаптация, коммуникации, данные. Строю карту потерь с цифрами.',
+    items:[
+      {num:'01',title:'Карта процессов',text:'Полная схема того как устроены процессы сейчас — от найма до увольнения.'},
+      {num:'02',title:'Точки потерь',text:'Конкретные места где бизнес тратит деньги впустую или не зарабатывает.'},
+      {num:'03',title:'Приоритеты',text:'Что исправить в первую очередь чтобы получить результат быстро.'},
+      {num:'04',title:'Дорожная карта',text:'Конкретный план действий с цифрами, сроками и ожидаемым эффектом.'},
+    ],
+    related:['naim','onboarding','crm']
+  },
+  {
+    id:'naim', label:'НАЙМ', sub:'поток кандидатов',
+    eyebrow:'02 · Система найма',
+    title:'НАЙМ',
+    lead:'Выстраиваю воронку найма которая приносит нужных людей без ручного сорсинга. Закрытие вакансий быстрее на 40%.',
+    items:[
+      {num:'01',title:'Воронка найма',text:'Настраиваю входящий поток, отбор и оценку кандидатов по прозрачным критериям.'},
+      {num:'02',title:'Описание вакансий',text:'Создаю тексты которые привлекают нужных и отсекают лишних ещё до отклика.'},
+      {num:'03',title:'Процесс оценки',text:'Структурированные интервью и тестовые задания вместо интуиции.'},
+      {num:'04',title:'Автоматизация',text:'Первичный скрининг и коммуникация с кандидатами — без ручной работы.'},
+    ],
+    related:['audit','onboarding','crm']
+  },
+  {
+    id:'onboarding', label:'ОНБОРДИНГ', sub:'первые 30 дней',
+    eyebrow:'03 · Онбординг',
+    title:'ОНБОРДИНГ',
+    lead:'Первые 30 дней определяют останется ли человек. Выстраиваю систему которая снижает отток в первые 90 дней на 60%.',
+    items:[
+      {num:'01',title:'Welcome-процесс',text:'Первый день без хаоса. Человек знает что делать, кому звонить, где что лежит.'},
+      {num:'02',title:'База знаний',text:'Структурированная документация вместо "спроси у Маши".'},
+      {num:'03',title:'Чек-листы',text:'Понедельные задачи для нового сотрудника и его руководителя.'},
+      {num:'04',title:'Контроль прохождения',text:'Автоматические напоминания и точки обратной связи в 7, 30, 90 дней.'},
+    ],
+    related:['naim','adaptation','communications']
+  },
+  {
+    id:'adaptation', label:'АДАПТАЦИЯ', sub:'испытательный срок',
+    eyebrow:'04 · Адаптация',
+    title:'АДАПТАЦИЯ',
+    lead:'Испытательный срок — это не просто "он нам подходит?" но и "мы ему подходим?". Выстраиваю процесс где оба ответа появляются вовремя.',
+    items:[
+      {num:'01',title:'Цели на испытательный',text:'Измеримые результаты на 30/60/90 дней вместо расплывчатых ожиданий.'},
+      {num:'02',title:'Наставничество',text:'Система менторинга которая не превращается в "поговори с кем-нибудь".'},
+      {num:'03',title:'1-on-1',text:'Структурированные встречи руководителя с новым сотрудником.'},
+      {num:'04',title:'Обратная связь',text:'Двусторонняя оценка в конце испытательного срока с конкретными выводами.'},
+    ],
+    related:['onboarding','communications','kpi']
+  },
+  {
+    id:'communications', label:'КОММУНИКАЦИИ', sub:'внутри компании',
+    eyebrow:'05 · Внутренние коммуникации',
+    title:'КОММ-УНИКАЦИИ',
+    lead:'Когда информация не доходит — люди работают вслепую. Строю систему коммуникаций которая работает без постоянного ручного контроля.',
+    items:[
+      {num:'01',title:'Каналы коммуникаций',text:'Чёткая структура: что где обсуждается, кто кому пишет, какие форматы встреч.'},
+      {num:'02',title:'Ритм команды',text:'Еженедельные ритуалы которые держат команду в синхроне без лишних совещаний.'},
+      {num:'03',title:'Обмен знаниями',text:'Как важная информация передаётся внутри и не уходит вместе с людьми.'},
+      {num:'04',title:'Фидбэк-культура',text:'Процессы обратной связи которые люди реально используют.'},
+    ],
+    related:['adaptation','kpi','audit']
+  },
+  {
+    id:'kpi', label:'KPI / OKR', sub:'измеримость',
+    eyebrow:'06 · Система KPI',
+    title:'KPI',
+    lead:'Метрики которые люди понимают и на которые реально влияют. Не цифры ради цифр — а система которая связывает действия с результатом.',
+    items:[
+      {num:'01',title:'Выбор метрик',text:'Только те показатели которые реально отражают результат и на которые можно влиять.'},
+      {num:'02',title:'Декомпозиция',text:'От цели компании до конкретных действий каждого сотрудника.'},
+      {num:'03',title:'Дашборды',text:'Визуализация которую команда видит и понимает без экспертизы в аналитике.'},
+      {num:'04',title:'Ревью-процесс',text:'Регулярные встречи по результатам которые мотивируют а не пугают.'},
+    ],
+    related:['communications','crm','audit']
+  },
+  {
+    id:'crm', label:'CRM', sub:'система под ключ',
+    eyebrow:'07 · CRM под ключ',
+    title:'CRM',
+    lead:'Строю CRM-систему под процессы компании — не подстраиваю процессы под шаблон. От выбора инструмента до обучения команды.',
+    items:[
+      {num:'01',title:'Анализ и выбор',text:'Подбираю инструмент под задачи компании: Notion, Bitrix, AmoCRM, Airtable или custom.'},
+      {num:'02',title:'Настройка',text:'Воронки, автоматизации, интеграции — всё под ваши процессы а не под шаблон.'},
+      {num:'03',title:'Миграция данных',text:'Переносим всё что есть без потери истории.'},
+      {num:'04',title:'Обучение команды',text:'Инструкции и сессии обучения чтобы система реально использовалась.'},
+    ],
+    related:['naim','kpi','audit']
+  },
+  {
+    id:'consult', label:'КОНСУЛЬТАЦИЯ', sub:'разовый разбор',
+    eyebrow:'08 · HR-консультация',
+    title:'КОНСУЛЬТАЦИЯ',
+    lead:'Разовая стратегическая сессия — когда нужен взгляд снаружи на конкретную проблему. Без долгосрочных обязательств.',
+    items:[
+      {num:'01',title:'Разбор ситуации',text:'60-90 минут на детальный анализ вашей конкретной проблемы.'},
+      {num:'02',title:'Практические решения',text:'Не теория — конкретные шаги которые можно начать делать сразу.'},
+      {num:'03',title:'Приоритизация',text:'Что делать в первую очередь чтобы получить результат быстро.'},
+      {num:'04',title:'Документация',text:'Итоги встречи и план действий в письменном виде.'},
+    ],
+    related:['audit','naim','kpi']
+  }
+];
+
+// ─── STATE ──────────────────────────────────────────────
+let panelOpen = false;
+const grid     = document.getElementById('services-grid');
+const panel    = document.getElementById('service-panel');
+const backdrop = document.getElementById('panel-backdrop');
+const content  = document.getElementById('panel-content');
+
+// ─── BUILD SERVICE GRID ──────────────────────────────────
+SERVICES.forEach((s, i) => {
+  const card = document.createElement('div');
+  card.className = 'service-card';
+  card.setAttribute('role','button');
+  card.setAttribute('tabindex','0');
+  card.setAttribute('aria-label', s.label);
+  card.innerHTML = `
+    <span class="card-num">0${i+1}</span>
+    <h2 class="card-title">${s.label}</h2>
+    <p class="card-sub">${s.sub}</p>
+    <p class="card-lead">${s.lead}</p>
+    <span class="card-arrow">Подробнее →</span>
+  `;
+  card.addEventListener('click', () => openPanel(s));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') openPanel(s);
+  });
+  grid.appendChild(card);
+});
+
+// ─── SCROLL REVEAL ───────────────────────────────────────
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (!e.isIntersecting) return;
+    const delay = Array.from(grid.children).indexOf(e.target) * 60;
+    setTimeout(() => e.target.classList.add('revealed'), delay);
+    revealObs.unobserve(e.target);
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.service-card').forEach(c => revealObs.observe(c));
+
+// ─── OPEN PANEL ─────────────────────────────────────────
+function openPanel(service) {
+  panelOpen = true;
+  panel.setAttribute('aria-hidden','false');
+  backdrop.classList.add('visible');
+
+  content.innerHTML = `
+    <button class="panel-close" id="panel-close" aria-label="Закрыть">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="panel-eyebrow stagger-item">${service.eyebrow}</p>
+    <h2 class="panel-title stagger-item">${service.title}</h2>
+    <p class="panel-lead stagger-item">${service.lead}</p>
+    <div class="panel-grid stagger-item">
+      ${service.items.map(item => `
+        <div class="panel-item">
+          <p class="panel-item-num">${item.num}</p>
+          <h3 class="panel-item-title">${item.title}</h3>
+          <p class="panel-item-text">${item.text}</p>
+        </div>`).join('')}
+    </div>
+    <div class="panel-related stagger-item">
+      <p class="panel-related-label">Связанные системы</p>
+      <div class="panel-related-nodes">
+        ${service.related.map(rid => {
+          const rel = SERVICES.find(sv => sv.id === rid);
+          return rel ? `<button class="panel-related-node" data-id="${rid}">${rel.label}</button>` : '';
+        }).join('')}
+      </div>
+    </div>
+    <a href="https://t.me/HR_Ignatiy" class="panel-cta stagger-item" target="_blank" rel="noopener">
+      Обсудить этот процесс →
+    </a>
+  `;
+
+  document.getElementById('panel-close').addEventListener('click', closePanel);
+
+  content.querySelectorAll('.panel-related-node').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const rel = SERVICES.find(sv => sv.id === btn.dataset.id);
+      if (rel) { closePanel(); setTimeout(() => openPanel(rel), 320); }
+    });
+  });
+
+  // Open panel then stagger content
+  requestAnimationFrame(() => {
+    panel.classList.add('open');
+    setTimeout(() => {
+      content.querySelectorAll('.stagger-item').forEach((el, i) => {
+        setTimeout(() => el.classList.add('in'), 160 + i * 80);
+      });
+    }, 80);
+  });
+}
+
+// ─── CLOSE PANEL ────────────────────────────────────────
+function closePanel() {
+  panelOpen = false;
+  panel.classList.remove('open');
+  panel.setAttribute('aria-hidden','true');
+  backdrop.classList.remove('visible');
+  document.querySelectorAll('.nav-svc').forEach(b => b.classList.remove('active'));
+}
+
+backdrop.addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && panelOpen) closePanel(); });
+
+// ─── NAV SERVICE TABS ────────────────────────────────────
+document.querySelectorAll('.nav-svc').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const svc = SERVICES.find(s => s.id === btn.dataset.id);
+    if (!svc) return;
+    document.querySelectorAll('.nav-svc').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    openPanel(svc);
+  });
+});
+
+// ─── SCROLL / CTA ────────────────────────────────────────
+document.getElementById('enter-btn').addEventListener('click', () => {
+  document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+});
+document.getElementById('scroll-hint')?.addEventListener('click', () => {
+  document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+});
+
+// ─── HERO ENTRANCE ───────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const els = document.querySelectorAll('.hero-eyebrow,.hero-headline span,.hero-glass,.hero-photo-wrap');
+  els.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = `opacity .65s ease ${i * 80 + 100}ms, transform .65s cubic-bezier(.23,1,.32,1) ${i * 80 + 100}ms`;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    });
+  });
+});
+
+// ─── THREE.JS LIQUID GLASS ENGINE ────────────────────────────────────────────
+;(function(){
+  if(typeof THREE==='undefined') return;
+  const W=()=>window.innerWidth, H=()=>window.innerHeight;
+
+  // Create WebGL canvas — sits behind all HTML content
+  const glc=document.createElement('canvas');
+  glc.style.cssText='position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;';
+  document.body.insertBefore(glc, document.body.firstChild);
+
+  const rnd=new THREE.WebGLRenderer({canvas:glc,alpha:false,antialias:false,powerPreference:'high-performance'});
+  rnd.setPixelRatio(1); // CSS pixels — matches getBoundingClientRect()
+  rnd.setSize(W(),H());
+  const cam=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+  const quad=new THREE.PlaneGeometry(2,2);
+
+  // Shared vertex shader — fullscreen quad, passes UV
+  const VERT=`out vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}`;
+
+  // ── 1. Background shader — waves + composited photo + headline text ────
+  const bgMat=new THREE.ShaderMaterial({
+    glslVersion:THREE.GLSL3,
+    uniforms:{
+      uT:{value:0},
+      uPhoto:{value:null},
+      uPhotoRect:{value:new THREE.Vector4(0,0,0,0)},
+      uPhotoA:{value:0.0},
+      uText:{value:null},
+      uTextRect:{value:new THREE.Vector4(0,0,0,0)},
+      uTextA:{value:0.0},
+      uRes:{value:new THREE.Vector2(W(),H())},
+    },
+    vertexShader:VERT,
+    fragmentShader:`
+precision mediump float;
+uniform float uT;
+uniform sampler2D uPhoto;
+uniform vec4 uPhotoRect;
+uniform float uPhotoA;
+uniform sampler2D uText;
+uniform vec4 uTextRect;
+uniform float uTextA;
+uniform vec2 uRes;
+in vec2 vUv;
+out vec4 fc;
+
+float rrectSDF(vec2 p,vec2 b,float r){vec2 q=abs(p)-(b-r);return length(max(q,0.))+min(max(q.x,q.y),0.)-r;}
+
+void main(){
+  vec2 u=vec2(vUv.x,1.-vUv.y);
+  float t=uT*.28;
+
+  // ── Three large sweeping waves with organic sine undulation ──────────────
+  // Wave 1: main diagonal sweep (upper-left → lower-right)
+  float w1=u.y-(
+    .74-.40*u.x
+    +.14*sin(u.x*1.8+t*.26+.0)
+    +.06*sin(u.x*3.7+t*.17+1.5)
+    +.03*sin(u.x*7.3+t*.11+3.2)
+    +.04*sin(u.x*.68+t*.20+.8)
+  );
+
+  // Wave 2: secondary wave with different curvature
+  float w2=u.y-(
+    .47-.22*u.x
+    +.11*sin(u.x*2.2+t*.23+2.2)
+    +.05*sin(u.x*4.8+t*.15+.7)
+    +.03*sin(u.x*1.1+t*.29+4.0)
+    +.02*sin(u.x*8.5+t*.10+1.8)
+  );
+
+  // Wave 3: lower accent wave
+  float w3=u.y-(
+    .25+.09*u.x
+    +.08*sin(u.x*2.6+t*.31+1.2)
+    +.04*sin(u.x*5.4+t*.19+2.7)
+    +.02*sin(u.x*9.1+t*.09+.5)
+  );
+
+  // ── Color zones — dark navy palette with subtle hue shifts ───────────────
+  vec3 c1=mix(vec3(.010,.026,.140),vec3(.022,.055,.225),u.x*.4+u.y*.25); // above w1: deepest navy
+  vec3 c2=mix(vec3(.030,.072,.298),vec3(.044,.092,.362),u.x*.5+u.y*.3);  // w1→w2: medium blue
+  vec3 c3=mix(vec3(.018,.050,.232),vec3(.028,.068,.272),.25+u.x*.4);     // w2→w3: darker blue
+  vec3 c4=mix(vec3(.007,.018,.108),vec3(.014,.038,.158),u.x*.6);         // below w3: almost black
+
+  float eps=.007;
+  float s1=smoothstep(-eps,eps,w1);
+  float s2=smoothstep(-eps,eps,w2);
+  float s3=smoothstep(-eps,eps,w3);
+  vec3 c=mix(c1,mix(c2,mix(c3,c4,s3),s2),s1);
+
+  // ── Specular highlights — thin bright lines on wave crests ───────────────
+  // Stronger on the "above" (lit top) side of each wave
+  vec3 hiCol=vec3(.55,.78,1.); // cool blue-white
+  float b1=mix(.42,.90,1.-smoothstep(-.009,.009,w1));
+  float b2=mix(.38,.72,1.-smoothstep(-.007,.007,w2));
+  float b3=mix(.30,.58,1.-smoothstep(-.006,.006,w3));
+
+  c+=exp(-abs(w1)*98.)*b1*hiCol;
+  c+=exp(-abs(w2)*82.)*b2*hiCol;
+  c+=exp(-abs(w3)*68.)*b3*hiCol*.8;
+
+  // Subtle ambient glow behind wave 1 (blue haze on upper area)
+  float glow=smoothstep(.18,-.05,w1)*.22;
+  c+=glow*vec3(.08,.18,.55);
+
+  // ── Wave 4: prism streak through nav bar (u.y≈0.02–0.09) ─────────────────
+  // Positioned to cross the fixed nav at the top — chromatic aberration in the
+  // nav glass shader will split this white line into a full rainbow prism.
+  float w4=u.y-(
+    .062-.035*u.x
+    +.013*sin(u.x*4.1+t*.32+2.4)
+    +.007*sin(u.x*9.0+t*.21+1.0)
+    +.005*sin(u.x*1.6+t*.18+3.8)
+  );
+  c+=exp(-abs(w4)*155.)*.55*vec3(.62,.84,1.0);
+
+  // ── Hero photo composite ──────────────────────────────────────────────────
+  if(uPhotoA>0.01){
+    vec2 pMin=uPhotoRect.xy,pSz=uPhotoRect.zw;
+    vec2 pUV=(u-pMin)/pSz;
+    if(pUV.x>=0.&&pUV.x<=1.&&pUV.y>=0.&&pUV.y<=1.){
+      // SDF uses original pUV — outside rounded corners gets d>0 and mask→0
+      vec2 pxSz=pSz*uRes;
+      vec2 pxC=(pUV-.5)*pxSz;
+      float d=rrectSDF(pxC,pxSz*.5,28.);
+      float mask=clamp(.5-d,0.,1.)*uPhotoA;
+      vec3 ph=texture(uPhoto,vec2(pUV.x,1.-pUV.y)).rgb;
+      ph=pow(ph,vec3(0.82)); // gentle gamma lift — compensates sRGB-as-linear display
+      ph=mix(ph,vec3(dot(ph,vec3(.299,.587,.114))),.10); // grayscale(.1)
+      c=mix(c,ph,mask);
+    }
+  }
+
+  // ── Headline text composite ───────────────────────────────────────────────
+  if(uTextA>0.01){
+    vec2 tMin=uTextRect.xy,tSz=uTextRect.zw;
+    vec2 tUV=(u-tMin)/tSz;
+    if(all(greaterThanEqual(tUV,vec2(0.)))&&all(lessThanEqual(tUV,vec2(1.)))){
+      vec4 ts=texture(uText,vec2(tUV.x,1.-tUV.y));
+      c=mix(c,ts.rgb,ts.a*uTextA);
+    }
+  }
+
+  fc=vec4(clamp(c,0.,1.),1.);
+}`
+  });
+  const bgS=new THREE.Scene();
+  bgS.add(new THREE.Mesh(quad,bgMat));
+  let bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
+
+  // ── Content loading flags (separate from visibility alpha) ───────────────
+  let photoLoaded=false, textLoaded=false;
+  let textCanvasTex=null;
+
+  // ── Sync content rects — called BEFORE each bgS render ───────────────────
+  function syncContent(){
+    if(photoLoaded){
+      const ph=document.querySelector('.hero-photo');
+      if(ph){
+        const rc=ph.getBoundingClientRect();
+        if(rc.bottom<0||rc.top>H()){
+          bgMat.uniforms.uPhotoA.value=0;
+        } else {
+          bgMat.uniforms.uPhotoA.value=1;
+          bgMat.uniforms.uPhotoRect.value.set(rc.left/W(),rc.top/H(),rc.width/W(),rc.height/H());
+        }
+      }
+    }
+    if(textLoaded){
+      const tx=document.querySelector('.hero-headline');
+      if(tx){
+        const rc=tx.getBoundingClientRect();
+        if(rc.bottom<0||rc.top>H()){
+          bgMat.uniforms.uTextA.value=0;
+        } else {
+          bgMat.uniforms.uTextA.value=1;
+          bgMat.uniforms.uTextRect.value.set(rc.left/W(),rc.top/H(),rc.width/W(),rc.height/H());
+        }
+      }
+    }
+  }
+
+  // ── Load hero photo ───────────────────────────────────────────────────────
+  new THREE.TextureLoader().load('/assets/hero.jpeg',tex=>{
+    bgMat.uniforms.uPhoto.value=tex;
+    photoLoaded=true;
+    syncContent(); // set rect immediately on load
+  });
+
+  // ── Render headline text to canvas texture ────────────────────────────────
+  function buildTextTexture(){
+    const el=document.querySelector('.hero-headline');
+    if(!el) return;
+    const rc=el.getBoundingClientRect();
+    if(!rc.width||!rc.height) return;
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const cv=document.createElement('canvas');
+    cv.width=Math.round(rc.width*dpr);
+    cv.height=Math.round(rc.height*dpr);
+    const ctx=cv.getContext('2d');
+    ctx.scale(dpr,dpr);
+    const cs=getComputedStyle(el);
+    const fz=parseFloat(cs.fontSize);
+    const lh=fz*0.96;
+    const indent=fz*0.28;
+    ctx.font=`900 ${fz}px "Barlow Condensed",sans-serif`;
+    if('letterSpacing' in ctx) ctx.letterSpacing=`${-0.02*fz}px`;
+    ctx.fillStyle='rgba(255,255,255,1)';
+    ctx.textBaseline='top';
+
+    // Word-wrap each phrase to the space available in the canvas — mirrors how the
+    // (invisible) real DOM text would wrap. Without this, narrow viewports draw a
+    // single unbroken line wider than the canvas, clipping it at the right edge.
+    const rows=[];
+    [
+      ['ВАШ БИЗНЕС',   false],
+      ['ТЕРЯЕТ ДЕНЬГИ',true],
+      ['БЕЗ',          false],
+      ['ПРОЦЕССОВ.',   true],
+    ].forEach(([line,ind])=>{
+      const x=ind?indent:0;
+      const maxW=rc.width-x;
+      const words=line.split(' ');
+      let cur=words[0];
+      for(let w=1;w<words.length;w++){
+        const test=cur+' '+words[w];
+        if(ctx.measureText(test).width<=maxW){ cur=test; }
+        else { rows.push([cur,x,maxW]); cur=words[w]; }
+      }
+      rows.push([cur,x,maxW]);
+    });
+    rows.forEach(([text,x,maxW],i)=>{
+      const y=i*lh;
+      const w=ctx.measureText(text).width;
+      if(w>maxW){
+        // Single word still too wide to break — squeeze it horizontally to fit
+        // rather than letting it overflow the canvas and get clipped.
+        ctx.save();
+        ctx.translate(x,y);
+        ctx.scale(maxW/w,1);
+        ctx.fillText(text,0,0);
+        ctx.restore();
+      } else {
+        ctx.fillText(text,x,y);
+      }
+    });
+    if(textCanvasTex) textCanvasTex.dispose();
+    textCanvasTex=new THREE.CanvasTexture(cv);
+    bgMat.uniforms.uText.value=textCanvasTex;
+    textLoaded=true;
+    syncContent(); // set rect immediately after build
+  }
+  document.fonts.ready.then(buildTextTexture);
+
+  // ── 2. Glass refraction shader — optical lens distortion + chromatic aberration ─
+  const MX=14; // max glass elements tracked simultaneously
+  const gArr=new Float32Array(MX*6); // x,y,w,h,cornerRadius,lensScale per element (CSS px)
+
+  const glMat=new THREE.ShaderMaterial({
+    glslVersion:THREE.GLSL3,
+    uniforms:{
+      uBg: {value:null},
+      uRes:{value:new THREE.Vector2(W(),H())},
+      uG:  {value:gArr},
+      uN:  {value:0},
+      uL:  {value:0.28},   // lens distortion strength
+      uBr: {value:1.45},   // brightness — glass focuses/amplifies light like a lens
+      uCA: {value:0.028}   // chromatic aberration — stronger for visible prism on nav
+    },
+    vertexShader:VERT,
+    fragmentShader:`
+precision mediump float;
+uniform sampler2D uBg;
+uniform vec2 uRes;
+uniform float uG[${MX*6}];
+uniform int uN;
+uniform float uL,uBr,uCA;
+in vec2 vUv;
+out vec4 fc;
+
+// Rounded box SDF — returns px distance (negative = inside)
+float rb(vec2 p,vec2 b,float r){vec2 q=abs(p)-b+r;return length(max(q,0.))+min(max(q.x,q.y),0.)-r;}
+
+void main(){
+  // CSS pixel coords (0,0)=top-left — matches getBoundingClientRect()
+  vec2 css=vec2(vUv.x,1.-vUv.y)*uRes;
+  vec4 col=texture(uBg,vUv);
+
+  for(int i=0;i<${MX};i++){
+    if(i>=uN) break;
+
+    float gx=uG[i*6],gy=uG[i*6+1],gw=uG[i*6+2],gh=uG[i*6+3],gr=uG[i*6+4],gs=uG[i*6+5];
+    vec2 ctr=vec2(gx+gw*.5, gy+gh*.5);
+    vec2 hs =vec2(gw*.5,    gh*.5);
+    vec2 rel=css-ctr;
+
+    float sdf=rb(rel,hs,gr);
+    if(sdf>2.) continue; // skip pixels clearly outside
+
+    // Normalized position within glass element [-1..1]
+    vec2 n=rel/(hs+.001);
+    float d=length(n);
+    vec2 dir=normalize(n+.0001);
+
+    // gs = per-element lens scale: negative = magnifying (nav), ~0 = no distortion, positive = barrel
+    float lc=d*(1.+d)*0.52;
+    vec2 pxOff=dir*uL*lc*min(hs.x,hs.y)*gs;
+    vec2 uvOff=vec2(pxOff.x,-pxOff.y)/uRes; // flip Y for UV space
+
+    // Chromatic aberration: R/B channels shift in opposite directions → rainbow at edges
+    // Stronger at corners (d>1 in corners of rounded rect)
+    float caStr=uCA*(d*d+0.4*d);
+    vec2 ca=vec2(dir.x,-dir.y)*caStr;
+    vec2 uv2=vUv+uvOff;
+    // Clamp sampling to glass element UV bounds — prevents adjacent content bleed
+    vec2 uvMin=vec2(gx/uRes.x, 1.-(gy+gh)/uRes.y);
+    vec2 uvMax=vec2((gx+gw)/uRes.x, 1.-gy/uRes.y);
+    uv2=clamp(uv2,uvMin,uvMax);
+
+    float r=texture(uBg,clamp(uv2+ca,uvMin,uvMax)).r;
+    float g=texture(uBg,uv2).g;
+    float b=texture(uBg,clamp(uv2-ca,uvMin,uvMax)).b;
+
+    // Blend: background → refracted+brightened, with AA at SDF edge
+    col.rgb=mix(col.rgb, vec3(r,g,b)*uBr, smoothstep(2.,-1.,sdf));
+  }
+  fc=col;
+}`
+  });
+  const glS=new THREE.Scene();
+  glS.add(new THREE.Mesh(quad,glMat));
+
+  // ── 3. Glass element tracking — map DOM rects to shader uniforms ─────────
+  // [selector, borderRadius, lensScale]  positive=barrel distortion, negative=magnifying
+  const TRACKED=[
+    ['nav',           100,  1.0],  // barrel distortion — same rainbow logic as cards
+    ['.hero-glass',    28,  0.60], // moderate barrel, visible rainbow, safe gap from photo
+    ['.service-card',  28,  1.0],  // full barrel distortion (rainbow refraction)
+    ['.contact-glass', 28,  1.0],
+    ['#service-panel',  0,  0.6],
+  ];
+
+  function syncGlasses(){
+    let n=0;
+    TRACKED.forEach(([sel,r,ls])=>{
+      document.querySelectorAll(sel).forEach(el=>{
+        if(n>=MX) return;
+        const rc=el.getBoundingClientRect();
+        if(!rc.width || rc.bottom<-10 || rc.top>H()+10) return;
+        const i=n*6;
+        gArr[i]=rc.left; gArr[i+1]=rc.top; gArr[i+2]=rc.width; gArr[i+3]=rc.height; gArr[i+4]=r; gArr[i+5]=ls;
+        n++;
+      });
+    });
+    glMat.uniforms.uN.value=n;
+    glMat.uniforms.uG.needsUpdate=true;
+  }
+
+  // ── 4. Render loop ────────────────────────────────────────────────────────
+  const cssOrbs=document.querySelector('.bg-orbs');
+  let bgHidden=false;
+
+  function frame(t){
+    requestAnimationFrame(frame);
+
+    // Pass 1: sync content rects, then render background to offscreen texture
+    bgMat.uniforms.uT.value=t*.001;
+    syncContent();
+    rnd.setRenderTarget(bgRT);
+    rnd.render(bgS,cam);
+
+    // Pass 2: render glass refraction over background to screen
+    glMat.uniforms.uBg.value=bgRT.texture;
+    syncGlasses();
+    rnd.setRenderTarget(null);
+    rnd.render(glS,cam);
+
+    // Hide CSS orbs once WebGL is running (first frame)
+    if(!bgHidden){ if(cssOrbs) cssOrbs.style.display='none'; bgHidden=true; }
+  }
+  requestAnimationFrame(frame);
+
+  // ── 5. Resize ─────────────────────────────────────────────────────────────
+  window.addEventListener('resize',()=>{
+    rnd.setSize(W(),H());
+    bgRT.dispose();
+    bgRT=new THREE.WebGLRenderTarget(W(),H(),{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter});
+    glMat.uniforms.uRes.value.set(W(),H());
+    bgMat.uniforms.uRes.value.set(W(),H());
+    buildTextTexture();
+  });
+
+  // Apply .gl-active — switches backdrop-filter to SVG lens distortion
+  document.documentElement.classList.add('gl-active');
+
+  // Generate barrel-distortion displacement map for SVG feDisplacementMap
+  // R channel = x displacement, G channel = y displacement, 128 = no displacement
+  (function(){
+    const W=128,H=128,s=0.42;
+    const cv=document.createElement('canvas');
+    cv.width=W;cv.height=H;
+    const ctx=cv.getContext('2d');
+    const img=ctx.createImageData(W,H);
+    for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+      const nx=(x/(W-1))*2-1, ny=(y/(H-1))*2-1;
+      const d=Math.sqrt(nx*nx+ny*ny);
+      const lc=d*(1.+d)*s;
+      const i=(y*W+x)*4;
+      img.data[i]  =Math.max(0,Math.min(255,Math.round(128+nx*lc*82)));
+      img.data[i+1]=Math.max(0,Math.min(255,Math.round(128+ny*lc*82)));
+      img.data[i+2]=128;
+      img.data[i+3]=255;
+    }
+    ctx.putImageData(img,0,0);
+    const el=document.getElementById('glass-dismap');
+    if(el) el.setAttribute('href',cv.toDataURL());
+  })();
+})();
+</script>
+
+<!-- SVG lens distortion filter — backdrop-filter reads composited DOM (text, photo, waves) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<filter id="glass-lens" x="-8%" y="-8%" width="116%" height="116%"
+        color-interpolation-filters="sRGB">
+  <feImage id="glass-dismap" result="dmap" preserveAspectRatio="none"
+           x="0%" y="0%" width="100%" height="100%"/>
+  <feDisplacementMap in="SourceGraphic" in2="dmap" scale="48"
+                     xChannelSelector="R" yChannelSelector="G"/>
+</filter>
+</defs>
+</svg>
+</body>
+</html>
