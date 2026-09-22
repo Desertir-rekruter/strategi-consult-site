@@ -184,13 +184,16 @@
     gap:14px;
   }
   .gc2{ grid-column: span 2; }
+  .gc3{ grid-column: span 3; }
   .gr2{ grid-row: span 2; }
   @media (max-width:980px){
     .grid{ grid-template-columns: repeat(2, 1fr); }
+    .gc3{ grid-column: span 2; }
   }
   @media (max-width:620px){
     .grid{ grid-template-columns: 1fr; }
     .gc2{ grid-column: span 1; }
+    .gc3{ grid-column: span 1; }
     .gr2{ grid-row: span 1; }
   }
 
@@ -816,28 +819,16 @@
           <p>Анализирую зарплатные вилки по рынку, конкурентов за таланты и реальную доступность кандидатов в вашей нише — чтобы оффер не проигрывал ещё до собеседования.</p>
         </div>
 
-        <!-- NEW SERVICE: CUSTOM DEV -->
-        <div class="card dark2 svc-card funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
+        <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
+        <div class="card svc-card gc3 funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
           <div class="funnel-head">
             <div>
-              <h3>Кастомные HR-системы</h3>
-              <div class="sub" style="color:#b8b8ba;">Пишу инструменты под компанию, а не подбираю готовые</div>
+              <h3>Кастомные HR-системы и боты</h3>
+              <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
             </div>
             <div class="funnel-expand-icon">⤢</div>
           </div>
-          <p style="color:#c7c7c9;">Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта.</p>
-        </div>
-
-        <!-- NEW SERVICE: BOTS -->
-        <div class="card svc-card gc2 funnel-card anim-in" style="animation-delay:.5s" id="botsCard" onclick="openCardOverlay('botsCard','botsOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3>HR и бизнес-боты</h3>
-              <div class="sub">Автоматизирую рутину ботами, а не инструкциями</div>
-            </div>
-            <div class="funnel-expand-icon">⤢</div>
-          </div>
-          <p>Собираю Telegram-ботов для скрининга кандидатов, онбординга новых сотрудников и ответов на частые кадровые вопросы — рутина исчезает, а не переезжает в очередной чат.</p>
+          <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
         </div>
 
         <!-- ENERGY / PROBLEMS CHECKLIST -->
@@ -1481,7 +1472,7 @@
   </div>
 </div>
 
-<!-- ============ FULLSCREEN CUSTOM SYSTEMS OVERLAY ============ -->
+<!-- ============ FULLSCREEN CUSTOM SYSTEMS + BOTS OVERLAY ============ -->
 <div class="funnel-overlay" id="customOverlay">
   <div class="funnel-overlay-bg"></div>
   <div class="funnel-overlay-scroll" id="customOverlayScroll" onclick="handleCardOverlayClick(event,'customOverlayScroll','customCard','customOverlay')">
@@ -1489,45 +1480,23 @@
       <div class="funnel-page-head">
         <div>
           <div class="eyebrow">HR Consulting Studio · Услуга</div>
-          <h2>Кастомные HR-системы</h2>
+          <h2>Кастомные HR-системы и боты</h2>
         </div>
         <div class="funnel-close" onclick="closeCardOverlay('customCard','customOverlay')">✕</div>
       </div>
-      <p class="funnel-lead">Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта.</p>
+      <p class="funnel-lead">Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам — она исчезает, а не переезжает в очередной чат.</p>
 
       <div class="funnel-page-section">
-        <h4>Что входит</h4>
+        <h4>HR-системы</h4>
         <div class="kb-cards c3">
           <div class="kb-card"><div class="ktitle">CRM под процесс</div><div class="ktext">Система найма строится под ваш реальный процесс, а не подгоняет процесс под чужой шаблон.</div></div>
           <div class="kb-card"><div class="ktitle">Кадровый учёт</div><div class="ktext">Внутренние инструменты для КДП, когда готовые сервисы избыточны или не покрывают нужный кейс.</div></div>
           <div class="kb-card"><div class="ktitle">Сначала процесс</div><div class="ktext">Пишу под задачу, а не подбираю задачу под готовый инструмент — иначе система не приживётся.</div></div>
         </div>
       </div>
-    </div>
-
-    <div class="funnel-cta">
-      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
-      <span>Отвечаю в течение рабочего дня</span>
-    </div>
-  </div>
-</div>
-
-<!-- ============ FULLSCREEN BOTS OVERLAY ============ -->
-<div class="funnel-overlay" id="botsOverlay">
-  <div class="funnel-overlay-bg"></div>
-  <div class="funnel-overlay-scroll" id="botsOverlayScroll" onclick="handleCardOverlayClick(event,'botsOverlayScroll','botsCard','botsOverlay')">
-    <div class="funnel-page">
-      <div class="funnel-page-head">
-        <div>
-          <div class="eyebrow">HR Consulting Studio · Услуга</div>
-          <h2>HR и бизнес-боты</h2>
-        </div>
-        <div class="funnel-close" onclick="closeCardOverlay('botsCard','botsOverlay')">✕</div>
-      </div>
-      <p class="funnel-lead">Собираю Telegram-ботов для скрининга кандидатов, онбординга новых сотрудников и ответов на частые кадровые вопросы — рутина исчезает, а не переезжает в очередной чат.</p>
 
       <div class="funnel-page-section">
-        <h4>Что входит</h4>
+        <h4>Telegram-боты</h4>
         <div class="kb-cards c3">
           <div class="kb-card"><div class="ktitle">Скрининг кандидатов</div><div class="ktext">Бот отсеивает нерелевантные отклики по вашим критериям до того, как они попадут к рекрутеру.</div></div>
           <div class="kb-card"><div class="ktitle">Онбординг</div><div class="ktext">Новый сотрудник получает ответы и материалы сразу, а не ждёт, пока до него дойдут руки HR.</div></div>
@@ -1569,7 +1538,6 @@
       if(document.getElementById('hrbpOverlay').classList.contains('open')) closeCardOverlay('hrbpCard','hrbpOverlay');
       if(document.getElementById('marketOverlay').classList.contains('open')) closeCardOverlay('marketCard','marketOverlay');
       if(document.getElementById('customOverlay').classList.contains('open')) closeCardOverlay('customCard','customOverlay');
-      if(document.getElementById('botsOverlay').classList.contains('open')) closeCardOverlay('botsCard','botsOverlay');
     }
   });
 
