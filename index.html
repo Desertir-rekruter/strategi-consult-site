@@ -751,7 +751,7 @@
 
           <div class="calc-output">
             <div class="calc-output-lbl">Ориентировочно</div>
-            <div class="calc-output-val" id="calcOutput">90 000 – 170 000 ₽</div>
+            <div class="calc-output-val" id="calcOutput">20 000 – 30 000 ₽</div>
           </div>
           <a class="calc-cta" id="calcCta" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить точный расчёт →</a>
         </div>
@@ -1497,7 +1497,7 @@
 
     var low, high, suffix = '';
     if(calcState.service === 'hiring'){
-      low = n * 90000; high = n * 170000;
+      low = n * 20000; high = n * 30000;
       if(n >= 4){ low = Math.round(low*0.9); high = Math.round(high*0.9); }
     } else if(calcState.service === 'onboarding'){
       low = 70000 + n*8000; high = 140000 + n*15000;
