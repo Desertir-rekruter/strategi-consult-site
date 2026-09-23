@@ -314,6 +314,20 @@
   .about-foot{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-top:16px; padding-top:14px; border-top:1px dashed rgba(20,20,20,0.12); font-size:11.5px; font-weight:600; color:var(--ink-soft); }
   .about-foot .avail{ color:var(--accent); font-weight:800; }
 
+  /* ---------- onboarding card (link to /onboarding/) ---------- */
+  .onb-card{ display:flex; flex-direction:column; text-decoration:none; color:inherit; cursor:pointer; }
+  .onb-card:hover{ transform:translateY(-2px); box-shadow:0 18px 36px rgba(47,95,224,0.18); }
+  .onb-card:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .onb-track{ position:relative; display:flex; justify-content:space-between; margin:16px 4px 0; }
+  .onb-line{ position:absolute; left:5px; right:5px; top:5px; height:2px; border-radius:2px; background:linear-gradient(90deg,rgba(47,95,224,0.25),var(--accent)); }
+  .onb-pt{ position:relative; display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .onb-pt i{ width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--accent); }
+  .onb-pt.on i{ background:var(--accent); box-shadow:0 0 0 4px rgba(47,95,224,0.18); }
+  .onb-pt span{ font-size:10.5px; font-weight:800; color:var(--ink-soft); }
+  .onb-pt.on span{ color:var(--accent); }
+  .onb-cap{ margin-top:8px; font-size:10px; font-weight:600; color:var(--ink-soft); }
+  .onb-card .card-hint{ margin-top:auto; padding-top:10px; color:var(--accent); }
+
   /* ---------- simple service card ---------- */
   .svc-card p{ margin-top:10px; font-size:12.5px; color:var(--ink-soft); font-weight:500; line-height:1.55; }
   .svc-card.dark p{ color:#c7c7c9; }
@@ -887,17 +901,6 @@
           <p>Анализирую зарплатные вилки по рынку, конкурентов за таланты и реальную доступность кандидатов в вашей нише — чтобы оффер не проигрывал ещё до собеседования.</p>
         </div>
 
-        <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
-        <div class="card svc-card gc3 funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3>Кастомные HR-системы и боты</h3>
-              <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
-            </div>
-          </div>
-          <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
-        </div>
-
         <!-- ENERGY / PROBLEMS CHECKLIST -->
         <div class="card energy gc2 anim-in" style="animation-delay:.3s">
           <h3>Узнаёте свою компанию?</h3>
@@ -912,6 +915,32 @@
           </div>
           <div class="problem-result" id="problemResult">Отметьте пункты — покажу, во сколько это обходится</div>
         </div>
+
+        <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
+        <div class="card svc-card gc2 funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3>Кастомные HR-системы и боты</h3>
+              <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
+            </div>
+          </div>
+          <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
+        </div>
+
+        <!-- ONBOARDING: links to the /onboarding/ page -->
+        <a class="card svc-card onb-card anim-in" style="animation-delay:.5s" id="onbCard" href="/onboarding/">
+          <h3>Онбординг</h3>
+          <div class="sub">Снижаю текучесть в первые 3 месяца</div>
+          <div class="onb-track" aria-hidden="true">
+            <div class="onb-line"></div>
+            <div class="onb-pt"><i></i><span>1</span></div>
+            <div class="onb-pt"><i></i><span>7</span></div>
+            <div class="onb-pt"><i></i><span>30</span></div>
+            <div class="onb-pt on"><i></i><span>90</span></div>
+          </div>
+          <div class="onb-cap">Дни адаптации нового сотрудника</div>
+          <div class="card-hint">Подробнее →</div>
+        </a>
 
         <!-- ABOUT + RESULTS -->
         <div class="card geo gc2 gr2 anim-in" style="animation-delay:.35s;">
