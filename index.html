@@ -551,7 +551,7 @@
     .content{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; }
     .top, .layout, .grid{ display:contents; }
     .content > *, .top > *, .grid > *{ grid-column:1 / -1; }
-    .top .hero{ order:-3; }
+    .top .hero{ order:-3; grid-column:1 / -1; }
     #funnelCard{ order:-2; }
     #aboutCard, #kbCard{
       order:-1; grid-column:auto; aspect-ratio:1 / 1; min-width:0; overflow:hidden;
@@ -581,6 +581,9 @@
     .cal-head{ flex-wrap:wrap; justify-content:flex-start; gap:8px; }
     .cal-title{ flex:1 0 100%; order:-1; font-size:17px; }
 
+    /* bottom menu fits 360px screens */
+    .pills a{ padding:10px 14px; }
+
     /* overlays */
     .funnel-steps{ grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
     .audit-timeline-wrap{ overflow:visible; }
@@ -589,6 +592,11 @@
     .audit-timeline-fill{ background:linear-gradient(180deg,rgba(110,147,255,0.35),var(--accent-light)); }
     .audit-tl-point{ left:50%; top:var(--p); }
     .audit-tl-label{ top:50%; left:24px; transform:translateY(-50%); width:min(240px, 62vw); text-align:left; }
+  }
+  /* very small phones (320px): the two squares don't fit side by side, stack them */
+  @media (max-width:359px){
+    #aboutCard, #kbCard{ grid-column:1 / -1; aspect-ratio:auto; min-height:150px; }
+    .pills a{ padding:10px 10px; }
   }
   .kb-long{ font-style:normal; }
 
