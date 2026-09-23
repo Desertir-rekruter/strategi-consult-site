@@ -500,30 +500,24 @@
 
   .funnel-lead-row{ display:flex; align-items:stretch; gap:18px; margin-bottom:32px; flex-wrap:wrap; }
   .funnel-lead-card{
-    flex:1 1 420px; background:rgba(255,255,255,0.96); color:var(--ink);
-    border-radius:22px; padding:26px 28px; font-size:14.5px; font-weight:500;
-    line-height:1.65; box-shadow:0 20px 44px rgba(0,0,0,0.28);
+    flex:1 1 420px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.9);
+    border:1px solid rgba(255,255,255,0.2); border-radius:22px; padding:26px 28px;
+    font-size:14.5px; font-weight:500; line-height:1.65;
     display:flex; align-items:center;
   }
   .funnel-stat-card{
-    flex:0 0 300px; background:rgba(255,255,255,0.97); color:var(--ink);
-    border-radius:28px; padding:30px 26px 32px; box-shadow:0 24px 50px rgba(0,0,0,0.3);
-    display:flex; flex-direction:column; align-items:center;
+    flex:0 0 300px; background:rgba(255,255,255,0.08); color:#fff;
+    border:1px solid rgba(255,255,255,0.2); border-radius:22px; padding:26px 24px 28px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
   }
-  .funnel-stat-card .stat-title{ font-size:14.5px; font-weight:800; color:var(--ink); line-height:1.4; text-align:center; margin-bottom:8px; }
-  .kb-chart{ width:100%; flex:1; display:flex; flex-direction:column; align-items:center; padding-top:20px; }
-  .kb-bars{ display:flex; justify-content:center; align-items:flex-end; gap:52px; flex:1; width:100%; }
-  .kb-bar-col{ width:60px; display:flex; flex-direction:column; align-items:center; }
-  .kb-bar-val{ font-size:15px; font-weight:800; color:var(--ink); margin-bottom:12px; }
-  .kb-bar{ width:52px; border-radius:10px 10px 4px 4px; background:#e3e4e6; position:relative; }
-  .kb-bar.on{ background:var(--ink); }
-  .kb-bar.on::after{
-    content:""; position:absolute; top:-11px; left:50%; transform:translateX(-50%);
-    width:7px; height:7px; border-radius:50%; background:var(--ink);
-  }
-  .kb-baseline{ width:100%; height:2px; border-radius:2px; background:rgba(27,27,29,0.14); margin-top:4px; }
-  .kb-bar-labels{ display:flex; justify-content:center; gap:52px; width:100%; margin-top:14px; }
-  .kb-bar-label{ width:60px; text-align:center; font-size:12.5px; font-weight:700; color:var(--ink-soft); line-height:1.35; }
+  .funnel-stat-card .stat-title{ font-size:12px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:rgba(255,255,255,0.6); line-height:1.5; text-align:center; }
+  /* knowledge-base overlay: radial arcs on glass */
+  .kbr-ov{ display:flex; align-items:center; justify-content:center; gap:18px; margin-top:20px; }
+  .kbr-ov .kbr-svg{ width:132px; height:132px; flex:0 0 132px; }
+  .kbr-ov .kbr-svg text{ fill:#fff; }
+  .kbr-ov .kbr-leg{ gap:16px; }
+  .kbr-ov .kbr-leg b{ color:#fff; font-size:24px; }
+  .kbr-ov .kbr-leg span{ color:rgba(255,255,255,0.65); font-size:11.5px; }
 
   .funnel-page-section{ margin-top:34px; }
   .funnel-page-section h4{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,0.6); font-weight:700; margin-bottom:16px; }
@@ -1602,21 +1596,19 @@
         <div class="funnel-lead-card">Готов спорить, у вас есть Google или Яндекс Диск с кучей регламентов, инструкций и правил. Сотрудники постоянно бегают к вам или руководителям с одними и теми же вопросами, вместо того чтобы сразу всё знать. База знаний решает всё это. С ней сотрудник всегда знает, что делать, как это делать и почему он делает именно так. База знаний — это единый сборник информации для каждого уникального сотрудника о том, как ему действовать в той или иной ситуации.</div>
         <div class="funnel-stat-card">
           <div class="stat-title">Свободное время руководителей<br>с базой знаний и без</div>
-          <div class="kb-chart">
-            <div class="kb-bars">
-              <div class="kb-bar-col">
-                <div class="kb-bar-val">8 часов</div>
-                <div class="kb-bar on" style="height:150px;"></div>
-              </div>
-              <div class="kb-bar-col">
-                <div class="kb-bar-val">2 часа</div>
-                <div class="kb-bar" style="height:50px;"></div>
-              </div>
-            </div>
-            <div class="kb-baseline"></div>
-            <div class="kb-bar-labels">
-              <div class="kb-bar-label">С базой<br>знаний</div>
-              <div class="kb-bar-label">Без</div>
+          <div class="kbr kbr-ov" role="img" aria-label="Свободное время руководителей: с базой знаний 8 часов из 10, без неё 2 часа из 10">
+            <svg class="kbr-svg" viewBox="0 0 150 150" aria-hidden="true">
+              <g fill="none" stroke-linecap="round" transform="rotate(135 75 75)">
+                <circle cx="75" cy="75" r="62" pathLength="100" stroke="rgba(255,255,255,0.12)" stroke-width="15" stroke-dasharray="75 100"/>
+                <circle cx="75" cy="75" r="42" pathLength="100" stroke="rgba(255,255,255,0.12)" stroke-width="15" stroke-dasharray="75 100"/>
+                <circle cx="75" cy="75" r="62" pathLength="100" stroke="#6E93FF" stroke-width="15" stroke-dasharray="60 100"/>
+                <circle cx="75" cy="75" r="42" pathLength="100" stroke="#DCE6FF" stroke-width="15" stroke-dasharray="15 100"/>
+              </g>
+              <text x="75" y="83" text-anchor="middle" font-size="22" font-weight="300">×4</text>
+            </svg>
+            <div class="kbr-leg">
+              <div><b><i style="background:#6E93FF"></i>8 ч</b><span>С базой знаний</span></div>
+              <div><b><i style="background:#DCE6FF"></i>2 ч</b><span>Без неё</span></div>
             </div>
           </div>
         </div>
