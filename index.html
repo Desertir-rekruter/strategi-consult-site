@@ -7,6 +7,8 @@
   (function(){ try{ var t=localStorage.getItem('sc-theme'); if(t==='dark'||t==='light') document.documentElement.setAttribute('data-theme',t); }catch(e){} })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" as="image" href="/assets/automation-backdrop-m.avif" type="image/avif" media="(max-width:620px) and (max-aspect-ratio:3/5)" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/automation-backdrop.avif" type="image/avif" media="not all and (max-width:620px) and (max-aspect-ratio:3/5)" fetchpriority="high">
 <meta name="format-detection" content="telephone=no">
 <meta name="google-site-verification" content="3tqszmfp_SPrWvcZ0IvIvjjzAOSPyVKQximyUmPIdt0" />
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
@@ -93,7 +95,8 @@
      nor when iOS Safari collapses its toolbars on the first scroll */
   .backdrop{
     position:fixed; top:0; left:0; width:100vw; height:100vh; height:100lvh; z-index:-1;
-    background-image: url('/assets/automation-backdrop.jpg');
+    background-image: url('/assets/automation-backdrop.jpg'), url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAVACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDkNI0tr+4ihjB3OMlmXKqOeT3HSvTNNs9P0m1EUDbnyA5VSzseeMdh1xnpXJ6BHLJNFEuornY28xoxJHzd/XmutisZh5wHmsrhcGX5eB756+/Ws5PUuK0LEs9wYRLZQxRh1JZ5QWbI7bRwePU1jXNoLqGZr+4nutsLyeS0giQYOM7E+h6k1LqV3NY2xnkKyRxjYyRz4BJOOv49eK52LXzdQLFaI8k8oMJV8cqXyckdscdferi0Q0yw/idrCdrTTrGKFUPLOxcn+QH5VojV55wFuB5qNwVY8UUVlM0icvrFrF5snkhoVfkqjHB+orGtm8mU7M56ZzRRVwYpH//Z');
+    background-image: image-set(url('/assets/automation-backdrop.avif') type('image/avif'), url('/assets/automation-backdrop.webp') type('image/webp'), url('/assets/automation-backdrop.jpg') type('image/jpeg')), url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAVACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDkNI0tr+4ihjB3OMlmXKqOeT3HSvTNNs9P0m1EUDbnyA5VSzseeMdh1xnpXJ6BHLJNFEuornY28xoxJHzd/XmutisZh5wHmsrhcGX5eB756+/Ws5PUuK0LEs9wYRLZQxRh1JZ5QWbI7bRwePU1jXNoLqGZr+4nutsLyeS0giQYOM7E+h6k1LqV3NY2xnkKyRxjYyRz4BJOOv49eK52LXzdQLFaI8k8oMJV8cqXyckdscdferi0Q0yw/idrCdrTTrGKFUPLOxcn+QH5VojV55wFuB5qNwVY8UUVlM0icvrFrF5snkhoVfkqjHB+orGtm8mU7M56ZzRRVwYpH//Z');
     background-size: cover;
     background-position: center 35%;
   }
@@ -163,6 +166,7 @@
     margin:0; position:relative; aspect-ratio:4/5; overflow:hidden; background:#2b2b2e;
     border-radius:24px; border:1px solid rgba(255,255,255,0.35); box-shadow:0 24px 50px rgba(0,0,0,0.35);
   }
+  .about-photo picture{ display:contents; }
   .about-photo img{ display:block; width:100%; height:100%; object-fit:cover; object-position:50% 30%; transform:scale(1.22); transform-origin:50% 36%; }
   .about-photo figcaption{
     position:absolute; left:12px; right:12px; bottom:12px;
@@ -677,6 +681,10 @@
   @media (max-width:359px){
     #aboutCard, #kbCard{ grid-column:1 / -1; aspect-ratio:auto; min-height:150px; }
     .pills a{ padding:10px 10px; }
+  }
+  /* phones in portrait only see the middle of the photo: serve a narrower crop */
+  @media (max-width:620px) and (max-aspect-ratio:3/5){
+    .backdrop{ background-image: image-set(url('/assets/automation-backdrop-m.avif') type('image/avif'), url('/assets/automation-backdrop-m.webp') type('image/webp'), url('/assets/automation-backdrop.jpg') type('image/jpeg')), url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAVACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDkNI0tr+4ihjB3OMlmXKqOeT3HSvTNNs9P0m1EUDbnyA5VSzseeMdh1xnpXJ6BHLJNFEuornY28xoxJHzd/XmutisZh5wHmsrhcGX5eB756+/Ws5PUuK0LEs9wYRLZQxRh1JZ5QWbI7bRwePU1jXNoLqGZr+4nutsLyeS0giQYOM7E+h6k1LqV3NY2xnkKyRxjYyRz4BJOOv49eK52LXzdQLFaI8k8oMJV8cqXyckdscdferi0Q0yw/idrCdrTTrGKFUPLOxcn+QH5VojV55wFuB5qNwVY8UUVlM0icvrFrF5snkhoVfkqjHB+orGtm8mU7M56ZzRRVwYpH//Z'); }
   }
   .kb-long{ font-style:normal; }
 
@@ -1355,7 +1363,11 @@
 
       <div class="about-hero">
         <figure class="about-photo">
-          <img src="/assets/automation-portrait.jpg" width="853" height="1281" alt="Игнатий Филатов — HRBP и HR-консультант">
+          <picture>
+            <source type="image/avif" data-srcset="/assets/automation-portrait.avif">
+            <source type="image/webp" data-srcset="/assets/automation-portrait.webp">
+            <img data-src="/assets/automation-portrait.jpg" width="853" height="1281" alt="Игнатий Филатов — HRBP и HR-консультант" decoding="async">
+          </picture>
           <figcaption><b>Игнатий Филатов</b>HRBP · HR-консультант · работаю удалённо</figcaption>
         </figure>
         <div class="about-hero-text">
@@ -2097,6 +2109,14 @@
      overlay page (already filled with text) turns in from -90deg and grows to
      full size. Close plays the same motion backwards. */
   var cardFlip = {};
+  // images inside overlays aren't visible on load: fetch them once the page is idle
+  function loadDeferredImages(){
+    document.querySelectorAll('[data-srcset]').forEach(function(el){ el.srcset = el.dataset.srcset; el.removeAttribute('data-srcset'); });
+    document.querySelectorAll('img[data-src]').forEach(function(el){ el.src = el.dataset.src; el.removeAttribute('data-src'); });
+  }
+  window.addEventListener('load', function(){
+    (window.requestIdleCallback || function(f){ setTimeout(f, 200); })(loadDeferredImages);
+  });
   function copyComputedStyle(from, to){
     var cs = getComputedStyle(from);
     for(var i = 0; i < cs.length; i++){
@@ -2112,6 +2132,7 @@
     var card = document.getElementById(cardId);
     var overlay = document.getElementById(overlayId);
     if(cardFlip[overlayId]) return;
+    loadDeferredImages();
     var bg = getComputedStyle(document.querySelector('.backdrop')).backgroundImage;
     overlay.style.setProperty('--bg-image', bg);
     var c = card.getBoundingClientRect();
