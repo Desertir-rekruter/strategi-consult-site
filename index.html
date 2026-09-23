@@ -2,6 +2,10 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<script>
+  /* theme: apply the saved choice before first paint (no flash) */
+  (function(){ try{ var t=localStorage.getItem('sc-theme'); if(t==='dark'||t==='light') document.documentElement.setAttribute('data-theme',t); }catch(e){} })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
 <meta name="google-site-verification" content="3tqszmfp_SPrWvcZ0IvIvjjzAOSPyVKQximyUmPIdt0" />
@@ -696,11 +700,90 @@
   @media (min-width:640px){
     .split-col-results{ border-left:1px dashed rgba(20,20,20,0.14); padding-left:24px; }
   }
+
+  /* ============ THEME TOGGLE + DARK THEME ============ */
+  .theme-toggle{
+    position:fixed; top:14px; right:14px; z-index:400;
+    width:62px; height:32px; padding:0; border-radius:20px; cursor:pointer;
+    background:rgba(255,255,255,0.4); border:1px solid rgba(255,255,255,0.6);
+    backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
+    box-shadow:0 8px 22px rgba(0,0,0,0.18);
+    display:flex; align-items:center; justify-content:space-between; padding:0 8px;
+    transition:background .4s ease, border-color .4s ease;
+  }
+  .theme-toggle svg{ width:14px; height:14px; position:relative; z-index:1; transition:color .4s ease, opacity .4s ease; }
+  .theme-toggle .tt-sun{ color:#131313; }
+  .theme-toggle .tt-moon{ color:#131313; opacity:.45; }
+  .theme-toggle .tt-knob{
+    position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%;
+    background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    transition:transform .5s cubic-bezier(.33,1,.68,1), background .4s ease;
+  }
+  .theme-toggle:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  html[data-theme="dark"] .theme-toggle{ background:rgba(24,24,27,0.55); border-color:rgba(255,255,255,0.18); }
+  html[data-theme="dark"] .theme-toggle .tt-knob{ transform:translateX(30px); background:#2b2b2f; }
+  html[data-theme="dark"] .theme-toggle .tt-sun{ color:#fff; opacity:.45; }
+  html[data-theme="dark"] .theme-toggle .tt-moon{ color:#fff; opacity:1; }
+  /* keep the first row clear of the fixed toggle where the side margins are narrow */
+  @media (max-width:1499px){ .content{ padding-top:56px; } }
+  @media (max-width:620px){ .theme-toggle{ top:10px; right:10px; } .content{ padding-top:50px; } }
+
+  /* smooth colour change while switching (class added for ~0.6s by JS) */
+  html.theme-anim .content *, html.theme-anim .content, html.theme-anim .backdrop::after, html.theme-anim body > footer{
+    transition:background-color .5s ease, color .5s ease, border-color .5s ease, fill .5s ease, stroke .5s ease !important;
+  }
+
+  /* dark theme: only the page itself — the opened-card overlays are already dark */
+  .backdrop::after{ content:""; position:absolute; inset:0; background:rgba(8,8,10,0); transition:background .5s ease; }
+  html[data-theme="dark"] .backdrop::after{ background:rgba(8,8,10,0.5); }
+  html[data-theme="dark"] .content, html[data-theme="dark"] body > footer{
+    --ink:#f2f2f3;
+    --ink-soft:rgba(255,255,255,0.68);
+    --glass:rgba(22,22,25,0.52);
+    --glass-strong:rgba(255,255,255,0.1);
+    --glass-border:rgba(255,255,255,0.14);
+    --accent-soft:rgba(110,147,255,0.16);
+    color:var(--ink);
+  }
+  html[data-theme="dark"] .card.dark{ background:rgba(12,12,14,0.62); }
+  html[data-theme="dark"] .funnel-wrap,
+  html[data-theme="dark"] .audit-teaser{ background:linear-gradient(160deg,rgba(255,255,255,0.09),rgba(255,255,255,0.03)); border:1px solid rgba(255,255,255,0.08); }
+  html[data-theme="dark"] .faq-item{ background:rgba(255,255,255,0.06); }
+  html[data-theme="dark"] .about-foot,
+  html[data-theme="dark"] .faq-list,
+  html[data-theme="dark"] .cal-cell{ border-color:rgba(255,255,255,0.14); }
+  html[data-theme="dark"] .split-col-results{ border-left-color:rgba(255,255,255,0.14); }
+  html[data-theme="dark"] .bar-row .track{ background:rgba(255,255,255,0.14); }
+  html[data-theme="dark"] .event{ background:rgba(255,255,255,0.92); color:#131313; }
+  html[data-theme="dark"] .content [stroke="#111"]{ stroke:#e8e8ea; }
+  html[data-theme="dark"] .content [stroke="rgba(19,19,19,0.09)"]{ stroke:rgba(255,255,255,0.12); }
+  html[data-theme="dark"] .onb-pt i{ background:#1d1d20; }
+  /* accent used as TEXT needs the lighter blue on dark glass */
+  html[data-theme="dark"] .about-tags .tag,
+  html[data-theme="dark"] .about-foot .avail,
+  html[data-theme="dark"] .stat-row b,
+  html[data-theme="dark"] .audit-num,
+  html[data-theme="dark"] .audit-check,
+  html[data-theme="dark"] .problem-result a,
+  html[data-theme="dark"] .retention-chart-labels span:last-child,
+  html[data-theme="dark"] .onb-card .card-hint,
+  html[data-theme="dark"] .onb-pt.on span{ color:var(--accent-light); }
+  html[data-theme="dark"] .about-tags .tag{ border-color:rgba(110,147,255,0.3); }
+  html[data-theme="dark"] body > footer{ color:rgba(255,255,255,0.7) !important; border-top-color:rgba(255,255,255,0.14) !important; }
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle .tt-knob, .backdrop::after{ transition:none; }
+    html.theme-anim .content *, html.theme-anim .content{ transition:none !important; }
+  }
 </style>
 </head>
 <body>
 
 <div class="backdrop"></div>
+<button type="button" class="theme-toggle" id="themeToggle" aria-label="Тёмная тема" aria-pressed="false" onclick="toggleTheme()">
+  <span class="tt-knob" aria-hidden="true"></span>
+  <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+  <svg class="tt-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+</button>
 
 <div class="frame">
   <div class="content">
@@ -2043,5 +2126,26 @@ function unitCalcUpdate(){
   <a href="/naim/" style="color:inherit;text-decoration:none;">Автоматизация найма</a>
   <span style="width:100%;opacity:.6;margin-top:6px;">© 2026 Игнатий Филатов · HRBP, HR-консультант</span>
 </footer>
+<script>
+  /* ============ theme toggle (shared key with /onboarding/) ============ */
+  function currentTheme(){ return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; }
+  function syncThemeToggle(){
+    var b = document.getElementById('themeToggle'); if(!b) return;
+    var dark = currentTheme() === 'dark';
+    b.setAttribute('aria-pressed', String(dark));
+    b.setAttribute('aria-label', dark ? 'Светлая тема' : 'Тёмная тема');
+  }
+  function toggleTheme(){
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    var root = document.documentElement;
+    root.classList.add('theme-anim');
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('sc-theme', next); }catch(e){}
+    syncThemeToggle();
+    clearTimeout(toggleTheme._t);
+    toggleTheme._t = setTimeout(function(){ root.classList.remove('theme-anim'); }, 650);
+  }
+  syncThemeToggle();
+</script>
 </body>
 </html>
