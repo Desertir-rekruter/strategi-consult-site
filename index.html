@@ -62,10 +62,11 @@
   }
 
   /* ---------- full-screen sharp office backdrop (NOT blurred) ---------- */
-  /* sized to 100vw (scrollbar included) so the photo keeps the same scale whether or not
-     the scrollbar is showing — opening an overlay hides it, and the photo must not jump */
+  /* sized to 100vw (scrollbar included) and 100lvh (the tallest viewport, toolbars collapsed)
+     so the photo keeps one scale: it must not jump when an overlay hides the scrollbar,
+     nor when iOS Safari collapses its toolbars on the first scroll */
   .backdrop{
-    position:fixed; top:0; bottom:0; left:0; width:100vw; z-index:-1;
+    position:fixed; top:0; left:0; width:100vw; height:100vh; height:100lvh; z-index:-1;
     background-image: url('/assets/automation-backdrop.jpg');
     background-size: cover;
     background-position: center 35%;
@@ -401,7 +402,7 @@
   .funnel-overlay-scroll::-webkit-scrollbar-thumb{ background:rgba(255,255,255,.35); border-radius:10px; border:3px solid transparent; background-clip:padding-box; }
   .flip-clone{ position:fixed !important; margin:0 !important; z-index:1; pointer-events:none; }
   .funnel-overlay-bg{
-    position:absolute; top:0; bottom:0; left:0; width:100vw;
+    position:absolute; top:0; left:0; width:100vw; height:100vh; height:100lvh;
     background-image: var(--bg-image);
     background-size: cover; background-position: center 35%;
   }
