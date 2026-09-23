@@ -545,6 +545,53 @@
     .cal-steps{ display:flex; flex-direction:column; gap:10px; margin-top:4px; }
   }
 
+  /* ---------- phone: «Найм» full width, then «Обо мне» + «База знаний» as two squares ---------- */
+  .about-sq{ display:none; }
+  @media (max-width:620px){
+    .content{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; }
+    .top, .layout, .grid{ display:contents; }
+    .content > *, .top > *, .grid > *{ grid-column:1 / -1; }
+    .top .hero{ order:-3; }
+    #funnelCard{ order:-2; }
+    #aboutCard, #kbCard{
+      order:-1; grid-column:auto; aspect-ratio:1 / 1; min-width:0; overflow:hidden;
+      padding:14px 14px 13px; display:flex; flex-direction:column;
+    }
+    #aboutCard h3, #kbCard h3{ font-size:14px; line-height:1.2; }
+
+    /* «Обо мне»: one big figure */
+    #aboutCard .about-text, #aboutCard .about-tags, #aboutCard .about-foot{ display:none; }
+    .about-sq{ display:flex; flex-direction:column; flex:1; min-height:0; }
+    .about-sq .sq-big{ margin-top:auto; font-size:34px; font-weight:300; letter-spacing:-1px; line-height:1; }
+    .about-sq .sq-big small{ font-size:15px; letter-spacing:0; }
+    .about-sq .sq-cap{ margin-top:4px; font-size:10.5px; font-weight:600; color:var(--ink-soft); line-height:1.3; }
+    .about-sq .sq-avail{ margin-top:auto; display:flex; align-items:center; gap:6px; font-size:10.5px; font-weight:800; color:var(--accent); }
+    .about-sq .sq-avail i{ width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 3px rgba(47,95,224,.2); flex:0 0 auto; }
+
+    /* «База знаний»: small ring + legend */
+    #kbCard .sub, #kbCard .week-top-right, #kbCard .kbr-cap, #kbCard .kb-long{ display:none; }
+    #kbCard .kbr{ margin-top:auto; justify-content:flex-start; gap:8px; }
+    #kbCard .kbr-svg{ width:62px; height:62px; flex:0 0 62px; }
+    #kbCard .kbr-leg{ gap:6px; }
+    #kbCard .kbr-leg b{ font-size:15px; gap:5px; line-height:1; }
+    #kbCard .kbr-leg i{ width:8px; height:8px; }
+    #kbCard .kbr-leg span{ font-size:9px; padding-left:13px; }
+
+    /* «Как я работаю» card: title on its own line, pills under it */
+    .cal-head{ flex-wrap:wrap; justify-content:flex-start; gap:8px; }
+    .cal-title{ flex:1 0 100%; order:-1; font-size:17px; }
+
+    /* overlays */
+    .funnel-steps{ grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+    .audit-timeline-wrap{ overflow:visible; }
+    .audit-timeline{ min-width:0; padding:24px 0 26px; }
+    .audit-timeline-track{ width:4px; height:270px; margin:0 0 0 8px; }
+    .audit-timeline-fill{ background:linear-gradient(180deg,rgba(110,147,255,0.35),var(--accent-light)); }
+    .audit-tl-point{ left:50%; top:var(--p); }
+    .audit-tl-label{ top:50%; left:24px; transform:translateY(-50%); width:min(240px, 62vw); text-align:left; }
+  }
+  .kb-long{ font-style:normal; }
+
   /* ---------- entrance animation ---------- */
   @keyframes cardIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
   .anim-in{ animation:cardIn .6s cubic-bezier(.22,1,.36,1) backwards; }
@@ -656,6 +703,11 @@
           <span>Работаю удалённо</span>
           <span class="avail">Беру 2–3 клиента в месяц · сейчас есть место</span>
         </div>
+        <div class="about-sq">
+          <div class="sq-big">5+<small> лет</small></div>
+          <div class="sq-cap">в HR · действующий HRBP</div>
+          <div class="sq-avail"><i></i>Есть место</div>
+        </div>
       </aside>
     </div>
 
@@ -692,7 +744,7 @@
               <text x="75" y="83" text-anchor="middle" font-size="22" font-weight="300">×4</text>
             </svg>
             <div class="kbr-leg">
-              <div><b><i style="background:#2F5FE0"></i>8 ч</b><span>С базой знаний</span></div>
+              <div><b><i style="background:#2F5FE0"></i>8 ч</b><span>С базой<em class="kb-long"> знаний</em></span></div>
               <div><b><i style="background:#6E93FF"></i>2 ч</b><span>Без</span></div>
             </div>
           </div>
@@ -708,16 +760,16 @@
           </div>
           <div class="funnel-wrap">
             <svg class="funnel-svg" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="4,6 96,6 76,34 24,34" fill="#161618"/>
-              <polygon points="24,34 76,34 61,62 39,62" fill="#5a5a5d"/>
-              <polygon points="39,62 61,62 52,88 48,88" fill="#9a9a9d"/>
-              <polygon points="48,88 52,88 51,106 49,106" fill="#cfcfd2"/>
+              <polygon points="4,6 96,6 76,34 24,34" fill="#1B3A9E"/>
+              <polygon points="24,34 76,34 61,62 39,62" fill="#2F5FE0"/>
+              <polygon points="39,62 61,62 52,88 48,88" fill="#6E93FF"/>
+              <polygon points="48,88 52,88 51,106 49,106" fill="#B9CCFF"/>
             </svg>
             <div class="funnel-stats">
-              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#161618"></span>Резюме</span><span>340</span></div>
-              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#5a5a5d"></span>Первичное собеседование</span><span>25</span></div>
-              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#9a9a9d"></span>Собеседование с заказчиком (вами)</span><span>3–5</span></div>
-              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#cfcfd2"></span>Выход</span><span>1</span></div>
+              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#1B3A9E"></span>Резюме</span><span>340</span></div>
+              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#2F5FE0"></span>Первичное собеседование</span><span>25</span></div>
+              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#6E93FF"></span>Собеседование с заказчиком (вами)</span><span>3–5</span></div>
+              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#B9CCFF"></span>Выход</span><span>1</span></div>
             </div>
           </div>
         </div>
@@ -1209,16 +1261,16 @@
         <h4>Воронка подбора</h4>
         <div class="funnel-big-visual">
           <svg class="funnel-big-svg" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="4,6 96,6 76,34 24,34" fill="#ffffff"/>
-            <polygon points="24,34 76,34 61,62 39,62" fill="rgba(255,255,255,0.72)"/>
-            <polygon points="39,62 61,62 52,88 48,88" fill="rgba(255,255,255,0.44)"/>
-            <polygon points="48,88 52,88 51,106 49,106" fill="rgba(255,255,255,0.24)"/>
+            <polygon points="4,6 96,6 76,34 24,34" fill="#DCE6FF"/>
+            <polygon points="24,34 76,34 61,62 39,62" fill="#9DB5FF"/>
+            <polygon points="39,62 61,62 52,88 48,88" fill="#6E93FF"/>
+            <polygon points="48,88 52,88 51,106 49,106" fill="#2F5FE0"/>
           </svg>
           <div class="funnel-big-stats">
-            <div class="fbstat"><span class="flabel"><span class="fdot" style="background:#fff"></span>Резюме</span><span>340</span></div>
-            <div class="fbstat"><span class="flabel"><span class="fdot" style="background:rgba(255,255,255,0.72)"></span>Первичное собеседование</span><span>25</span></div>
-            <div class="fbstat"><span class="flabel"><span class="fdot" style="background:rgba(255,255,255,0.44)"></span>Собеседование с заказчиком (вами)</span><span>3–5</span></div>
-            <div class="fbstat"><span class="flabel"><span class="fdot" style="background:rgba(255,255,255,0.24)"></span>Выход</span><span>1</span></div>
+            <div class="fbstat"><span class="flabel"><span class="fdot" style="background:#DCE6FF"></span>Резюме</span><span>340</span></div>
+            <div class="fbstat"><span class="flabel"><span class="fdot" style="background:#9DB5FF"></span>Первичное собеседование</span><span>25</span></div>
+            <div class="fbstat"><span class="flabel"><span class="fdot" style="background:#6E93FF"></span>Собеседование с заказчиком (вами)</span><span>3–5</span></div>
+            <div class="fbstat"><span class="flabel"><span class="fdot" style="background:#2F5FE0"></span>Выход</span><span>1</span></div>
             <div class="fconv-row" style="grid-column:1/-1; margin-top:4px;"><span>Резюме → Первичное собеседование</span><b>7%</b></div>
             <div class="fconv-row" style="grid-column:1/-1;"><span>Первичное собеседование → Собеседование с заказчиком</span><b>16%</b></div>
             <div class="fconv-row" style="grid-column:1/-1;"><span>Собеседование с заказчиком → Выход</span><b>25%</b></div>
