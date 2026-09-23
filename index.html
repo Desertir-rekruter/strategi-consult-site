@@ -1400,6 +1400,45 @@
       <p class="funnel-lead">Строю дашборд ключевых HR-метрик и юнит-экономику по каждой роли — сколько сотрудник стоит компании и когда выходит в плюс. Решения на цифрах, а не на ощущениях.</p>
 
       <div class="funnel-page-section">
+        <h4>Что такое юнит-экономика в HR</h4>
+        <p style="font-size:13.5px; color:rgba(255,255,255,0.8); line-height:1.6; max-width:680px; margin-bottom:16px;">Юнит-экономика — это расчёт, сколько компания зарабатывает или теряет на одном сотруднике, если разложить его на понятные цифры: сколько он стоит и сколько приносит. Это не абстракция для инвесторов, а рабочий инструмент — чтобы видеть, какие роли и отделы реально окупаются, а какие держатся на «кажется, справляется».</p>
+        <div class="kb-cards c3">
+          <div class="kb-card"><div class="ktitle">Полная стоимость сотрудника</div><div class="ktext">Не только оклад — плюс налоги, рабочее место, бонусы и обучение.</div></div>
+          <div class="kb-card"><div class="ktitle">Доход на сотрудника</div><div class="ktext">Сколько выручки или ценности сотрудник приносит компании за тот же период.</div></div>
+          <div class="kb-card"><div class="ktitle">Маржа по роли</div><div class="ktext">Какие позиции и отделы приносят прибыль, а какие работают в минус.</div></div>
+        </div>
+
+        <div class="funnel-case" style="margin-top:14px;">
+          <b>Ценность для вас</b>
+          <p>Вы видите в деньгах, а не в ощущениях, кто из команды окупается, кого стоит доращивать, а какую роль вообще не нужно было заводить в штат. Это база для решений о найме, зарплатах и структуре команды — без гадания.</p>
+        </div>
+
+        <div class="funnel-case" style="margin-top:14px;">
+          <b>Посчитайте сами: окупается ли сотрудник</b>
+          <div class="calc-row">
+            <div class="calc-row-lbl"><span>Оклад сотрудника</span><b id="unitSalaryVal">100 000 ₽</b></div>
+            <input type="range" min="30000" max="400000" step="5000" value="100000" id="unitSalary" class="calc-slider" oninput="unitCalcUpdate()">
+          </div>
+          <div class="calc-row">
+            <div class="calc-row-lbl"><span>Доп. расходы — налоги, рабочее место, бонусы</span><b id="unitOverheadVal">30%</b></div>
+            <input type="range" min="0" max="60" step="5" value="30" id="unitOverhead" class="calc-slider" oninput="unitCalcUpdate()">
+          </div>
+          <div class="calc-row">
+            <div class="calc-row-lbl"><span>Доход, который сотрудник приносит компании</span><b id="unitRevenueVal">250 000 ₽</b></div>
+            <input type="range" min="0" max="1000000" step="10000" value="250000" id="unitRevenue" class="calc-slider" oninput="unitCalcUpdate()">
+          </div>
+          <div class="calc-output">
+            <div class="calc-output-lbl">Полная стоимость сотрудника</div>
+            <div style="font-size:16px; font-weight:800; color:#fff; margin-top:2px;" id="unitCostOutput">130 000 ₽ / мес</div>
+          </div>
+          <div class="calc-output" style="border-top:none; padding-top:10px;">
+            <div class="calc-output-lbl">Юнит-экономика сотрудника</div>
+            <div class="calc-output-val" id="unitMarginOutput">+120 000 ₽/мес</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="funnel-page-section">
         <h4>Проблема</h4>
         <div class="funnel-case">
           <b>Почему это происходит</b>
@@ -1835,6 +1874,31 @@
     document.getElementById('calcCta').href = 'https://wa.me/995557602599?text=' + encodeURIComponent(msg);
   }
   calcUpdate();
+
+  /* ============ unit economics calculator (HR-метрики overlay) ============ */
+  function unitCalcFmt(n){ return Math.round(n).toLocaleString('ru-RU'); }
+  function unitCalcUpdate(){
+    var salary = parseInt(document.getElementById('unitSalary').value, 10);
+    var overhead = parseInt(document.getElementById('unitOverhead').value, 10);
+    var revenue = parseInt(document.getElementById('unitRevenue').value, 10);
+    var cost = salary * (1 + overhead / 100);
+    var margin = revenue - cost;
+
+    document.getElementById('unitSalaryVal').textContent = unitCalcFmt(salary) + ' ₽';
+    document.getElementById('unitOverheadVal').textContent = overhead + '%';
+    document.getElementById('unitRevenueVal').textContent = unitCalcFmt(revenue) + ' ₽';
+    document.getElementById('unitCostOutput').textContent = unitCalcFmt(cost) + ' ₽ / мес';
+
+    var marginEl = document.getElementById('unitMarginOutput');
+    if(margin >= 0){
+      marginEl.textContent = '+' + unitCalcFmt(margin) + ' ₽/мес';
+      marginEl.style.color = 'var(--accent-light)';
+    } else {
+      marginEl.textContent = '−' + unitCalcFmt(Math.abs(margin)) + ' ₽/мес — пока не окупается';
+      marginEl.style.color = '#ff8177';
+    }
+  }
+  if(document.getElementById('unitSalary')) unitCalcUpdate();
 </script>
 
 <footer style="max-width:1200px;margin:40px auto 0;padding:24px 20px 32px;border-top:1px solid rgba(20,20,20,0.12);font:13px -apple-system,BlinkMacSystemFont,sans-serif;color:#3a3a3c;display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;text-align:center;">
