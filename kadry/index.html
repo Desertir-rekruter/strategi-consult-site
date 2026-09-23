@@ -2,15 +2,21 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<script>
+  /* theme: apply the saved choice before first paint (shared with the homepage) */
+  (function(){ try{ var t=localStorage.getItem('sc-theme'); if(t==='dark'||t==='light') document.documentElement.setAttribute('data-theme',t); }catch(e){} })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <title>Автоматизация кадрового учёта — Игнатий Филатов, HR консультант</title>
 <meta name="description" content="Автоматизация кадрового учёта для компаний до 300 человек. Убираю бумажную рутину, настраиваю системы которые работают без постоянного участия HR.">
 <meta name="keywords" content="автоматизация кадрового учёта, кадровый учёт, КЭДО, HR автоматизация, кадровое делопроизводство">
+<meta name="author" content="Игнатий Филатов">
+<link rel="canonical" href="https://strategi-consult.com/kadry/">
 <meta property="og:title" content="Автоматизация кадрового учёта — Игнатий Филатов">
 <meta property="og:description" content="Убираю бумажную рутину из кадрового учёта. Настраиваю системы которые работают без вас.">
 <meta property="og:url" content="https://strategi-consult.com/kadry/">
-<link rel="canonical" href="https://strategi-consult.com/kadry/">
 <meta property="og:image" content="https://strategi-consult.com/assets/og-image.jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -21,6 +27,8 @@
 <meta name="twitter:title" content="Автоматизация кадрового учёта — Игнатий Филатов">
 <meta name="twitter:description" content="Убираю бумажную рутину из кадрового учёта. Настраиваю системы которые работают без вас.">
 <meta name="twitter:image" content="https://strategi-consult.com/assets/og-image.jpeg">
+<link rel="preload" as="image" href="/assets/automation-backdrop.jpg">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -46,377 +54,433 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Какие системы кадрового учёта вы рекомендуете для малого и среднего бизнеса?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "До 50 человек — облачный сервис (Контур.Персонал) или 1С:ЗУП в базовой конфигурации. От 50 до 300 человек — 1С:ЗУП или СБИС с модулем HR. Для удалённых команд важна поддержка КЭДО."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Обязателен ли переход на КЭДО?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Юридически — нет, это право а не обязанность. Но для компаний с удалёнными сотрудниками или несколькими офисами КЭДО экономит огромное количество времени. С 2022 года законодательство чётко регулирует КЭДО — это безопасный инструмент."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Сколько времени занимает автоматизация кадрового учёта?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Базовая настройка системы для компании 20-50 человек — 2-3 недели. Для 50-150 человек с переносом данных и настройкой КЭДО — 4-6 недель. Компания не останавливается, переход происходит постепенно."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Как избежать потери данных при переходе на новую систему?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Переход делается поэтапно с резервным копированием. Сначала переносим данные, проверяем корректность, и только потом прекращаем работу в старой системе. Параллельный период занимает 2-4 недели — это страховка от ошибок."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Нужен ли HR-специалист в штате после автоматизации?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "До 100 человек — кадровый учёт после автоматизации можно вести силами одного человека, совмещающего это с другими задачами. От 100 человек — штатный HR нужен, но тратит на рутину в 3 раза меньше времени."
-      }
-    }
+    {"@type": "Question", "name": "Какие системы кадрового учёта вы рекомендуете для малого и среднего бизнеса?", "acceptedAnswer": {"@type": "Answer", "text": "До 50 человек — облачный сервис (Контур.Персонал) или 1С:ЗУП в базовой конфигурации. От 50 до 300 человек — 1С:ЗУП или СБИС с модулем HR. Для удалённых команд важна поддержка КЭДО."}},
+    {"@type": "Question", "name": "Обязателен ли переход на КЭДО?", "acceptedAnswer": {"@type": "Answer", "text": "Юридически — нет, это право а не обязанность. Но для компаний с удалёнными сотрудниками или несколькими офисами КЭДО экономит огромное количество времени. С 2022 года законодательство чётко регулирует КЭДО — это безопасный инструмент."}},
+    {"@type": "Question", "name": "Сколько времени занимает автоматизация кадрового учёта?", "acceptedAnswer": {"@type": "Answer", "text": "Базовая настройка системы для компании 20-50 человек — 2-3 недели. Для 50-150 человек с переносом данных и настройкой КЭДО — 4-6 недель. Компания не останавливается, переход происходит постепенно."}},
+    {"@type": "Question", "name": "Как избежать потери данных при переходе на новую систему?", "acceptedAnswer": {"@type": "Answer", "text": "Переход делается поэтапно с резервным копированием. Сначала переносим данные, проверяем корректность, и только потом прекращаем работу в старой системе. Параллельный период занимает 2-4 недели — это страховка от ошибок."}},
+    {"@type": "Question", "name": "Нужен ли HR-специалист в штате после автоматизации?", "acceptedAnswer": {"@type": "Answer", "text": "До 100 человек — кадровый учёт после автоматизации можно вести силами одного человека, совмещающего это с другими задачами. От 100 человек — штатный HR нужен, но тратит на рутину в 3 раза меньше времени."}}
   ]
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-  :root{--black:#0d1520;--white:#fff;--gray-3:#8E8B80;--gray-4:#111d2e;--accent:#EE6A1B}
-  html{scroll-behavior:smooth}
-  body{font-family:'Outfit',-apple-system,sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;background:rgba(13,21,32,0.75);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(232,230,224,0.1)}
-  .nav-logo{font-size:17px;font-weight:600;color:var(--white);text-decoration:none}
-  .nav-links{display:flex;gap:32px;list-style:none}
-  .nav-links a{font-size:13px;color:rgba(232,230,224,0.75);text-decoration:none;transition:color .2s}
-  .nav-links a:hover{color:var(--white)}
-  .nav-cta{color:var(--accent)!important;font-weight:500}
-  .hero{min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden;position:relative}
-  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 25% 50%,rgba(238,106,27,0.14) 0%,transparent 70%);pointer-events:none}
-  .hero-left{padding:120px 48px 80px 10%;position:relative;z-index:1}
-  .hero-eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;opacity:0;animation:fadeUp .8s .2s forwards}
-  .hero-title{font-size:clamp(32px,4vw,58px);font-weight:700;line-height:1.05;letter-spacing:-.03em;margin-bottom:24px;opacity:0;animation:fadeUp .8s .4s forwards}
-  .hero-sub{font-size:17px;font-weight:300;line-height:1.6;color:rgba(232,230,224,.72);margin-bottom:40px;max-width:420px;opacity:0;animation:fadeUp .8s .6s forwards}
-  .hero-buttons{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .8s forwards}
-  .hero-right{position:relative;height:100dvh;display:flex;align-items:flex-start;justify-content:center;overflow:hidden;opacity:0;animation:fadeIn 1s .4s forwards}
-  .hero-photo{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
-  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(13,21,32,0.75) 0%,rgba(13,21,32,0.15) 30%,transparent 55%)}
-  .btn-primary{padding:14px 30px;background:var(--accent);color:var(--white);font-size:15px;font-weight:500;border-radius:10px;text-decoration:none;transition:background .2s,transform .15s;display:inline-block}
-  .btn-primary:hover{background:#d95d14;transform:scale(1.02)}
-  .btn-secondary{padding:14px 30px;color:var(--accent);font-size:15px;font-weight:500;border-radius:10px;text-decoration:none;border:1.5px solid rgba(238,106,27,.45);transition:border-color .2s,transform .15s;display:inline-block}
-  .btn-secondary:hover{border-color:var(--accent);transform:scale(1.02)}
-  section{padding:100px 24px}
-  .section-inner{max-width:980px;margin:0 auto}
-  .section-eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;text-align:center}
-  .section-title{font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-.02em;line-height:1.1;text-align:center;margin-bottom:16px}
-  .section-sub{font-size:17px;font-weight:300;color:var(--gray-3);text-align:center;max-width:560px;margin:0 auto 64px;line-height:1.6}
-  .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
-  .card{background:var(--gray-4);border-radius:12px;padding:36px 32px;border:1px solid rgba(232,230,224,.08);transition:border-color .2s,transform .2s}
-  .card:hover{border-color:rgba(238,106,27,.35);transform:translateY(-3px)}
-  .card-icon{font-size:28px;margin-bottom:16px;display:block}
-  .card-title{font-size:18px;font-weight:600;margin-bottom:10px}
-  .card-desc{font-size:14px;font-weight:300;color:var(--gray-3);line-height:1.65}
-  .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}
-  .step{padding:32px;background:rgba(232,230,224,.05);border-radius:12px;border:1px solid rgba(232,230,224,.08);transition:border-color .2s,transform .2s}
-  .step:hover{border-color:rgba(238,106,27,.4);transform:translateY(-4px)}
-  .step-num{font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--accent);margin-bottom:16px;text-transform:uppercase}
-  .step-title{font-size:18px;font-weight:600;margin-bottom:10px}
-  .step-desc{font-size:14px;font-weight:300;color:var(--gray-3);line-height:1.65}
-  .cta-section{background:var(--black);text-align:center}
-  .cta-card{max-width:680px;margin:0 auto;padding:72px 48px;background:rgba(232,230,224,.04);border-radius:20px;border:1px solid rgba(232,230,224,.14)}
-  .cta-title{font-size:clamp(26px,4vw,42px);font-weight:700;letter-spacing:-.02em;margin-bottom:16px}
-  .cta-sub{font-size:17px;font-weight:300;color:rgba(232,230,224,.7);margin-bottom:36px;line-height:1.55}
-  footer{background:var(--gray-4);border-top:1px solid rgba(232,230,224,.1);padding:28px 24px;text-align:center}
-  .footer-text{font-size:13px;font-weight:300;color:var(--gray-3)}
-  .gray-bg{background:var(--gray-4)}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-  .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
-  .reveal.visible{opacity:1;transform:translateY(0)}
-  .faq-list{display:flex;flex-direction:column;gap:16px;max-width:760px;margin:0 auto}
-  .faq-item{background:var(--gray-4);border-radius:12px;padding:28px 32px;border:1px solid rgba(232,230,224,.08);transition:border-color .2s}
-  .faq-item:hover{border-color:rgba(238,106,27,.3)}
-  .faq-q{font-size:17px;font-weight:600;margin-bottom:12px;line-height:1.35}
-  .faq-a{font-size:15px;font-weight:300;color:var(--gray-3);line-height:1.7}
-  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;margin-top:48px}
-  .stat-card{background:rgba(238,106,27,.08);border:1px solid rgba(238,106,27,.2);border-radius:12px;padding:32px 24px;text-align:center}
-  .stat-num{font-size:clamp(36px,5vw,52px);font-weight:700;color:var(--accent);letter-spacing:-.03em;display:block;margin-bottom:8px}
-  .stat-label{font-size:13px;font-weight:400;color:rgba(232,230,224,.72);line-height:1.5}
-  @media(max-width:768px){.hero{grid-template-columns:1fr;min-height:auto}.hero-left{padding:100px 24px 40px}.hero-right{height:72vw;min-height:260px}.nav-links{display:none}}</style>
-<link rel="stylesheet" href="/assets/shared.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-</head>
-<body>
-<a href="#main-content" class="skip-link">Перейти к содержимому</a>
-<div class="scroll-progress" aria-hidden="true"></div>
-<nav>
-  <a href="/" class="nav-logo">Игнатий</a>
-  <ul class="nav-links">
-    <li><a href="/">Главная</a></li>
-    <li><a href="/onboarding/">Онбординг</a></li>
-    <li><a href="/naim/">Найм</a></li>
-    <li><a href="/kadry/">Кадровый учёт</a></li>
-    <li><a href="/#contact" class="nav-cta">Связаться →</a></li>
-  </ul>
-  <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="dropdown">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="dropdown-menu" id="dropdown" role="menu">
-  <a href="/" role="menuitem">Главная</a>
-  <div class="menu-divider"></div>
-  <div class="menu-section">Услуги</div>
-  <a href="/onboarding/" role="menuitem">Автоматизация онбординга</a>
-  <a href="/naim/" role="menuitem">Автоматизация найма</a>
-  <a href="/kadry/" role="menuitem">Кадровый учёт</a>
-  <a href="/malyj-biznes/" role="menuitem">HR для малого бизнеса</a>
-  <div class="menu-divider"></div>
-  <a href="/#contact" class="menu-cta" role="menuitem">Связаться →</a>
-</div>
-<script>
-  const burger = document.getElementById('burger');
-  const dropdown = document.getElementById('dropdown');
-  function setMenu(open) {
-    burger.classList.toggle('open', open);
-    dropdown.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-  }
-  burger.addEventListener('click', () => setMenu(!dropdown.classList.contains('open')));
-  dropdown.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('click', e => {
-    if (!burger.contains(e.target) && !dropdown.contains(e.target)) setMenu(false);
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://strategi-consult.com/"},
+    {"@type": "ListItem", "position": 2, "name": "Автоматизация кадрового учёта", "item": "https://strategi-consult.com/kadry/"}
+  ]
+}
 </script>
 
-<section class="hero" id="main-content">
-  <div class="hero-bg"></div>
-  <div class="hero-left">
-    <p class="hero-eyebrow">Автоматизация кадрового учёта</p>
-    <h1 class="hero-title">Кадровый учёт не должен отнимать половину рабочего дня.</h1>
-    <p class="hero-sub">Убираю бумажную рутину, настраиваю системы и освобождаю HR для работы которая реально влияет на бизнес.</p>
-    <div class="hero-buttons">
-      <a href="#contact" class="btn-primary">Обсудить задачу</a>
-      <a href="#process" class="btn-secondary">Как это работает</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-overlay"></div>
-    <img class="hero-photo" src="/assets/hero.jpeg" alt="Игнатий Филатов — автоматизация кадрового учёта">
-  </div>
-</section>
+<style>
+  :root{
+    --ink:#131313;
+    --accent:#2F5FE0;
+    --accent-light:#6E93FF;
+    --glass-line: rgba(255,255,255,0.2);
+    --glass-fill: rgba(255,255,255,0.08);
+    --text-soft: rgba(255,255,255,0.75);
+    --text-mute: rgba(255,255,255,0.6);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:'Century Gothic','Avenir Next','Futura','Poppins',sans-serif;
+    color:#fff; min-height:100vh; background:#1b1b1d;
+  }
+  a{ color:inherit; }
 
-<section style="background:var(--gray-4);padding:100px 24px">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">Проблемы</p>
-    <h2 class="section-title reveal">Как выглядит кадровый учёт без автоматизации</h2>
-    <p class="section-sub reveal">Узнаёте свою компанию?</p>
-    <div class="cards-grid">
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-folders" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Горы бумаг</h3>
-        <p class="card-desc">Приказы, договоры, заявления — всё в бумажном виде, ничего не найти быстро.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-repeat" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Одна и та же рутина каждый месяц</h3>
-        <p class="card-desc">HR тратит часы на табели, отпуска, больничные — вместо того чтобы заниматься людьми.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-x" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Ошибки и штрафы</h3>
-        <p class="card-desc">Ручной ввод данных — это ошибки. Ошибки в кадрах — это штрафы от трудовой инспекции.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-chart-bar-off" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Нет аналитики</h3>
-        <p class="card-desc">Непонятно сколько стоит содержание персонала, какая текучесть и где проблемы.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  /* same office photo as the homepage, dimmed like an opened card */
+  .backdrop{
+    position:fixed; top:0; bottom:0; left:0; width:100vw; z-index:-1;
+    background:#1b1b1d url('/assets/automation-backdrop.jpg') center 35% / cover no-repeat;
+  }
+  .backdrop::after{ content:""; position:absolute; inset:0; background:rgba(20,20,20,0.55); }
 
-<section id="process" style="padding:100px 24px">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">Процесс</p>
-    <h2 class="section-title reveal">Как я автоматизирую кадровый учёт</h2>
-    <p class="section-sub reveal">От бумажного хаоса к цифровой системе</p>
-    <div class="steps-grid">
-      <div class="step reveal">
-        <p class="step-num">Шаг 01</p>
-        <h3 class="step-title">Аудит текущих процессов</h3>
-        <p class="step-desc">Смотрю что и как ведётся сейчас, нахожу узкие места и риски для бизнеса.</p>
-      </div>
-      <div class="step reveal">
-        <p class="step-num">Шаг 02</p>
-        <h3 class="step-title">Выбор инструментов</h3>
-        <p class="step-desc">Подбираю систему под размер компании — без переплаты за лишние функции.</p>
-      </div>
-      <div class="step reveal">
-        <p class="step-num">Шаг 03</p>
-        <h3 class="step-title">Настройка и перенос данных</h3>
-        <p class="step-desc">Переношу все данные в систему, настраиваю шаблоны документов и автоматические напоминания.</p>
-      </div>
-      <div class="step reveal">
-        <p class="step-num">Шаг 04</p>
-        <h3 class="step-title">Обучение и сдача</h3>
-        <p class="step-desc">Обучаю сотрудников работать в системе. Кадровый учёт начинает занимать в 3 раза меньше времени.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  .skip{ position:absolute; left:-9999px; top:8px; background:#fff; color:var(--ink); padding:8px 14px; border-radius:10px; z-index:10; }
+  .skip:focus{ left:12px; }
 
-<section style="background:var(--gray-4);padding:100px 24px">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">Результат</p>
-    <h2 class="section-title reveal">Что меняется после автоматизации</h2>
-    <p class="section-sub reveal">Измеримые результаты для бизнеса</p>
-    <div class="cards-grid">
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-clock" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Экономия времени</h3>
-        <p class="card-desc">HR тратит на рутину в 2-3 раза меньше — и фокусируется на задачах которые влияют на результат.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-shield-check" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Защита от штрафов</h3>
-        <p class="card-desc">Все документы в порядке, сроки не пропускаются — трудовая инспекция не страшна.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-chart-bar" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Аналитика по персоналу</h3>
-        <p class="card-desc">Видите реальную картину: стоимость найма, текучесть, нагрузку на отделы — в одном месте.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  .wrap{ width:100%; max-width:968px; margin:0 auto; padding:24px 24px 40px; }
 
-<section style="padding:100px 24px">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">Цифры</p>
-    <h2 class="section-title reveal">Кадровый учёт без автоматизации в цифрах</h2>
-    <p class="section-sub reveal">Сколько времени и денег уходит на ручную рутину</p>
-    <div class="stats-grid">
-      <div class="stat-card reveal">
-        <span class="stat-num">60%</span>
-        <span class="stat-label">рабочего времени HR тратят на административную рутину вместо стратегических задач</span>
-      </div>
-      <div class="stat-card reveal">
-        <span class="stat-num">×3</span>
-        <span class="stat-label">меньше времени занимает кадровый учёт после перехода на цифровую систему</span>
-      </div>
-      <div class="stat-card reveal">
-        <span class="stat-num">до 50 000 ₽</span>
-        <span class="stat-label">штраф за ошибки в кадровых документах по КоАП — и это только за одно нарушение</span>
-      </div>
-      <div class="stat-card reveal">
-        <span class="stat-num">0 бумаг</span>
-        <span class="stat-label">кадровых документов на бумаге после перехода на КЭДО — всё хранится и подписывается онлайн</span>
-      </div>
-    </div>
-  </div>
-</section>
+  /* ---------- top nav (the homepage's dark pill bar) ---------- */
+  .topnav{ display:flex; justify-content:center; margin-bottom:22px; }
+  .pills{
+    display:flex; align-items:center; gap:4px; flex-wrap:wrap; justify-content:center;
+    background:rgba(27,27,29,0.55); backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
+    border:1px solid rgba(255,255,255,0.08); border-radius:40px; padding:6px;
+    box-shadow:0 14px 30px rgba(0,0,0,0.25);
+  }
+  .pills a{ text-decoration:none; color:#d6d6d8; font-size:12.5px; font-weight:600; padding:9px 16px; border-radius:30px; transition:background .2s, color .2s; white-space:nowrap; }
+  .pills a:hover{ background:rgba(255,255,255,0.1); color:#fff; }
+  .pills a[aria-current="page"]{ background:#fff; color:var(--accent); }
+  .pills a.go{ background:var(--accent); color:#fff; }
+  .pills a.go:hover{ opacity:.9; }
 
-<section style="background:var(--gray-4);padding:100px 24px">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">Состав услуги</p>
-    <h2 class="section-title reveal">Что входит в автоматизацию кадрового учёта</h2>
-    <p class="section-sub reveal">Полный переход от бумажного хаоса к работающей цифровой системе</p>
-    <div class="cards-grid">
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-clipboard-text" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Аудит текущего учёта</h3>
-        <p class="card-desc">Проверяю все кадровые документы: трудовые договоры, приказы, личные карточки, табели учёта рабочего времени. Нахожу нарушения которые могут обернуться штрафами при проверке трудовой инспекции.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-device-laptop" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Выбор и настройка системы</h3>
-        <p class="card-desc">Подбираю HRM-систему под размер и бюджет компании. Для небольших компаний часто достаточно 1С:ЗУП или облачных аналогов. Настраиваю шаблоны документов, справочники, интеграции с бухгалтерией.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-file-import" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Перенос исторических данных</h3>
-        <p class="card-desc">Переношу данные сотрудников из Excel и бумажных карточек в систему. Проверяю корректность и полноту данных. Архивируем бумажные документы по регламенту хранения.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-writing-sign" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Переход на КЭДО</h3>
-        <p class="card-desc">Настраиваю кадровый электронный документооборот: сотрудники подписывают документы онлайн, HR видит статус подписания в реальном времени. Актуально для удалённых команд и компаний с несколькими офисами.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-bell" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Автоматические напоминания</h3>
-        <p class="card-desc">Настраиваю уведомления об истечении договоров, окончании испытательного срока, плановых отпусках. Сроки больше не пропускаются — система напомнит вовремя.</p>
-      </div>
-      <div class="card reveal">
-        <span class="card-icon"><i class="ti ti-school" style="font-size:28px;color:var(--accent)"></i></span>
-        <h3 class="card-title">Обучение сотрудников</h3>
-        <p class="card-desc">Провожу обучение для HR и бухгалтерии по работе с системой. Подготавливаю инструкции и регламенты. После сдачи проекта команда работает самостоятельно.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  /* ---------- main glass panel ---------- */
+  .page{
+    background:rgba(255,255,255,0.14);
+    backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+    border:1px solid rgba(255,255,255,0.35);
+    border-radius:30px; padding:44px 40px 44px;
+  }
+  .crumbs{ font-size:11.5px; font-weight:600; color:var(--text-mute); margin-bottom:22px; }
+  .crumbs a{ text-decoration:none; }
+  .crumbs a:hover{ color:#fff; }
+  .eyebrow{ font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,0.65); font-weight:700; margin-bottom:10px; }
+  h1{ font-size:44px; font-weight:300; letter-spacing:-1px; line-height:1.1; max-width:780px; }
+  h1 em{ font-style:normal; color:var(--accent-light); font-weight:400; }
+  .lead{ font-size:16px; font-weight:500; color:rgba(255,255,255,0.88); max-width:640px; line-height:1.5; margin-top:16px; }
+  .actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+  .btn{ display:inline-block; text-decoration:none; font-size:13px; font-weight:700; padding:13px 24px; border-radius:30px; transition:transform .2s, background .2s, opacity .2s; }
+  .btn.primary{ background:var(--accent); color:#fff; }
+  .btn.primary:hover{ transform:translateY(-1px); opacity:.92; }
+  .btn.ghost{ background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); color:#fff; }
+  .btn.ghost:hover{ background:rgba(255,255,255,0.2); }
 
-<section style="padding:100px 24px">
-  <div class="section-inner">
-    <p class="section-eyebrow reveal">FAQ</p>
-    <h2 class="section-title reveal">Частые вопросы об автоматизации кадрового учёта</h2>
-    <div class="faq-list" style="margin-top:48px">
-      <div class="faq-item reveal">
-        <h3 class="faq-q">Какие системы кадрового учёта вы рекомендуете для малого и среднего бизнеса?</h3>
-        <p class="faq-a">Зависит от размера и задач. До 50 человек — часто достаточно облачного сервиса (Контур.Персонал, Кадровый учёт онлайн) или 1С:ЗУП в базовой конфигурации. От 50 до 300 человек — 1С:ЗУП или СБИС с модулем HR. Для компаний с удалёнными сотрудниками важна поддержка КЭДО — это сразу сужает выбор. Подбираю систему под конкретные требования, не навязываю дорогие решения.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h3 class="faq-q">Обязателен ли переход на КЭДО (кадровый электронный документооборот)?</h3>
-        <p class="faq-a">Юридически — нет, это право а не обязанность. Но для компаний с удалёнными сотрудниками или несколькими офисами КЭДО экономит огромное количество времени: не нужно гонять бумаги, ждать подписей, хранить архивы. С 2022 года законодательство чётко регулирует КЭДО, это безопасный инструмент.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h3 class="faq-q">Сколько времени занимает автоматизация кадрового учёта?</h3>
-        <p class="faq-a">Базовая настройка системы для компании 20-50 человек — 2-3 недели. Для 50-150 человек с переносом данных и настройкой КЭДО — 4-6 недель. Процесс идёт параллельно с текущей работой: компания не останавливается, переход происходит постепенно.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h3 class="faq-q">Что если часть сотрудников работает дистанционно или в других городах?</h3>
-        <p class="faq-a">Именно для таких компаний автоматизация нужна больше всего. Настраиваю систему с поддержкой КЭДО — документы подписываются электронной подписью, HR видит статус по всем сотрудникам в одном интерфейсе. Физическое местоположение перестаёт иметь значение для кадровых процессов.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h3 class="faq-q">Как избежать потери данных при переходе на новую систему?</h3>
-        <p class="faq-a">Переход делается поэтапно с обязательным резервным копированием. Сначала переносим данные в новую систему, проверяем корректность, и только потом прекращаем вести учёт в старой. Параллельный период работы в двух системах обычно занимает 2-4 недели — это страховка от любых ошибок при переносе.</p>
-      </div>
-      <div class="faq-item reveal">
-        <h3 class="faq-q">Нужен ли HR-специалист в штате после автоматизации?</h3>
-        <p class="faq-a">Зависит от размера компании. До 100 человек — кадровый учёт после автоматизации можно вести силами одного человека, совмещающего это с другими задачами (бухгалтер, офис-менеджер). От 100 человек — штатный HR нужен, но он тратит на рутину в 3 раза меньше времени и может фокусироваться на развитии людей.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  /* ---------- sections ---------- */
+  .sec{ margin-top:48px; scroll-margin-top:24px; }
+  .sec-label{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute); font-weight:700; }
+  .sec h2{ font-size:26px; font-weight:300; letter-spacing:-.4px; line-height:1.2; margin-top:8px; }
+  .sec-sub{ font-size:13.5px; color:var(--text-soft); margin-top:6px; }
+  .sec-body{ margin-top:18px; }
 
-<section class="cta-section" id="contact">
-  <div class="section-inner">
-    <div class="cta-card reveal">
-      <h2 class="cta-title">Готовы навести порядок<br>в HR-процессах?</h2>
-      <p class="cta-sub">Первый разговор — бесплатно. 30 минут, и у вас будет чёткое понимание, с чего начать.</p>
-      <a href="https://t.me/HR_Ignatiy" class="btn-primary">Написать в Telegram</a>
-      <a href="/" class="cta-link">← На главную</a>
+  .cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .cards.c3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .card{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:16px; padding:18px 20px; }
+  .card h3{ font-size:14px; font-weight:700; margin-bottom:6px; line-height:1.3; }
+  .card p{ font-size:12.5px; color:var(--text-soft); line-height:1.55; }
+  .card .num{ display:inline-block; font-size:11px; font-weight:800; color:var(--accent-light); margin-bottom:8px; letter-spacing:.04em; }
+
+  /* process: 4 steps joined by a line */
+  .steps{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; position:relative; }
+  .step{ position:relative; }
+  .step .dot{ display:block; width:13px; height:13px; border-radius:50%; background:var(--accent-light); box-shadow:0 0 0 5px rgba(110,147,255,0.22); margin:0 0 16px 20px; position:relative; z-index:1; }
+  .steps::before{ content:""; position:absolute; top:6px; left:26px; right:26px; height:2px; background:linear-gradient(90deg,rgba(110,147,255,0.35),var(--accent-light)); border-radius:2px; }
+  .step .card{ height:calc(100% - 29px); }
+
+  /* numbers */
+  .stats{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+  .stat{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:16px; padding:20px 16px; }
+  .stat .v{ font-size:32px; font-weight:300; color:#fff; line-height:1; letter-spacing:-.5px; }
+  .stat .v.accent{ color:var(--accent-light); font-weight:400; }
+  .stat .l{ font-size:11.5px; color:var(--text-soft); line-height:1.4; margin-top:10px; }
+
+  .stat .v.long{ font-size:26px; white-space:nowrap; }
+  @media (max-width:620px){ .stat .v.long{ font-size:19px; } }
+
+  /* FAQ */
+  .faq{ display:flex; flex-direction:column; gap:8px; }
+  .faq-item{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:14px; overflow:hidden; transition:background .2s; }
+  .faq-item.open{ background:rgba(255,255,255,0.12); }
+  .faq-item h3{ font-size:inherit; font-weight:inherit; }
+  .faq-q{ width:100%; text-align:left; font-family:inherit; font-size:13.5px; font-weight:700; color:#fff; background:none; border:none; padding:15px 18px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:14px; }
+  .faq-q span{ font-size:18px; font-weight:400; color:var(--text-soft); transition:transform .45s cubic-bezier(.33,1,.68,1); flex:0 0 auto; line-height:1; }
+  .faq-item.open .faq-q span{ transform:rotate(45deg); }
+  .faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .6s cubic-bezier(.33,1,.68,1); }
+  .faq-item.open .faq-a{ grid-template-rows:1fr; }
+  .faq-a > div{ min-height:0; overflow:hidden; }
+  .faq-a p{ padding:0 18px 16px; font-size:12.5px; color:var(--text-soft); line-height:1.6; opacity:0; transition:opacity .4s ease; }
+  .faq-item.open .faq-a p{ opacity:1; transition:opacity .5s ease .1s; }
+  .faq-q:focus-visible, .btn:focus-visible, .pills a:focus-visible, .card-link:focus-visible{ outline:2px solid var(--accent-light); outline-offset:3px; }
+
+  /* other services */
+  .card-link{ text-decoration:none; display:block; transition:transform .2s, background .2s, border-color .2s; }
+  .card-link:hover{ transform:translateY(-2px); background:rgba(255,255,255,0.13); border-color:rgba(255,255,255,0.35); }
+  .card-link h3 i{ font-style:normal; color:var(--accent-light); }
+
+  /* final CTA */
+  .cta{ margin-top:48px; background:rgba(255,255,255,0.96); color:var(--ink); border-radius:22px; padding:30px 32px; box-shadow:0 20px 44px rgba(0,0,0,0.28); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .cta h2{ font-size:24px; font-weight:300; letter-spacing:-.4px; line-height:1.2; }
+  .cta p{ font-size:13.5px; color:#3a3a3c; margin-top:6px; line-height:1.5; max-width:460px; }
+  .cta .actions{ margin-top:0; }
+  .cta .btn.ghost{ background:transparent; border-color:rgba(20,20,20,0.2); color:var(--ink); }
+  .cta .btn.ghost:hover{ background:rgba(20,20,20,0.05); }
+
+  .foot{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px 22px; margin-top:28px; font-size:12.5px; color:rgba(255,255,255,0.7); text-align:center; }
+  .foot a{ text-decoration:none; }
+  .foot a:hover{ color:#fff; }
+  .foot .copy{ width:100%; opacity:.7; margin-top:4px; }
+
+  /* entrance */
+  @keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+  .page{ animation:rise .7s cubic-bezier(.22,1,.36,1) backwards; }
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .page{ animation:none; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .faq-a, .faq-a p, .faq-q span{ transition:none; }
+  }
+
+  @media (max-width:860px){
+    .cards.c3{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .steps{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .steps::before{ display:none; }
+    .step .dot{ display:none; }
+    .step .card{ height:100%; }
+  }
+  @media (max-width:620px){
+    .wrap{ padding:16px 12px 32px; }
+    .pills a{ padding:8px 12px; font-size:12px; }
+    .pills a.hide-sm{ display:none; }
+    .page{ padding:28px 18px 30px; border-radius:24px; }
+    h1{ font-size:30px; }
+    .lead{ font-size:14.5px; }
+    .sec{ margin-top:38px; }
+    .sec h2{ font-size:22px; }
+    .cards, .cards.c3{ grid-template-columns:minmax(0,1fr); }
+    .steps{ grid-template-columns:minmax(0,1fr); }
+    .stat .v{ font-size:26px; }
+    .cta{ padding:24px 20px; }
+    .cta h2{ font-size:21px; }
+  }
+
+  /* ============ THEME TOGGLE (same control as the homepage) ============ */
+  .theme-toggle{
+    position:fixed; top:14px; right:14px; z-index:50;
+    width:62px; height:32px; border-radius:20px; cursor:pointer;
+    background:rgba(24,24,27,0.55); border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
+    box-shadow:0 8px 22px rgba(0,0,0,0.18);
+    display:flex; align-items:center; justify-content:space-between; padding:0 8px;
+    transition:background .4s ease, border-color .4s ease;
+  }
+  .theme-toggle svg{ width:14px; height:14px; position:relative; z-index:1; color:#fff; transition:opacity .4s ease, color .4s ease; }
+  .theme-toggle .tt-sun{ opacity:.45; }
+  .theme-toggle .tt-knob{ position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#2b2b2f; box-shadow:0 2px 6px rgba(0,0,0,0.25); transform:translateX(30px); transition:transform .5s cubic-bezier(.33,1,.68,1), background .4s ease; }
+  .theme-toggle:focus-visible{ outline:2px solid var(--accent-light); outline-offset:3px; }
+  html[data-theme="light"] .theme-toggle{ background:rgba(255,255,255,0.4); border-color:rgba(255,255,255,0.6); }
+  html[data-theme="light"] .theme-toggle .tt-knob{ transform:none; background:#fff; }
+  html[data-theme="light"] .theme-toggle svg{ color:#131313; }
+  html[data-theme="light"] .theme-toggle .tt-sun{ opacity:1; }
+  html[data-theme="light"] .theme-toggle .tt-moon{ opacity:.45; }
+  @media (max-width:1100px){ .wrap{ padding-top:56px; } }
+  @media (max-width:620px){ .theme-toggle{ top:10px; right:10px; } .wrap{ padding-top:50px; } }
+
+  html.theme-anim body, html.theme-anim body *, html.theme-anim .backdrop::after{
+    transition:background-color .5s ease, color .5s ease, border-color .5s ease !important;
+  }
+
+  /* ============ LIGHT THEME (page is dark by default) ============ */
+  .backdrop::after{ transition:background .5s ease; }
+  html[data-theme="light"]{
+    --glass-line: rgba(255,255,255,0.6);
+    --glass-fill: rgba(255,255,255,0.42);
+    --text-soft: #3a3a3c;
+    --text-mute: rgba(19,19,19,0.55);
+  }
+  html[data-theme="light"] body{ color:#131313; }
+  html[data-theme="light"] .backdrop::after{ background:rgba(255,255,255,0.05); }
+  html[data-theme="light"] .page{ background:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.6); }
+  html[data-theme="light"] .eyebrow{ color:rgba(19,19,19,0.6); }
+  html[data-theme="light"] .lead{ color:#2a2a2c; }
+  html[data-theme="light"] h1 em,
+  html[data-theme="light"] .card .num,
+  html[data-theme="light"] .stat .v.accent,
+  html[data-theme="light"] .card-link h3 i{ color:var(--accent); }
+  html[data-theme="light"] .crumbs a:hover, html[data-theme="light"] .foot a:hover{ color:#131313; }
+  html[data-theme="light"] .btn.ghost{ background:rgba(255,255,255,0.5); border-color:rgba(19,19,19,0.15); color:#131313; }
+  html[data-theme="light"] .btn.ghost:hover{ background:rgba(255,255,255,0.75); }
+  html[data-theme="light"] .step .dot{ background:var(--accent); box-shadow:0 0 0 5px rgba(47,95,224,0.18); }
+  html[data-theme="light"] .steps::before{ background:linear-gradient(90deg,rgba(47,95,224,0.3),var(--accent)); }
+  html[data-theme="light"] .stat .v{ color:#131313; }
+  html[data-theme="light"] .faq-q{ color:#131313; }
+  html[data-theme="light"] .faq-item.open{ background:rgba(255,255,255,0.62); }
+  html[data-theme="light"] .card-link:hover{ background:rgba(255,255,255,0.62); border-color:rgba(255,255,255,0.85); }
+  html[data-theme="light"] .foot{ color:rgba(19,19,19,0.7); }
+  html[data-theme="light"] .faq-q:focus-visible, html[data-theme="light"] .btn:focus-visible, html[data-theme="light"] .card-link:focus-visible{ outline-color:var(--accent); }
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle .tt-knob, .backdrop::after{ transition:none; }
+    html.theme-anim body, html.theme-anim body *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<button type="button" class="theme-toggle" id="themeToggle" aria-label="Светлая тема" aria-pressed="true" onclick="toggleTheme()">
+  <span class="tt-knob" aria-hidden="true"></span>
+  <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+  <svg class="tt-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+</button>
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<div class="wrap">
+  <header class="topnav">
+    <nav class="pills" aria-label="Разделы сайта">
+      <a href="/">Главная</a>
+      <a href="/onboarding/" class="hide-sm">Онбординг</a>
+      <a href="/#naim">Найм</a>
+      <a href="/kadry/" aria-current="page">Кадровый учёт</a>
+      <a href="https://t.me/HR_Ignatiy" class="go" target="_blank" rel="noopener">Связаться →</a>
+    </nav>
+  </header>
+
+  <main id="main" class="page">
+    <nav class="crumbs" aria-label="Хлебные крошки"><a href="/">Главная</a> / Автоматизация кадрового учёта</nav>
+
+    <div class="eyebrow">Автоматизация кадрового учёта</div>
+    <h1>Кадровый учёт не должен отнимать <em>половину рабочего дня.</em></h1>
+    <p class="lead">Убираю бумажную рутину, настраиваю системы и освобождаю HR для работы которая реально влияет на бизнес.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Обсудить задачу</a>
+      <a class="btn ghost" href="#process">Как это работает</a>
     </div>
-  </div>
-</section>
-<footer>
-  <p class="footer-text">© 2026 Игнатий Филатов — HRBP, HR-консультант, автоматизация HR процессов</p>
-  <p class="footer-text" style="margin-top:6px"><a href="/privacy/" class="footer-link">Политика конфиденциальности</a></p>
-</footer>
-<script src="/assets/shared.js"></script>
-<div class="mobile-cta-bar" aria-label="Быстрый контакт">
-  <a href="https://t.me/HR_Ignatiy" class="mcta-tg">Telegram</a>
-  <a href="https://wa.me/995557602599" class="mcta-wa">WhatsApp</a>
+
+    <section class="sec reveal" aria-labelledby="h-problems">
+      <div class="sec-label">Проблемы</div>
+      <h2 id="h-problems">Как выглядит кадровый учёт без автоматизации</h2>
+      <p class="sec-sub">Узнаёте свою компанию?</p>
+      <div class="sec-body cards">
+        <div class="card"><h3>Горы бумаг</h3><p>Приказы, договоры, заявления — всё в бумажном виде, ничего не найти быстро.</p></div>
+        <div class="card"><h3>Одна и та же рутина каждый месяц</h3><p>HR тратит часы на табели, отпуска, больничные — вместо того чтобы заниматься людьми.</p></div>
+        <div class="card"><h3>Ошибки и штрафы</h3><p>Ручной ввод данных — это ошибки. Ошибки в кадрах — это штрафы от трудовой инспекции.</p></div>
+        <div class="card"><h3>Нет аналитики</h3><p>Непонятно сколько стоит содержание персонала, какая текучесть и где проблемы.</p></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" id="process" aria-labelledby="h-process">
+      <div class="sec-label">Процесс</div>
+      <h2 id="h-process">Как я автоматизирую кадровый учёт</h2>
+      <p class="sec-sub">От бумажного хаоса к цифровой системе</p>
+      <ol class="sec-body steps" style="list-style:none;">
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">ШАГ 01</span><h3>Аудит текущих процессов</h3><p>Смотрю что и как ведётся сейчас, нахожу узкие места и риски для бизнеса.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">ШАГ 02</span><h3>Выбор инструментов</h3><p>Подбираю систему под размер компании — без переплаты за лишние функции.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">ШАГ 03</span><h3>Настройка и перенос данных</h3><p>Переношу все данные в систему, настраиваю шаблоны документов и автоматические напоминания.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">ШАГ 04</span><h3>Обучение и сдача</h3><p>Обучаю сотрудников работать в системе. Кадровый учёт начинает занимать в 3 раза меньше времени.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-result">
+      <div class="sec-label">Результат</div>
+      <h2 id="h-result">Что меняется после автоматизации</h2>
+      <p class="sec-sub">Измеримые результаты для бизнеса</p>
+      <div class="sec-body cards c3">
+        <div class="card"><h3>Экономия времени</h3><p>HR тратит на рутину в 2-3 раза меньше — и фокусируется на задачах которые влияют на результат.</p></div>
+        <div class="card"><h3>Защита от штрафов</h3><p>Все документы в порядке, сроки не пропускаются — трудовая инспекция не страшна.</p></div>
+        <div class="card"><h3>Аналитика по персоналу</h3><p>Видите реальную картину: стоимость найма, текучесть, нагрузку на отделы — в одном месте.</p></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-numbers">
+      <div class="sec-label">Цифры</div>
+      <h2 id="h-numbers">Кадровый учёт без автоматизации в цифрах</h2>
+      <p class="sec-sub">Сколько времени и денег уходит на ручную рутину</p>
+      <div class="sec-body stats">
+        <div class="stat"><div class="v accent">60%</div><div class="l">рабочего времени HR тратят на административную рутину вместо стратегических задач</div></div>
+        <div class="stat"><div class="v accent">×3</div><div class="l">меньше времени занимает кадровый учёт после перехода на цифровую систему</div></div>
+        <div class="stat"><div class="v accent long">до 50 000 ₽</div><div class="l">штраф за ошибки в кадровых документах по КоАП — и это только за одно нарушение</div></div>
+        <div class="stat"><div class="v accent">0 бумаг</div><div class="l">кадровых документов на бумаге после перехода на КЭДО — всё хранится и подписывается онлайн</div></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-scope">
+      <div class="sec-label">Состав услуги</div>
+      <h2 id="h-scope">Что входит в автоматизацию кадрового учёта</h2>
+      <p class="sec-sub">Полный переход от бумажного хаоса к работающей цифровой системе</p>
+      <div class="sec-body cards c3">
+        <div class="card"><h3>Аудит текущего учёта</h3><p>Проверяю все кадровые документы: трудовые договоры, приказы, личные карточки, табели учёта рабочего времени. Нахожу нарушения которые могут обернуться штрафами при проверке трудовой инспекции.</p></div>
+        <div class="card"><h3>Выбор и настройка системы</h3><p>Подбираю HRM-систему под размер и бюджет компании. Для небольших компаний часто достаточно 1С:ЗУП или облачных аналогов. Настраиваю шаблоны документов, справочники, интеграции с бухгалтерией.</p></div>
+        <div class="card"><h3>Перенос исторических данных</h3><p>Переношу данные сотрудников из Excel и бумажных карточек в систему. Проверяю корректность и полноту данных. Архивируем бумажные документы по регламенту хранения.</p></div>
+        <div class="card"><h3>Переход на КЭДО</h3><p>Настраиваю кадровый электронный документооборот: сотрудники подписывают документы онлайн, HR видит статус подписания в реальном времени. Актуально для удалённых команд и компаний с несколькими офисами.</p></div>
+        <div class="card"><h3>Автоматические напоминания</h3><p>Настраиваю уведомления об истечении договоров, окончании испытательного срока, плановых отпусках. Сроки больше не пропускаются — система напомнит вовремя.</p></div>
+        <div class="card"><h3>Обучение сотрудников</h3><p>Провожу обучение для HR и бухгалтерии по работе с системой. Подготавливаю инструкции и регламенты. После сдачи проекта команда работает самостоятельно.</p></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-faq">
+      <div class="sec-label">FAQ</div>
+      <h2 id="h-faq">Частые вопросы об автоматизации кадрового учёта</h2>
+      <div class="sec-body faq">
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Какие системы кадрового учёта вы рекомендуете для малого и среднего бизнеса?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Зависит от размера и задач. До 50 человек — часто достаточно облачного сервиса (Контур.Персонал, Кадровый учёт онлайн) или 1С:ЗУП в базовой конфигурации. От 50 до 300 человек — 1С:ЗУП или СБИС с модулем HR. Для компаний с удалёнными сотрудниками важна поддержка КЭДО — это сразу сужает выбор. Подбираю систему под конкретные требования, не навязываю дорогие решения.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Обязателен ли переход на КЭДО (кадровый электронный документооборот)?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Юридически — нет, это право а не обязанность. Но для компаний с удалёнными сотрудниками или несколькими офисами КЭДО экономит огромное количество времени: не нужно гонять бумаги, ждать подписей, хранить архивы. С 2022 года законодательство чётко регулирует КЭДО, это безопасный инструмент.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Сколько времени занимает автоматизация кадрового учёта?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Базовая настройка системы для компании 20-50 человек — 2-3 недели. Для 50-150 человек с переносом данных и настройкой КЭДО — 4-6 недель. Процесс идёт параллельно с текущей работой: компания не останавливается, переход происходит постепенно.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Что если часть сотрудников работает дистанционно или в других городах?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Именно для таких компаний автоматизация нужна больше всего. Настраиваю систему с поддержкой КЭДО — документы подписываются электронной подписью, HR видит статус по всем сотрудникам в одном интерфейсе. Физическое местоположение перестаёт иметь значение для кадровых процессов.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Как избежать потери данных при переходе на новую систему?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Переход делается поэтапно с обязательным резервным копированием. Сначала переносим данные в новую систему, проверяем корректность, и только потом прекращаем вести учёт в старой. Параллельный период работы в двух системах обычно занимает 2-4 недели — это страховка от любых ошибок при переносе.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Нужен ли HR-специалист в штате после автоматизации?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Зависит от размера компании. До 100 человек — кадровый учёт после автоматизации можно вести силами одного человека, совмещающего это с другими задачами (бухгалтер, офис-менеджер). От 100 человек — штатный HR нужен, но он тратит на рутину в 3 раза меньше времени и может фокусироваться на развитии людей.</p></div></div></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-other">
+      <div class="sec-label">Другие услуги</div>
+      <h2 id="h-other">Другие HR-процессы которые я автоматизирую</h2>
+      <div class="sec-body cards c3">
+        <a class="card card-link" href="/onboarding/"><h3>Автоматизация онбординга <i>→</i></h3><p>Выстраиваю процесс адаптации который снижает текучесть в первые 3 месяца.</p></a>
+        <a class="card card-link" href="/#naim"><h3>Автоматизация найма <i>→</i></h3><p>Выстраиваю воронку подбора которая работает без вашего участия на каждом этапе.</p></a>
+        <a class="card card-link" href="/#hrbp"><h3>HRBP по подписке <i>→</i></h3><p>HR-директор на part-time, без найма в штат — для компаний до 300 человек.</p></a>
+      </div>
+    </section>
+
+    <section class="cta reveal" aria-labelledby="h-cta">
+      <div>
+        <h2 id="h-cta">Готовы навести порядок в HR-процессах?</h2>
+        <p>Первый разговор — бесплатно. 30 минут, и у вас будет чёткое понимание, с чего начать.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="btn ghost" href="https://wa.me/995557602599" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <a href="/">← На главную</a>
+    <a href="/onboarding/">Автоматизация онбординга</a>
+    <a href="/#naim">Автоматизация найма</a>
+    <a href="/#hrbp">HR для малого бизнеса</a>
+    <a href="/privacy/">Политика конфиденциальности</a>
+    <span class="copy">© 2026 Игнатий Филатов — HRBP, HR-консультант, автоматизация HR процессов</span>
+  </footer>
 </div>
+
+<script>
+  // FAQ: one open at a time, smooth grid-rows animation (CSS)
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i){
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if(!wasOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // sections fade up as they scroll into view
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin:'0px 0px -8% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+
+  // theme toggle — this page is dark unless the visitor picked light
+  function currentTheme(){ return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'; }
+  function syncThemeToggle(){
+    var b = document.getElementById('themeToggle'); if(!b) return;
+    var dark = currentTheme() === 'dark';
+    b.setAttribute('aria-pressed', String(dark));
+    b.setAttribute('aria-label', dark ? 'Светлая тема' : 'Тёмная тема');
+  }
+  function toggleTheme(){
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    var root = document.documentElement;
+    root.classList.add('theme-anim');
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('sc-theme', next); }catch(e){}
+    syncThemeToggle();
+    clearTimeout(toggleTheme._t);
+    toggleTheme._t = setTimeout(function(){ root.classList.remove('theme-anim'); }, 650);
+  }
+  syncThemeToggle();
+</script>
 </body>
 </html>
