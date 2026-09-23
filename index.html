@@ -560,6 +560,19 @@
   .calc-svc{ font-family:inherit; font-size:11px; font-weight:700; color:#d6d6d8; background:#3c3c3f; border:1px solid rgba(255,255,255,0.12); padding:8px 14px; border-radius:20px; cursor:pointer; transition:.2s; }
   .calc-svc.active{ background:var(--accent-light); color:#fff; }
   .calc-row{ margin-top:18px; }
+  .calc-howto-btn{ display:inline-flex; align-items:center; gap:4px; margin-left:8px; padding:3px 10px; border-radius:999px; border:1px solid rgba(143,162,255,0.45); background:rgba(143,162,255,0.12); color:#b3c0ff; font:inherit; font-size:10.5px; font-weight:700; cursor:pointer; vertical-align:middle; transition:background .15s, border-color .15s; }
+  .calc-howto-btn:hover{ background:rgba(143,162,255,0.22); border-color:rgba(143,162,255,0.7); }
+  .calc-howto-btn i{ font-style:normal; font-size:13px; line-height:1; display:inline-block; transition:transform .15s; }
+  .calc-howto-btn[aria-expanded="true"] i{ transform:rotate(90deg); }
+  .calc-howto-body[hidden]{ display:none; }
+  .calc-howto-body{ margin-top:14px; padding:14px 16px; border-radius:12px; background:rgba(0,0,0,0.22); border:1px solid rgba(255,255,255,0.08); font-size:12px; line-height:1.55; color:rgba(255,255,255,0.8); }
+  .calc-howto-body h5{ font-size:12.5px; font-weight:800; color:#fff; margin:14px 0 4px; }
+  .calc-howto-body h5:first-child{ margin-top:0; }
+  .calc-howto-body p{ margin:0 0 6px; }
+  .calc-howto-body ul{ margin:4px 0 6px; padding-left:18px; }
+  .calc-howto-body li{ margin:2px 0; }
+  .calc-howto-body b{ display:inline; font-size:inherit; margin:0; color:#fff; font-weight:800; }
+  .calc-howto-body .f{ display:inline-block; padding:2px 8px; border-radius:6px; background:rgba(255,255,255,0.08); color:#fff; font-weight:700; }
   .calc-row-lbl{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; font-size:11px; font-weight:600; color:#d6d6d8; }
   .calc-row-lbl span{ flex:1 1 auto; min-width:0; }
   .calc-row-lbl b{ flex:0 0 auto; white-space:nowrap; color:#fff; font-size:13px; font-weight:800; font-variant-numeric:tabular-nums; }
@@ -1425,8 +1438,36 @@
             <input type="range" min="0" max="60" step="5" value="30" id="unitOverhead" class="calc-slider" oninput="unitCalcUpdate()">
           </div>
           <div class="calc-row">
-            <div class="calc-row-lbl"><span>Доход, который сотрудник приносит компании</span><b id="unitRevenueVal">250 000 ₽</b></div>
+            <div class="calc-row-lbl"><span>Доход, который сотрудник приносит компании <button type="button" class="calc-howto-btn" aria-expanded="false" aria-controls="unitHowto" onclick="toggleUnitHowto(this)">Как посчитать <i>›</i></button></span><b id="unitRevenueVal">250 000 ₽</b></div>
             <input type="range" min="0" max="1000000" step="10000" value="250000" id="unitRevenue" class="calc-slider" oninput="unitCalcUpdate()">
+            <div class="calc-howto-body" id="unitHowto" hidden>
+                <p>Точной формулы для одного человека нет — считают по-разному в зависимости от роли. Три способа, от простого к точному.</p>
+                <h5>1. Выручка или прибыль на сотрудника — по всей компании</h5>
+                <p><span class="f">Выручка / среднесписочная численность</span></p>
+                <p>Пример: выручка 120 млн ₽ в год, 40 человек — 3 млн ₽ на сотрудника. Честнее — по прибыли: <span class="f">чистая прибыль / численность</span>. Это средний показатель, а не вклад конкретного человека: он полезен, чтобы сравнивать годы между собой или себя с конкурентами.</p>
+                <h5>2. Отдача на вложения в персонал (Human Capital ROI)</h5>
+                <p><span class="f">(Выручка − (все расходы − ФОТ)) / ФОТ</span></p>
+                <p>Показывает, сколько рублей приносит каждый рубль, потраченный на людей. 1,8 — значит, на 1 ₽ зарплаты компания получает 1,8 ₽. Меньше 1 — люди стоят дороже, чем приносят.</p>
+                <h5>3. Вклад конкретного сотрудника — для производства</h5>
+                <p>Лучше всего считается для ролей с измеримой выработкой — сварщиков, гибщиков, шлифовщиков:</p>
+                <p><span class="f">Выработка за месяц × маржинальная прибыль с единицы − полная стоимость сотрудника</span></p>
+                <p>Пример со сварщиком:</p>
+                <ul>
+                  <li>варит 40 изделий в месяц, с каждого компания зарабатывает 5 000 ₽ сверх материалов — 200 000 ₽;</li>
+                  <li>полная стоимость: зарплата 90 000 ₽ + страховые взносы ~30% (27 000 ₽) + инструмент, спецодежда, рабочее место ~10 000 ₽ — около 127 000 ₽;</li>
+                  <li><b>вклад — около 73 000 ₽ в месяц</b>, отдача 1,57.</li>
+                </ul>
+                <p>Берите именно полную стоимость, а не только оклад — иначе результат будет завышен.</p>
+                <h5>А инженер, HR, бухгалтер?</h5>
+                <p>Их вклад напрямую не измерить. Обычно поступают так:</p>
+                <ul>
+                  <li>через проекты: инженер-конструктор разработал изделие — его вклад равен доле в прибыли с этого изделия;</li>
+                  <li>через экономию: сколько денег сэкономлено или потерь предотвращено — меньше брака, быстрее закрытые вакансии;</li>
+                  <li>или оценивают по способу 2, вместе со всеми.</li>
+                </ul>
+                <h5>Где можно ошибиться</h5>
+                <p>Расчёт по одному человеку всегда приблизительный: выработка зависит от загрузки заказами, оборудования и работы соседей по цепочке. Для решений об увольнении или премии не стоит опираться только на эту цифру.</p>
+            </div>
           </div>
           <div class="calc-output">
             <div class="calc-output-lbl">Полная стоимость сотрудника</div>
@@ -1878,7 +1919,8 @@
 
   /* ============ unit economics calculator (HR-метрики overlay) ============ */
   function unitCalcFmt(n){ return Math.round(n).toLocaleString('ru-RU'); }
-  function unitCalcUpdate(){
+  function toggleUnitHowto(btn){ const b=document.getElementById('unitHowto'); const open=b.hidden; b.hidden=!open; btn.setAttribute('aria-expanded', String(open)); }
+function unitCalcUpdate(){
     var salary = parseInt(document.getElementById('unitSalary').value, 10);
     var overhead = parseInt(document.getElementById('unitOverhead').value, 10);
     var revenue = parseInt(document.getElementById('unitRevenue').value, 10);
