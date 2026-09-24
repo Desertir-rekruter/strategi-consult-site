@@ -415,6 +415,39 @@
   .audit-hero-cap{ font-size:13px; color:rgba(255,255,255,0.65); font-weight:600; margin-top:8px; }
 
   /* ---------- audit overlay: money leaks ---------- */
+  .audit-letter{ max-width:640px; margin-top:14px; font-size:17px; font-weight:500; line-height:1.6; color:rgba(255,255,255,0.9); }
+  .audit-letter p + p{ margin-top:14px; }
+  .audit-q-lead{ font-size:16px; font-weight:500; color:rgba(255,255,255,0.9); line-height:1.5; max-width:640px; margin-bottom:16px; }
+  .audit-qs{ display:flex; flex-direction:column; gap:10px; }
+  .audit-q{ display:grid; grid-template-columns:1fr auto; gap:6px 20px; padding:16px 20px; border-radius:18px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); transition:background .2s,border-color .2s; }
+  .audit-q.on{ background:rgba(47,95,224,0.28); border-color:rgba(110,147,255,0.7); }
+  .audit-qq{ font-size:16px; font-weight:700; line-height:1.35; }
+  .audit-qa{ grid-column:1/2; font-size:13.5px; color:rgba(255,255,255,0.8); line-height:1.5; }
+  .audit-src{ color:rgba(255,255,255,0.6); font-size:12px; }
+  .audit-yn{ grid-row:1/3; grid-column:2; display:flex; gap:6px; align-self:center; }
+  .audit-yn button{ font-family:inherit; font-size:13px; font-weight:700; color:#fff; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:8px 16px; cursor:pointer; transition:background .2s; }
+  .audit-yn button[aria-pressed="true"]{ background:var(--accent); border-color:var(--accent); }
+  .audit-yn button:focus-visible{ outline:2px solid var(--accent-light); outline-offset:2px; }
+  .audit-score{ margin-top:16px; font-size:15px; color:rgba(255,255,255,0.82); }
+  .audit-score b{ color:#fff; }
+  .audit-more{ margin-top:30px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:18px; transition:background .2s; }
+  .audit-more[open]{ background:rgba(255,255,255,0.12); }
+  .audit-more summary{ list-style:none; cursor:pointer; padding:16px 20px; font-size:16px; font-weight:700; color:#fff; display:flex; justify-content:space-between; align-items:center; gap:14px; }
+  .audit-more summary::-webkit-details-marker{ display:none; }
+  .audit-more summary::after{ content:"+"; font-size:22px; font-weight:400; color:rgba(255,255,255,0.75); flex:0 0 auto; transition:transform .35s cubic-bezier(.33,1,.68,1); }
+  .audit-more[open] summary::after{ transform:rotate(45deg); }
+  .audit-more summary:focus-visible{ outline:2px solid var(--accent-light); outline-offset:2px; border-radius:18px; }
+  .audit-rows{ padding:0 20px 8px; }
+  .audit-row{ display:grid; grid-template-columns:130px 1fr; gap:18px; padding:14px 0; border-top:1px solid rgba(255,255,255,0.2); align-items:baseline; }
+  .audit-n{ font-size:22px; font-weight:300; color:var(--accent-soft); white-space:nowrap; }
+  .audit-t{ font-size:14px; color:rgba(255,255,255,0.82); line-height:1.5; }
+  .audit-t b{ color:#fff; }
+  @media (max-width:620px){
+    .audit-letter{ font-size:16px; }
+    .audit-q{ grid-template-columns:1fr; }
+    .audit-yn{ grid-row:auto; grid-column:1; justify-self:start; margin-top:6px; }
+    .audit-row{ grid-template-columns:1fr; gap:2px; }
+  }
   .leak-list{ display:flex; flex-direction:column; gap:10px; }
   .leak-item{ display:flex; align-items:center; gap:20px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:16px; padding:16px 22px; }
   .leak-num{ flex:0 0 auto; min-width:96px; font-size:21px; font-weight:800; color:var(--accent-light); text-align:center; }
@@ -1268,45 +1301,39 @@
       <div class="funnel-page-head">
         <div>
           <div class="eyebrow">HR Consulting Studio · Услуга</div>
-          <h2>Бесплатный аудит процессов</h2>
+          <h2>Почему аудит бесплатный</h2>
         </div>
         <div class="funnel-close" onclick="closeCardOverlay('auditCard','auditOverlay')">✕</div>
       </div>
-      <p class="funnel-lead">30-минутный разбор вашей ситуации — бесплатно. Уже в конце звонка вы поймёте, где утекают деньги и что с этим делать.</p>
-
-      <div class="audit-hero-stat">
-        <div class="audit-hero-num">150 000 ₽</div>
-        <div class="audit-hero-cap">экономят клиенты в год уже на первом этапе внедрения</div>
+      <div class="audit-letter">
+        <p>Я беру 2–3 клиента в месяц. Прежде чем браться за задачу, мне нужно понять, смогу ли я вам помочь. Для этого хватает 30 минут разговора.</p>
+        <p>Поэтому звонок бесплатный. Я смотрю на вашу ситуацию, вы смотрите на меня. В конце вы знаете, где теряете деньги, что с этим делать и сколько это стоит.</p>
       </div>
 
       <div class="funnel-page-section">
-        <h4>Где чаще всего утекают деньги</h4>
-        <div class="leak-list">
-          <div class="leak-item"><div class="leak-num">5 недель</div><div class="leak-text"><b>Долгий найм</b>Вакансия закрывается вручную — кандидаты уходят к конкурентам, пока вы решаете.</div></div>
-          <div class="leak-item"><div class="leak-num">50–200%</div><div class="leak-text"><b>Текучесть</b>Годовой зарплаты стоит замена одного ушедшего сотрудника — по оценке Gallup (2019).</div></div>
-          <div class="leak-item"><div class="leak-num">~30%</div><div class="leak-text"><b>Ранний уход</b>Людей хотя бы раз уходили с новой работы в первые 90 дней — опрос Jobvite (2018).</div></div>
-          <div class="leak-item"><div class="leak-num">5,3 ч</div><div class="leak-text"><b>Ручная рутина</b>В неделю сотрудник ждёт ответов от коллег или заново ищет то, что уже кто-то знает — исследование Panopto (2018).</div></div>
+        <p class="audit-q-lead">Ответьте на четыре вопроса. Если хотя бы на один ответ «да», на созвоне есть что разобрать.</p>
+        <div class="audit-qs" id="auditQs">
+          <div class="audit-q"><div class="audit-qq">Вакансия висит дольше месяца?</div><div class="audit-qa">При ручном сорсинге вакансия закрывается около 5 недель. В кейсе геймдев-команды срок сократили до 3 недель.</div><div class="audit-yn"><button type="button" data-v="y" aria-pressed="false">Да</button><button type="button" data-v="n" aria-pressed="false">Нет</button></div></div>
+          <div class="audit-q"><div class="audit-qq">Новички уходят в первые три месяца?</div><div class="audit-qa">~30% людей хотя бы раз уходили с новой работы в первые 90 дней. <span class="audit-src">Jobvite, 2018</span></div><div class="audit-yn"><button type="button" data-v="y" aria-pressed="false">Да</button><button type="button" data-v="n" aria-pressed="false">Нет</button></div></div>
+          <div class="audit-q"><div class="audit-qq">Не считали, сколько стоит уход сотрудника?</div><div class="audit-qa">Замена одного человека стоит 50–200% его годовой зарплаты. <span class="audit-src">Gallup, 2019</span></div><div class="audit-yn"><button type="button" data-v="y" aria-pressed="false">Да</button><button type="button" data-v="n" aria-pressed="false">Нет</button></div></div>
+          <div class="audit-q"><div class="audit-qq">Сотрудники по сто раз спрашивают одно и то же?</div><div class="audit-qa">5,3 часа в неделю уходит на ожидание ответов и поиск того, что кто-то уже знает. <span class="audit-src">Panopto, 2018</span></div><div class="audit-yn"><button type="button" data-v="y" aria-pressed="false">Да</button><button type="button" data-v="n" aria-pressed="false">Нет</button></div></div>
         </div>
+        <div class="audit-score" id="auditScore" aria-live="polite">Отметьте, что про вас.</div>
       </div>
 
-      <div class="funnel-page-section">
-        <h4>Как проходит звонок</h4>
-        <div class="audit-timeline-wrap">
-          <div class="audit-timeline">
-            <div class="audit-timeline-track">
-              <div class="audit-timeline-fill"></div>
-              <div class="audit-tl-point" style="--p:0%"><span class="audit-tl-dot"></span><div class="audit-tl-label"><b>0 мин</b>Рассказываете о ситуации</div></div>
-              <div class="audit-tl-point" style="--p:33%"><span class="audit-tl-dot"></span><div class="audit-tl-label"><b>~10 мин</b>Разбираю и нахожу утечки</div></div>
-              <div class="audit-tl-point" style="--p:66%"><span class="audit-tl-dot"></span><div class="audit-tl-label"><b>~20 мин</b>Предлагаю гипотезу решения</div></div>
-              <div class="audit-tl-point" style="--p:100%"><span class="audit-tl-dot"></span><div class="audit-tl-label"><b>30 мин</b>Конкретный план и ориентир по цене</div></div>
-            </div>
-          </div>
+      <details class="audit-more">
+        <summary>С чем чаще всего приходят</summary>
+        <div class="audit-rows">
+          <div class="audit-row"><div class="audit-n">5 недель</div><div class="audit-t"><b>Долгий найм.</b> Вакансия закрывается вручную, кандидаты уходят к конкурентам.</div></div>
+          <div class="audit-row"><div class="audit-n">50–200%</div><div class="audit-t"><b>Текучесть.</b> Годовой зарплаты стоит замена одного сотрудника. <span class="audit-src">Gallup, 2019</span></div></div>
+          <div class="audit-row"><div class="audit-n">~30%</div><div class="audit-t"><b>Ранний уход</b> в первые 90 дней. <span class="audit-src">Jobvite, 2018</span></div></div>
+          <div class="audit-row"><div class="audit-n">5,3 ч</div><div class="audit-t"><b>Ручная рутина</b> каждую неделю на сотрудника. <span class="audit-src">Panopto, 2018</span></div></div>
         </div>
-      </div>
+      </details>
     </div>
 
     <div class="funnel-cta">
-      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
+      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener" id="auditCta">Получить бесплатный аудит</a>
       <span>Отвечаю в течение рабочего дня</span>
     </div>
   </div>
@@ -2083,6 +2110,22 @@
 </div>
 
 <script>
+  (function(){
+    var box = document.getElementById('auditQs'); if(!box) return;
+    var score = document.getElementById('auditScore'), cta = document.getElementById('auditCta');
+    box.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if(!b) return;
+      var q = b.closest('.audit-q'), on = b.getAttribute('aria-pressed') !== 'true';
+      q.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      q.classList.toggle('on', on && b.dataset.v === 'y');
+      var yes = box.querySelectorAll('.audit-q.on').length;
+      if(!yes){ score.textContent = 'Отметьте, что про вас.'; cta.textContent = 'Получить бесплатный аудит'; return; }
+      var w = yes === 1 ? 'пункт' : 'пункта';
+      score.innerHTML = '<b>' + yes + ' ' + w + '</b> — разберём их на созвоне.';
+      cta.textContent = 'Разобрать ' + yes + ' ' + w + ' на созвоне';
+    });
+  })();
   function openFunnel(e){ openCardOverlay('funnelCard','funnelOverlay'); }
   function closeFunnel(){ closeCardOverlay('funnelCard','funnelOverlay'); }
   function handleOverlayClick(e){
