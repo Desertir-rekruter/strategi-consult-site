@@ -564,6 +564,13 @@
   .ret-say{ font-size:15px; line-height:1.5; color:#fff; margin:4px 0 0; }
   .ret-say b{ color:#9DB5FF; }
   @media (prefers-reduced-motion:reduce){ .ret-dot{ transition:none; } }
+  .w-big{ font-size:26px; font-weight:700; letter-spacing:-.4px; font-variant-numeric:tabular-nums; line-height:1.15; margin-top:6px; color:#fff; }
+  .w-big small{ display:block; font-size:12px; font-weight:500; color:rgba(255,255,255,0.6); letter-spacing:0; margin-top:4px; }
+  .w-seg{ display:flex; flex-wrap:wrap; gap:6px; margin:2px 0 14px; }
+  .w-seg button{ font-family:inherit; font-size:12px; font-weight:700; color:#fff; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:20px; padding:7px 13px; cursor:pointer; transition:background .2s; }
+  .w-seg button[aria-pressed="true"]{ background:var(--accent); border-color:var(--accent); }
+  .w-seg button:focus-visible{ outline:2px solid var(--accent-light); outline-offset:2px; }
+  .w-seg-lbl{ font-size:12.5px; color:rgba(255,255,255,0.85); margin-bottom:6px; }
   .ret-src{ color:rgba(255,255,255,0.6); font-size:11.5px; margin-top:12px; line-height:1.45; }
   @media (max-width:900px){ .ret-split{ grid-template-columns:1fr; } }
   .funnel-article-h{ text-wrap:balance; font-size:22px; font-weight:400; letter-spacing:-.2px; color:#fff; margin-bottom:12px; }
@@ -1877,24 +1884,18 @@
         </div>
         <div class="funnel-close" onclick="closeCardOverlay('metricsCard','metricsOverlay')">✕</div>
       </div>
-      <p class="funnel-lead">Строю дашборд ключевых HR-метрик и юнит-экономику по каждой роли — сколько сотрудник стоит компании и когда выходит в плюс. Решения на цифрах, а не на ощущениях.</p>
+      <details class="funnel-article">
+        <summary>Как самому понять, окупается ли сотрудник</summary>
+        <p>Большинство руководителей, с которыми я говорю, не знают, сколько им на самом деле стоит сотрудник. Оклад знают. А то, что сверху ещё налоги, рабочее место, обучение и несколько месяцев, пока новичок разгоняется, — это уже «ну где-то там».</p>
+        <p>Начните с простого. Возьмите пять последних вакансий и посчитайте в обычной таблице, сколько дней каждая была открыта. Уже по этим пяти строчкам будет видно, где у вас затык. Потом прибавьте к окладу всё, что компания платит сверху, и сравните с тем, что человек приносит. Калькулятор ниже как раз для этого.</p>
+        <p>И не пытайтесь сразу построить идеальный дашборд на двадцать метрик (такие обычно умирают через месяц). Одна-две цифры, которые вы реально смотрите каждый месяц, полезнее. Ну а если хочется, чтобы всё это считалось само, вы знаете, куда писать)</p>
+      </details>
+      <h3 class="funnel-article-h">А теперь о том, как работаю я</h3>
+      <p class="funnel-lead">Я перевожу HR на язык денег. Не «кажется, справляется», а сколько человек стоит компании, сколько приносит и когда выходит в плюс. Считаю на ваших данных: из таблиц, 1С, выгрузок с hh — откуда получится.</p>
 
       <div class="funnel-page-section">
-        <h4>Что такое юнит-экономика в HR</h4>
-        <p style="font-size:13.5px; color:rgba(255,255,255,0.8); line-height:1.6; max-width:680px; margin-bottom:16px;">Юнит-экономика — это расчёт, сколько компания зарабатывает или теряет на одном сотруднике, если разложить его на понятные цифры: сколько он стоит и сколько приносит. Это не абстракция для инвесторов, а рабочий инструмент — чтобы видеть, какие роли и отделы реально окупаются, а какие держатся на «кажется, справляется».</p>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Полная стоимость сотрудника</div><div class="ktext">Не только оклад — плюс налоги, рабочее место, бонусы и обучение.</div></div>
-          <div class="kb-card"><div class="ktitle">Доход на сотрудника</div><div class="ktext">Сколько выручки или ценности сотрудник приносит компании за тот же период.</div></div>
-          <div class="kb-card"><div class="ktitle">Маржа по роли</div><div class="ktext">Какие позиции и отделы приносят прибыль, а какие работают в минус.</div></div>
-        </div>
-
-        <div class="funnel-case" style="margin-top:14px;">
-          <b>Ценность для вас</b>
-          <p>Вы видите в деньгах, а не в ощущениях, кто из команды окупается, кого стоит доращивать, а какую роль вообще не нужно было заводить в штат. Это база для решений о найме, зарплатах и структуре команды — без гадания.</p>
-        </div>
-
-        <div class="funnel-case" style="margin-top:14px;">
-          <b>Посчитайте сами: окупается ли сотрудник</b>
+        <h4>Посчитайте сами: окупается ли сотрудник</h4>
+        <div class="funnel-case">
           <div class="calc-row">
             <div class="calc-row-lbl"><span>Оклад сотрудника</span><b id="unitSalaryVal">100 000 ₽</b></div>
             <input type="range" min="30000" max="400000" step="5000" value="100000" id="unitSalary" class="calc-slider" oninput="unitCalcUpdate()">
@@ -1947,28 +1948,13 @@
       </div>
 
       <div class="funnel-page-section">
-        <h4>Проблема</h4>
-        <div class="funnel-case">
-          <b>Почему это происходит</b>
-          <p>Без цифр HR-решения принимаются на ощущениях: кажется, что вакансия закрывается быстро, кажется, что сотрудник окупается. Пока это не переведено в конкретные цифры, спорить с интуицией нечем — и решения продолжают приниматься наугад.</p>
-        </div>
-      </div>
-
-      <div class="funnel-page-section">
-        <h4>Что можно сделать самому</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Начните с одной метрики</div><div class="ktext">Посчитайте time-to-hire за последние 5 вакансий вручную в таблице — этого достаточно, чтобы увидеть тренд.</div></div>
-          <div class="kb-card"><div class="ktitle">Считайте полную стоимость найма</div><div class="ktext">Зарплата рекрутера, реклама, время на собеседования и недополученная работа за время вакансии.</div></div>
-          <div class="kb-card"><div class="ktitle">Сравнивайте, а не гадайте</div><div class="ktext">Сопоставьте cost-per-hire с потерями от того, что позиция долго не закрывалась.</div></div>
-        </div>
-      </div>
-
-      <div class="funnel-page-section">
-        <h4>Что входит</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Дашборд метрик</div><div class="ktext">Time-to-hire, cost-per-hire, текучесть, eNPS — в одном месте, а не разбросано по таблицам.</div></div>
-          <div class="kb-card"><div class="ktitle">Юнит-экономика роли</div><div class="ktext">Сколько сотрудник стоит компании и когда выходит в плюс — по каждой ключевой роли отдельно.</div></div>
-          <div class="kb-card"><div class="ktitle">Регулярные срезы</div><div class="ktext">Не разовый отчёт, а живая картина — чтобы решения принимались на актуальных цифрах.</div></div>
+        <h4>Как я работаю с метриками</h4>
+        <div class="funnel-steps">
+          <div class="fstep"><div class="fnum">01</div><div class="ftitle">Данные</div><div class="ftext">Собираю то, что уже есть: таблицы, 1С, выгрузки с hh. Новую бюрократию не завожу.</div></div>
+          <div class="fstep"><div class="fnum">02</div><div class="ftitle">Полная стоимость</div><div class="ftext">Считаю, сколько на самом деле стоит каждая ключевая роль, а не только её оклад.</div></div>
+          <div class="fstep"><div class="fnum">03</div><div class="ftitle">Дашборд</div><div class="ftext">Собираю главные метрики в одном месте: время и стоимость найма, текучесть, eNPS.</div></div>
+          <div class="fstep"><div class="fnum">04</div><div class="ftitle">Вы подключаетесь тут</div><div class="ftext">Разбираем цифры вместе: какие роли окупаются, где теряются деньги и что с этим делать.</div></div>
+          <div class="fstep"><div class="fnum">05</div><div class="ftitle">Обновление</div><div class="ftext">Цифры обновляются регулярно, чтобы решения принимались на свежих данных, а не на прошлогоднем отчёте.</div></div>
         </div>
       </div>
     </div>
@@ -1992,34 +1978,36 @@
         </div>
         <div class="funnel-close" onclick="closeCardOverlay('hrbpCard','hrbpOverlay')">✕</div>
       </div>
-      <p class="funnel-lead">Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
-
-      <div class="funnel-page-section">
-        <h4>Проблема</h4>
-        <div class="funnel-case">
-          <b>Почему это происходит</b>
-          <p>Без выделенного HR-времени всё HR превращается в тушение пожаров: сначала наняли, потом разбираются с конфликтом, потом снова наняли. Системных решений не появляется, потому что на них физически нет времени между срочными задачами.</p>
+      <div class="ret-split">
+        <div class="ret-text">
+      <details class="funnel-article">
+        <summary>Как самому навести порядок в HR, пока нет HR</summary>
+        <p>В компаниях без HR обычно происходит одно и то же. HR-задачи делает собственник или руководитель, в перерывах между «настоящей» работой. Сначала наняли, потом разбираются с конфликтом, потом снова наняли, потому что первый ушёл. Системы нет, потому что на неё физически нет времени.</p>
+        <p>Что можно сделать самому. Выделите фиксированные часы на HR, хотя бы два-три в неделю, и не отдавайте их под срочное. Ведите список вопросов, которые повторяются: если что-то всплыло третий раз, это уже процесс, а не случайность. И отделяйте задачи, которые тушат пожар, от тех, которые убирают его причину. Вторых почти всегда меньше, но именно они экономят время.</p>
+        <p>Если после недели такого учёта окажется, что HR у вас занимает больше, чем вы готовы ему отдавать, вы знаете, куда писать)</p>
+      </details>
+      <h3 class="funnel-article-h">А теперь о том, как работаю я</h3>
+      <p class="funnel-lead">Я работаю как ваш HR, только не в штате и не на полный день. Вы покупаете часы в месяц, а я закрываю в них то, что нужно именно сейчас: найм, онбординг, конфликт, кадровые документы или стратегию. Платите за работу, а не за то, что человек сидит в офисе.</p>
+        </div>
+        <div class="ret-calc" aria-label="Нужен ли вам штатный HR">
+          <div class="ret-title">Нужен ли вам штатный HR</div>
+          <div class="ret-ctl"><label for="hrbpH">HR-задач в неделю <output id="hrbpHo"></output></label><input type="range" id="hrbpH" min="1" max="40" step="1" value="6"></div>
+          <div class="w-big" id="hrbpBig" aria-live="polite"></div>
+          <p class="ret-say" id="hrbpSay"></p>
+          <div class="ret-src">Считаем от полной ставки: 40 часов в неделю. Прикиньте, сколько часов в неделю у вас уходит на найм, адаптацию, документы и разговоры с людьми.</div>
         </div>
       </div>
 
       <div class="funnel-page-section">
-        <h4>Что можно сделать самому</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Выделите фиксированные часы</div><div class="ktext">Даже 2–3 часа в неделю на HR-задачи регулярно дают больше, чем один день раз в квартал.</div></div>
-          <div class="kb-card"><div class="ktitle">Ведите список повторяющихся вопросов</div><div class="ktext">Если один и тот же вопрос всплывает третий раз — это уже процесс, а не случайность.</div></div>
-          <div class="kb-card"><div class="ktitle">Разделите срочное и системное</div><div class="ktext">Отдельно фиксируйте задачи, которые решают симптом, и те, что решают причину.</div></div>
+        <h4>Как проходит месяц работы</h4>
+        <div class="funnel-steps">
+          <div class="fstep"><div class="fnum">01</div><div class="ftitle">Разбор</div><div class="ftext">Смотрю, что сейчас горит, а что может подождать.</div></div>
+          <div class="fstep"><div class="fnum">02</div><div class="ftitle">План на месяц</div><div class="ftext">Составляем список задач и расставляем приоритеты вместе с вами.</div></div>
+          <div class="fstep"><div class="fnum">03</div><div class="ftitle">Работа</div><div class="ftext">Делаю задачи в рамках часов: найм, онбординг, документы, сложные разговоры.</div></div>
+          <div class="fstep"><div class="fnum">04</div><div class="ftitle">Вы подключаетесь тут</div><div class="ftext">Созваниваемся по удобному вам графику: вы в курсе всего, но не тратите на это день.</div></div>
+          <div class="fstep"><div class="fnum">05</div><div class="ftitle">Отчёт</div><div class="ftext">В конце месяца показываю, что сделано и что берём дальше.</div></div>
         </div>
       </div>
-
-      <div class="funnel-page-section">
-        <h4>Что входит</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">HR-функция на part-time</div><div class="ktext">Формат часов в месяц — без найма в штат и расходов на полную ставку HR-директора.</div></div>
-          <div class="kb-card"><div class="ktitle">Весь цикл, а не куски</div><div class="ktext">Найм, онбординг, кадровые процессы и стратегия — под одним HRBP, а не набор разрозненных подрядчиков.</div></div>
-          <div class="kb-card"><div class="ktitle">Кому подходит</div><div class="ktext">Компаниям, которым рано под штатного HRBP, но HR уже нужен системно, а не по остаточному принципу.</div></div>
-        </div>
-      </div>
-
       <!-- ===== HR для малого бизнеса (SEO content moved from the old /malyj-biznes/ page) ===== -->
       <section class="ov-block" id="hr-dlya-malogo-biznesa" aria-labelledby="h-small-biz">
         <div class="eyebrow">HR для малого бизнеса</div>
@@ -2136,31 +2124,40 @@
         </div>
         <div class="funnel-close" onclick="closeCardOverlay('marketCard','marketOverlay')">✕</div>
       </div>
-      <p class="funnel-lead">Анализирую зарплатные вилки по рынку, конкурентов за таланты и реальную доступность кандидатов в вашей нише — чтобы оффер не проигрывал ещё до собеседования.</p>
-
-      <div class="funnel-page-section">
-        <h4>Проблема</h4>
-        <div class="funnel-case">
-          <b>Почему это происходит</b>
-          <p>Оффер часто проигрывает не потому что маленький, а потому что не соответствует рынку прямо сейчас — зарплаты меняются быстрее, чем компании успевают это заметить, а вилки в вакансии годами остаются прежними.</p>
+      <div class="ret-split">
+        <div class="ret-text">
+      <details class="funnel-article">
+        <summary>Как самому понять, сколько сейчас стоит специалист</summary>
+        <p>Самая частая история: вакансия висит третий месяц, откликов мало, а те, кто пришёл, пропадают после слов о зарплате. И тут выясняется, что вилку ставили года два назад и с тех пор не трогали. А рынок за это время ушёл вперёд: по данным Росстата, средняя зарплата в России выросла на 18,3% в 2024 году и ещё на 13,5% в 2025-м. <span class="audit-src">Росстат</span></p>
+        <p>Что можно сделать самому. Откройте hh.ru и посмотрите 5–10 похожих вакансий, именно свежих, за последний месяц. Спросите у кандидатов, которые вам отказали, на какую сумму они рассчитывали (на удивление, многие честно отвечают). И не зацикливайтесь только на деньгах: иногда проигрывают из-за того, что ответили кандидату через неделю, а конкурент — через день.</p>
+        <p>Если после этого всё равно непонятно, почему не идут люди, вы знаете, куда писать)</p>
+      </details>
+      <h3 class="funnel-article-h">А теперь о том, как работаю я</h3>
+      <p class="funnel-lead">Я собираю картину рынка под вашу конкретную вакансию: сколько сейчас платят за такого специалиста, кто ещё его ищет и чем переманивает, и сколько таких людей вообще есть. Чтобы оффер не проигрывал ещё до собеседования.</p>
+        </div>
+        <div class="ret-calc" aria-label="Не устарела ли ваша вилка">
+          <div class="ret-title">Не устарела ли ваша вилка</div>
+          <div class="ret-ctl"><label for="mkS">Зарплата в вакансии <output id="mkSo"></output></label><input type="range" id="mkS" min="30000" max="400000" step="5000" value="100000"></div>
+          <div class="w-seg-lbl" id="mkYl">Когда ставили эту цифру</div>
+          <div class="w-seg" role="group" aria-labelledby="mkYl">
+            <button type="button" data-y="2023" aria-pressed="true">в 2023</button>
+            <button type="button" data-y="2024" aria-pressed="false">в 2024</button>
+            <button type="button" data-y="2025" aria-pressed="false">в 2025</button>
+          </div>
+          <div class="w-big" id="mkBig" aria-live="polite"></div>
+          <p class="ret-say" id="mkSay"></p>
+          <div class="ret-src">Средняя зарплата в России выросла на 18,3% в 2024 году и на 13,5% в 2025-м (Росстат). Это средний рост по стране: в вашей нише он может быть другим.</div>
         </div>
       </div>
 
       <div class="funnel-page-section">
-        <h4>Что можно сделать самому</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Проверьте 3–5 актуальных вакансий</div><div class="ktext">Посмотрите похожие позиции на hh.ru за последний месяц, а не полугодовой давности данные.</div></div>
-          <div class="kb-card"><div class="ktitle">Спросите у кандидатов на отказе</div><div class="ktext">Прямой вопрос «на какую сумму вы рассчитывали» даёт больше, чем любая аналитика.</div></div>
-          <div class="kb-card"><div class="ktitle">Смотрите не только на зарплату</div><div class="ktext">Часто теряют не из-за денег, а из-за скорости отклика или условий работы.</div></div>
-        </div>
-      </div>
-
-      <div class="funnel-page-section">
-        <h4>Что входит</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Зарплатные вилки</div><div class="ktext">Актуальные вилки по рынку и конкретно по вашей нише — не усреднённые данные из открытых источников.</div></div>
-          <div class="kb-card"><div class="ktitle">Конкуренты за таланты</div><div class="ktext">Кто ещё охотится за теми же кандидатами и чем переманивает — зарплатой, условиями или брендом.</div></div>
-          <div class="kb-card"><div class="ktitle">Доступность кандидатов</div><div class="ktext">Сколько подходящих людей вообще есть на рынке — чтобы требования к вакансии были реалистичными.</div></div>
+        <h4>Как я исследую рынок</h4>
+        <div class="funnel-steps">
+          <div class="fstep"><div class="fnum">01</div><div class="ftitle">Бриф</div><div class="ftext">Разбираемся, кого именно ищем и что вы готовы предложить.</div></div>
+          <div class="fstep"><div class="fnum">02</div><div class="ftitle">Конкуренты</div><div class="ftext">Смотрю, кто ещё ищет таких людей и что обещает: деньги, условия, бренд.</div></div>
+          <div class="fstep"><div class="fnum">03</div><div class="ftitle">Кандидаты</div><div class="ftext">Изучаю резюме и говорю с кандидатами о том, сколько и за что они хотят.</div></div>
+          <div class="fstep"><div class="fnum">04</div><div class="ftitle">Вы подключаетесь тут</div><div class="ftext">Показываю вилку, конкурентов и сколько подходящих людей есть на рынке.</div></div>
+          <div class="fstep"><div class="fnum">05</div><div class="ftitle">Оффер</div><div class="ftext">Вместе собираем оффер, который не проиграет ещё до собеседования.</div></div>
         </div>
       </div>
     </div>
@@ -2184,40 +2181,35 @@
         </div>
         <div class="funnel-close" onclick="closeCardOverlay('customCard','customOverlay')">✕</div>
       </div>
-      <p class="funnel-lead">Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам — она исчезает, а не переезжает в очередной чат.</p>
-
-      <div class="funnel-page-section">
-        <h4>Проблема</h4>
-        <div class="funnel-case">
-          <b>Почему это происходит</b>
-          <p>Готовые сервисы решают типовые задачи, но ваш процесс найма или кадрового учёта редко бывает типовым — отсюда куча ручных обходных путей вокруг системы, которая должна была всё упростить.</p>
+      <div class="ret-split">
+        <div class="ret-text">
+      <details class="funnel-article">
+        <summary>Как самому понять, что пора автоматизировать</summary>
+        <p>Обычно всё начинается с того, что купили модную HR-систему, а через полгода вокруг неё выросли таблицы, чаты и «я тебе сейчас в личку скину». Готовые сервисы хорошо решают типовые задачи, но ваш процесс почти никогда не типовой. И вместо упрощения получается ещё одно место, куда надо не забыть зайти.</p>
+        <p>Что можно сделать самому. Неделю записывайте все вопросы, которые вам задают кандидаты и сотрудники. Посчитайте, сколько времени уходит на ответы (счётчик рядом, можно прикинуть прямо сейчас). И если решите что-то автоматизировать, начните с одного, самого частого сценария. Бот, который хорошо отвечает на пять вопросов, полезнее бота, который плохо отвечает на пятьдесят.</p>
+        <p>Если цифра в счётчике вас расстроила, вы знаете, куда писать)</p>
+      </details>
+      <h3 class="funnel-article-h">А теперь о том, как работаю я</h3>
+      <p class="funnel-lead">Я делаю HR-системы и Telegram-ботов под ваш процесс, а не подгоняю процесс под чужой шаблон. Скрининг кандидатов, онбординг, ответы на частые вопросы: рутина уходит к боту, а не переезжает в очередной чат.</p>
+        </div>
+        <div class="ret-calc" aria-label="Сколько времени съедают одни и те же вопросы">
+          <div class="ret-title">Сколько съедают одни и те же вопросы</div>
+          <div class="ret-ctl"><label for="cqN">Одинаковых вопросов в день <output id="cqNo"></output></label><input type="range" id="cqN" min="1" max="50" step="1" value="10"></div>
+          <div class="ret-ctl"><label for="cqM">Минут на один ответ <output id="cqMo"></output></label><input type="range" id="cqM" min="1" max="15" step="1" value="3"></div>
+          <div class="w-big" id="cqBig" aria-live="polite"></div>
+          <p class="ret-say" id="cqSay"></p>
+          <div class="ret-src">Считаем 21 рабочий день в месяце и 8-часовой рабочий день.</div>
         </div>
       </div>
 
       <div class="funnel-page-section">
-        <h4>Что можно сделать самому</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Выпишите повторяющиеся вопросы</div><div class="ktext">Соберите за неделю все вопросы, которые кандидаты и сотрудники задают чаще всего — это готовый список тем для бота.</div></div>
-          <div class="kb-card"><div class="ktitle">Посчитайте время на рутину</div><div class="ktext">Сколько часов в неделю уходит на однотипные ответы и пересылку одних и тех же файлов.</div></div>
-          <div class="kb-card"><div class="ktitle">Начните с одного процесса</div><div class="ktext">Не пытайтесь автоматизировать всё сразу — выберите самый частый и самый простой сценарий.</div></div>
-        </div>
-      </div>
-
-      <div class="funnel-page-section">
-        <h4>HR-системы</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">CRM под процесс</div><div class="ktext">Система найма строится под ваш реальный процесс, а не подгоняет процесс под чужой шаблон.</div></div>
-          <div class="kb-card"><div class="ktitle">Кадровый учёт</div><div class="ktext">Внутренние инструменты для КДП, когда готовые сервисы избыточны или не покрывают нужный кейс.</div></div>
-          <div class="kb-card"><div class="ktitle">Сначала процесс</div><div class="ktext">Пишу под задачу, а не подбираю задачу под готовый инструмент — иначе система не приживётся.</div></div>
-        </div>
-      </div>
-
-      <div class="funnel-page-section">
-        <h4>Telegram-боты</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Скрининг кандидатов</div><div class="ktext">Бот отсеивает нерелевантные отклики по вашим критериям до того, как они попадут к рекрутеру.</div></div>
-          <div class="kb-card"><div class="ktitle">Онбординг</div><div class="ktext">Новый сотрудник получает ответы и материалы сразу, а не ждёт, пока до него дойдут руки HR.</div></div>
-          <div class="kb-card"><div class="ktitle">Частые вопросы</div><div class="ktext">Бот отвечает на повторяющиеся кадровые вопросы команды — рутина не оседает в личных чатах.</div></div>
+        <h4>Как я делаю систему или бота</h4>
+        <div class="funnel-steps">
+          <div class="fstep"><div class="fnum">01</div><div class="ftitle">Разбор процесса</div><div class="ftext">Смотрю, как у вас устроены найм, онбординг или кадровые вопросы и где больше всего ручной работы.</div></div>
+          <div class="fstep"><div class="fnum">02</div><div class="ftitle">Первый сценарий</div><div class="ftext">Выбираем самое частое и простое, с него и начинаем.</div></div>
+          <div class="fstep"><div class="fnum">03</div><div class="ftitle">Прототип</div><div class="ftext">Делаю рабочую версию и запускаю на небольшой группе людей.</div></div>
+          <div class="fstep"><div class="fnum">04</div><div class="ftitle">Вы подключаетесь тут</div><div class="ftext">Смотрите, как это работает на живых людях, и говорите, что поправить.</div></div>
+          <div class="fstep"><div class="fnum">05</div><div class="ftitle">Доработка</div><div class="ftext">Дорабатываю по ходу и добавляю новые сценарии, когда первый прижился.</div></div>
         </div>
       </div>
     </div>
@@ -2668,6 +2660,56 @@ function unitCalcUpdate(){
   }
   T.addEventListener('input',upd);
   upd();
+})();
+</script>
+<script>
+(function(){
+  function fmt(n){ return Math.round(n).toLocaleString('ru-RU'); }
+  function pl(n,a,b,c){ n=Math.abs(n)%100; var d=n%10; if(n>10&&n<20) return c; if(d>1&&d<5) return b; if(d===1) return a; return c; }
+  function $(id){ return document.getElementById(id); }
+  // HRBP: part-time vs full-time load
+  var H=$('hrbpH');
+  if(H){
+    var hu=function(){
+      var h=+H.value,p=Math.round(h/40*100),idle=40-h;
+      $('hrbpHo').textContent=h+' '+pl(h,'час','часа','часов');
+      $('hrbpBig').innerHTML='Штатный HR загружен на '+p+'%<small>при полной ставке в 40 часов в неделю</small>';
+      $('hrbpSay').innerHTML = h>=30 ? 'Похоже, вам уже нужен свой HR в штате. Помогу его найти и ввести в работу.'
+        : 'Остальные <b>'+idle+' '+pl(idle,'час','часа','часов')+'</b> в неделю вы платили бы за ожидание задач. Подписка закрывает ровно ту нагрузку, которая есть.';
+    };
+    H.addEventListener('input',hu); hu();
+  }
+  // Market: salary catch-up by Rosstat average wage growth
+  var S=$('mkS');
+  if(S){
+    var year=2023, k={2023:1.183*1.135, 2024:1.135, 2025:1};
+    var btns=document.querySelectorAll('#marketOverlay .w-seg button');
+    var mu=function(){
+      var v=+S.value,need=Math.round(v*k[year]/1000)*1000;
+      $('mkSo').textContent=fmt(v)+' ₽';
+      btns.forEach(function(b){ b.setAttribute('aria-pressed', +b.dataset.y===year); });
+      if(year===2025){
+        $('mkBig').innerHTML=fmt(v)+' ₽<small>цифра свежая, данных за 2026 год ещё нет</small>';
+        $('mkSay').innerHTML='Но средняя по стране — не ваш рынок. В вашей нише цифра может быть и выше, и ниже.';
+      } else {
+        $('mkBig').innerHTML='≈ '+fmt(need)+' ₽<small>столько нужно, чтобы просто догнать рост средней зарплаты</small>';
+        $('mkSay').innerHTML='Это <b>+'+fmt(need-v)+' ₽</b> к вашей цифре, и это ещё без поправки на вашу нишу.';
+      }
+    };
+    btns.forEach(function(b){ b.addEventListener('click',function(){ year=+b.dataset.y; mu(); }); });
+    S.addEventListener('input',mu); mu();
+  }
+  // Custom: time spent on repeated questions
+  var N=$('cqN'),M=$('cqM');
+  if(N){
+    var cu=function(){
+      var n=+N.value,m=+M.value,mo=n*m*21/60,yr=mo*12,days=Math.round(yr/8);
+      $('cqNo').textContent=n; $('cqMo').textContent=m+' мин';
+      $('cqBig').innerHTML='≈ '+(mo<10?mo.toLocaleString('ru-RU',{maximumFractionDigits:1}):fmt(mo))+' ч в месяц<small>уходит на ответы на одни и те же вопросы</small>';
+      $('cqSay').innerHTML='За год это <b>'+fmt(yr)+' '+pl(Math.round(yr),'час','часа','часов')+'</b>, или <b>'+days+' '+pl(days,'рабочий день','рабочих дня','рабочих дней')+'</b>.';
+    };
+    [N,M].forEach(function(e){ e.addEventListener('input',cu); }); cu();
+  }
 })();
 </script>
 </body>
