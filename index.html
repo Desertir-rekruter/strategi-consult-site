@@ -901,7 +901,11 @@
     transition:background-color .5s ease, color .5s ease, border-color .5s ease, fill .5s ease, stroke .5s ease !important;
   }
 
-  /* dark theme: only the page itself — the opened-card overlays are already dark */
+  /* dark theme: the page itself, plus the opened-card overlays (darker tint, dark glass page) */
+  html[data-theme="dark"] .funnel-overlay-bg::after{ background:rgba(8,8,10,0.72); }
+  html[data-theme="dark"] .funnel-page{ background:rgba(18,18,21,0.58); border-color:rgba(255,255,255,0.14); }
+  html[data-theme="dark"] .funnel-close{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); }
+  html[data-theme="dark"] .funnel-close:hover{ background:rgba(255,255,255,0.16); }
   .backdrop::after{ content:""; position:absolute; inset:0; background:rgba(8,8,10,0); transition:background .5s ease; }
   html[data-theme="dark"] .backdrop::after{ background:rgba(8,8,10,0.5); }
   html[data-theme="dark"] .content, html[data-theme="dark"] body > footer{
