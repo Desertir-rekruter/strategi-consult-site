@@ -666,6 +666,39 @@
   }
   .funnel-cta span{ font-size:12px; color:rgba(255,255,255,0.65); }
 
+
+  /* ============ «Решатель проблем» ============ */
+  .solver-card{ grid-column:1 / -1; display:flex; align-items:center; gap:18px 28px; flex-wrap:wrap; min-height:0; }
+  .solver-card .sv-tile-text{ flex:0 1 260px; }
+  .solver-card .sv-tile-chips{ flex:1 1 380px; display:flex; flex-wrap:wrap; gap:8px; }
+  .solver-card .sv-tile-chips span{ font-size:11px; font-weight:700; padding:8px 13px; border-radius:20px; background:#3c3c3f; color:#d6d6d8; border:1px solid rgba(255,255,255,0.12); }
+  .solver-card .sv-tile-chips span.on{ background:var(--accent-light); color:#fff; border-color:transparent; }
+  .solver-card .sv-tile-go{ flex:0 0 auto; font-size:12.5px; font-weight:700; color:#fff; background:var(--accent); padding:12px 20px; border-radius:24px; }
+  @media (max-width:620px){ .solver-card .sv-tile-chips span:nth-child(n+4){ display:none; } .solver-card .sv-tile-go{ width:100%; text-align:center; } }
+  .sv-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .sv-chip{ font-family:inherit; font-size:13px; font-weight:600; text-align:left; line-height:1.35; padding:10px 15px; border-radius:22px; cursor:pointer; color:#fff; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.24); transition:background .2s, border-color .2s, transform .15s; }
+  .sv-chip:hover{ background:rgba(255,255,255,0.16); }
+  .sv-chip:active{ transform:scale(.97); }
+  .sv-chip:focus-visible, .sv-sol:focus-visible{ outline:2px solid var(--accent-light); outline-offset:2px; }
+  .sv-chip[aria-pressed="true"]{ background:var(--accent); border-color:var(--accent-light); }
+  .sv-chip[aria-pressed="true"]::before{ content:"✓ "; }
+  .sv-sep{ height:1px; background:rgba(255,255,255,0.16); margin:28px 0; }
+  .sv-h{ font-size:20px; font-weight:400; letter-spacing:-.2px; margin-bottom:12px; }
+  .sv-h span{ font-size:13px; color:rgba(255,255,255,0.6); }
+  .sv-sols{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px; }
+  .sv-sol{ font-family:inherit; text-align:left; cursor:pointer; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:16px; padding:16px 18px; display:flex; flex-direction:column; gap:6px; text-decoration:none; color:#fff; animation:svPop .45s cubic-bezier(.33,1,.68,1) both; }
+  .sv-sol:hover{ background:rgba(255,255,255,0.13); }
+  .sv-sol.top{ border-color:var(--accent-light); background:rgba(47,95,224,0.22); }
+  .sv-sol .t{ font-size:15px; font-weight:700; }
+  .sv-sol .d{ font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.85); }
+  .sv-sol .fix{ font-size:11.5px; line-height:1.45; color:#b3c0ff; font-weight:600; }
+  .sv-sol .go{ margin-top:auto; padding-top:6px; font-size:12px; font-weight:700; }
+  .sv-badge{ align-self:flex-start; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:10px; background:var(--accent-light); color:#fff; }
+  .sv-empty{ border:1px dashed rgba(255,255,255,0.3); border-radius:16px; padding:22px; text-align:center; font-size:13.5px; color:rgba(255,255,255,0.6); }
+  .sv-cta-off{ opacity:.45; pointer-events:none; }
+  @keyframes svPop{ from{ opacity:0; transform:translateY(8px) scale(.98); } }
+  @media (prefers-reduced-motion: reduce){ .sv-sol{ animation:none; } .sv-chip{ transition:none; } }
+
   body.funnel-lock{ overflow:hidden; }
 
   @media (max-width:760px){
@@ -1059,6 +1092,22 @@
             <div class="calc-output-val" id="calcOutput">20 000 – 30 000 ₽</div>
           </div>
           <a class="calc-cta" id="calcCta" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить точный расчёт →</a>
+        </div>
+
+        <!-- PROBLEM SOLVER: full-width band so the cards around it keep their places -->
+        <div class="card dark2 funnel-card solver-card anim-in" style="animation-delay:.12s;" id="solverCard" role="button" tabindex="0" aria-label="Решатель проблем: открыть" onclick="openCardOverlay('solverCard','solverOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('solverCard','solverOverlay');}">
+          <div class="sv-tile-text">
+            <h3 style="color:#f2f2f2;">Решатель проблем</h3>
+            <div class="sub" style="color:#b8b8ba;">Отметьте, что болит, и я соберу решения под вашу ситуацию</div>
+          </div>
+          <div class="sv-tile-chips" aria-hidden="true">
+            <span class="on">По 2 месяца не могу закрыть вакансию</span>
+            <span>Одни и те же вопросы</span>
+            <span class="on">Данные о клиентах теряются</span>
+            <span>Новички уходят</span>
+            <span>Не понимаю, что происходит в бизнесе</span>
+          </div>
+          <div class="sv-tile-go">Собрать свой набор →</div>
         </div>
 
         <!-- NEW SERVICE: RETENTION -->
@@ -2036,6 +2085,30 @@
 </div>
 
 <!-- ============ FULLSCREEN MARKET RESEARCH OVERLAY ============ -->
+<div class="funnel-overlay" id="solverOverlay">
+  <div class="funnel-overlay-bg"></div>
+  <div class="funnel-overlay-scroll" id="solverOverlayScroll" onclick="handleCardOverlayClick(event,'solverOverlayScroll','solverCard','solverOverlay')">
+    <div class="funnel-page">
+      <div class="funnel-page-head">
+        <div>
+          <div class="eyebrow">Решатель проблем</div>
+          <h2>Что у вас болит?</h2>
+        </div>
+        <div class="funnel-close" onclick="closeCardOverlay('solverCard','solverOverlay')">✕</div>
+      </div>
+      <p class="funnel-lead" style="margin-top:14px; margin-bottom:26px;">Отметьте всё, что узнаёте у себя. Я соберу из того, что делаю, набор решений именно под ваш список.</p>
+      <div class="sv-chips" id="svChips"></div>
+      <div class="sv-sep"></div>
+      <h3 class="sv-h" id="svHead">Ваш набор решений</h3>
+      <div id="svSols" aria-live="polite"></div>
+    </div>
+    <div class="funnel-cta">
+      <a id="svCta" class="sv-cta-off" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить мой набор →</a>
+      <span id="svCtaNote">Сначала отметьте хотя бы одну проблему</span>
+    </div>
+  </div>
+</div>
+
 <div class="funnel-overlay" id="marketOverlay">
   <div class="funnel-overlay-bg"></div>
   <div class="funnel-overlay-scroll" id="marketOverlayScroll" onclick="handleCardOverlayClick(event,'marketOverlayScroll','marketCard','marketOverlay')">
@@ -2182,6 +2255,7 @@
       if(document.getElementById('hrbpOverlay').classList.contains('open')) closeCardOverlay('hrbpCard','hrbpOverlay');
       if(document.getElementById('marketOverlay').classList.contains('open')) closeCardOverlay('marketCard','marketOverlay');
       if(document.getElementById('customOverlay').classList.contains('open')) closeCardOverlay('customCard','customOverlay');
+      if(document.getElementById('solverOverlay').classList.contains('open')) closeCardOverlay('solverCard','solverOverlay');
     }
   });
 
@@ -2307,6 +2381,84 @@
   function handleCardOverlayClick(e, scrollId, cardId, overlayId){
     if(e.target.id === scrollId){ closeCardOverlay(cardId, overlayId); }
   }
+
+
+  /* ============ «Решатель проблем» ============ */
+  /* each problem points to 1–3 of the site's own services with a weight;
+     services that cover more of the ticked problems go first */
+  var svServices = {
+    naim: { t:'Найм', d:'Экономлю 16,5 часов на одной вакансии: воронка, скрипты, отбор без хаоса.', open:['funnelCard','funnelOverlay'] },
+    kb:   { t:'Построение базы знаний', d:'Единый источник правды: процессы и роли в одном месте, а не в переписках и головах.', open:['kbCard','kbOverlay'] },
+    onb:  { t:'Онбординг', d:'Снижаю текучесть в первые 3 месяца: план первых 1, 7 и 30 дней.', href:'/onboarding/' },
+    ret:  { t:'Снижение текучести', d:'Разбираюсь, почему уходят, и выстраиваю удержание.', open:['retentionCard','retentionOverlay'] },
+    met:  { t:'HR-метрики и юнит-экономика', d:'Считаю, сколько стоит и когда окупается каждый сотрудник. Решения на цифрах.', open:['metricsCard','metricsOverlay'] },
+    mkt:  { t:'Исследование рынка', d:'Сколько платят конкуренты и где искать людей, чтобы оффер не проигрывал.', open:['marketCard','marketOverlay'] },
+    sys:  { t:'Кастомные HR-системы и боты', d:'CRM и внутренние системы под ваши процессы, рутину передаю Telegram-ботам.', open:['customCard','customOverlay'] },
+    kdp:  { t:'Кадровый учёт', d:'Убираю бумажную рутину: КЭДО, шаблоны, напоминания о сроках.', href:'/kadry/' },
+    hrbp: { t:'HRBP по подписке', d:'HR-директор на part-time, без найма в штат.', open:['hrbpCard','hrbpOverlay'] },
+    aud:  { t:'Аудит процессов', d:'За 30 минут находим, где именно компания теряет деньги.', open:['auditCard','auditOverlay'] }
+  };
+  var svProblems = [
+    { id:'q',     t:'Сотрудники постоянно задают одни и те же вопросы', s:{kb:3, sys:1} },
+    { id:'key',   t:'Всё держится на паре людей: уйдут, и всё встанет', s:{kb:3, ret:1} },
+    { id:'ramp',  t:'Новички месяцами выходят на результат', s:{onb:3, kb:2} },
+    { id:'vac',   t:'По 2 месяца не могу закрыть вакансию', s:{naim:3, mkt:2} },
+    { id:'int',   t:'Руководители тонут в собеседованиях', s:{naim:3} },
+    { id:'off',   t:'Кандидаты отказываются от оффера', s:{mkt:3, naim:1} },
+    { id:'new',   t:'Новички уходят в первые месяцы', s:{onb:3, ret:1} },
+    { id:'best',  t:'Уходят сильные сотрудники', s:{ret:3, mkt:1} },
+    { id:'hr',    t:'HR нужен, а брать HR-директора в штат рано', s:{hrbp:3} },
+    { id:'blind', t:'Не понимаю, что происходит у меня в бизнесе', s:{met:3, aud:2} },
+    { id:'roi',   t:'Не понимаю, какие сотрудники окупаются', s:{met:3} },
+    { id:'lost',  t:'Данные о клиентах постоянно теряются', s:{sys:3} },
+    { id:'paper', t:'Кадровые документы в бумажном хаосе', s:{kdp:3} },
+    { id:'rout',  t:'На HR-рутину уходит полдня', s:{kdp:2, sys:2} }
+  ];
+  var svSel = [];
+  function svProblem(id){ for(var i = 0; i < svProblems.length; i++){ if(svProblems[i].id === id) return svProblems[i]; } }
+  function svToggle(id){
+    var i = svSel.indexOf(id);
+    if(i < 0) svSel.push(id); else svSel.splice(i, 1);
+    svRender();
+  }
+  function svRender(){
+    document.getElementById('svChips').innerHTML = svProblems.map(function(p){
+      return '<button type="button" class="sv-chip" aria-pressed="' + (svSel.indexOf(p.id) >= 0) + '" onclick="svToggle(\'' + p.id + '\')">' + p.t + '</button>';
+    }).join('');
+    var score = {}, fix = {};
+    svSel.forEach(function(id){
+      var p = svProblem(id);
+      for(var k in p.s){ score[k] = (score[k] || 0) + p.s[k]; (fix[k] = fix[k] || []).push(p.t); }
+    });
+    var keys = Object.keys(score).sort(function(a, b){ return score[b] - score[a]; });
+    document.getElementById('svHead').innerHTML = 'Ваш набор решений' + (keys.length ? ' <span>· ' + keys.length + '</span>' : '');
+    document.getElementById('svSols').innerHTML = keys.length ? '<div class="sv-sols">' + keys.map(function(k, i){
+      var s = svServices[k];
+      var inner = (i === 0 ? '<span class="sv-badge">Начать с этого</span>' : '') +
+        '<span class="t">' + s.t + '</span><span class="d">' + s.d + '</span>' +
+        '<span class="fix">Закрывает: ' + fix[k].map(function(f){ return '«' + f.toLowerCase() + '»'; }).join(', ') + '</span>' +
+        '<span class="go">Читать →</span>';
+      var cls = 'sv-sol' + (i === 0 ? ' top' : '');
+      return s.href ? '<a class="' + cls + '" href="' + s.href + '">' + inner + '</a>'
+                    : '<button type="button" class="' + cls + '" onclick="svOpen(\'' + k + '\')">' + inner + '</button>';
+    }).join('') + '</div>' : '<div class="sv-empty">Отметьте проблемы выше, и здесь появятся решения под них</div>';
+    var cta = document.getElementById('svCta');
+    cta.classList.toggle('sv-cta-off', !svSel.length);
+    var list = svSel.map(function(id){ return '— ' + svProblem(id).t.toLowerCase(); }).join('\n');
+    cta.href = 'https://wa.me/995557602599?text=' + encodeURIComponent('Здравствуйте! Собрал свои проблемы в решателе:\n' + list + '\nХочу обсудить, с чего начать.');
+    document.getElementById('svCtaNote').textContent = svSel.length ? 'Список ваших проблем уже будет в сообщении' : 'Сначала отметьте хотя бы одну проблему';
+  }
+  // close the solver, then open the chosen service's window from its own card
+  function svOpen(k){
+    var t = svServices[k].open;
+    closeCardOverlay('solverCard', 'solverOverlay');
+    setTimeout(function(){
+      var card = document.getElementById(t[0]);
+      card.scrollIntoView({block:'center'});
+      openCardOverlay(t[0], t[1]);
+    }, 700);
+  }
+  svRender();
 
   /* ============ hiring-speed toggle ============ */
   function speedToggle(state){
