@@ -552,10 +552,18 @@
   .ret-ctl input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 0 0 4px rgba(110,147,255,0.45); cursor:pointer; }
   .ret-ctl input[type=range]::-moz-range-thumb{ width:18px; height:18px; border:0; border-radius:50%; background:#fff; box-shadow:0 0 0 4px rgba(110,147,255,0.45); cursor:pointer; }
   .ret-ctl input[type=range]:focus-visible::-webkit-slider-thumb{ box-shadow:0 0 0 4px #6E93FF, 0 0 0 7px rgba(255,255,255,0.4); }
-  .ret-big{ font-size:28px; font-weight:700; letter-spacing:-.5px; font-variant-numeric:tabular-nums; line-height:1.15; margin-top:6px; }
-  .ret-big small{ display:block; font-size:12px; font-weight:500; color:rgba(255,255,255,0.6); letter-spacing:0; margin-top:4px; }
-  .ret-save{ margin-top:14px; padding-top:14px; border-top:1px dashed rgba(255,255,255,0.25); font-size:13.5px; color:rgba(255,255,255,0.85); line-height:1.45; }
-  .ret-save b{ color:#9DB5FF; font-variant-numeric:tabular-nums; }
+  .ret-dots{ display:grid; grid-template-columns:repeat(10,1fr); gap:7px; margin:4px 0 14px; }
+  .ret-dot{ aspect-ratio:1; border-radius:50%; background:rgba(255,255,255,0.85); transition:background .45s, transform .45s, box-shadow .45s; }
+  .ret-dot.gone{ background:transparent; box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.35); transform:scale(.8); }
+  .ret-dot.keep{ background:#6E93FF; box-shadow:0 0 12px rgba(110,147,255,0.8); }
+  .ret-legend{ display:flex; flex-wrap:wrap; gap:6px 14px; font-size:11.5px; color:rgba(255,255,255,0.6); margin-bottom:10px; }
+  .ret-legend i{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+  .ret-legend .l-stay{ background:rgba(255,255,255,0.85); }
+  .ret-legend .l-gone{ box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.5); }
+  .ret-legend .l-keep{ background:#6E93FF; }
+  .ret-say{ font-size:15px; line-height:1.5; color:#fff; margin:4px 0 0; }
+  .ret-say b{ color:#9DB5FF; }
+  @media (prefers-reduced-motion:reduce){ .ret-dot{ transition:none; } }
   .ret-src{ color:rgba(255,255,255,0.6); font-size:11.5px; margin-top:12px; line-height:1.45; }
   @media (max-width:900px){ .ret-split{ grid-template-columns:1fr; } }
   .funnel-article-h{ text-wrap:balance; font-size:22px; font-weight:400; letter-spacing:-.2px; color:#fff; margin-bottom:12px; }
@@ -1763,14 +1771,13 @@
       <h3 class="funnel-article-h">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Я не начинаю с «давайте поднимем зарплаты» или «давайте закажем пиццу по пятницам». Сначала выясняю, почему уходят именно у вас, и только потом предлагаю, что менять. Бывшие сотрудники говорят со мной откровеннее, чем с бывшим начальником: я человек со стороны, и мне не надо ничего доказывать.</p>
         </div>
-        <div class="ret-calc" aria-label="Калькулятор стоимости текучести">
-          <div class="ret-title">Сколько вам стоит текучесть</div>
-          <div class="ret-ctl"><label for="retN">Сотрудников <output id="retNo"></output></label><input type="range" id="retN" min="10" max="300" step="5" value="40"></div>
+        <div class="ret-calc" aria-label="Сколько человек уйдёт из команды за год">
+          <div class="ret-title">Ваша команда через год</div>
+          <div class="ret-dots" id="retDots" aria-hidden="true"></div>
+          <div class="ret-legend"><span><i class="l-stay"></i>остались</span><span><i class="l-gone"></i>ушли</span><span><i class="l-keep"></i>можно было удержать</span></div>
           <div class="ret-ctl"><label for="retT">Уходят за год <output id="retTo"></output></label><input type="range" id="retT" min="5" max="60" step="1" value="25"></div>
-          <div class="ret-ctl"><label for="retS">Средняя зарплата в месяц <output id="retSo"></output></label><input type="range" id="retS" min="40000" max="300000" step="5000" value="90000"></div>
-          <div class="ret-big" id="retBig" aria-live="polite"></div>
-          <div class="ret-save" id="retSave"></div>
-          <div class="ret-src">Замена одного сотрудника стоит 50–200% его годовой зарплаты (Gallup, 2019). 42% ушедших можно было удержать (Gallup, 2024).</div>
+          <p class="ret-say" id="retSay" aria-live="polite"></p>
+          <div class="ret-src">42% ушедших говорят, что руководитель или компания могли их удержать. Gallup, 2024, опрос 717 человек.</div>
         </div>
       </div>
 
@@ -2479,20 +2486,19 @@ function unitCalcUpdate(){
 </script>
 <script>
 (function(){
-  var N=document.getElementById('retN'),T=document.getElementById('retT'),S=document.getElementById('retS');
-  if(!N) return;
-  function fmt(n){ return Math.round(n).toLocaleString('ru-RU'); }
-  function money(n){ return n>=1e6 ? (n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:1})+'\u00a0млн\u00a0₽' : fmt(n)+'\u00a0₽'; }
-  function pl(n,a,b,c){ n=Math.abs(n)%100; var d=n%10; if(n>10&&n<20) return c; if(d>1&&d<5) return b; if(d===1) return a; return c; }
+  var box=document.getElementById('retDots'),T=document.getElementById('retT');
+  if(!box) return;
+  for(var i=0;i<40;i++){ var d=document.createElement('div'); d.className='ret-dot'; box.appendChild(d); }
+  var order=[]; for(var k=0;k<40;k++) order.push(k);
+  order.sort(function(x,y){ return (x*37)%40-(y*37)%40; });
   function upd(){
-    var n=+N.value,t=+T.value,s=+S.value,leave=Math.round(n*t/100),yr=s*12,keep=Math.round(leave*0.42);
-    document.getElementById('retNo').textContent=n;
-    document.getElementById('retTo').textContent=t+'% · '+leave+' '+pl(leave,'человек','человека','человек');
-    document.getElementById('retSo').textContent=fmt(s)+' ₽';
-    document.getElementById('retBig').innerHTML='от '+money(leave*yr*0.5)+'<br>до '+money(leave*yr*2)+'<small>в год уходит на замену ушедших</small>';
-    document.getElementById('retSave').innerHTML=keep>0 ? 'Если удержать хотя бы <b>'+keep+' '+pl(keep,'человека','человек','человек')+'</b> из тех, кого можно было, это <b>от '+money(keep*yr*0.5)+'</b> в год.' : 'При таких цифрах текучесть почти не бьёт по бюджету.';
+    var t=+T.value,leave=Math.round(40*t/100),keep=Math.round(leave*0.42),ds=box.children;
+    for(var i=0;i<40;i++) ds[i].className='ret-dot';
+    for(var k=0;k<leave;k++) ds[order[k]].className='ret-dot '+(k<keep?'keep':'gone');
+    document.getElementById('retTo').textContent=t+'%';
+    document.getElementById('retSay').innerHTML='Из <b>40 человек</b> за год уйдут <b>'+leave+'</b>'+(keep?', и <b>'+keep+'</b> из них можно было удержать.':'.');
   }
-  [N,T,S].forEach(function(e){ e.addEventListener('input',upd); });
+  T.addEventListener('input',upd);
   upd();
 })();
 </script>
