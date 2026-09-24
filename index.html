@@ -496,10 +496,17 @@
     color:#fff; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center;
   }
   .funnel-close:hover{ background:rgba(255,255,255,0.28); }
-  .funnel-article{ max-width:640px; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid rgba(255,255,255,0.2); }
-  .funnel-article p{ font-size:15px; font-weight:500; color:rgba(255,255,255,0.85); line-height:1.6; }
+  .funnel-article{ max-width:640px; margin-bottom:32px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:18px; transition:background .2s; }
+  .funnel-article[open]{ background:rgba(255,255,255,0.12); }
+  .funnel-article summary{ list-style:none; cursor:pointer; padding:16px 20px; font-size:16px; font-weight:700; color:#fff; display:flex; justify-content:space-between; align-items:center; gap:14px; }
+  .funnel-article summary::-webkit-details-marker{ display:none; }
+  .funnel-article summary::after{ content:"+"; font-size:22px; font-weight:400; color:rgba(255,255,255,0.75); flex:0 0 auto; transition:transform .35s cubic-bezier(.33,1,.68,1); }
+  .funnel-article[open] summary::after{ transform:rotate(45deg); }
+  .funnel-article summary:focus-visible{ outline:2px solid var(--accent-light); outline-offset:2px; border-radius:18px; }
+  .funnel-article p{ padding:0 20px; font-size:15px; font-weight:500; color:rgba(255,255,255,0.85); line-height:1.6; }
   .funnel-article p + p{ margin-top:14px; }
-  .funnel-article-h{ font-size:22px; font-weight:400; letter-spacing:-.2px; color:#fff; margin-bottom:12px; }
+  .funnel-article p:last-child{ padding-bottom:20px; }
+  .funnel-article-h{ text-wrap:balance; font-size:22px; font-weight:400; letter-spacing:-.2px; color:#fff; margin-bottom:12px; }
   .funnel-lead{ font-size:16px; font-weight:500; color:rgba(255,255,255,0.88); max-width:640px; line-height:1.5; margin-bottom:32px; }
 
   .funnel-lead-row{ display:flex; align-items:stretch; gap:18px; margin-bottom:32px; flex-wrap:wrap; }
@@ -1459,11 +1466,12 @@
         </div>
         <div class="funnel-close" onclick="closeFunnel()">✕</div>
       </div>
-      <div class="funnel-article">
+      <details class="funnel-article">
+        <summary>Как самому нанять хорошего специалиста</summary>
         <p>Как построить хороший найм? Я скажу сейчас достаточно непопулярную вещь, но хороший найм — это долго и дорого. Невозможно сразу найти хорошего специалиста, не отсмотрев при этом сто пятьсот резюме, не проверив скиллы, не дав шанс тому самому резюме, потому что оно написано очень амбициозно (этот парень никогда не дойдет до технического собеседования). Потом идут часы на простой скрининг, чтобы убедиться, что кандидат не пытается от нас что-то скрыть или выдать себя за кого-то другого. И только потом мы доходим до тех самых 3–5 технических собеседований, по итогам которых выберем того самого. А до этого нужно составить профиль кандидата, чтобы выбирать не лучшего, а самого подходящего. Потому что лучший может уйти через месяц, потому что ему скучно, может не сойтись с вашими клиентами, потому что до этого работал с совершенно другим сегментом, или просто увести ваших клиентов.</p>
         <p>Сегодня нейронки пишут резюме и готовят человека к собеседованию. Именно поэтому мы не можем убрать рекрутера из этой схемы, именно поэтому это долго и дорого (у меня, кстати, вообще не дорого и не так уж долго, но это потому, что в начале пути было очень дорого и очень долго).</p>
         <p>В общем, если вы тут все еще ради инструкции, как действовать, то я описал ее только что. Простая воронка, несколько этапов. Обязательно найдется тот самый кандидат. Главное — не ленитесь, и к вам придет человек, который будет приносить деньги компании от года к году. А за бесплатной консультацией вы знаете, куда писать)</p>
-      </div>
+      </details>
       <h3 class="funnel-article-h">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Предварительные результаты вы получите еще в течение первой недели, а полное закрытие вакансии — до трех недель. Вакансия будет закрыта под ключ, а платите только после выхода специалиста. Ниже вы можете видеть пример того, как будет выстроена моя работа. Я пропущу через себя около 400 релевантных резюме, чтобы выбрать 20 лучших, из которых только 5 человек дойдут до вас, чтобы вы смогли выбрать человека под себя.</p>
 
