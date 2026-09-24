@@ -2382,14 +2382,18 @@
       low = 25000 + n*250; high = 45000 + n*450;
       suffix = ' / мес';
     } else {
-      low = 40000 + n*20000; high = 60000 + n*35000;
+      low = high = n * 10000 * (n >= 2 ? 0.95 : 1);
     }
     if(calcState.urgent){ low = Math.round(low*1.25); high = Math.round(high*1.25); }
 
-    document.getElementById('calcOutput').textContent = calcFmt(low) + ' – ' + calcFmt(high) + ' ₽' + suffix;
+    var exact = calcState.service === 'kb';
+    var fmt = exact ? function(v){ return Math.round(v).toLocaleString('ru-RU'); } : calcFmt;
+    var priceText = (low === high ? fmt(low) : fmt(low) + ' – ' + fmt(high)) + ' ₽' + suffix;
+    if(exact && n >= 2) priceText += ' (скидка 5%)';
+    document.getElementById('calcOutput').textContent = priceText;
 
     var msg = 'Здравствуйте! Интересует: ' + meta.title + ', ' + n + ' ' + calcPluralWord(n, meta.words) +
-      (calcState.urgent ? ', срочно' : '') + '. Ориентировочно ' + calcFmt(low) + '–' + calcFmt(high) + ' ₽' + suffix + '. Хочу точный расчёт.';
+      (calcState.urgent ? ', срочно' : '') + '. Ориентировочно ' + priceText + '. Хочу точный расчёт.';
     document.getElementById('calcCta').href = 'https://wa.me/995557602599?text=' + encodeURIComponent(msg);
   }
   calcUpdate();
