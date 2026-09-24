@@ -982,7 +982,7 @@
             <button type="button" class="calc-svc active" data-svc="hiring" onclick="calcSelectService(this,'hiring')">Найм</button>
             <button type="button" class="calc-svc" data-svc="onboarding" onclick="calcSelectService(this,'onboarding')">Онбординг</button>
             <button type="button" class="calc-svc" data-svc="hr" onclick="calcSelectService(this,'hr')">Кадровый учёт (КДП)</button>
-            <button type="button" class="calc-svc" data-svc="small" onclick="calcSelectService(this,'small')">Малый бизнес</button>
+            <button type="button" class="calc-svc" data-svc="kb" onclick="calcSelectService(this,'kb')">База знаний</button>
           </div>
 
           <div class="calc-row">
@@ -2295,7 +2295,7 @@
     hiring:     { title:'Найм',                 qtyLabel:'Сколько вакансий закрыть',          words:['вакансия','вакансии','вакансий'],     min:1, max:10,  def:1  },
     onboarding: { title:'Онбординг',             qtyLabel:'Сколько новых сотрудников в месяц', words:['сотрудник','сотрудника','сотрудников'], min:1, max:20,  def:5  },
     hr:         { title:'Кадровый учёт (КДП)',   qtyLabel:'Сколько сотрудников в штате',       words:['сотрудник','сотрудника','сотрудников'], min:5, max:150, def:20 },
-    small:      { title:'HR для малого бизнеса', qtyLabel:'Сколько человек в компании',        words:['сотрудник','сотрудника','сотрудников'], min:3, max:50,  def:10 }
+    kb:         { title:'Построение базы знаний', qtyLabel:'Сколько отделов описать',          words:['отдел','отдела','отделов'],             min:1, max:15,  def:3  }
   };
   function calcPluralWord(n, forms){
     var mod10 = n % 10, mod100 = n % 100;
@@ -2339,10 +2339,7 @@
       low = 25000 + n*250; high = 45000 + n*450;
       suffix = ' / мес';
     } else {
-      if(n <= 10){ low = 40000; high = 70000; }
-      else if(n <= 25){ low = 60000; high = 100000; }
-      else { low = 90000; high = 150000; }
-      suffix = ' / мес';
+      low = 40000 + n*20000; high = 60000 + n*35000;
     }
     if(calcState.urgent){ low = Math.round(low*1.25); high = Math.round(high*1.25); }
 
