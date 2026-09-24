@@ -668,12 +668,16 @@
 
 
   /* ============ «Решатель проблем» ============ */
-  .solver-card{ grid-column:1 / -1; display:flex; align-items:center; gap:18px 28px; flex-wrap:wrap; min-height:0; }
+  .solver-card{ grid-column:span 2; display:flex; align-items:center; gap:18px 28px; flex-wrap:wrap; min-height:0; }
   .solver-card .sv-tile-text{ flex:0 1 260px; }
   .solver-card .sv-tile-chips{ flex:1 1 380px; display:flex; flex-wrap:wrap; gap:8px; }
   .solver-card .sv-tile-chips span{ font-size:11px; font-weight:700; padding:8px 13px; border-radius:20px; background:#3c3c3f; color:#d6d6d8; border:1px solid rgba(255,255,255,0.12); }
   .solver-card .sv-tile-chips span.on{ background:var(--accent-light); color:#fff; border-color:transparent; }
   .solver-card .sv-tile-go{ flex:0 0 auto; font-size:12.5px; font-weight:700; color:#fff; background:var(--accent); padding:12px 20px; border-radius:24px; }
+  @media (max-width:980px){ .solver-card{ grid-column:1 / -1; } }
+  .metrics-band{ grid-column:1 / -1; display:flex; align-items:center; gap:14px 36px; flex-wrap:wrap; min-height:0; }
+  .metrics-band .funnel-head{ flex:0 1 300px; margin-bottom:0; }
+  .metrics-band > p{ flex:1 1 420px; margin:0; }
   @media (max-width:620px){ .solver-card .sv-tile-chips span:nth-child(n+4){ display:none; } .solver-card .sv-tile-go{ width:100%; text-align:center; } }
   .sv-chips{ display:flex; flex-wrap:wrap; gap:8px; }
   .sv-chip{ font-family:inherit; font-size:13px; font-weight:600; text-align:left; line-height:1.35; padding:10px 15px; border-radius:22px; cursor:pointer; color:#fff; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.24); transition:background .2s, border-color .2s, transform .15s; }
@@ -1098,22 +1102,6 @@
           <a class="calc-cta" id="calcCta" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить точный расчёт →</a>
         </div>
 
-        <!-- PROBLEM SOLVER: full-width band so the cards around it keep their places -->
-        <div class="card dark2 funnel-card solver-card anim-in" style="animation-delay:.12s;" id="solverCard" role="button" tabindex="0" aria-label="Решатель проблем: открыть" onclick="openCardOverlay('solverCard','solverOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('solverCard','solverOverlay');}">
-          <div class="sv-tile-text">
-            <h3 style="color:#f2f2f2;">Решатель проблем</h3>
-            <div class="sub" style="color:#b8b8ba;">Отметьте, что болит, и я соберу решения под вашу ситуацию</div>
-          </div>
-          <div class="sv-tile-chips" aria-hidden="true">
-            <span class="on">По 2 месяца не могу закрыть вакансию</span>
-            <span>Одни и те же вопросы</span>
-            <span class="on">Данные о клиентах теряются</span>
-            <span>Новички уходят</span>
-            <span>Не понимаю, что происходит в бизнесе</span>
-          </div>
-          <div class="sv-tile-go">Собрать свой набор →</div>
-        </div>
-
         <!-- NEW SERVICE: RETENTION -->
         <div class="card svc-card funnel-card anim-in" style="animation-delay:.4s" id="retentionCard" onclick="openCardOverlay('retentionCard','retentionOverlay')">
           <div class="funnel-head">
@@ -1139,8 +1127,24 @@
           </div>
         </div>
 
-        <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS -->
-        <div class="card svc-card gc2 funnel-card anim-in" style="animation-delay:.42s" id="metricsCard" onclick="openCardOverlay('metricsCard','metricsOverlay')">
+        <!-- PROBLEM SOLVER: two columns next to retention -->
+        <div class="card dark2 funnel-card solver-card anim-in" style="animation-delay:.12s;" id="solverCard" role="button" tabindex="0" aria-label="Решатель проблем: открыть" onclick="openCardOverlay('solverCard','solverOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('solverCard','solverOverlay');}">
+          <div class="sv-tile-text">
+            <h3 style="color:#f2f2f2;">Решатель проблем</h3>
+            <div class="sub" style="color:#b8b8ba;">Отметьте, что болит, и я соберу решения под вашу ситуацию</div>
+          </div>
+          <div class="sv-tile-chips" aria-hidden="true">
+            <span class="on">По 2 месяца не могу закрыть вакансию</span>
+            <span>Одни и те же вопросы</span>
+            <span class="on">Данные о клиентах теряются</span>
+            <span>Новички уходят</span>
+            <span>Не понимаю, что происходит в бизнесе</span>
+          </div>
+          <div class="sv-tile-go">Собрать свой набор →</div>
+        </div>
+
+        <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS (full-width band) -->
+        <div class="card svc-card metrics-band funnel-card anim-in" style="animation-delay:.42s" id="metricsCard" onclick="openCardOverlay('metricsCard','metricsOverlay')">
           <div class="funnel-head">
             <div>
               <h3>HR-метрики и юнит-экономика</h3>
