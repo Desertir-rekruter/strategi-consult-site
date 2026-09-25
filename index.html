@@ -843,6 +843,18 @@
   .calc-slider::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background:var(--accent-light); cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.35); }
   .calc-slider::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:var(--accent-light); border:none; cursor:pointer; }
   .calc-urgency{ display:flex; justify-content:space-between; align-items:center; margin-top:18px; font-size:11.5px; font-weight:600; color:#d6d6d8; }
+  /* metrics overlay: compact unit-economics calculator */
+  #metricsOverlay .funnel-case:has(#unitSalary){ max-width:640px; padding:20px 22px; }
+  #metricsOverlay .funnel-case:has(#unitSalary) .calc-row:first-child{ margin-top:0; }
+  #metricsOverlay .calc-row{ margin-top:12px; }
+  #metricsOverlay .calc-row-lbl{ font-size:12px; }
+  #metricsOverlay .calc-slider{ margin:6px 0 0; }
+  .unit-outs{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; padding-top:14px; border-top:1px dashed rgba(255,255,255,0.25); }
+  .unit-outs .calc-output{ margin:0; padding:0; border:0; }
+  .unit-outs .calc-output-lbl{ color:rgba(255,255,255,0.65); }
+  .unit-outs .calc-output-val{ font-size:20px; }
+  .unit-outs .unit-cost{ color:#fff; }
+  @media (max-width:420px){ .unit-outs{ grid-template-columns:1fr; } }
   .calc-output{ margin-top:18px; padding-top:16px; border-top:1px dashed rgba(255,255,255,0.14); }
   .calc-output-lbl{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#8a8a8d; }
   .calc-output-val{ font-size:21px; font-weight:800; color:var(--accent-light); margin-top:4px; font-variant-numeric:tabular-nums; }
@@ -1936,13 +1948,15 @@
                 <p>Расчёт по одному человеку всегда приблизительный: выработка зависит от загрузки заказами, оборудования и работы соседей по цепочке. Для решений об увольнении или премии не стоит опираться только на эту цифру.</p>
             </div></div></div>
           </div>
-          <div class="calc-output">
-            <div class="calc-output-lbl">Полная стоимость сотрудника</div>
-            <div style="font-size:16px; font-weight:800; color:#fff; margin-top:2px;" id="unitCostOutput">130 000 ₽ / мес</div>
-          </div>
-          <div class="calc-output" style="border-top:none; padding-top:10px;">
-            <div class="calc-output-lbl">Юнит-экономика сотрудника</div>
-            <div class="calc-output-val" id="unitMarginOutput">+120 000 ₽/мес</div>
+          <div class="unit-outs">
+            <div class="calc-output">
+              <div class="calc-output-lbl">Полная стоимость сотрудника</div>
+              <div class="calc-output-val unit-cost" id="unitCostOutput">130 000 ₽ / мес</div>
+            </div>
+            <div class="calc-output">
+              <div class="calc-output-lbl">Юнит-экономика сотрудника</div>
+              <div class="calc-output-val" id="unitMarginOutput">+120 000 ₽/мес</div>
+            </div>
           </div>
         </div>
       </div>
