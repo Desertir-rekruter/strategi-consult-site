@@ -844,17 +844,19 @@
   .calc-slider::-moz-range-thumb{ width:18px; height:18px; border-radius:50%; background:var(--accent-light); border:none; cursor:pointer; }
   .calc-urgency{ display:flex; justify-content:space-between; align-items:center; margin-top:18px; font-size:11.5px; font-weight:600; color:#d6d6d8; }
   /* metrics overlay: compact unit-economics calculator */
-  #metricsOverlay .funnel-case:has(#unitSalary){ max-width:640px; padding:20px 22px; }
-  #metricsOverlay .funnel-case:has(#unitSalary) .calc-row:first-child{ margin-top:0; }
+  .unit-split{ grid-template-columns:minmax(0,1fr) minmax(0,380px); }
+  .unit-calc{ padding:20px 22px; margin:0; }
+  .unit-calc .calc-row:first-of-type{ margin-top:0; }
+  .unit-calc .calc-howto-body{ font-size:12.5px; }
+  @media (max-width:900px){ .unit-split{ grid-template-columns:1fr; } }
   #metricsOverlay .calc-row{ margin-top:12px; }
   #metricsOverlay .calc-row-lbl{ font-size:12px; }
   #metricsOverlay .calc-slider{ margin:6px 0 0; }
-  .unit-outs{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; padding-top:14px; border-top:1px dashed rgba(255,255,255,0.25); }
+  .unit-outs{ display:grid; grid-template-columns:1fr; gap:16px; margin-top:16px; padding-top:14px; border-top:1px dashed rgba(255,255,255,0.25); }
   .unit-outs .calc-output{ margin:0; padding:0; border:0; }
   .unit-outs .calc-output-lbl{ color:rgba(255,255,255,0.65); }
   .unit-outs .calc-output-val{ font-size:20px; }
   .unit-outs .unit-cost{ color:#fff; }
-  @media (max-width:420px){ .unit-outs{ grid-template-columns:1fr; } }
   .calc-output{ margin-top:18px; padding-top:16px; border-top:1px dashed rgba(255,255,255,0.14); }
   .calc-output-lbl{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#8a8a8d; }
   .calc-output-val{ font-size:21px; font-weight:800; color:var(--accent-light); margin-top:4px; font-variant-numeric:tabular-nums; }
@@ -1896,6 +1898,8 @@
         </div>
         <div class="funnel-close" onclick="closeCardOverlay('metricsCard','metricsOverlay')">✕</div>
       </div>
+      <div class="ret-split unit-split">
+        <div class="ret-text">
       <details class="funnel-article">
         <summary>Как самому понять, окупается ли сотрудник</summary>
         <p>Большинство руководителей, с которыми я говорю, не знают, сколько им на самом деле стоит сотрудник. Оклад и налоги знают. А то, что сверху ещё рабочее место, обучение и несколько месяцев, пока новичок разгоняется, — это уже «ну где-то там».</p>
@@ -1904,10 +1908,9 @@
       </details>
       <h3 class="funnel-article-h">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Я перевожу HR на язык денег. Не «кажется, справляется», а сколько человек стоит компании, сколько приносит и когда выходит в плюс. Считаю на ваших данных: из таблиц, 1С, выгрузок с hh — откуда получится.</p>
-
-      <div class="funnel-page-section">
-        <h4>Посчитайте сами: окупается ли сотрудник</h4>
-        <div class="funnel-case">
+        </div>
+        <div class="funnel-case unit-calc">
+          <div class="ret-title">Посчитайте сами: окупается ли сотрудник</div>
           <div class="calc-row">
             <div class="calc-row-lbl"><span>Оклад сотрудника</span><b id="unitSalaryVal">100 000 ₽</b></div>
             <input type="range" min="30000" max="400000" step="5000" value="100000" id="unitSalary" class="calc-slider" oninput="unitCalcUpdate()">
