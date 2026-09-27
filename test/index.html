@@ -2698,7 +2698,7 @@
     document.getElementById('calcOutput').textContent = priceText;
 
     var msg = 'Здравствуйте! Интересует: ' + meta.title + ', ' + n + ' ' + calcPluralWord(n, meta.words) +
-      (calcState.urgent ? ', срочно' : '') + '. Ориентировочно ' + priceText + '. Хочу точный расчёт.';
+      (calcState.urgent ? ', срочно' : '') + '. Хочу точный расчёт.';
     document.getElementById('calcCta').href = 'https://wa.me/995557602599?text=' + encodeURIComponent(msg);
   }
   calcUpdate();
