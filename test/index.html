@@ -1285,7 +1285,7 @@
             </div>
           </div>
           <!-- MARKET RESEARCH: teaser inside the metrics band (opens its own window) -->
-          <div class="mkt-tile" id="marketCard" role="button" tabindex="0" onclick="event.stopPropagation(); openCardOverlay('marketCard','marketOverlay')" onkeydown="if(event.key==='Enter'){event.stopPropagation(); openCardOverlay('marketCard','marketOverlay')}">
+          <div class="mkt-tile" id="marketCard" role="button" tabindex="0" onclick="event.stopPropagation(); openMarket()" onkeydown="if(event.key==='Enter'){event.stopPropagation(); openMarket()}">
             <div class="mkt-txt">
               <div class="mkt-eyebrow">Начните с рынка</div>
               <h4>Исследование рынка</h4>
@@ -2057,6 +2057,47 @@
           <div class="fstep"><div class="fnum">05</div><div class="ftitle">Обновление</div><div class="ftext">Цифры обновляются регулярно, чтобы решения принимались на свежих данных, а не на прошлогоднем отчёте.</div></div>
         </div>
       </div>
+      <!-- ===== Исследование рынка (было отдельным окном) ===== -->
+      <section class="ov-block" id="issledovanie-rynka" aria-labelledby="h-rynok">
+        <div class="eyebrow">Смежная услуга</div>
+        <h3 class="ov-title" id="h-rynok">Исследование рынка</h3>
+      <div class="ret-split">
+        <div class="ret-text">
+      <details class="funnel-article">
+        <summary>Как самому понять, сколько сейчас стоит специалист</summary>
+        <p>Самая частая история: вакансия висит третий месяц, откликов мало, а те, кто пришёл, пропадают после слов о зарплате. И тут выясняется, что вилку ставили года два назад и с тех пор не трогали. А рынок за это время ушёл вперёд: по данным Росстата, средняя зарплата в России выросла на 18,3% в 2024 году и ещё на 13,5% в 2025-м. <span class="audit-src">Росстат</span></p>
+        <p>Что можно сделать самому. Откройте hh.ru и посмотрите 5–10 похожих вакансий, именно свежих, за последний месяц. Спросите у кандидатов, которые вам отказали, на какую сумму они рассчитывали (на удивление, многие честно отвечают). И не зацикливайтесь только на деньгах: иногда проигрывают из-за того, что ответили кандидату через неделю, а конкурент — через день.</p>
+        <p>Если после этого всё равно непонятно, почему не идут люди, вы знаете, куда писать)</p>
+      </details>
+      <h3 class="funnel-article-h face-h"><img class="face-av" src="/test/assets/people/av-smile.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
+      <p class="funnel-lead">Я собираю картину рынка под вашу конкретную вакансию: сколько сейчас платят за такого специалиста, кто ещё его ищет и чем переманивает, и сколько таких людей вообще есть. Чтобы оффер не проигрывал ещё до собеседования.</p>
+        </div>
+        <div class="ret-calc" aria-label="Не устарела ли ваша вилка">
+          <div class="ret-title">Не устарела ли ваша вилка</div>
+          <div class="ret-ctl"><label for="mkS">Зарплата в вакансии <output id="mkSo"></output></label><input type="range" id="mkS" min="30000" max="400000" step="5000" value="100000"></div>
+          <div class="w-seg-lbl" id="mkYl">Когда ставили эту цифру</div>
+          <div class="w-seg" role="group" aria-labelledby="mkYl">
+            <button type="button" data-y="2023" aria-pressed="true">в 2023</button>
+            <button type="button" data-y="2024" aria-pressed="false">в 2024</button>
+            <button type="button" data-y="2025" aria-pressed="false">в 2025</button>
+          </div>
+          <div class="w-big" id="mkBig" aria-live="polite"></div>
+          <p class="ret-say" id="mkSay"></p>
+          <div class="ret-src">Средняя зарплата в России выросла на 18,3% в 2024 году и на 13,5% в 2025-м (Росстат). Это средний рост по стране: в вашей нише он может быть другим.</div>
+        </div>
+      </div>
+
+      <div class="funnel-page-section">
+        <h4>Как я исследую рынок</h4>
+        <div class="funnel-steps">
+          <div class="fstep"><div class="fnum">01</div><div class="ftitle">Бриф</div><div class="ftext">Разбираемся, кого именно ищем и что вы готовы предложить.</div></div>
+          <div class="fstep"><div class="fnum">02</div><div class="ftitle">Конкуренты</div><div class="ftext">Смотрю, кто ещё ищет таких людей и что обещает: деньги, условия, бренд.</div></div>
+          <div class="fstep"><div class="fnum">03</div><div class="ftitle">Кандидаты</div><div class="ftext">Изучаю резюме и говорю с кандидатами о том, сколько и за что они хотят.</div></div>
+          <div class="fstep"><div class="fnum">04</div><div class="ftitle">Вы подключаетесь тут</div><div class="ftext">Показываю вилку, конкурентов и сколько подходящих людей есть на рынке.</div></div>
+          <div class="fstep"><div class="fnum">05</div><div class="ftitle">Оффер</div><div class="ftext">Вместе собираем оффер, который не проиграет ещё до собеседования.</div></div>
+        </div>
+      </div>
+      </section>
     </div>
 
     <div class="funnel-cta">
@@ -2188,7 +2229,6 @@
   </div>
 </div>
 
-<!-- ============ FULLSCREEN MARKET RESEARCH OVERLAY ============ -->
 <div class="funnel-overlay" id="solverOverlay">
   <div class="funnel-overlay-bg"></div>
   <div class="funnel-overlay-scroll" id="solverOverlayScroll" onclick="handleCardOverlayClick(event,'solverOverlayScroll','solverCard','solverOverlay')">
@@ -2209,62 +2249,6 @@
     <div class="funnel-cta">
       <a id="svCta" class="sv-cta-off" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить мой набор →</a>
       <span id="svCtaNote">Сначала отметьте хотя бы одну проблему</span>
-    </div>
-  </div>
-</div>
-
-<div class="funnel-overlay" id="marketOverlay">
-  <div class="funnel-overlay-bg"></div>
-  <div class="funnel-overlay-scroll" id="marketOverlayScroll" onclick="handleCardOverlayClick(event,'marketOverlayScroll','marketCard','marketOverlay')">
-    <div class="funnel-page">
-      <div class="funnel-page-head">
-        <div>
-          <div class="eyebrow">HR Consulting Studio · Услуга</div>
-          <h2>Исследование рынка</h2>
-        </div>
-        <div class="funnel-close" onclick="closeCardOverlay('marketCard','marketOverlay')">✕</div>
-      </div>
-      <div class="ret-split">
-        <div class="ret-text">
-      <details class="funnel-article">
-        <summary>Как самому понять, сколько сейчас стоит специалист</summary>
-        <p>Самая частая история: вакансия висит третий месяц, откликов мало, а те, кто пришёл, пропадают после слов о зарплате. И тут выясняется, что вилку ставили года два назад и с тех пор не трогали. А рынок за это время ушёл вперёд: по данным Росстата, средняя зарплата в России выросла на 18,3% в 2024 году и ещё на 13,5% в 2025-м. <span class="audit-src">Росстат</span></p>
-        <p>Что можно сделать самому. Откройте hh.ru и посмотрите 5–10 похожих вакансий, именно свежих, за последний месяц. Спросите у кандидатов, которые вам отказали, на какую сумму они рассчитывали (на удивление, многие честно отвечают). И не зацикливайтесь только на деньгах: иногда проигрывают из-за того, что ответили кандидату через неделю, а конкурент — через день.</p>
-        <p>Если после этого всё равно непонятно, почему не идут люди, вы знаете, куда писать)</p>
-      </details>
-      <h3 class="funnel-article-h face-h"><img class="face-av" src="/test/assets/people/av-smile.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
-      <p class="funnel-lead">Я собираю картину рынка под вашу конкретную вакансию: сколько сейчас платят за такого специалиста, кто ещё его ищет и чем переманивает, и сколько таких людей вообще есть. Чтобы оффер не проигрывал ещё до собеседования.</p>
-        </div>
-        <div class="ret-calc" aria-label="Не устарела ли ваша вилка">
-          <div class="ret-title">Не устарела ли ваша вилка</div>
-          <div class="ret-ctl"><label for="mkS">Зарплата в вакансии <output id="mkSo"></output></label><input type="range" id="mkS" min="30000" max="400000" step="5000" value="100000"></div>
-          <div class="w-seg-lbl" id="mkYl">Когда ставили эту цифру</div>
-          <div class="w-seg" role="group" aria-labelledby="mkYl">
-            <button type="button" data-y="2023" aria-pressed="true">в 2023</button>
-            <button type="button" data-y="2024" aria-pressed="false">в 2024</button>
-            <button type="button" data-y="2025" aria-pressed="false">в 2025</button>
-          </div>
-          <div class="w-big" id="mkBig" aria-live="polite"></div>
-          <p class="ret-say" id="mkSay"></p>
-          <div class="ret-src">Средняя зарплата в России выросла на 18,3% в 2024 году и на 13,5% в 2025-м (Росстат). Это средний рост по стране: в вашей нише он может быть другим.</div>
-        </div>
-      </div>
-
-      <div class="funnel-page-section">
-        <h4>Как я исследую рынок</h4>
-        <div class="funnel-steps">
-          <div class="fstep"><div class="fnum">01</div><div class="ftitle">Бриф</div><div class="ftext">Разбираемся, кого именно ищем и что вы готовы предложить.</div></div>
-          <div class="fstep"><div class="fnum">02</div><div class="ftitle">Конкуренты</div><div class="ftext">Смотрю, кто ещё ищет таких людей и что обещает: деньги, условия, бренд.</div></div>
-          <div class="fstep"><div class="fnum">03</div><div class="ftitle">Кандидаты</div><div class="ftext">Изучаю резюме и говорю с кандидатами о том, сколько и за что они хотят.</div></div>
-          <div class="fstep"><div class="fnum">04</div><div class="ftitle">Вы подключаетесь тут</div><div class="ftext">Показываю вилку, конкурентов и сколько подходящих людей есть на рынке.</div></div>
-          <div class="fstep"><div class="fnum">05</div><div class="ftitle">Оффер</div><div class="ftext">Вместе собираем оффер, который не проиграет ещё до собеседования.</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="funnel-cta">
-      <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
-      <span>Отвечаю в течение рабочего дня</span>
     </div>
   </div>
 </div>
@@ -2361,7 +2345,6 @@
       if(document.getElementById('retentionOverlay').classList.contains('open')) closeCardOverlay('retentionCard','retentionOverlay');
       if(document.getElementById('metricsOverlay').classList.contains('open')) closeCardOverlay('metricsCard','metricsOverlay');
       if(document.getElementById('hrbpOverlay').classList.contains('open')) closeCardOverlay('hrbpCard','hrbpOverlay');
-      if(document.getElementById('marketOverlay').classList.contains('open')) closeCardOverlay('marketCard','marketOverlay');
       if(document.getElementById('customOverlay').classList.contains('open')) closeCardOverlay('customCard','customOverlay');
       if(document.getElementById('solverOverlay').classList.contains('open')) closeCardOverlay('solverCard','solverOverlay');
     }
@@ -2500,7 +2483,7 @@
     onb:  { t:'Онбординг', d:'Снижаю текучесть в первые 3 месяца: план первых 1, 7 и 30 дней.', href:'/test/onboarding/' },
     ret:  { t:'Снижение текучести', d:'Разбираюсь, почему уходят, и выстраиваю удержание.', open:['retentionCard','retentionOverlay'] },
     met:  { t:'HR-метрики и юнит-экономика', d:'Считаю, сколько стоит и когда окупается каждый сотрудник. Решения на цифрах.', open:['metricsCard','metricsOverlay'] },
-    mkt:  { t:'Исследование рынка', d:'Сколько платят конкуренты и где искать людей, чтобы оффер не проигрывал.', open:['marketCard','marketOverlay'] },
+    mkt:  { t:'Исследование рынка', d:'Сколько платят конкуренты и где искать людей, чтобы оффер не проигрывал.', open:['marketCard','metricsOverlay','issledovanie-rynka'] },
     sys:  { t:'Кастомные HR-системы и боты', d:'CRM и внутренние системы под ваши процессы, рутину передаю Telegram-ботам.', open:['customCard','customOverlay'] },
     kdp:  { t:'Кадровый учёт', d:'Убираю бумажную рутину: КЭДО, шаблоны, напоминания о сроках.', href:'/test/kadry/' },
     hrbp: { t:'HRBP по подписке', d:'HR-директор на part-time, без найма в штат.', open:['hrbpCard','hrbpOverlay'] },
@@ -2564,8 +2547,18 @@
       var card = document.getElementById(t[0]);
       card.scrollIntoView({block:'center'});
       openCardOverlay(t[0], t[1]);
+      if(t[2]) scrollOverlayTo(t[1], t[2]);
     }, 700);
   }
+  /* scroll an opened window to one of its sections (after the flip finishes) */
+  function scrollOverlayTo(overlayId, secId){
+    setTimeout(function(){
+      var sc = document.getElementById(overlayId + 'Scroll'), sec = document.getElementById(secId);
+      sc.scrollTo({ top: sc.scrollTop + sec.getBoundingClientRect().top - sc.getBoundingClientRect().top - 24, behavior:'smooth' });
+    }, 900);
+  }
+  /* market research lives inside the HR-metrics window */
+  function openMarket(){ openCardOverlay('marketCard','metricsOverlay'); scrollOverlayTo('metricsOverlay','issledovanie-rynka'); }
   svRender();
 
   /* ============ deep links: /#naim, /#hrbp open their card ============ */
@@ -2748,7 +2741,7 @@ function unitCalcUpdate(){
   var S=$('mkS');
   if(S){
     var year=2023, k={2023:1.183*1.135, 2024:1.135, 2025:1};
-    var btns=document.querySelectorAll('#marketOverlay .w-seg button');
+    var btns=document.querySelectorAll('#issledovanie-rynka .w-seg button');
     var mu=function(){
       var v=+S.value,need=Math.round(v*k[year]/1000)*1000;
       $('mkSo').textContent=fmt(v)+' ₽';
