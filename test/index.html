@@ -715,6 +715,16 @@
   .metrics-band{ grid-column:1 / -1; display:flex; align-items:center; gap:14px 36px; flex-wrap:wrap; min-height:0; }
   .metrics-band .funnel-head{ flex:0 1 300px; margin-bottom:0; }
   .metrics-band > p{ flex:1 1 420px; margin:0; }
+  .mkt-tile{ flex:1 1 420px; display:flex; align-items:center; gap:18px; padding:18px 20px; border-radius:var(--radius-md); cursor:pointer;
+    background:linear-gradient(135deg, rgba(98,147,255,0.30), rgba(25,95,232,0.16)); border:1px solid rgba(98,147,255,0.55); transition:transform .2s ease, background .2s ease; }
+  .mkt-tile:hover{ transform:translateY(-1px); background:linear-gradient(135deg, rgba(98,147,255,0.40), rgba(25,95,232,0.22)); }
+  .mkt-tile:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .mkt-txt{ flex:1 1 auto; min-width:0; }
+  .mkt-eyebrow{ font-size:var(--fs-cap); font-weight:var(--fw-medium); letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:4px; }
+  .mkt-tile h4{ font-size:var(--fs-h3); font-weight:var(--fw-bold); margin-bottom:4px; }
+  .mkt-tile p{ font-size:var(--fs-body-s); font-weight:var(--fw-regular); color:var(--ink-soft); line-height:1.5; margin:0; }
+  .mkt-go{ flex:0 0 auto; font-size:var(--fs-btn); font-weight:var(--fw-medium); color:#fff; background:var(--accent); padding:11px 20px; border-radius:24px; white-space:nowrap; }
+  @media (max-width:620px){ .mkt-tile{ flex-direction:column; align-items:stretch; } .mkt-go{ text-align:center; } }
   @media (max-width:620px){ .solver-card .sv-tile-chips span:nth-child(n+4){ display:none; } .solver-card .sv-tile-go{ width:100%; text-align:center; } }
   .sv-chips{ display:flex; flex-wrap:wrap; gap:8px; }
   .sv-chip{ font-family:inherit; font-size:var(--fs-chip); font-weight:var(--fw-medium); text-align:left; line-height:1.35; padding:10px 15px; border-radius:22px; cursor:pointer; color:#fff; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.24); transition:background .2s, border-color .2s, transform .15s; }
@@ -973,6 +983,7 @@
     color:var(--ink);
   }
   html[data-theme="dark"] .card.dark{ background:rgba(12,12,14,0.62); }
+  html[data-theme="dark"] .mkt-eyebrow{ color:var(--accent-light); }
   html[data-theme="dark"] .funnel-wrap,
   html[data-theme="dark"] .audit-teaser{ background:linear-gradient(160deg,rgba(255,255,255,0.09),rgba(255,255,255,0.03)); border:1px solid rgba(255,255,255,0.08); }
   html[data-theme="dark"] .faq-item{ background:rgba(255,255,255,0.06); }
@@ -1263,7 +1274,15 @@
               <div class="sub">Считаю, сколько стоит и когда окупается каждый сотрудник</div>
             </div>
           </div>
-          <p>Строю дашборд ключевых HR-метрик (time-to-hire, cost-per-hire, текучесть, eNPS) и юнит-экономику по каждой роли — сколько сотрудник стоит компании и когда выходит в плюс. Решения на цифрах, а не на ощущениях.</p>
+          <!-- MARKET RESEARCH: teaser inside the metrics band (opens its own window) -->
+          <div class="mkt-tile" id="marketCard" role="button" tabindex="0" onclick="event.stopPropagation(); openCardOverlay('marketCard','marketOverlay')" onkeydown="if(event.key==='Enter'){event.stopPropagation(); openCardOverlay('marketCard','marketOverlay')}">
+            <div class="mkt-txt">
+              <div class="mkt-eyebrow">Начните с рынка</div>
+              <h4>Исследование рынка</h4>
+              <p>Сколько платят конкуренты и где искать людей — чтобы оффер не проигрывал ещё до собеседования.</p>
+            </div>
+            <span class="mkt-go">Смотреть →</span>
+          </div>
         </div>
 
         <!-- NEW SERVICE: HRBP SUBSCRIPTION -->
@@ -1275,17 +1294,6 @@
             </div>
           </div>
           <p>Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
-        </div>
-
-        <!-- NEW SERVICE: MARKET RESEARCH -->
-        <div class="card svc-card funnel-card anim-in" style="animation-delay:.46s" id="marketCard" onclick="openCardOverlay('marketCard','marketOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3>Исследование рынка</h3>
-              <div class="sub">Сколько платят конкуренты и где искать людей</div>
-            </div>
-          </div>
-          <p>Анализирую зарплатные вилки по рынку, конкурентов за таланты и реальную доступность кандидатов в вашей нише — чтобы оффер не проигрывал ещё до собеседования.</p>
         </div>
 
         <!-- ENERGY / PROBLEMS CHECKLIST -->
