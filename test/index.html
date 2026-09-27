@@ -243,6 +243,8 @@
   .gc2{ grid-column: span 2; }
   .gc3{ grid-column: span 3; }
   .gr2{ grid-row: span 2; }
+  /* next to the tall «Обо мне» card: kadry + process fill its height, no holes */
+  @media (min-width:981px){ #kadryCard, #processCard{ align-self:stretch; } }
   @media (max-width:980px){
     .grid{ grid-template-columns: repeat(2, 1fr); }
     .gc3{ grid-column: span 2; }
@@ -638,6 +640,13 @@
   .fstep .ftitle{ font-size:var(--fs-body-s); font-weight:var(--fw-bold); margin-bottom:4px;}
   .fstep .ftext{ font-size:var(--fs-sec); color:rgba(255,255,255,0.72); line-height:1.4; font-weight:var(--fw-regular); }
 
+  .funnel-cases{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+  @media (max-width:760px){ .funnel-cases{ grid-template-columns:1fr; } }
+  .speed-cmp{ display:grid; gap:12px; margin-top:14px; }
+  .speed-cmp-row{ display:grid; grid-template-columns:120px minmax(0,1fr) auto; align-items:center; gap:12px; font-size:var(--fs-body-s); color:rgba(255,255,255,0.78); }
+  .speed-cmp-row i{ display:block; height:10px; border-radius:6px; background:rgba(255,255,255,0.28); width:var(--w); }
+  .speed-cmp-row.after i{ background:var(--accent-light); }
+  .speed-cmp-row em{ font-style:normal; font-size:var(--fs-num-s); font-weight:var(--fw-medium); color:#fff; font-variant-numeric:tabular-nums; white-space:nowrap; }
   .funnel-case{ background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:18px; padding:18px 20px; }
   .funnel-case b{ display:block; font-size:var(--fs-h3); margin-bottom:6px; font-weight:var(--fw-bold); }
   .funnel-case p{ font-size:var(--fs-body); color:rgba(255,255,255,0.78); line-height:1.5; font-weight:var(--fw-regular); }
@@ -712,7 +721,8 @@
     .solver-card .sv-tile-chips span{ padding:7px 12px; }
     #retentionCard{ align-self:stretch; }
   }
-  .metrics-band{ grid-column:1 / -1; display:flex; align-items:center; gap:14px 36px; flex-wrap:wrap; min-height:0; }
+  .metrics-band{ grid-column:1 / span 3; display:flex; align-items:center; gap:14px 36px; flex-wrap:wrap; min-height:0; }
+  @media (max-width:980px){ .metrics-band{ grid-column:1 / -1; } }
   .metrics-band .funnel-head{ flex:0 1 300px; margin-bottom:0; }
   .metrics-band > p{ flex:1 1 420px; margin:0; }
   .mkt-tile{ flex:1 1 420px; display:flex; align-items:center; gap:18px; padding:18px 20px; border-radius:var(--radius-md); cursor:pointer;
@@ -1026,7 +1036,7 @@
   .hero-person img{ display:block; width:100%; height:auto; max-height:290px; object-fit:contain; object-position:bottom; filter:drop-shadow(0 10px 24px rgba(20,30,60,.22)); }
 
   .split-col-results{ position:relative; }
-  .res-person{ display:block; width:120px; height:auto; margin:10px 0 -24px auto; filter:drop-shadow(0 8px 18px rgba(20,30,60,.2)); }
+  .res-person{ display:block; width:120px; height:auto; margin:10px 0 -18px auto; filter:drop-shadow(0 8px 18px rgba(20,30,60,.2)); }
 
   #processCard{ position:relative; padding-right:120px; overflow:hidden; }
   /* weekend columns are empty — drop them to make room for the photo */
@@ -1266,7 +1276,7 @@
           <div class="sv-tile-go">Собрать свой набор →</div>
         </div>
 
-        <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS (full-width band) -->
+        <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS (band over 3 columns, onboarding in the 4th) -->
         <div class="card svc-card metrics-band funnel-card anim-in" style="animation-delay:.42s" id="metricsCard" onclick="openCardOverlay('metricsCard','metricsOverlay')">
           <div class="funnel-head">
             <div>
@@ -1285,43 +1295,6 @@
           </div>
         </div>
 
-        <!-- NEW SERVICE: HRBP SUBSCRIPTION -->
-        <div class="card dark svc-card funnel-card anim-in" style="animation-delay:.44s" id="hrbpCard" onclick="openCardOverlay('hrbpCard','hrbpOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3 style="color:#f2f2f2;">HRBP по подписке</h3>
-              <div class="sub">HR-директор на part-time, без найма в штат</div>
-            </div>
-          </div>
-          <p>Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
-        </div>
-
-        <!-- ENERGY / PROBLEMS CHECKLIST -->
-        <div class="card energy gc2 anim-in" style="animation-delay:.3s">
-          <h3>Узнаёте свою компанию?</h3>
-          <div class="sub">Большинство HR-проблем невидимы, пока не посчитать потери. Отметьте то, что про вас:</div>
-          <div class="problem-list">
-            <button type="button" class="problem-chip" onclick="toggleProblem(this)">Ручные рутинные процессы</button>
-            <button type="button" class="problem-chip" onclick="toggleProblem(this)">Высокая текучесть</button>
-            <button type="button" class="problem-chip" onclick="toggleProblem(this)">Долгий и дорогой найм</button>
-            <button type="button" class="problem-chip" onclick="toggleProblem(this)">Хаос в HR-данных</button>
-            <button type="button" class="problem-chip" onclick="toggleProblem(this)">Низкая вовлечённость</button>
-            <button type="button" class="problem-chip" onclick="toggleProblem(this)">HR не связан с бизнесом</button>
-          </div>
-          <div class="problem-result" id="problemResult">Отметьте пункты — покажу, во сколько это обходится</div>
-        </div>
-
-        <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
-        <div class="card svc-card gc2 funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3>Кастомные HR-системы и боты</h3>
-              <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
-            </div>
-          </div>
-          <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
-        </div>
-
         <!-- ONBOARDING: links to the /onboarding/ page -->
         <a class="card svc-card onb-card anim-in" style="animation-delay:.5s" id="onbCard" href="/test/onboarding/">
           <h3>Онбординг</h3>
@@ -1336,6 +1309,28 @@
           <div class="onb-cap">Дни адаптации нового сотрудника</div>
           <div class="card-hint">Подробнее →</div>
         </a>
+
+        <!-- NEW SERVICE: HRBP SUBSCRIPTION -->
+        <div class="card dark svc-card funnel-card anim-in" style="animation-delay:.44s" id="hrbpCard" onclick="openCardOverlay('hrbpCard','hrbpOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3 style="color:#f2f2f2;">HRBP по подписке</h3>
+              <div class="sub">HR-директор на part-time, без найма в штат</div>
+            </div>
+          </div>
+          <p>Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
+        </div>
+
+        <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
+        <div class="card svc-card gc3 funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
+          <div class="funnel-head">
+            <div>
+              <h3>Кастомные HR-системы и боты</h3>
+              <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
+            </div>
+          </div>
+          <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
+        </div>
 
         <!-- ABOUT + RESULTS -->
         <div class="card geo gc2 gr2 anim-in" style="animation-delay:.35s;">
@@ -1402,35 +1397,8 @@
           </div>
         </div>
 
-        <!-- ANALYTICS DARK -->
-        <div class="card dark analytics anim-in" style="animation-delay:.1s;">
-          <h3 style="color:#f2f2f2;">Ключевые цифры</h3>
-          <div class="stat-chain">
-            <div class="stat"><div class="n">3×</div><div class="l">ускорение<br>HR-процессов</div></div>
-            <div class="chain-dot"></div>
-            <div class="stat"><div class="n">−40%</div><div class="l">затрат на подбор<br>и адаптацию</div></div>
-            <div class="chain-dot"></div>
-            <div class="stat"><div class="n">25+</div><div class="l">проанализировано<br>компаний</div></div>
-          </div>
-        </div>
-
-        <!-- ORDERS / HIRING SPEED CASE -->
-        <div class="card orders anim-in" style="position:relative; animation-delay:.15s;">
-          <h3>Скорость закрытия вакансий</h3>
-          <div class="sub">Кейс: геймдев-команда, 80+ человек</div>
-          <div class="speed-toggle">
-            <button type="button" class="speed-btn active" id="speedBtnBefore" onclick="speedToggle('before')">Ручной сорсинг</button>
-            <button type="button" class="speed-btn" id="speedBtnAfter" onclick="speedToggle('after')">Входящий поток</button>
-          </div>
-          <svg viewBox="0 0 220 110" preserveAspectRatio="none">
-            <path id="speedPathBefore" class="speed-path" d="M0,28 L220,28" fill="none" stroke="#111" stroke-width="2.4"/>
-            <path id="speedPathAfter" class="speed-path speed-hidden" d="M0,86 L220,86" fill="none" stroke="#111" stroke-width="2.4"/>
-          </svg>
-          <div class="orders-months"><span id="speedWeeks">5 недель на вакансию — ручной сорсинг</span></div>
-        </div>
-
         <!-- KADRY: links to the /kadry/ page -->
-        <a class="card svc-card onb-card anim-in" style="animation-delay:.2s" id="kadryCard" href="/test/kadry/">
+        <a class="card svc-card onb-card gc2 anim-in" style="animation-delay:.2s" id="kadryCard" href="/test/kadry/">
           <h3>Кадровый учёт</h3>
           <div class="sub">Убираю бумажную рутину из кадрового учёта</div>
           <div class="kd-bars" aria-hidden="true">
@@ -1753,10 +1721,20 @@
       </div>
 
       <div class="funnel-page-section">
-        <h4>Кейс</h4>
-        <div class="funnel-case">
-          <b>Продуктовая IT-команда, 40 человек</b>
-          <p>Закрыли 6 инженерных позиций за 5 недель вместо привычных 3 месяцев: перестроили воронку, ускорили скрининг и синхронизировали интервью с нанимающими менеджерами.</p>
+        <h4>Кейсы</h4>
+        <div class="funnel-cases">
+          <div class="funnel-case">
+            <b>Продуктовая IT-команда, 40 человек</b>
+            <p>Закрыли 6 инженерных позиций за 5 недель вместо привычных 3 месяцев: перестроили воронку, ускорили скрининг и синхронизировали интервью с нанимающими менеджерами.</p>
+          </div>
+          <div class="funnel-case">
+            <b>Геймдев-команда, 80+ человек</b>
+            <p>Скорость закрытия вакансий после перестройки воронки:</p>
+            <div class="speed-cmp">
+              <div class="speed-cmp-row"><span>Ручной сорсинг</span><i style="--w:100%"></i><em>5 недель</em></div>
+              <div class="speed-cmp-row after"><span>Входящий поток</span><i style="--w:60%"></i><em>3 недели</em></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2589,41 +2567,6 @@
     }, 700);
   }
   svRender();
-
-  /* ============ hiring-speed toggle ============ */
-  function speedToggle(state){
-    var before = document.getElementById('speedPathBefore');
-    var after = document.getElementById('speedPathAfter');
-    var btnB = document.getElementById('speedBtnBefore');
-    var btnA = document.getElementById('speedBtnAfter');
-    var label = document.getElementById('speedWeeks');
-    if(state === 'after'){
-      before.classList.add('speed-hidden'); after.classList.remove('speed-hidden');
-      btnA.classList.add('active'); btnB.classList.remove('active');
-      label.textContent = '3 недели на вакансию — после перестройки воронки';
-    } else {
-      after.classList.add('speed-hidden'); before.classList.remove('speed-hidden');
-      btnB.classList.add('active'); btnA.classList.remove('active');
-      label.textContent = '5 недель на вакансию — ручной сорсинг';
-    }
-  }
-
-  /* ============ problems checklist ============ */
-  function toggleProblem(el){
-    el.classList.toggle('checked');
-    var n = document.querySelectorAll('.problem-chip.checked').length;
-    var msgs = [
-      'Отметьте пункты — покажу, во сколько это обходится',
-      'Уже заметно — это тянет ресурсы, но чинится быстро.',
-      'Уже заметно — это тянет ресурсы, но чинится быстро.',
-      'Похоже, HR отнимает больше денег, чем кажется — стоит посчитать.',
-      'Похоже, HR отнимает больше денег, чем кажется — стоит посчитать.',
-      'Это системные проблемы, а не мелочи — здесь можно сэкономить особенно много.',
-      'Это системные проблемы, а не мелочи — здесь можно сэкономить особенно много.'
-    ];
-    var out = document.getElementById('problemResult');
-    out.innerHTML = msgs[n] + (n > 0 ? ' <a href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Обсудить →</a>' : '');
-  }
 
   /* ============ deep links: /#naim, /#hrbp open their card ============ */
   var hashOverlays = {
