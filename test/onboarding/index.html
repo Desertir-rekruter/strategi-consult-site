@@ -523,5 +523,23 @@
   }
   syncThemeToggle();
 </script>
+<script>
+  /* клик по фону вокруг страницы (или Esc) закрывает её, как окна на главной */
+  (function(){
+    function closePage(){
+      var home = '/test/';
+      try{
+        var r = document.referrer ? new URL(document.referrer) : null;
+        if(r && r.origin === location.origin && history.length > 1){ history.back(); return; }
+      }catch(e){}
+      location.href = home;
+    }
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.page, .pills, .theme-toggle, a, button, input, select, textarea, label')) return;
+      closePage();
+    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePage(); });
+  })();
+</script>
 </body>
 </html>
