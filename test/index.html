@@ -247,10 +247,12 @@
   .pager{
     display:flex; align-items:flex-start; overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none;
-    margin:-8px -26px 0; transition:height .35s cubic-bezier(.33,1,.68,1);
+    margin:-8px -26px 0; transition:height .55s cubic-bezier(.65,0,.35,1);
   }
   .pager::-webkit-scrollbar{ display:none; }
   .pg{ flex:0 0 100%; min-width:0; box-sizing:border-box; padding:8px 26px 4px; scroll-snap-align:start; scroll-snap-stop:always; }
+  .pager.is-animating{ scroll-snap-type:none; }
+  .pg{ transform-origin:50% 0; will-change:transform; }
   .dock-ghost{ visibility:hidden; }
   .pg-dots{
     position:sticky; bottom:16px; z-index:5; width:fit-content; margin:16px auto 0;
@@ -2866,14 +2868,44 @@ function unitCalcUpdate(){
       side();
       pages.forEach(function(p, k){ p.inert = k !== i; });
     }
+    // own animation instead of the browser's quick smooth-scroll: ease in-out, ~0.7 s
+    var anim = 0, animating = false;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function ease(p){ return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }
+    // pages shrink a little while they slide away, like home-screen pages
+    function depth(){
+      var pos = pager.scrollLeft / pager.clientWidth;
+      pages.forEach(function(p, k){
+        var d = Math.min(1, Math.abs(pos - k));
+        p.style.transform = d < 0.002 ? '' : 'scale(' + (1 - 0.06 * d).toFixed(4) + ')';
+      });
+    }
     function go(k){
       k = Math.max(0, Math.min(pages.length - 1, k));
+      var from = pager.scrollLeft, to = k * pager.clientWidth;
+      if(Math.abs(from - to) < 2) return;
+      cancelAnimationFrame(anim);
       pages.forEach(function(p){ p.inert = false; });
-      pager.scrollTo({ left: k * pager.clientWidth, behavior: 'smooth' });
+      // keep the taller height while sliding, settle to the new page afterwards
+      pager.style.height = Math.max(pager.offsetHeight, pages[k].offsetHeight) + 'px';
       var top = pager.getBoundingClientRect().top;
       if(top < 0) window.scrollBy({ top: top - 20, behavior: 'smooth' });
+      if(reduce){ pager.scrollLeft = to; fit(); return; }
+      animating = true; pager.classList.add('is-animating');
+      var t0 = performance.now(), dur = 720;
+      (function step(now){
+        var p = Math.min(1, (now - t0) / dur);
+        pager.scrollLeft = from + (to - from) * ease(p);
+        if(p < 1){ anim = requestAnimationFrame(step); return; }
+        animating = false; pager.classList.remove('is-animating'); depth(); fit();
+      })(t0);
     }
-    pager.addEventListener('scroll', function(){ clearTimeout(t); t = setTimeout(fit, 90); }, { passive:true });
+    var raf = 0;
+    pager.addEventListener('scroll', function(){
+      if(!raf) raf = requestAnimationFrame(function(){ raf = 0; depth(); });
+      if(animating) return;
+      clearTimeout(t); t = setTimeout(fit, 90);
+    }, { passive:true });
     dots.forEach(function(d){ d.addEventListener('click', function(){ go(+d.dataset.pg); }); });
     arrows.forEach(function(a){ a.addEventListener('click', function(){ go(cur() + (+a.dataset.dir)); }); });
     // side buttons: only while the pages fill the middle of the screen
