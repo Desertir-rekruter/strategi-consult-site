@@ -242,6 +242,56 @@
     .about-letter-photo{ height:260px; order:-1; }
   }
 
+
+  /* ---------- pages: swipe sideways like a phone / tablet home screen ---------- */
+  .pager{
+    display:flex; align-items:flex-start; overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none;
+    margin:-8px -26px 0; transition:height .35s cubic-bezier(.33,1,.68,1);
+  }
+  .pager::-webkit-scrollbar{ display:none; }
+  .pg{ flex:0 0 100%; min-width:0; box-sizing:border-box; padding:8px 26px 4px; scroll-snap-align:start; scroll-snap-stop:always; }
+  .dock-ghost{ visibility:hidden; }
+  .pg-dots{
+    position:sticky; bottom:16px; z-index:5; width:fit-content; margin:16px auto 0;
+    display:flex; align-items:center; gap:4px; padding:5px 6px;
+    background:rgba(27,27,29,0.55); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.18); border-radius:30px; box-shadow:0 10px 26px rgba(0,0,0,0.22);
+  }
+  .pg-dots button{ font-family:inherit; border:0; background:none; cursor:pointer; padding:0; }
+  .pg-dot{ width:24px; height:24px; display:flex; align-items:center; justify-content:center; }
+  .pg-dot::before{ content:""; width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.4); transition:background .25s, transform .25s; }
+  .pg-dot.on::before{ background:#fff; transform:scale(1.15); }
+  .pg-arrow{ width:30px; height:30px; border-radius:50%; color:#fff; font-size:20px; line-height:1; display:flex; align-items:center; justify-content:center; transition:background .2s, opacity .2s; }
+  .pg-arrow:hover{ background:rgba(255,255,255,0.16); }
+  .pg-arrow[disabled]{ opacity:.3; cursor:default; background:none; }
+  .pg-dots button:focus-visible{ outline:2px solid var(--accent-light); outline-offset:1px; border-radius:50%; }
+  @media (max-width:620px){
+    .pager{ margin:-8px -16px 0; }
+    .pg{ padding:8px 16px 4px; }
+  }
+  @media (prefers-reduced-motion: reduce){ .pager{ transition:none; } }
+
+  /* side buttons in the free space beside the grid (wide screens only) */
+  .pg-side{
+    display:none; position:fixed; top:50%; z-index:6; width:56px; height:56px; margin-top:-28px; padding:0;
+    border-radius:50%; border:1px solid rgba(255,255,255,0.28); cursor:pointer; color:#fff;
+    background:rgba(27,27,29,0.5); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.25);
+    align-items:center; justify-content:center;
+    transition:opacity .3s, transform .25s, background .2s;
+  }
+  .pg-side:hover{ background:rgba(25,95,232,0.85); transform:scale(1.06); }
+  .pg-side:focus-visible{ outline:2px solid var(--accent-light); outline-offset:3px; }
+  .pg-side.off{ opacity:0; pointer-events:none; transform:scale(.85); }
+  .pg-next{ right:calc((100vw - 1320px) / 4 + 13px - 28px); }
+  .pg-prev{ left:calc((100vw - 1320px) / 4 + 13px - 28px); }
+  .pg-next.hint svg{ animation:pgNudge 1.6s ease-in-out 2; }
+  @keyframes pgNudge{ 0%,100%{ transform:none; } 30%{ transform:translateX(5px); } 60%{ transform:none; } }
+  @media (min-width:1420px){ .pg-side{ display:flex; } }
+  @media (prefers-reduced-motion: reduce){ .pg-next.hint svg{ animation:none; } }
+  /* page 2 starts off-screen: no entrance animation there */
+  #pg2 .anim-in{ animation:none; }
   /* ---------- layout: dock + grid ---------- */
   .layout{ display:flex; gap:14px; }
 
@@ -838,9 +888,10 @@
   /* ---------- phone: «Найм» full width, then «Обо мне» + «База знаний» as two squares ---------- */
   .about-sq{ display:none; }
   @media (max-width:620px){
-    .content{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; }
+    .pg{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:14px; align-content:start; }
     .top, .layout, .grid{ display:contents; }
-    .content > *, .top > *, .grid > *{ grid-column:1 / -1; }
+    .pg > *, .top > *, .grid > *, .calc-stack > *{ grid-column:1 / -1; }
+    .content > .hello-band{ margin-top:14px; }
     .top .hero{ order:-3; grid-column:1 / -1; }
     #funnelCard{ order:-2; }
     #aboutCard, #kbCard{
@@ -1139,305 +1190,327 @@
 
 <div class="frame">
   <div class="content">
-    <div class="top">
-      <div class="hero hero-face anim-in" id="top">
-        <div class="hero-txt">
-          <div class="eyebrow">Игнатий Филатов · HRBP-консультант</div>
-          <h1>Ваш бизнес теряет деньги прямо сейчас</h1>
-          <p>Нахожу, где HR съедает деньги — и выстраиваю процессы, которые это останавливают</p>
-          <a class="hero-cta" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит →</a>
+    <!-- PAGES: swipe sideways like a phone/tablet home screen -->
+    <div class="pager" id="pager">
+      <section class="pg" id="pg1" aria-label="Страница 1 из 2">
+        <div class="top">
+          <div class="hero hero-face anim-in" id="top">
+            <div class="hero-txt">
+              <div class="eyebrow">Игнатий Филатов · HRBP-консультант</div>
+              <h1>Ваш бизнес теряет деньги прямо сейчас</h1>
+              <p>Нахожу, где HR съедает деньги — и выстраиваю процессы, которые это останавливают</p>
+              <a class="hero-cta" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит →</a>
+            </div>
+            <figure class="hero-person"><picture><source media="(max-width:620px)" srcset="/test/assets/people/3701-m.webp"><img src="/test/assets/people/3701.webp" alt="Игнатий Филатов" width="751" height="1100" fetchpriority="high"></picture></figure>
+          </div>
+          <aside class="card about-mini funnel-card anim-in" id="aboutCard" role="button" tabindex="0" aria-label="Обо мне: открыть подробнее" onclick="openCardOverlay('aboutCard','aboutOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('aboutCard','aboutOverlay');}" style="animation-delay:.08s;">
+            <div class="about-mini-head">
+              <h3>Обо мне</h3>
+              <img class="face-av" src="/test/assets/people/av-calm.webp" alt="" width="240" height="240" loading="lazy">
+            </div>
+            <p class="about-text">Я действующий HRBP. Нахожу, где бизнес теряет деньги на HR, и исправляю это автоматизацией.</p>
+            <div class="about-tags">
+              <span class="tag">5+ лет в HR</span>
+              <span class="tag">HRBP</span>
+              <span class="tag">Автоматизация</span>
+            </div>
+            <div class="about-foot">
+              <span>Работаю удалённо</span>
+              <span class="avail">Беру 2–3 клиента в месяц · сейчас есть место</span>
+            </div>
+            <div class="about-sq">
+              <div class="sq-big">5+<small> лет</small></div>
+              <div class="sq-cap">в HR · действующий HRBP</div>
+              <div class="sq-avail"><i></i>Беру новые проекты</div>
+            </div>
+          </aside>
         </div>
-        <figure class="hero-person"><picture><source media="(max-width:620px)" srcset="/test/assets/people/3701-m.webp"><img src="/test/assets/people/3701.webp" alt="Игнатий Филатов" width="751" height="1100" fetchpriority="high"></picture></figure>
-      </div>
-      <aside class="card about-mini funnel-card anim-in" id="aboutCard" role="button" tabindex="0" aria-label="Обо мне: открыть подробнее" onclick="openCardOverlay('aboutCard','aboutOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('aboutCard','aboutOverlay');}" style="animation-delay:.08s;">
-        <div class="about-mini-head">
-          <h3>Обо мне</h3>
-          <img class="face-av" src="/test/assets/people/av-calm.webp" alt="" width="240" height="240" loading="lazy">
+
+        <div class="layout">
+          <div class="dock">
+            <div class="dot active">▦</div>
+            <div class="dot">◈</div>
+            <div class="dot">₽</div>
+            <div class="dot">↻</div>
+          </div>
+
+          <div class="grid">
+
+            <!-- WEEK / RESULT -->
+            <div class="card week funnel-card" id="kbCard" onclick="openKB(event)">
+              <div class="week-top">
+                <div>
+                  <h3>Построение базы знаний</h3>
+                  <div class="sub">Экономит время и деньги руководителей</div>
+                </div>
+                <div class="week-top-right">
+                  <div class="week-num">16<span style="font-size:16px;">ч</span></div>
+                </div>
+              </div>
+              <div class="kbr-cap">Свободное время руководителей</div>
+              <div class="kbr" role="img" aria-label="Свободное время руководителей: с базой знаний 8 часов из 10, без неё 2 часа из 10">
+                <svg class="kbr-svg" viewBox="0 0 150 150" aria-hidden="true">
+                  <g fill="none" stroke-linecap="round" transform="rotate(135 75 75)">
+                    <circle cx="75" cy="75" r="62" pathLength="100" stroke="rgba(19,19,19,0.09)" stroke-width="15" stroke-dasharray="75 100"/>
+                    <circle cx="75" cy="75" r="42" pathLength="100" stroke="rgba(19,19,19,0.09)" stroke-width="15" stroke-dasharray="75 100"/>
+                    <circle cx="75" cy="75" r="62" pathLength="100" stroke="#195FE8" stroke-width="15" stroke-dasharray="60 100"/>
+                    <circle cx="75" cy="75" r="42" pathLength="100" stroke="#6293FF" stroke-width="15" stroke-dasharray="15 100"/>
+                  </g>
+                  <text x="75" y="83" text-anchor="middle" font-size="22" font-weight="500">×4</text>
+                </svg>
+                <div class="kbr-leg">
+                  <div><b><i style="background:#195FE8"></i>8 ч</b><span>С базой<em class="kb-long"> знаний</em></span></div>
+                  <div><b><i style="background:#6293FF"></i>2 ч</b><span>Без</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- HIRING FUNNEL -->
+            <div class="card phil funnel-card" id="funnelCard" onclick="openFunnel(event)">
+              <div class="funnel-head">
+                <div>
+                  <h3>Найм</h3>
+                  <div class="sub">Экономлю 16,5 часов на одной вакансии</div>
+                </div>
+              </div>
+              <div class="funnel-wrap">
+                <svg class="funnel-svg" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="4,6 96,6 76,34 24,34" fill="#1B3A9E"/>
+                  <polygon points="24,34 76,34 61,62 39,62" fill="#195FE8"/>
+                  <polygon points="39,62 61,62 52,88 48,88" fill="#6293FF"/>
+                  <polygon points="48,88 52,88 51,106 49,106" fill="#B9CCFF"/>
+                </svg>
+                <div class="funnel-stats">
+                  <div class="fstat"><span class="flabel"><span class="fdot" style="background:#1B3A9E"></span>Резюме</span><span>340</span></div>
+                  <div class="fstat"><span class="flabel"><span class="fdot" style="background:#195FE8"></span>Первичное собеседование</span><span>25</span></div>
+                  <div class="fstat"><span class="flabel"><span class="fdot" style="background:#6293FF"></span>Собеседование с заказчиком (вами)</span><span>3–5</span></div>
+                  <div class="fstat"><span class="flabel"><span class="fdot" style="background:#B9CCFF"></span>Выход</span><span>1</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- HR AUDIT SERVICE -->
+            <div class="card levels funnel-card anim-in" style="animation-delay:.05s; display:flex; flex-direction:column;" id="auditCard" onclick="openCardOverlay('auditCard','auditOverlay')">
+              <div class="funnel-head">
+                <div>
+                  <h3>Аудит процессов</h3>
+                  <div class="sub">Узнайте за 30 минут, где именно теряет деньги ваша компания</div>
+                </div>
+              </div>
+              <div class="audit-teaser">
+                <div class="audit-num">30<span style="font-size:14px;">мин</span></div>
+                <div class="audit-teaser-list">
+                  <div>Бесплатно</div>
+                  <div>Конкретный план, не общие советы</div>
+                  <div>Ответ за 24 часа</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: calculator + onboarding under it -->
+            <div class="calc-stack gr2">
+              <!-- CALCULATOR -->
+              <div class="card dark2 settings anim-in" style="animation-delay:.1s;">
+                <h3 style="color:#f2f2f2;">Сколько это будет стоить</h3>
+                <div class="sub" style="color:#b8b8ba;">Ориентировочно — точную цифру назову на созвоне</div>
+
+                <div class="calc-services">
+                  <button type="button" class="calc-svc active" data-svc="hiring" onclick="calcSelectService(this,'hiring')">Найм</button>
+                  <button type="button" class="calc-svc" data-svc="onboarding" onclick="calcSelectService(this,'onboarding')">Онбординг</button>
+                  <button type="button" class="calc-svc" data-svc="hr" onclick="calcSelectService(this,'hr')">Кадровый учёт (КДП)</button>
+                  <button type="button" class="calc-svc" data-svc="kb" onclick="calcSelectService(this,'kb')">База знаний</button>
+                </div>
+
+                <div class="calc-row">
+                  <div class="calc-row-lbl"><span id="calcQtyLabel">Сколько вакансий закрыть</span><b id="calcQtyVal">1 вакансия</b></div>
+                  <input type="range" min="1" max="10" value="1" id="calcQty" class="calc-slider" oninput="calcUpdate()">
+                </div>
+
+                <div class="calc-urgency">
+                  <span>Срочно (быстрее обычного)</span>
+                  <div class="switch" id="calcUrgent" onclick="calcToggleUrgent()"></div>
+                </div>
+
+                <div class="calc-output">
+                  <div class="calc-output-lbl">Ориентировочно</div>
+                  <div class="calc-output-val" id="calcOutput">20 000 – 30 000 ₽</div>
+                </div>
+                <a class="calc-cta" id="calcCta" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить точный расчёт →</a>
+              </div>
+
+              <!-- ONBOARDING: links to the /onboarding/ page -->
+              <a class="card svc-card onb-card anim-in" style="animation-delay:.5s" id="onbCard" href="/test/onboarding/">
+                <h3>Онбординг</h3>
+                <div class="sub">Снижаю текучесть в первые 3 месяца</div>
+                <div class="onb-track" aria-hidden="true">
+                  <div class="onb-line"></div>
+                  <div class="onb-pt"><i></i><span>1</span></div>
+                  <div class="onb-pt"><i></i><span>7</span></div>
+                  <div class="onb-pt"><i></i><span>30</span></div>
+                  <div class="onb-pt on"><i></i><span>90</span></div>
+                </div>
+                <div class="onb-cap">Дни адаптации нового сотрудника</div>
+                <div class="card-hint">Подробнее →</div>
+              </a>
+            </div>
+
+            <!-- NEW SERVICE: RETENTION -->
+            <div class="card svc-card funnel-card anim-in" style="animation-delay:.4s" id="retentionCard" onclick="openCardOverlay('retentionCard','retentionOverlay')">
+              <div class="funnel-head">
+                <div>
+                  <h3>Снижение текучести</h3>
+                  <div class="sub">Разбираюсь, почему уходят, и выстраиваю удержание</div>
+                </div>
+              </div>
+              <div class="retention-chart">
+                <svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="retentionFade" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#195FE8" stop-opacity="0.18"/>
+                      <stop offset="100%" stop-color="#195FE8" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M10,22 C55,20 85,42 125,54 C160,64 188,70 210,74 L210,86 L10,86 Z" fill="url(#retentionFade)"/>
+                  <path d="M10,22 C55,20 85,42 125,54 C160,64 188,70 210,74" fill="none" stroke="#195FE8" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="10" cy="22" r="4.5" fill="#9a9a9d"/>
+                  <circle cx="210" cy="74" r="4.5" fill="#195FE8"/>
+                </svg>
+                <div class="retention-chart-labels"><span>Было</span><span>Стало</span></div>
+              </div>
+            </div>
+
+            <!-- PROBLEM SOLVER: two columns next to retention -->
+            <div class="card dark2 funnel-card solver-card anim-in" style="animation-delay:.12s;" id="solverCard" role="button" tabindex="0" aria-label="Решатель проблем: открыть" onclick="openCardOverlay('solverCard','solverOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('solverCard','solverOverlay');}">
+              <div class="sv-tile-text">
+                <h3 style="color:#f2f2f2;">Решатель проблем</h3>
+                <div class="sub" style="color:#b8b8ba;">Отметьте, что болит, и я соберу решения под вашу ситуацию</div>
+              </div>
+              <div class="sv-tile-chips" aria-hidden="true">
+                <span class="on">По 2 месяца не могу закрыть вакансию</span>
+                <span>Одни и те же вопросы</span>
+                <span class="on">Данные о клиентах теряются</span>
+                <span>Новички уходят</span>
+                <span>Не понимаю, что происходит в бизнесе</span>
+              </div>
+              <div class="sv-tile-go">Собрать свой набор →</div>
+            </div>
+
+
+          </div>
         </div>
-        <p class="about-text">Я действующий HRBP. Нахожу, где бизнес теряет деньги на HR, и исправляю это автоматизацией.</p>
-        <div class="about-tags">
-          <span class="tag">5+ лет в HR</span>
-          <span class="tag">HRBP</span>
-          <span class="tag">Автоматизация</span>
+      </section>
+
+      <section class="pg" id="pg2" aria-label="Страница 2 из 2">
+        <div class="layout">
+          <div class="dock dock-ghost" aria-hidden="true"></div>
+          <div class="grid">
+            <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS (band over the full width) -->
+            <div class="card svc-card metrics-band funnel-card anim-in" style="animation-delay:.42s" id="metricsCard" onclick="openCardOverlay('metricsCard','metricsOverlay')">
+              <div class="funnel-head">
+                <div>
+                  <h3>HR-метрики и юнит-экономика</h3>
+                  <div class="sub">Считаю, сколько стоит и когда окупается каждый сотрудник</div>
+                </div>
+              </div>
+              <!-- MARKET RESEARCH: teaser inside the metrics band (opens its own window) -->
+              <div class="mkt-tile" id="marketCard" role="button" tabindex="0" onclick="event.stopPropagation(); openMarket()" onkeydown="if(event.key==='Enter'){event.stopPropagation(); openMarket()}">
+                <div class="mkt-txt">
+                  <div class="mkt-eyebrow">Начните с рынка</div>
+                  <h4>Исследование рынка</h4>
+                  <p>Сколько платят конкуренты и где искать людей — чтобы оффер не проигрывал ещё до собеседования.</p>
+                </div>
+                <span class="mkt-go">Смотреть →</span>
+              </div>
+            </div>
+
+            <!-- NEW SERVICE: HRBP SUBSCRIPTION -->
+            <div class="card dark svc-card funnel-card anim-in" style="animation-delay:.44s" id="hrbpCard" onclick="openCardOverlay('hrbpCard','hrbpOverlay')">
+              <div class="funnel-head">
+                <div>
+                  <h3 style="color:#f2f2f2;">HRBP по подписке</h3>
+                  <div class="sub">HR-директор на part-time, без найма в штат</div>
+                </div>
+              </div>
+              <p>Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
+            </div>
+
+            <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
+            <div class="card svc-card gc3 funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
+              <div class="funnel-head">
+                <div>
+                  <h3>Кастомные HR-системы и боты</h3>
+                  <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
+                </div>
+              </div>
+              <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
+            </div>
+
+            <!-- KADRY: links to the /kadry/ page -->
+            <a class="card svc-card onb-card gc2 anim-in" style="animation-delay:.2s" id="kadryCard" href="/test/kadry/">
+              <h3>Кадровый учёт</h3>
+              <div class="sub">Убираю бумажную рутину из кадрового учёта</div>
+              <div class="kd-bars" aria-hidden="true">
+                <div class="kd-row"><span>Бумага</span><div class="kd-track"><i></i></div></div>
+                <div class="kd-row after"><span>КЭДО</span><div class="kd-track"><i></i></div></div>
+              </div>
+              <div class="kd-cap"><b>×3</b>меньше времени на кадровый учёт</div>
+              <div class="card-hint">Подробнее →</div>
+            </a>
+
+            <!-- CALENDAR / PROCESS -->
+            <div class="card calendar gc2 funnel-card anim-in" style="animation-delay:.25s" id="processCard" onclick="openCardOverlay('processCard','processOverlay')">
+              <div class="cal-head">
+                <div class="cal-nav">Бесплатно</div>
+                <div class="cal-title">Как я работаю · 4 шага</div>
+                <div class="cal-nav">24 часа</div>
+              </div>
+              <div class="cal-grid">
+                <div></div>
+                <div class="dow">Пн</div><div class="dow">Вт</div><div class="dow">Ср</div>
+                <div class="dow">Чт</div><div class="dow">Пт</div><div class="dow">Сб</div><div class="dow">Вс</div>
+
+                <div class="time">12:00</div>
+                <div class="cal-cell"><div class="event">Диагно-<br>стика</div></div>
+                <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+                <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+
+                <div class="time">13:00</div>
+                <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+                <div class="cal-cell"><div class="event outline">Аудит<br>данных</div></div>
+                <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+
+                <div class="time">14:00</div>
+                <div class="cal-cell"></div><div class="cal-cell"></div>
+                <div class="cal-cell"><div class="event">Стратегия</div></div>
+                <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+
+                <div class="time">15:00</div>
+                <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+                <div class="cal-cell"><div class="event outline">Внед-<br>рение</div></div>
+                <div class="cal-cell"></div><div class="cal-cell"></div>
+              </div>
+              <div class="cal-steps">
+                <div class="cal-step"><span>01</span>Диагностика</div>
+                <div class="cal-step"><span>02</span>Аудит данных</div>
+                <div class="cal-step"><span>03</span>Стратегия</div>
+                <div class="cal-step"><span>04</span>Внедрение</div>
+              </div>
+              <div class="card-hint">Нажмите, чтобы посмотреть детали →</div>
+              <img class="proc-person" src="/test/assets/people/3749.webp" alt="" width="399" height="1100" loading="lazy">
+            </div>
+          </div>
         </div>
-        <div class="about-foot">
-          <span>Работаю удалённо</span>
-          <span class="avail">Беру 2–3 клиента в месяц · сейчас есть место</span>
-        </div>
-        <div class="about-sq">
-          <div class="sq-big">5+<small> лет</small></div>
-          <div class="sq-cap">в HR · действующий HRBP</div>
-          <div class="sq-avail"><i></i>Беру новые проекты</div>
-        </div>
-      </aside>
+      </section>
     </div>
 
-    <div class="layout">
-      <div class="dock">
-        <div class="dot active">▦</div>
-        <div class="dot">◈</div>
-        <div class="dot">₽</div>
-        <div class="dot">↻</div>
-      </div>
+    <button type="button" class="pg-side pg-prev" data-dir="-1" aria-label="Назад, на первую страницу"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button type="button" class="pg-side pg-next" data-dir="1" aria-label="Дальше, на вторую страницу"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 
-      <div class="grid">
-
-        <!-- WEEK / RESULT -->
-        <div class="card week funnel-card" id="kbCard" onclick="openKB(event)">
-          <div class="week-top">
-            <div>
-              <h3>Построение базы знаний</h3>
-              <div class="sub">Экономит время и деньги руководителей</div>
-            </div>
-            <div class="week-top-right">
-              <div class="week-num">16<span style="font-size:16px;">ч</span></div>
-            </div>
-          </div>
-          <div class="kbr-cap">Свободное время руководителей</div>
-          <div class="kbr" role="img" aria-label="Свободное время руководителей: с базой знаний 8 часов из 10, без неё 2 часа из 10">
-            <svg class="kbr-svg" viewBox="0 0 150 150" aria-hidden="true">
-              <g fill="none" stroke-linecap="round" transform="rotate(135 75 75)">
-                <circle cx="75" cy="75" r="62" pathLength="100" stroke="rgba(19,19,19,0.09)" stroke-width="15" stroke-dasharray="75 100"/>
-                <circle cx="75" cy="75" r="42" pathLength="100" stroke="rgba(19,19,19,0.09)" stroke-width="15" stroke-dasharray="75 100"/>
-                <circle cx="75" cy="75" r="62" pathLength="100" stroke="#195FE8" stroke-width="15" stroke-dasharray="60 100"/>
-                <circle cx="75" cy="75" r="42" pathLength="100" stroke="#6293FF" stroke-width="15" stroke-dasharray="15 100"/>
-              </g>
-              <text x="75" y="83" text-anchor="middle" font-size="22" font-weight="500">×4</text>
-            </svg>
-            <div class="kbr-leg">
-              <div><b><i style="background:#195FE8"></i>8 ч</b><span>С базой<em class="kb-long"> знаний</em></span></div>
-              <div><b><i style="background:#6293FF"></i>2 ч</b><span>Без</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- HIRING FUNNEL -->
-        <div class="card phil funnel-card" id="funnelCard" onclick="openFunnel(event)">
-          <div class="funnel-head">
-            <div>
-              <h3>Найм</h3>
-              <div class="sub">Экономлю 16,5 часов на одной вакансии</div>
-            </div>
-          </div>
-          <div class="funnel-wrap">
-            <svg class="funnel-svg" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="4,6 96,6 76,34 24,34" fill="#1B3A9E"/>
-              <polygon points="24,34 76,34 61,62 39,62" fill="#195FE8"/>
-              <polygon points="39,62 61,62 52,88 48,88" fill="#6293FF"/>
-              <polygon points="48,88 52,88 51,106 49,106" fill="#B9CCFF"/>
-            </svg>
-            <div class="funnel-stats">
-              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#1B3A9E"></span>Резюме</span><span>340</span></div>
-              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#195FE8"></span>Первичное собеседование</span><span>25</span></div>
-              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#6293FF"></span>Собеседование с заказчиком (вами)</span><span>3–5</span></div>
-              <div class="fstat"><span class="flabel"><span class="fdot" style="background:#B9CCFF"></span>Выход</span><span>1</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- HR AUDIT SERVICE -->
-        <div class="card levels funnel-card anim-in" style="animation-delay:.05s; display:flex; flex-direction:column;" id="auditCard" onclick="openCardOverlay('auditCard','auditOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3>Аудит процессов</h3>
-              <div class="sub">Узнайте за 30 минут, где именно теряет деньги ваша компания</div>
-            </div>
-          </div>
-          <div class="audit-teaser">
-            <div class="audit-num">30<span style="font-size:14px;">мин</span></div>
-            <div class="audit-teaser-list">
-              <div>Бесплатно</div>
-              <div>Конкретный план, не общие советы</div>
-              <div>Ответ за 24 часа</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT COLUMN: calculator + onboarding under it -->
-        <div class="calc-stack gr2">
-          <!-- CALCULATOR -->
-          <div class="card dark2 settings anim-in" style="animation-delay:.1s;">
-            <h3 style="color:#f2f2f2;">Сколько это будет стоить</h3>
-            <div class="sub" style="color:#b8b8ba;">Ориентировочно — точную цифру назову на созвоне</div>
-
-            <div class="calc-services">
-              <button type="button" class="calc-svc active" data-svc="hiring" onclick="calcSelectService(this,'hiring')">Найм</button>
-              <button type="button" class="calc-svc" data-svc="onboarding" onclick="calcSelectService(this,'onboarding')">Онбординг</button>
-              <button type="button" class="calc-svc" data-svc="hr" onclick="calcSelectService(this,'hr')">Кадровый учёт (КДП)</button>
-              <button type="button" class="calc-svc" data-svc="kb" onclick="calcSelectService(this,'kb')">База знаний</button>
-            </div>
-
-            <div class="calc-row">
-              <div class="calc-row-lbl"><span id="calcQtyLabel">Сколько вакансий закрыть</span><b id="calcQtyVal">1 вакансия</b></div>
-              <input type="range" min="1" max="10" value="1" id="calcQty" class="calc-slider" oninput="calcUpdate()">
-            </div>
-
-            <div class="calc-urgency">
-              <span>Срочно (быстрее обычного)</span>
-              <div class="switch" id="calcUrgent" onclick="calcToggleUrgent()"></div>
-            </div>
-
-            <div class="calc-output">
-              <div class="calc-output-lbl">Ориентировочно</div>
-              <div class="calc-output-val" id="calcOutput">20 000 – 30 000 ₽</div>
-            </div>
-            <a class="calc-cta" id="calcCta" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить точный расчёт →</a>
-          </div>
-
-          <!-- ONBOARDING: links to the /onboarding/ page -->
-          <a class="card svc-card onb-card anim-in" style="animation-delay:.5s" id="onbCard" href="/test/onboarding/">
-            <h3>Онбординг</h3>
-            <div class="sub">Снижаю текучесть в первые 3 месяца</div>
-            <div class="onb-track" aria-hidden="true">
-              <div class="onb-line"></div>
-              <div class="onb-pt"><i></i><span>1</span></div>
-              <div class="onb-pt"><i></i><span>7</span></div>
-              <div class="onb-pt"><i></i><span>30</span></div>
-              <div class="onb-pt on"><i></i><span>90</span></div>
-            </div>
-            <div class="onb-cap">Дни адаптации нового сотрудника</div>
-            <div class="card-hint">Подробнее →</div>
-          </a>
-        </div>
-
-        <!-- NEW SERVICE: RETENTION -->
-        <div class="card svc-card funnel-card anim-in" style="animation-delay:.4s" id="retentionCard" onclick="openCardOverlay('retentionCard','retentionOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3>Снижение текучести</h3>
-              <div class="sub">Разбираюсь, почему уходят, и выстраиваю удержание</div>
-            </div>
-          </div>
-          <div class="retention-chart">
-            <svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <defs>
-                <linearGradient id="retentionFade" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#195FE8" stop-opacity="0.18"/>
-                  <stop offset="100%" stop-color="#195FE8" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path d="M10,22 C55,20 85,42 125,54 C160,64 188,70 210,74 L210,86 L10,86 Z" fill="url(#retentionFade)"/>
-              <path d="M10,22 C55,20 85,42 125,54 C160,64 188,70 210,74" fill="none" stroke="#195FE8" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="10" cy="22" r="4.5" fill="#9a9a9d"/>
-              <circle cx="210" cy="74" r="4.5" fill="#195FE8"/>
-            </svg>
-            <div class="retention-chart-labels"><span>Было</span><span>Стало</span></div>
-          </div>
-        </div>
-
-        <!-- PROBLEM SOLVER: two columns next to retention -->
-        <div class="card dark2 funnel-card solver-card anim-in" style="animation-delay:.12s;" id="solverCard" role="button" tabindex="0" aria-label="Решатель проблем: открыть" onclick="openCardOverlay('solverCard','solverOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('solverCard','solverOverlay');}">
-          <div class="sv-tile-text">
-            <h3 style="color:#f2f2f2;">Решатель проблем</h3>
-            <div class="sub" style="color:#b8b8ba;">Отметьте, что болит, и я соберу решения под вашу ситуацию</div>
-          </div>
-          <div class="sv-tile-chips" aria-hidden="true">
-            <span class="on">По 2 месяца не могу закрыть вакансию</span>
-            <span>Одни и те же вопросы</span>
-            <span class="on">Данные о клиентах теряются</span>
-            <span>Новички уходят</span>
-            <span>Не понимаю, что происходит в бизнесе</span>
-          </div>
-          <div class="sv-tile-go">Собрать свой набор →</div>
-        </div>
-
-        <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS (band over the full width) -->
-        <div class="card svc-card metrics-band funnel-card anim-in" style="animation-delay:.42s" id="metricsCard" onclick="openCardOverlay('metricsCard','metricsOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3>HR-метрики и юнит-экономика</h3>
-              <div class="sub">Считаю, сколько стоит и когда окупается каждый сотрудник</div>
-            </div>
-          </div>
-          <!-- MARKET RESEARCH: teaser inside the metrics band (opens its own window) -->
-          <div class="mkt-tile" id="marketCard" role="button" tabindex="0" onclick="event.stopPropagation(); openMarket()" onkeydown="if(event.key==='Enter'){event.stopPropagation(); openMarket()}">
-            <div class="mkt-txt">
-              <div class="mkt-eyebrow">Начните с рынка</div>
-              <h4>Исследование рынка</h4>
-              <p>Сколько платят конкуренты и где искать людей — чтобы оффер не проигрывал ещё до собеседования.</p>
-            </div>
-            <span class="mkt-go">Смотреть →</span>
-          </div>
-        </div>
-
-        <!-- NEW SERVICE: HRBP SUBSCRIPTION -->
-        <div class="card dark svc-card funnel-card anim-in" style="animation-delay:.44s" id="hrbpCard" onclick="openCardOverlay('hrbpCard','hrbpOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3 style="color:#f2f2f2;">HRBP по подписке</h3>
-              <div class="sub">HR-директор на part-time, без найма в штат</div>
-            </div>
-          </div>
-          <p>Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
-        </div>
-
-        <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
-        <div class="card svc-card gc3 funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
-          <div class="funnel-head">
-            <div>
-              <h3>Кастомные HR-системы и боты</h3>
-              <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
-            </div>
-          </div>
-          <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
-        </div>
-
-        <!-- KADRY: links to the /kadry/ page -->
-        <a class="card svc-card onb-card gc2 anim-in" style="animation-delay:.2s" id="kadryCard" href="/test/kadry/">
-          <h3>Кадровый учёт</h3>
-          <div class="sub">Убираю бумажную рутину из кадрового учёта</div>
-          <div class="kd-bars" aria-hidden="true">
-            <div class="kd-row"><span>Бумага</span><div class="kd-track"><i></i></div></div>
-            <div class="kd-row after"><span>КЭДО</span><div class="kd-track"><i></i></div></div>
-          </div>
-          <div class="kd-cap"><b>×3</b>меньше времени на кадровый учёт</div>
-          <div class="card-hint">Подробнее →</div>
-        </a>
-
-        <!-- CALENDAR / PROCESS -->
-        <div class="card calendar gc2 funnel-card anim-in" style="animation-delay:.25s" id="processCard" onclick="openCardOverlay('processCard','processOverlay')">
-          <div class="cal-head">
-            <div class="cal-nav">Бесплатно</div>
-            <div class="cal-title">Как я работаю · 4 шага</div>
-            <div class="cal-nav">24 часа</div>
-          </div>
-          <div class="cal-grid">
-            <div></div>
-            <div class="dow">Пн</div><div class="dow">Вт</div><div class="dow">Ср</div>
-            <div class="dow">Чт</div><div class="dow">Пт</div><div class="dow">Сб</div><div class="dow">Вс</div>
-
-            <div class="time">12:00</div>
-            <div class="cal-cell"><div class="event">Диагно-<br>стика</div></div>
-            <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
-            <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
-
-            <div class="time">13:00</div>
-            <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
-            <div class="cal-cell"><div class="event outline">Аудит<br>данных</div></div>
-            <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
-
-            <div class="time">14:00</div>
-            <div class="cal-cell"></div><div class="cal-cell"></div>
-            <div class="cal-cell"><div class="event">Стратегия</div></div>
-            <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
-
-            <div class="time">15:00</div>
-            <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
-            <div class="cal-cell"><div class="event outline">Внед-<br>рение</div></div>
-            <div class="cal-cell"></div><div class="cal-cell"></div>
-          </div>
-          <div class="cal-steps">
-            <div class="cal-step"><span>01</span>Диагностика</div>
-            <div class="cal-step"><span>02</span>Аудит данных</div>
-            <div class="cal-step"><span>03</span>Стратегия</div>
-            <div class="cal-step"><span>04</span>Внедрение</div>
-          </div>
-          <div class="card-hint">Нажмите, чтобы посмотреть детали →</div>
-          <img class="proc-person" src="/test/assets/people/3749.webp" alt="" width="399" height="1100" loading="lazy">
-        </div>
-
-
-      </div>
+    <div class="pg-dots" role="tablist" aria-label="Страницы">
+      <button type="button" class="pg-arrow" data-dir="-1" aria-label="Предыдущая страница">‹</button>
+      <button type="button" class="pg-dot on" data-pg="0" role="tab" aria-selected="true" aria-label="Страница 1"></button>
+      <button type="button" class="pg-dot" data-pg="1" role="tab" aria-selected="false" aria-label="Страница 2"></button>
+      <button type="button" class="pg-arrow" data-dir="1" aria-label="Следующая страница">›</button>
     </div>
 
     <section class="hello-band anim-in" aria-label="Связаться со мной">
@@ -2775,6 +2848,55 @@ function unitCalcUpdate(){
     [N,M].forEach(function(e){ e.addEventListener('input',cu); }); cu();
   }
 })();
+
+  /* pages: dots, arrows, keyboard; the pager takes the height of the visible page */
+  (function(){
+    var pager = document.getElementById('pager'); if(!pager) return;
+    var pages = pager.querySelectorAll('.pg');
+    var dots = document.querySelectorAll('.pg-dot');
+    var arrows = document.querySelectorAll('.pg-arrow');
+    var prev = document.querySelector('.pg-prev'), next = document.querySelector('.pg-next');
+    var t;
+    function cur(){ return Math.max(0, Math.min(pages.length - 1, Math.round(pager.scrollLeft / pager.clientWidth))); }
+    function fit(){
+      var i = cur();
+      pager.style.height = pages[i].offsetHeight + 'px';
+      dots.forEach(function(d, k){ d.classList.toggle('on', k === i); d.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+      arrows[0].disabled = i === 0; arrows[1].disabled = i === pages.length - 1;
+      side();
+      pages.forEach(function(p, k){ p.inert = k !== i; });
+    }
+    function go(k){
+      k = Math.max(0, Math.min(pages.length - 1, k));
+      pages.forEach(function(p){ p.inert = false; });
+      pager.scrollTo({ left: k * pager.clientWidth, behavior: 'smooth' });
+      var top = pager.getBoundingClientRect().top;
+      if(top < 0) window.scrollBy({ top: top - 20, behavior: 'smooth' });
+    }
+    pager.addEventListener('scroll', function(){ clearTimeout(t); t = setTimeout(fit, 90); }, { passive:true });
+    dots.forEach(function(d){ d.addEventListener('click', function(){ go(+d.dataset.pg); }); });
+    arrows.forEach(function(a){ a.addEventListener('click', function(){ go(cur() + (+a.dataset.dir)); }); });
+    // side buttons: only while the pages fill the middle of the screen
+    function side(){
+      var i = cur(), r = pager.getBoundingClientRect(), mid = window.innerHeight / 2;
+      var inView = r.top < mid && r.bottom > mid;
+      prev.classList.toggle('off', !inView || i === 0);
+      next.classList.toggle('off', !inView || i === pages.length - 1);
+    }
+    [prev, next].forEach(function(b){ b.addEventListener('click', function(){ next.classList.remove('hint'); go(cur() + (+b.dataset.dir)); }); });
+    window.addEventListener('scroll', side, { passive:true });
+    setTimeout(function(){ next.classList.add('hint'); }, 1500);
+    document.addEventListener('keydown', function(e){
+      if(e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if(document.body.classList.contains('funnel-lock')) return;
+      var el = document.activeElement;
+      if(el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return;
+      go(cur() + (e.key === 'ArrowRight' ? 1 : -1));
+    });
+    if(window.ResizeObserver) pages.forEach(function(p){ new ResizeObserver(fit).observe(p); });
+    window.addEventListener('resize', function(){ pager.scrollLeft = cur() * pager.clientWidth; fit(); });
+    fit();
+  })();
 </script>
 </body>
 </html>
