@@ -273,10 +273,25 @@
   .gc2{ grid-column: span 2; }
   .gc3{ grid-column: span 3; }
   .gr2{ grid-row: span 2; }
+  /* right column: compact calculator, onboarding card under it (desktop); on narrower screens the wrapper disappears */
+  .calc-stack{ display:contents; }
+  @media (min-width:981px){
+    .calc-stack{ display:flex; flex-direction:column; gap:14px; align-self:stretch; min-width:0; }
+    .calc-stack > .onb-card{ flex:1 1 auto; padding-top:14px; padding-bottom:12px; }
+    .calc-stack > .onb-card .onb-track{ margin-top:12px; }
+    .calc-stack .settings{ padding-bottom:16px; }
+    .calc-stack .calc-services{ gap:6px; margin-top:12px; }
+    .calc-stack .calc-svc{ padding:5px 10px; font-size:12px; }
+    /* neighbours fill the same two rows, so no gaps under them */
+    #kbCard, #funnelCard, #auditCard, #retentionCard{ align-self:stretch; }
+    #metricsCard{ grid-column:1 / -1; }
+    .calc-stack .calc-row{ margin-top:14px; }
+    .calc-stack .calc-urgency{ margin-top:12px; }
+    .calc-stack .calc-output{ margin-top:12px; padding-top:12px; }
+    .calc-stack .calc-cta{ margin-top:12px; padding:10px; }
+  }
   /* next to the tall «Обо мне» card: kadry + process fill its height, no holes */
   @media (min-width:981px){ #kadryCard, #processCard{ align-self:stretch; } }
-  /* calculator fills the full height of its two rows; total + button sit at the bottom */
-  @media (min-width:981px){ .card.settings.gr2{ align-self:stretch; display:flex; flex-direction:column; } .card.settings.gr2 > .calc-urgency{ margin-bottom:18px; } .card.settings.gr2 > .calc-output{ margin-top:auto; } }
   @media (max-width:980px){
     .grid{ grid-template-columns: repeat(2, 1fr); }
     .gc3{ grid-column: span 2; }
@@ -1238,33 +1253,51 @@
           </div>
         </div>
 
-        <!-- CALCULATOR -->
-        <div class="card dark2 settings gr2 anim-in" style="animation-delay:.1s;">
-          <h3 style="color:#f2f2f2;">Сколько это будет стоить</h3>
-          <div class="sub" style="color:#b8b8ba;">Ориентировочно — точную цифру назову на созвоне</div>
+        <!-- RIGHT COLUMN: calculator + onboarding under it -->
+        <div class="calc-stack gr2">
+          <!-- CALCULATOR -->
+          <div class="card dark2 settings anim-in" style="animation-delay:.1s;">
+            <h3 style="color:#f2f2f2;">Сколько это будет стоить</h3>
+            <div class="sub" style="color:#b8b8ba;">Ориентировочно — точную цифру назову на созвоне</div>
 
-          <div class="calc-services">
-            <button type="button" class="calc-svc active" data-svc="hiring" onclick="calcSelectService(this,'hiring')">Найм</button>
-            <button type="button" class="calc-svc" data-svc="onboarding" onclick="calcSelectService(this,'onboarding')">Онбординг</button>
-            <button type="button" class="calc-svc" data-svc="hr" onclick="calcSelectService(this,'hr')">Кадровый учёт (КДП)</button>
-            <button type="button" class="calc-svc" data-svc="kb" onclick="calcSelectService(this,'kb')">База знаний</button>
+            <div class="calc-services">
+              <button type="button" class="calc-svc active" data-svc="hiring" onclick="calcSelectService(this,'hiring')">Найм</button>
+              <button type="button" class="calc-svc" data-svc="onboarding" onclick="calcSelectService(this,'onboarding')">Онбординг</button>
+              <button type="button" class="calc-svc" data-svc="hr" onclick="calcSelectService(this,'hr')">Кадровый учёт (КДП)</button>
+              <button type="button" class="calc-svc" data-svc="kb" onclick="calcSelectService(this,'kb')">База знаний</button>
+            </div>
+
+            <div class="calc-row">
+              <div class="calc-row-lbl"><span id="calcQtyLabel">Сколько вакансий закрыть</span><b id="calcQtyVal">1 вакансия</b></div>
+              <input type="range" min="1" max="10" value="1" id="calcQty" class="calc-slider" oninput="calcUpdate()">
+            </div>
+
+            <div class="calc-urgency">
+              <span>Срочно (быстрее обычного)</span>
+              <div class="switch" id="calcUrgent" onclick="calcToggleUrgent()"></div>
+            </div>
+
+            <div class="calc-output">
+              <div class="calc-output-lbl">Ориентировочно</div>
+              <div class="calc-output-val" id="calcOutput">20 000 – 30 000 ₽</div>
+            </div>
+            <a class="calc-cta" id="calcCta" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить точный расчёт →</a>
           </div>
 
-          <div class="calc-row">
-            <div class="calc-row-lbl"><span id="calcQtyLabel">Сколько вакансий закрыть</span><b id="calcQtyVal">1 вакансия</b></div>
-            <input type="range" min="1" max="10" value="1" id="calcQty" class="calc-slider" oninput="calcUpdate()">
-          </div>
-
-          <div class="calc-urgency">
-            <span>Срочно (быстрее обычного)</span>
-            <div class="switch" id="calcUrgent" onclick="calcToggleUrgent()"></div>
-          </div>
-
-          <div class="calc-output">
-            <div class="calc-output-lbl">Ориентировочно</div>
-            <div class="calc-output-val" id="calcOutput">20 000 – 30 000 ₽</div>
-          </div>
-          <a class="calc-cta" id="calcCta" href="https://wa.me/995557602599" target="_blank" rel="noopener">Обсудить точный расчёт →</a>
+          <!-- ONBOARDING: links to the /onboarding/ page -->
+          <a class="card svc-card onb-card anim-in" style="animation-delay:.5s" id="onbCard" href="/test/onboarding/">
+            <h3>Онбординг</h3>
+            <div class="sub">Снижаю текучесть в первые 3 месяца</div>
+            <div class="onb-track" aria-hidden="true">
+              <div class="onb-line"></div>
+              <div class="onb-pt"><i></i><span>1</span></div>
+              <div class="onb-pt"><i></i><span>7</span></div>
+              <div class="onb-pt"><i></i><span>30</span></div>
+              <div class="onb-pt on"><i></i><span>90</span></div>
+            </div>
+            <div class="onb-cap">Дни адаптации нового сотрудника</div>
+            <div class="card-hint">Подробнее →</div>
+          </a>
         </div>
 
         <!-- NEW SERVICE: RETENTION -->
@@ -1308,7 +1341,7 @@
           <div class="sv-tile-go">Собрать свой набор →</div>
         </div>
 
-        <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS (band over 3 columns, onboarding in the 4th) -->
+        <!-- NEW SERVICE: HR METRICS + UNIT ECONOMICS (band over the full width) -->
         <div class="card svc-card metrics-band funnel-card anim-in" style="animation-delay:.42s" id="metricsCard" onclick="openCardOverlay('metricsCard','metricsOverlay')">
           <div class="funnel-head">
             <div>
@@ -1326,21 +1359,6 @@
             <span class="mkt-go">Смотреть →</span>
           </div>
         </div>
-
-        <!-- ONBOARDING: links to the /onboarding/ page -->
-        <a class="card svc-card onb-card anim-in" style="animation-delay:.5s" id="onbCard" href="/test/onboarding/">
-          <h3>Онбординг</h3>
-          <div class="sub">Снижаю текучесть в первые 3 месяца</div>
-          <div class="onb-track" aria-hidden="true">
-            <div class="onb-line"></div>
-            <div class="onb-pt"><i></i><span>1</span></div>
-            <div class="onb-pt"><i></i><span>7</span></div>
-            <div class="onb-pt"><i></i><span>30</span></div>
-            <div class="onb-pt on"><i></i><span>90</span></div>
-          </div>
-          <div class="onb-cap">Дни адаптации нового сотрудника</div>
-          <div class="card-hint">Подробнее →</div>
-        </a>
 
         <!-- NEW SERVICE: HRBP SUBSCRIPTION -->
         <div class="card dark svc-card funnel-card anim-in" style="animation-delay:.44s" id="hrbpCard" onclick="openCardOverlay('hrbpCard','hrbpOverlay')">
