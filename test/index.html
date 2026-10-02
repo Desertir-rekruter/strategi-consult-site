@@ -212,6 +212,36 @@
     .kb-cards.c3{ grid-template-columns:1fr; }
   }
 
+
+  /* About window: letter + photo, then tags / results / FAQ */
+  .about-letter{ display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:30px; align-items:end; margin-top:14px; }
+  .about-letter .funnel-lead{ margin:0; }
+  .about-letter .funnel-lead + .funnel-lead{ margin-top:14px; }
+  .about-letter-photo{ margin:0; height:330px; border-radius:24px; overflow:hidden; background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.12)); border:1px solid rgba(255,255,255,0.18); display:flex; align-items:flex-end; justify-content:center; }
+  .about-letter-photo img{ display:block; height:100%; width:auto; max-width:none; object-fit:contain; object-position:bottom; }
+  .about-facts{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  .about-facts span{ font-size:var(--fs-cap); font-weight:var(--fw-bold); padding:7px 13px; border-radius:30px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); color:#fff; }
+  .about-facts em{ font-style:normal; color:#B4CBFF; }
+  .about-letter-avail{ display:flex; align-items:center; gap:8px; margin-top:22px; font-size:var(--fs-sec); font-weight:var(--fw-bold); color:#B4CBFF; }
+  .about-letter-avail i{ width:8px; height:8px; border-radius:50%; background:var(--accent-light); box-shadow:0 0 0 4px rgba(98,147,255,0.25); flex:0 0 auto; }
+  .about-more{ margin-top:34px; padding-top:28px; border-top:1px dashed rgba(255,255,255,0.22); }
+  .about-more h3{ font-size:var(--fs-h3); font-weight:var(--fw-bold); color:#fff; }
+  .about-more .sub, .about-more .donut-caption, .about-more .stat-row span{ color:rgba(255,255,255,0.75); }
+  .about-more .about-tags .tag, .about-more .stat-row b{ color:#B4CBFF; }
+  .about-more .about-tags .tag{ background:rgba(255,255,255,0.1); border-color:rgba(180,203,255,0.4); }
+  .about-more .about-foot{ color:rgba(255,255,255,0.7); border-top-color:rgba(255,255,255,0.18); }
+  .about-more .split-col-results{ border-left-color:rgba(255,255,255,0.18); }
+  .about-more .donut{ color:#131313; }
+  .about-more .faq-list{ border-top-color:rgba(255,255,255,0.18); }
+  .about-more .faq-item{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.2); }
+  .about-more .faq-q{ color:#fff; }
+  .about-more .faq-q span{ color:rgba(255,255,255,0.7); }
+  .about-more .faq-a p{ color:rgba(255,255,255,0.8); }
+  @media (max-width:760px){
+    .about-letter{ grid-template-columns:minmax(0,1fr); gap:22px; }
+    .about-letter-photo{ height:260px; order:-1; }
+  }
+
   /* ---------- layout: dock + grid ---------- */
   .layout{ display:flex; gap:14px; }
 
@@ -1332,71 +1362,6 @@
           <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
         </div>
 
-        <!-- ABOUT + RESULTS -->
-        <div class="card geo gc2 gr2 anim-in" style="animation-delay:.35s;">
-          <div class="split-row">
-            <div class="split-col">
-              <div class="geo-head">
-                <h3>Обо мне</h3>
-                <div class="sub" style="font-weight:700;">В HR — 5+ лет</div>
-              </div>
-              <p class="about-text">Я действующий HRBP. Работаю на стыке HR и бизнеса — не просто «управляю людьми», а выстраиваю процессы, которые реально влияют на результат. Моя задача — найти, где бизнес теряет деньги на HR, и исправить это автоматизацией и здравым смыслом.</p>
-              <div class="about-tags">
-                <span class="tag">HRBP</span>
-                <span class="tag">HR-аналитика</span>
-                <span class="tag">Автоматизация</span>
-                <span class="tag">Найм и онбординг</span>
-                <span class="tag">Снижение текучести</span>
-                <span class="tag">HR-стратегия</span>
-              </div>
-              <div class="about-foot">
-                <span>Работаю удалённо</span>
-                <span class="avail">Беру 2–3 клиента в месяц · сейчас есть место</span>
-              </div>
-            </div>
-            <div class="split-col split-col-results funnel-card" id="resultsCard" onclick="openCardOverlay('resultsCard','resultsOverlay')">
-              <div class="funnel-head">
-                <div>
-                  <h3>Результаты</h3>
-                  <div class="sub">По кейсам с реальными клиентами</div>
-                </div>
-              </div>
-              <div class="donuts">
-                <div class="donut-col">
-                  <div class="donut" style="background:conic-gradient(var(--accent) 0% 40%, var(--accent-soft) 40% 100%)"><b><span>40%</span></b></div>
-                  <div class="donut-caption">Сокращение срока<br>закрытия вакансий</div>
-                </div>
-                <div class="donut-col">
-                  <div class="donut" style="background:conic-gradient(var(--accent) 0% 100%, var(--accent-soft) 100% 100%)"><b><span>×2</span></b></div>
-                  <div class="donut-caption">Меньше нерелевантных<br>интервью</div>
-                </div>
-              </div>
-              <div class="bar-rows">
-                <div class="stat-row"><span>Экономия на HR-рутине</span><b>180 000 ₽/год</b></div>
-              </div>
-              <img class="res-person" src="/test/assets/people/3646.webp" alt="" width="738" height="1100" loading="lazy">
-            </div>
-          </div>
-          <div class="faq-list">
-            <div class="faq-item">
-              <button type="button" class="faq-q" onclick="toggleFaq(this)">Достаточно ли у тебя опыта?<span>+</span></button>
-              <div class="faq-a"><p>Я действующий HRBP, а не теоретик. Работал внутри компаний разного масштаба. 25+ аудитов — это реальная практика, а не кейсы из учебника.</p></div>
-            </div>
-            <div class="faq-item">
-              <button type="button" class="faq-q" onclick="toggleFaq(this)">Сколько это стоит?<span>+</span></button>
-              <div class="faq-a"><p>Стоимость зависит от масштаба задачи. Диагностика — бесплатно. После неё скажу, что конкретно нужно и сколько стоит — без размытых диапазонов. Большинство клиентов окупают вложение в первый же месяц за счёт экономии на рутине.</p></div>
-            </div>
-            <div class="faq-item">
-              <button type="button" class="faq-q" onclick="toggleFaq(this)">Подойдёт ли это для нашей сферы?<span>+</span></button>
-              <div class="faq-a"><p>Работаю с компаниями до 300 человек в IT, ритейле, строительстве, производстве и сервисе. HR-процессы везде ломаются одинаково: ручная рутина, хаос в найме, слабый онбординг. Если у вас есть сотрудники — это работает.</p></div>
-            </div>
-            <div class="faq-item">
-              <button type="button" class="faq-q" onclick="toggleFaq(this)">Мы уже пробовали автоматизацию — не зашло<span>+</span></button>
-              <div class="faq-a"><p>Обычно это значит, что внедряли инструмент без изменения процесса. CRM не работает, если воронка не настроена. Бот не помогает, если онбординг хаотичный. Я начинаю с процесса — потом выбираем инструмент, а не наоборот.</p></div>
-            </div>
-          </div>
-        </div>
-
         <!-- KADRY: links to the /kadry/ page -->
         <a class="card svc-card onb-card gc2 anim-in" style="animation-delay:.2s" id="kadryCard" href="/test/kadry/">
           <h3>Кадровый учёт</h3>
@@ -1573,60 +1538,81 @@
     <div class="funnel-page">
       <div class="funnel-page-head">
         <div>
-          <div class="eyebrow">HR Consulting Studio · Обо мне</div>
-          <h2>Игнатий Филатов</h2>
+          <div class="eyebrow">Обо мне</div>
+          <h2>Привет, я Игнатий</h2>
         </div>
         <div class="funnel-close" onclick="closeCardOverlay('aboutCard','aboutOverlay')">✕</div>
       </div>
 
-      <div class="about-hero">
-        <figure class="about-photo">
-          <picture>
-            <source type="image/avif" data-srcset="/test/assets/automation-portrait.avif">
-            <source type="image/webp" data-srcset="/test/assets/automation-portrait.webp">
-            <img data-src="/test/assets/automation-portrait.jpg" width="853" height="1281" alt="Игнатий Филатов — HRBP и HR-консультант" decoding="async">
-          </picture>
-          <figcaption><b>Игнатий Филатов</b>HRBP · HR-консультант · работаю удалённо</figcaption>
-        </figure>
-        <div class="about-hero-text">
-          <p class="funnel-lead">Я не рассказываю про «ценность людей». Я действующий HRBP: каждый день внутри бизнеса, поэтому знаю, где HR на самом деле съедает деньги, и как это остановить. Без презентаций и общих советов, только конкретные изменения.</p>
-          <div class="kb-stats">
-            <div class="kb-stat"><div class="kval">5+</div><div class="klabel">лет в HR, работаю внутри компаний</div></div>
-            <div class="kb-stat"><div class="kval">25+</div><div class="klabel">компаний проанализировано</div></div>
-            <div class="kb-stat"><div class="kval">до 300</div><div class="klabel">человек в компаниях, с которыми работаю</div></div>
-            <div class="kb-stat"><div class="kval">24 ч</div><div class="klabel">отвечаю на заявку</div></div>
+      <div class="about-letter">
+        <div class="about-letter-text">
+          <p class="funnel-lead">Я действующий HRBP. Больше пяти лет работаю внутри компаний и вижу HR не со сцены конференции, а из рабочего чата, где кто-то в пятницу вечером опять ищет шаблон заявления на отпуск.</p>
+          <p class="funnel-lead">За это время я разобрал HR-процессы в 25+ компаниях, от IT до производства, и заметил скучную вещь: ломаются они везде одинаково. Вакансия висит месяц, новички уходят в первые недели, руководители по десять раз отвечают на одни и те же вопросы. Хорошая новость: чинится это тоже одинаково.</p>
+          <p class="funnel-lead">Поэтому я беру 2–3 клиента в месяц, не больше. Иначе сам стану тем HR, который «всё решит в понедельник».</p>
+          <div class="about-facts">
+            <span><em>5+ лет</em> в HR</span><span><em>25+</em> компаний</span><span>команды <em>до 300</em> человек</span><span>ответ за <em>24 ч</em></span>
           </div>
-          <div class="about-industries">
-            <div class="about-industries-label">Где HR-процессы ломаются одинаково, и я это чиню</div>
-            <div class="about-chips">
-              <span class="about-chip">IT</span><span class="about-chip">Ритейл</span><span class="about-chip">Строительство</span><span class="about-chip">Производство</span><span class="about-chip">Сервис</span>
+          <div class="about-letter-avail"><i></i>Сейчас есть место для нового проекта</div>
+        </div>
+        <figure class="about-letter-photo"><img src="/test/assets/people/3992.webp" width="845" height="1100" alt="Игнатий Филатов — HRBP и HR-консультант" loading="lazy" decoding="async"></figure>
+      </div>
+
+      <div class="about-more">
+        <div class="split-row">
+          <div class="split-col">
+            <h3>Чем занимаюсь</h3>
+            <div class="about-tags">
+              <span class="tag">HRBP</span>
+              <span class="tag">HR-аналитика</span>
+              <span class="tag">Автоматизация</span>
+              <span class="tag">Найм и онбординг</span>
+              <span class="tag">Снижение текучести</span>
+              <span class="tag">HR-стратегия</span>
+            </div>
+            <div class="about-foot"><span>Работаю удалённо</span></div>
+          </div>
+          <div class="split-col split-col-results">
+              <div class="funnel-head">
+                <div>
+                  <h3>Результаты</h3>
+                  <div class="sub">По кейсам с реальными клиентами</div>
+                </div>
+              </div>
+              <div class="donuts">
+                <div class="donut-col">
+                  <div class="donut" style="background:conic-gradient(var(--accent) 0% 40%, var(--accent-soft) 40% 100%)"><b><span>40%</span></b></div>
+                  <div class="donut-caption">Сокращение срока<br>закрытия вакансий</div>
+                </div>
+                <div class="donut-col">
+                  <div class="donut" style="background:conic-gradient(var(--accent) 0% 100%, var(--accent-soft) 100% 100%)"><b><span>×2</span></b></div>
+                  <div class="donut-caption">Меньше нерелевантных<br>интервью</div>
+                </div>
+              </div>
+              <div class="bar-rows">
+                <div class="stat-row"><span>Экономия на HR-рутине</span><b>180 000 ₽/год</b></div>
+              </div>
+              <img class="res-person" src="/test/assets/people/3646.webp" alt="" width="738" height="1100" loading="lazy">
+            </div>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+              <button type="button" class="faq-q" onclick="toggleFaq(this)">Достаточно ли у тебя опыта?<span>+</span></button>
+              <div class="faq-a"><p>Я действующий HRBP, а не теоретик. Работал внутри компаний разного масштаба. 25+ аудитов — это реальная практика, а не кейсы из учебника.</p></div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-q" onclick="toggleFaq(this)">Сколько это стоит?<span>+</span></button>
+              <div class="faq-a"><p>Стоимость зависит от масштаба задачи. Диагностика — бесплатно. После неё скажу, что конкретно нужно и сколько стоит — без размытых диапазонов. Большинство клиентов окупают вложение в первый же месяц за счёт экономии на рутине.</p></div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-q" onclick="toggleFaq(this)">Подойдёт ли это для нашей сферы?<span>+</span></button>
+              <div class="faq-a"><p>Работаю с компаниями до 300 человек в IT, ритейле, строительстве, производстве и сервисе. HR-процессы везде ломаются одинаково: ручная рутина, хаос в найме, слабый онбординг. Если у вас есть сотрудники — это работает.</p></div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-q" onclick="toggleFaq(this)">Мы уже пробовали автоматизацию — не зашло<span>+</span></button>
+              <div class="faq-a"><p>Обычно это значит, что внедряли инструмент без изменения процесса. CRM не работает, если воронка не настроена. Бот не помогает, если онбординг хаотичный. Я начинаю с процесса — потом выбираем инструмент, а не наоборот.</p></div>
             </div>
           </div>
-        </div>
       </div>
-
-      <div class="funnel-page-section">
-        <h4>Что вы получаете</h4>
-        <div class="kb-cards">
-          <div class="kb-card"><div class="ktitle">Понимание, где вы теряете деньги</div><div class="ktext">Диагностика находит ручную рутину, хаос в найме и слабый онбординг и переводит их в рубли, чтобы решения принимались по цифрам.</div></div>
-          <div class="kb-card"><div class="ktitle">Сначала процесс, потом инструмент</div><div class="ktext">CRM не работает, если воронка не настроена, а бот не поможет при хаотичном онбординге. Поэтому я начинаю с процесса, а не с покупки сервиса.</div></div>
-          <div class="kb-card"><div class="ktitle">Автоматизацию, которая живёт</div><div class="ktext">Telegram-боты для скрининга и онбординга, кастомные HR-системы и CRM под ваши процессы: рутина уходит, команда занимается людьми.</div></div>
-          <div class="kb-card"><div class="ktitle">HR на языке цифр</div><div class="ktext">Дашборд ключевых метрик: time-to-hire, cost-per-hire, текучесть, eNPS и юнит-экономика по каждой роли. Решения на цифрах, а не на ощущениях.</div></div>
-          <div class="kb-card"><div class="ktitle">HR-директор на part-time</div><div class="ktext">Веду HR-функцию удалённо в формате часов в месяц, если штатный HRBP вам ещё рано, а системный HR уже нужен.</div></div>
-          <div class="kb-card"><div class="ktitle">Меньше текучести</div><div class="ktext">Провожу exit- и стей-интервью и нахожу системную причину ухода: не всегда дело в деньгах. Строю удержание на реальной причине, а не на догадках.</div></div>
-        </div>
-      </div>
-
-      <div class="funnel-page-section">
-        <h4>Чем я отличаюсь</h4>
-        <div class="kb-cards c3">
-          <div class="kb-card"><div class="ktitle">Практик, а не теоретик</div><div class="ktext">Действующий HRBP. Не кейсы из учебника, а реальные процессы реальных компаний.</div></div>
-          <div class="kb-card"><div class="ktitle">Конкретный план</div><div class="ktext">После диагностики скажу, что именно нужно и сколько это стоит. Без размытых диапазонов и общих советов.</div></div>
-          <div class="kb-card"><div class="ktitle">Свежий взгляд</div><div class="ktext">Не тащу с собой устаревшие подходы: выбираю инструменты под задачу, а не задачу под инструмент.</div></div>
-        </div>
-      </div>
-
-      <div class="about-avail"><i></i><span>Беру 2–3 клиента в месяц · сейчас есть место</span></div>
     </div>
 
     <div class="funnel-cta">
