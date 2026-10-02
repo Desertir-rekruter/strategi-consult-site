@@ -275,6 +275,8 @@
   .gr2{ grid-row: span 2; }
   /* next to the tall «Обо мне» card: kadry + process fill its height, no holes */
   @media (min-width:981px){ #kadryCard, #processCard{ align-self:stretch; } }
+  /* calculator fills the full height of its two rows; total + button sit at the bottom */
+  @media (min-width:981px){ .card.settings.gr2{ align-self:stretch; display:flex; flex-direction:column; } .card.settings.gr2 > .calc-urgency{ margin-bottom:18px; } .card.settings.gr2 > .calc-output{ margin-top:auto; } }
   @media (max-width:980px){
     .grid{ grid-template-columns: repeat(2, 1fr); }
     .gc3{ grid-column: span 2; }
