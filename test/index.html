@@ -680,6 +680,17 @@
   .ret-legend .l-stay{ background:rgba(255,255,255,0.85); }
   .ret-legend .l-gone{ box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0.5); }
   .ret-legend .l-keep{ background:#6293FF; }
+  /* repeated-questions calculator: salary field and money result */
+  .ret-money{ display:flex; align-items:center; gap:10px; margin-top:6px; }
+  .ret-money input{ flex:0 1 150px; min-width:0; font:inherit; font-size:var(--fs-body); font-weight:var(--fw-medium); font-variant-numeric:tabular-nums; color:#fff;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.28); border-radius:12px; padding:9px 12px; outline:none; transition:border-color .2s, background .2s; }
+  .ret-money input:focus{ border-color:#6293FF; background:rgba(255,255,255,0.14); }
+  .ret-money span{ font-size:var(--fs-sec); color:rgba(255,255,255,0.7); }
+  .ret-cost{ margin-top:14px; padding:14px 16px; border-radius:16px; background:rgba(98,147,255,0.16); border:1px solid rgba(98,147,255,0.35); }
+  .ret-cost .rc-q{ font-size:var(--fs-sec); color:rgba(255,255,255,0.75); }
+  .ret-cost .rc-q b{ display:block; font-size:var(--fs-num-m); font-weight:var(--fw-medium); color:#fff; font-variant-numeric:tabular-nums; line-height:1.15; margin-top:2px; }
+  .ret-cost .rc-sum{ margin:8px 0 0; font-size:var(--fs-body); line-height:1.5; color:#fff; }
+  .ret-cost .rc-sum b{ color:#9DB5FF; font-variant-numeric:tabular-nums; }
   .ret-say{ font-size:var(--fs-body); line-height:1.5; color:#fff; margin:4px 0 0; font-weight:var(--fw-regular); }
   .ret-say b{ color:#9DB5FF; }
   @media (prefers-reduced-motion:reduce){ .ret-dot{ transition:none; } }
@@ -2437,9 +2448,11 @@
           <div class="ret-title">Сколько съедают одни и те же вопросы</div>
           <div class="ret-ctl"><label for="cqN">Одинаковых вопросов в день <output id="cqNo"></output></label><input type="range" id="cqN" min="1" max="50" step="1" value="10"></div>
           <div class="ret-ctl"><label for="cqM">Минут на один ответ <output id="cqMo"></output></label><input type="range" id="cqM" min="1" max="15" step="1" value="3"></div>
+          <div class="ret-ctl"><label for="cqS">Зарплата того, кто отвечает</label><div class="ret-money"><input type="text" id="cqS" inputmode="numeric" autocomplete="off" value="75 000" aria-describedby="cqSrc"><span>₽ в месяц</span></div></div>
           <div class="w-big" id="cqBig" aria-live="polite"></div>
           <p class="ret-say" id="cqSay"></p>
-          <div class="ret-src">Считаем 21 рабочий день в месяце и 8-часовой рабочий день.</div>
+          <div class="ret-cost" id="cqCost" aria-live="polite"></div>
+          <div class="ret-src" id="cqSrc">Считаем 21 рабочий день в месяце и 8-часовой рабочий день: час работы = зарплата ÷ 168.</div>
         </div>
       </div>
 
@@ -2928,14 +2941,28 @@ function unitCalcUpdate(){
     S.addEventListener('input',mu); mu();
   }
   // Custom: time spent on repeated questions
-  var N=$('cqN'),M=$('cqM');
+  var N=$('cqN'),M=$('cqM'),Sal=$('cqS');
   if(N){
+    var rub=function(v){ return Math.round(v).toLocaleString('ru-RU')+'\u00a0₽'; };
     var cu=function(){
       var n=+N.value,m=+M.value,mo=n*m*21/60,yr=mo*12,days=Math.round(yr/8);
       $('cqNo').textContent=n; $('cqMo').textContent=m+' мин';
       $('cqBig').innerHTML='≈ '+(mo<10?mo.toLocaleString('ru-RU',{maximumFractionDigits:1}):fmt(mo))+' ч в месяц<small>уходит на ответы на одни и те же вопросы</small>';
       $('cqSay').innerHTML='За год это <b>'+fmt(yr)+' '+pl(Math.round(yr),'час','часа','часов')+'</b>, или <b>'+days+' '+pl(days,'рабочий день','рабочих дня','рабочих дней')+'</b>.';
+      // money: the hour of the person who answers = salary / (21 days × 8 h)
+      var sal=parseInt(String(Sal.value).replace(/\D/g,''),10)||0, hour=sal/168;
+      if(!sal){ $('cqCost').innerHTML='<div class="rc-q">Введите зарплату, и я посчитаю, сколько стоит каждый такой вопрос.</div>'; return; }
+      var q=hour*m/60;
+      $('cqCost').innerHTML='<div class="rc-q">Один такой вопрос стоит компании<b>≈ '+(q<10?q.toLocaleString('ru-RU',{maximumFractionDigits:1})+'\u00a0₽':rub(q))+'</b></div>'+
+        '<p class="rc-sum">В месяц это <b>'+rub(mo*hour)+'</b>, за год <b>'+rub(yr*hour)+'</b> — просто за ответы на одни и те же вопросы.</p>';
     };
+    // keep the salary readable: 75000 → 75 000
+    Sal.addEventListener('input',function(){
+      var d=Sal.value.replace(/\D/g,'').slice(0,8), end=Sal.selectionEnd===Sal.value.length;
+      Sal.value=d?(+d).toLocaleString('ru-RU'):'';
+      if(end) Sal.setSelectionRange(Sal.value.length,Sal.value.length);
+      cu();
+    });
     [N,M].forEach(function(e){ e.addEventListener('input',cu); }); cu();
   }
 })();
