@@ -1218,6 +1218,43 @@
   @media (min-width:981px){ #hrbpCard, #customCard{ align-self:stretch; } }
   @media (max-width:620px){ .hrbp-person{ height:150px; } .hrbp-chart{ max-width:220px; } }
   @media (prefers-reduced-motion: reduce){ #pg2:not(.is-seen) .hc-bars i{ transform:none; } #pg2.is-seen .hc-bars i{ animation:none; } }
+  /* «Кастомные HR-системы и боты»: text on the left, a Telegram-style chat with an HR bot on the right */
+  .custom-split{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,330px); gap:18px 26px; align-items:start; }
+  .custom-text p{ margin-top:12px; }
+  .tg{ --tg-bg:rgba(255,255,255,0.32); --tg-in:#fff; --tg-out:#e3fec6; --tg-ink:#131313; --tg-time:rgba(19,19,19,0.45); --tg-acc:#2a8bf2;
+    border-radius:18px; overflow:hidden; background:var(--tg-bg); border:1px solid rgba(255,255,255,0.55); font-size:12.5px; line-height:1.35; color:var(--tg-ink); }
+  .tg-top{ display:flex; align-items:center; gap:9px; padding:8px 12px; background:rgba(255,255,255,0.5); border-bottom:1px solid rgba(19,19,19,0.06); }
+  .tg-top b{ display:block; font-size:13px; }
+  .tg-top small{ font-size:11px; color:var(--tg-time); }
+  .tg-av{ width:28px; height:28px; border-radius:50%; flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#fff; background:linear-gradient(135deg,#6293FF,#195FE8); }
+  .tg-feed{ display:flex; flex-direction:column; gap:5px; padding:10px 10px 12px; }
+  .tg-msg{ position:relative; max-width:84%; padding:6px 9px 6px 10px; border-radius:14px; box-shadow:0 1px 1px rgba(0,0,0,0.08); }
+  .tg-msg time{ float:right; margin:5px 0 -3px 8px; font-size:10px; color:var(--tg-time); }
+  .tg-msg.in{ align-self:flex-start; background:var(--tg-in); border-bottom-left-radius:5px; }
+  .tg-msg.out{ align-self:flex-end; background:var(--tg-out); border-bottom-right-radius:5px; }
+  .tg-file{ display:flex; align-items:center; gap:8px; margin-top:5px; }
+  .tg-file i{ width:30px; height:30px; border-radius:50%; flex:0 0 auto; background:var(--tg-acc); position:relative; }
+  .tg-file i::after{ content:""; position:absolute; left:10px; top:8px; width:10px; height:13px; border-radius:2px; background:#fff; }
+  .tg-file span{ font-size:12px; font-weight:600; color:var(--tg-acc); }
+  .tg-file small{ display:block; font-weight:400; color:var(--tg-time); font-size:10.5px; }
+  .tg-btns{ display:flex; gap:5px; max-width:84%; }
+  .tg-btns span{ flex:1; text-align:center; padding:6px 8px; border-radius:10px; background:rgba(255,255,255,0.55); color:var(--tg-acc); font-weight:600; font-size:12px; }
+  .tg-typing{ align-self:flex-start; display:flex; gap:3px; padding:9px 11px; border-radius:14px; border-bottom-left-radius:5px; background:var(--tg-in); }
+  .tg-typing i{ width:6px; height:6px; border-radius:50%; background:var(--tg-time); animation:tgDot 1s ease-in-out infinite; }
+  .tg-typing i:nth-child(2){ animation-delay:.15s; } .tg-typing i:nth-child(3){ animation-delay:.3s; }
+  @keyframes tgDot{ 0%,60%,100%{ transform:none; opacity:.5; } 30%{ transform:translateY(-3px); opacity:1; } }
+  /* the conversation plays once, the first time page 2 is shown */
+  #pg2:not(.is-seen) .tg-feed > *{ opacity:0; }
+  #pg2.is-seen .tg-feed > *{ animation:tgIn .4s cubic-bezier(.22,1,.36,1) backwards; animation-delay:calc(var(--d) * .7s + .3s); }
+  #pg2.is-seen .tg-typing{ animation:tgTyping 1.1s linear both; animation-delay:calc(var(--d) * .7s + .3s); max-height:40px; }
+  #pg2.is-seen .tg-typing i{ animation:tgDot 1s ease-in-out infinite; }
+  @keyframes tgIn{ from{ opacity:0; transform:translateY(8px) scale(.97); } to{ opacity:1; transform:none; } }
+  @keyframes tgTyping{ 0%{ opacity:0; max-height:40px; } 10%{ opacity:1; } 80%{ opacity:1; max-height:40px; padding-block:9px; } 100%{ opacity:0; max-height:0; padding-block:0; margin-top:-5px; } }
+  html[data-theme="dark"] .tg{ --tg-bg:rgba(14,22,33,0.55); --tg-in:#182533; --tg-out:#2b5278; --tg-ink:#f2f2f3; --tg-time:rgba(255,255,255,0.5); --tg-acc:#6ab2f2; border-color:rgba(255,255,255,0.12); }
+  html[data-theme="dark"] .tg-top{ background:rgba(23,33,43,0.7); border-bottom-color:rgba(255,255,255,0.06); }
+  html[data-theme="dark"] .tg-btns span{ background:rgba(255,255,255,0.1); }
+  @media (max-width:980px){ .custom-split{ grid-template-columns:minmax(0,1fr); } .tg{ max-width:380px; } }
+  @media (prefers-reduced-motion: reduce){ #pg2:not(.is-seen) .tg-feed > *{ opacity:1; } #pg2.is-seen .tg-feed > *, #pg2.is-seen .tg-typing{ animation:none; } .tg-typing{ display:none; } }
   .hello-band{ max-width:980px; margin:26px auto 6px; display:flex; align-items:flex-end; gap:26px; padding:0 34px 0 16px;
     background:var(--glass); backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px); border:1px solid var(--glass-border); border-radius:34px; overflow:hidden; }
   .hello-person{ width:230px; height:auto; flex:0 0 auto; margin-top:18px; display:block; filter:drop-shadow(0 10px 24px rgba(20,30,60,.2)); }
@@ -1521,14 +1558,27 @@
             </div>
 
             <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
-            <div class="card svc-card gc3 funnel-card anim-in" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
-              <div class="funnel-head">
-                <div>
-                  <h3>Кастомные HR-системы и боты</h3>
-                  <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
+            <div class="card svc-card gc3 funnel-card anim-in custom-split" style="animation-delay:.48s" id="customCard" onclick="openCardOverlay('customCard','customOverlay')">
+              <div class="custom-text">
+                <div class="funnel-head">
+                  <div>
+                    <h3>Кастомные HR-системы и боты</h3>
+                    <div class="sub">Пишу инструменты под компанию и автоматизирую рутину, а не подбираю готовое</div>
+                  </div>
+                </div>
+                <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
+              </div>
+              <div class="tg" aria-label="Пример: HR-бот в Telegram отвечает сотруднику" role="img">
+                <div class="tg-top"><span class="tg-av">HR</span><div><b>HR-бот компании</b><small>бот</small></div></div>
+                <div class="tg-feed" aria-hidden="true">
+                  <div class="tg-msg out" style="--d:0"><span>Где взять шаблон заявления на отпуск?</span><time>18:47</time></div>
+                  <div class="tg-msg in" style="--d:1"><span>Вот он 👇</span><div class="tg-file"><i></i><span>Заявление на отпуск.docx<small>24 КБ</small></span></div><time>18:47</time></div>
+                  <div class="tg-msg out" style="--d:2"><span>А сколько дней у меня осталось?</span><time>18:48</time></div>
+                  <div class="tg-typing" style="--d:3"><i></i><i></i><i></i></div>
+                  <div class="tg-msg in" style="--d:4"><span>14 дней. Отправить заявление руководителю на согласование?</span><time>18:48</time></div>
+                  <div class="tg-btns" style="--d:4"><span>Да, отправить</span><span>Позже</span></div>
                 </div>
               </div>
-              <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
             </div>
 
             <!-- KADRY: links to the /kadry/ page -->
