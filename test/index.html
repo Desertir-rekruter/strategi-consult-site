@@ -1136,6 +1136,7 @@
   .hero-face .hero-txt{ padding-bottom:24px; }
   .hero-face h1{ font-size:var(--fs-display); font-weight:var(--fw-bold); letter-spacing:-0.025em; }
   .hero-person{ margin:0; align-self:end; height:100%; min-height:250px; display:flex; align-items:flex-end; justify-content:center; }
+  .hero-about{ display:none; }
   .hero-person img{ display:block; width:100%; height:auto; max-height:290px; object-fit:contain; object-position:bottom; filter:drop-shadow(0 10px 24px rgba(20,30,60,.22)); }
 
   .split-col-results{ position:relative; }
@@ -1224,6 +1225,15 @@
     .hero-person{ order:-1; min-height:0; height:auto; margin:0 -18px; }
     .hero-person picture{ display:block; }
     .hero-person img{ width:auto; max-width:78%; height:190px; max-height:none; object-fit:contain; margin:0 auto; filter:none; }
+    /* mobile only: photo mirrored and moved left, «Обо мне» pill on the right */
+    .hero-person{ position:relative; justify-content:flex-start; }
+    .hero-person picture{ margin-left:0; }
+    .hero-person img{ transform:scaleX(-1); }
+    .hero-about{ display:inline-flex; position:absolute; right:30px; bottom:44px; align-items:center; gap:7px; padding:6px 6px 6px 13px; border-radius:999px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.55); -webkit-backdrop-filter:blur(14px) saturate(1.4); backdrop-filter:blur(14px) saturate(1.4); color:var(--ink); font:var(--fw-medium) var(--fs-chip)/1 var(--font); cursor:pointer; box-shadow:0 4px 14px rgba(20,30,60,.10); -webkit-tap-highlight-color:transparent; transition:transform .2s ease; }
+    .hero-about i{ display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-style:normal; font-size:15px; line-height:1; }
+    .hero-about:active{ transform:scale(.96); }
+    .hero-about:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+    html[data-theme="dark"] .hero-about{ background:rgba(24,24,27,0.55); border-color:rgba(255,255,255,0.18); color:#f2f2f2; }
     .hero-face .hero-txt{ padding:0 0 22px; margin-top:-2px; }
     .hero-face .eyebrow{ letter-spacing:.1em; font-size:11px; }
     #aboutCard .about-mini-head{ justify-content:space-between; }
@@ -1262,7 +1272,7 @@
               <p class="hero-lead">Нахожу, где HR съедает деньги — и выстраиваю процессы, которые это останавливают</p>
               <a class="hero-cta" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит →</a>
             </div>
-            <figure class="hero-person"><picture><source media="(max-width:620px)" srcset="/test/assets/people/3701-m.webp"><img src="/test/assets/people/3701.webp" alt="Игнатий Филатов" width="751" height="1100" fetchpriority="high"></picture></figure>
+            <figure class="hero-person"><picture><source media="(max-width:620px)" srcset="/test/assets/people/3701-m.webp"><img src="/test/assets/people/3701.webp" alt="Игнатий Филатов" width="751" height="1100" fetchpriority="high"></picture><button type="button" class="hero-about" id="heroAboutBtn" aria-label="Обо мне: открыть подробнее" onclick="openCardOverlay('heroAboutBtn','aboutOverlay')"><span>Обо мне</span><i aria-hidden="true">+</i></button></figure>
           </div>
           <aside class="card about-mini funnel-card anim-in" id="aboutCard" role="button" tabindex="0" aria-label="Обо мне: открыть подробнее" onclick="openCardOverlay('aboutCard','aboutOverlay')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCardOverlay('aboutCard','aboutOverlay');}" style="animation-delay:.08s;">
             <div class="about-mini-head">
