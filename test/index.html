@@ -248,7 +248,7 @@
     display:flex; align-items:flex-start; overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none;
     /* full window width, so cards slide out past the real screen edge, not the column edge */
-    margin:-8px calc(50% - var(--vw, 100vw) / 2) 0; transition:height .55s cubic-bezier(.65,0,.35,1);
+    margin:-8px calc(50% - var(--vw, 100vw) / 2) 0;
   }
   .pager::-webkit-scrollbar{ display:none; }
   .pg{ flex:0 0 100%; min-width:0; box-sizing:border-box; padding:8px max(26px, calc((var(--vw, 100vw) - 1268px) / 2)) 4px; scroll-snap-align:start; scroll-snap-stop:always; }
@@ -269,7 +269,6 @@
   .pg-arrow:hover{ background:rgba(255,255,255,0.16); }
   .pg-arrow[disabled]{ opacity:.3; cursor:default; background:none; }
   .pg-dots button:focus-visible{ outline:2px solid var(--accent-light); outline-offset:1px; border-radius:50%; }
-  @media (prefers-reduced-motion: reduce){ .pager{ transition:none; } }
 
   /* side buttons in the free space beside the grid (wide screens only) */
   .pg-side{
@@ -2921,8 +2920,6 @@ function unitCalcUpdate(){
       if(Math.abs(from - to) < 2) return;
       cancelAnimationFrame(anim);
       pages.forEach(function(p){ p.inert = false; });
-      // keep the taller height while sliding, settle to the new page afterwards
-      pager.style.height = Math.max(pager.offsetHeight, pages[k].offsetHeight) + 'px';
       var top = pager.getBoundingClientRect().top;
       if(top < 0) window.scrollBy({ top: top - 20, behavior: 'smooth' });
       if(reduce){ pager.scrollLeft = to; fit(); return; }
@@ -2932,27 +2929,28 @@ function unitCalcUpdate(){
       (function step(now){
         var p = Math.min(1, (now - t0) / dur);
         pager.scrollLeft = from + (to - from) * ease(p);
+        follow();
         if(p < 1){ anim = requestAnimationFrame(step); return; }
         animating = false; pager.classList.remove('is-animating'); depth(); fit();
       })(t0);
     }
-    // while swiping, grow at once to the taller of the two visible pages (never clip); shrink only after the swipe ends
-    function grow(){
+    // height follows the slide: content below moves with the pages, frame by frame.
+    // Toward the taller page the space opens ahead of the slide (its bottom is never clipped),
+    // toward the shorter page it closes only as the old page leaves.
+    function heightAt(){
       var pos = pager.scrollLeft / pager.clientWidth;
-      var a = Math.max(0, Math.floor(pos)), b = Math.min(pages.length - 1, Math.ceil(pos));
-      var need = Math.max(pages[a].offsetHeight, pages[b].offsetHeight);
-      if(need > (parseFloat(pager.style.height) || 0) + 1){
-        pager.style.transition = 'none';
-        pager.style.height = need + 'px';
-        void pager.offsetHeight;
-        pager.style.transition = '';
-      }
+      var a = Math.max(0, Math.min(pages.length - 1, Math.floor(pos))), b = Math.min(pages.length - 1, a + 1);
+      var ha = pages[a].offsetHeight, hb = pages[b].offsetHeight, t = Math.min(1, Math.max(0, pos - a));
+      if(a === b || ha === hb) return ha;
+      var d = ha > hb ? t : 1 - t;               // distance from the taller page
+      var lo = Math.min(ha, hb), hi = Math.max(ha, hb);
+      return lo + (hi - lo) * (1 - d * d * d);
     }
+    function follow(){ pager.style.height = heightAt().toFixed(1) + 'px'; }
     var raf = 0, lastScroll = 0;
     pager.addEventListener('scroll', function(){
       lastScroll = Date.now();
-      if(!animating) grow();
-      if(!raf) raf = requestAnimationFrame(function(){ raf = 0; depth(); });
+      if(!raf) raf = requestAnimationFrame(function(){ raf = 0; depth(); follow(); });
       if(animating) return;
       clearTimeout(t); t = setTimeout(fit, 150);
     }, { passive:true });
