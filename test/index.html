@@ -2936,11 +2936,25 @@ function unitCalcUpdate(){
         animating = false; pager.classList.remove('is-animating'); depth(); fit();
       })(t0);
     }
-    var raf = 0;
+    // while swiping, grow at once to the taller of the two visible pages (never clip); shrink only after the swipe ends
+    function grow(){
+      var pos = pager.scrollLeft / pager.clientWidth;
+      var a = Math.max(0, Math.floor(pos)), b = Math.min(pages.length - 1, Math.ceil(pos));
+      var need = Math.max(pages[a].offsetHeight, pages[b].offsetHeight);
+      if(need > (parseFloat(pager.style.height) || 0) + 1){
+        pager.style.transition = 'none';
+        pager.style.height = need + 'px';
+        void pager.offsetHeight;
+        pager.style.transition = '';
+      }
+    }
+    var raf = 0, lastScroll = 0;
     pager.addEventListener('scroll', function(){
+      lastScroll = Date.now();
+      if(!animating) grow();
       if(!raf) raf = requestAnimationFrame(function(){ raf = 0; depth(); });
       if(animating) return;
-      clearTimeout(t); t = setTimeout(fit, 90);
+      clearTimeout(t); t = setTimeout(fit, 150);
     }, { passive:true });
     dots.forEach(function(d){ d.addEventListener('click', function(){ go(+d.dataset.pg); }); });
     arrows.forEach(function(a){ a.addEventListener('click', function(){ go(cur() + (+a.dataset.dir)); }); });
@@ -2963,9 +2977,9 @@ function unitCalcUpdate(){
     });
     if(window.ResizeObserver) pages.forEach(function(p){ new ResizeObserver(fit).observe(p); });
     // safety net: if the browser moved the pages on its own (snap, history restore), re-sync height and dots
-    pager.addEventListener('scrollend', function(){ if(!animating) fit(); });
+    pager.addEventListener('scrollend', function(){ if(!animating){ clearTimeout(t); t = setTimeout(fit, 60); } });
     setInterval(function(){
-      if(animating || document.hidden) return;
+      if(animating || document.hidden || Date.now() - lastScroll < 300) return;
       var i = cur();
       if(i !== shown || Math.abs(parseFloat(pager.style.height) - pages[i].offsetHeight) > 2) fit();
     }, 400);
