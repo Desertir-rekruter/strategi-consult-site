@@ -105,10 +105,6 @@
 
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{ height:100%; }
-  /* mobile only: iOS Safari tints the status-bar strip from a fixed element with a background colour at the top edge;
-     this 1px strip (behind the photo) makes the top strip photo-coloured instead of white, the bottom bar keeps its original look */
-  .ios-top-tint{ display:none; }
-  @media (max-width:620px){ .ios-top-tint{ display:block; position:fixed; top:0; left:0; right:0; height:1px; z-index:-2; background-color:#a89b8a; pointer-events:none; } html[data-theme="dark"] .ios-top-tint{ background-color:#58514a; } }
   body{
     font-family:var(--font);
     color:var(--ink);
@@ -958,6 +954,20 @@
     .backdrop{ background-image: image-set(url('/test/assets/automation-backdrop-m.avif') type('image/avif'), url('/test/assets/automation-backdrop-m.webp') type('image/webp'), url('/test/assets/automation-backdrop.jpg') type('image/jpeg')), url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAVACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDkNI0tr+4ihjB3OMlmXKqOeT3HSvTNNs9P0m1EUDbnyA5VSzseeMdh1xnpXJ6BHLJNFEuornY28xoxJHzd/XmutisZh5wHmsrhcGX5eB756+/Ws5PUuK0LEs9wYRLZQxRh1JZ5QWbI7bRwePU1jXNoLqGZr+4nutsLyeS0giQYOM7E+h6k1LqV3NY2xnkKyRxjYyRz4BJOOv49eK52LXzdQLFaI8k8oMJV8cqXyckdscdferi0Q0yw/idrCdrTTrGKFUPLOxcn+QH5VojV55wFuB5qNwVY8UUVlM0icvrFrF5snkhoVfkqjHB+orGtm8mU7M56ZzRRVwYpH//Z'); }
   }
   .kb-long{ font-style:normal; }
+  /* mobile only: iOS Safari never paints a position:fixed layer under its status bar / toolbar (it fills those strips
+     with a flat colour), but it does paint ordinary scrolling content there. So on phones the photo is a scrolling layer:
+     it spans the whole page (clipped by .bg-clip) and a scroll-driven animation moves it down by exactly the scroll
+     distance (translateY == scrollY, 1px per 1px of scroll), so it looks fixed. 150px of photo above and 100px below the
+     viewport fill the strips under the iOS bars. */
+  @media (max-width:620px){
+    body{ position:relative; height:auto; }
+    .bg-clip{ position:absolute; top:-150px; bottom:-100px; left:0; right:0; overflow:hidden; z-index:-1; pointer-events:none; }
+    .bg-clip .backdrop{ position:absolute; top:0; height:calc(100lvh + 250px); width:100%; will-change:transform; }
+    @supports (animation-timeline: scroll()){
+      .bg-clip .backdrop{ animation:bgStay linear both; animation-timeline:scroll(root block); animation-range:0px 100000px; }
+    }
+  }
+  @keyframes bgStay{ from{ transform:translateY(0); } to{ transform:translateY(100000px); } }
 
   /* ---------- entrance animation ---------- */
   @keyframes cardIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
@@ -1320,9 +1330,7 @@
 </style>
 </head>
 <body>
-<div class="ios-top-tint" aria-hidden="true"></div>
-
-<div class="backdrop"></div>
+<div class="bg-clip"><div class="backdrop"></div></div>
 <button type="button" class="theme-toggle" id="themeToggle" aria-label="Тёмная тема" aria-pressed="false" onclick="toggleTheme()">
   <span class="tt-knob" aria-hidden="true"></span>
   <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
@@ -3251,6 +3259,16 @@ function unitCalcUpdate(){
     // keep it fresh while the page is open
     setInterval(function(){ if(!document.hidden){ ctrl = null; load().catch(function(){}); } }, 120000);
   })();
+</script>
+<script>
+/* phones on browsers without scroll-driven animations (iOS < 26): keep the scrolling photo layer in place from JS */
+(function(){
+  if(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()')) return;
+  var bg = document.querySelector('.bg-clip .backdrop'), mq = window.matchMedia('(max-width:620px)'), raf = 0;
+  function put(){ raf = 0; bg.style.transform = mq.matches ? 'translateY(' + window.scrollY + 'px)' : ''; }
+  window.addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(put); }, {passive:true});
+  mq.addEventListener('change', put); put();
+})();
 </script>
 </body>
 </html>
