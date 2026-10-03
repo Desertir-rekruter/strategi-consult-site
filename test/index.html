@@ -1141,6 +1141,42 @@
   #processCard .cal-grid > :nth-child(8n+7), #processCard .cal-grid > :nth-child(8n){ display:none; }
   .proc-person{ position:absolute; right:14px; bottom:0; height:92%; width:auto; pointer-events:none; filter:drop-shadow(0 8px 18px rgba(20,30,60,.2)); }
 
+
+  /* ---------- «Как я работаю» card: live schedule from Google Calendar (busy / free only) ---------- */
+  #processCard.is-live .cal-grid, #processCard.is-live .cal-steps{ display:none; }
+  .lc-live{ display:inline-flex; align-items:center; gap:7px; }
+  .lc-live i{ width:7px; height:7px; border-radius:50%; background:#2fbf71; box-shadow:0 0 0 3px rgba(47,191,113,.22); animation:lcPulse 2s ease-in-out infinite; }
+  @keyframes lcPulse{ 50%{ box-shadow:0 0 0 6px rgba(47,191,113,0); } }
+  .lc-grid{ display:grid; grid-template-columns:46px repeat(5, minmax(0,1fr)); gap:4px 6px; font-size:var(--fs-cap); font-weight:var(--fw-medium); }
+  .lc-dow{ text-align:center; color:var(--ink-soft); font-weight:700; padding-bottom:2px; white-space:nowrap; }
+  .lc-dow.today{ color:var(--accent); }
+  .lc-time{ color:var(--ink-soft); font-size:11px; line-height:20px; font-variant-numeric:tabular-nums; }
+  .lc-slot{ height:20px; border-radius:7px; min-width:0; padding:0; font:inherit; }
+  .lc-slot.busy{ background:var(--ink); opacity:.82; }
+  .lc-slot.past{ border:1px dashed rgba(20,20,20,0.08); }
+  .lc-slot.free{
+    position:relative; cursor:pointer; background:rgba(255,255,255,0.32); border:1px dashed rgba(25,95,232,0.4); color:#fff;
+    transition:background .2s, border-color .2s, transform .2s;
+  }
+  .lc-slot.free::after{ content:"+"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; opacity:0; transition:opacity .2s; }
+  .lc-slot.free:hover, .lc-slot.free:focus-visible{ background:var(--accent); border:1px solid var(--accent); transform:scale(1.06); outline:none; }
+  .lc-slot.free:hover::after, .lc-slot.free:focus-visible::after{ opacity:1; }
+  .lc-legend{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px; margin-top:10px; font-size:11px; font-weight:var(--fw-medium); color:var(--ink-soft); }
+  .lc-legend i{ display:inline-block; width:14px; height:10px; border-radius:4px; vertical-align:-1px; margin-right:5px; }
+  .lc-legend .k-busy{ background:var(--ink); opacity:.82; }
+  .lc-legend .k-free{ background:rgba(255,255,255,0.32); border:1px dashed rgba(25,95,232,0.5); }
+  .lc-legend a{ color:var(--accent); text-decoration:none; margin-left:auto; cursor:pointer; }
+  #processCard.is-live > .card-hint{ display:none; }
+  html[data-theme="dark"] .lc-slot.busy, html[data-theme="dark"] .lc-legend .k-busy{ background:rgba(255,255,255,0.85); }
+  html[data-theme="dark"] .lc-slot.free, html[data-theme="dark"] .lc-legend .k-free{ background:rgba(255,255,255,0.06); border-color:rgba(98,147,255,0.5); }
+  html[data-theme="dark"] .lc-slot.past{ border-color:rgba(255,255,255,0.1); }
+  html[data-theme="dark"] .lc-dow.today, html[data-theme="dark"] .lc-legend a{ color:var(--accent-light); }
+  @media (max-width:620px){
+    .lc-grid{ grid-template-columns:38px repeat(5, minmax(0,1fr)); gap:4px 4px; }
+    .lc-dow{ font-size:11px; }
+  }
+  @media (prefers-reduced-motion: reduce){ .lc-live i{ animation:none; } }
+
   .hello-band{ max-width:980px; margin:26px auto 6px; display:flex; align-items:flex-end; gap:26px; padding:0 34px 0 16px;
     background:var(--glass); backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px); border:1px solid var(--glass-border); border-radius:34px; overflow:hidden; }
   .hello-person{ width:230px; height:auto; flex:0 0 auto; margin-top:18px; display:block; filter:drop-shadow(0 10px 24px rgba(20,30,60,.2)); }
@@ -1487,6 +1523,7 @@
                 <div class="cal-step"><span>03</span>Стратегия</div>
                 <div class="cal-step"><span>04</span>Внедрение</div>
               </div>
+              <div class="lc" id="liveCal" hidden></div>
               <div class="card-hint">Нажмите, чтобы посмотреть детали →</div>
               <img class="proc-person" src="/test/assets/people/3749.webp" alt="" width="399" height="1100" loading="lazy">
             </div>
@@ -2921,6 +2958,90 @@ function unitCalcUpdate(){
     if(window.ResizeObserver) pages.forEach(function(p){ new ResizeObserver(fit).observe(p); });
     window.addEventListener('resize', function(){ setVw(); pager.scrollLeft = cur() * pager.clientWidth; fit(); });
     fit();
+  })();
+
+  /* «Как я работаю»: live busy/free grid from Google Calendar (Apps Script); static picture stays if it fails */
+  (function(){
+    var SCHEDULE_URL = window.SCHEDULE_URL || 'https://script.google.com/macros/s/AKfycbz_joHO-KM_Dhgy1729r7fSezxnM2mEd5FpJAIyG1dqHGxjjJhOtjZwJICIxWIPYrrq/exec';  // Apps Script «Расписание для сайта strategi-consult» (hr.restoart.hh)
+    var card = document.getElementById('processCard'), box = document.getElementById('liveCal');
+    if(!card || !box || !SCHEDULE_URL) return;
+    var TB = 4 * 3600e3;               // Batumi = UTC+4, no daylight saving
+    var H0 = 10, H1 = 19, DAYS = 5;    // working hours by Batumi time, five working days
+    var DOW = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+    var MON = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+    var tzOff = -new Date().getTimezoneOffset() / 60;
+    var tzLabel = 'GMT' + (tzOff >= 0 ? '+' : '−') + Math.abs(tzOff);
+    function hm(ms){ return new Date(ms).toLocaleTimeString('ru-RU', { hour:'2-digit', minute:'2-digit' }); }
+    function local(ms){ var d = new Date(ms); return { dow: DOW[d.getDay()], day: d.getDate(), mon: MON[d.getMonth()] }; }
+
+    function render(busy){
+      var now = Date.now(), tb = new Date(now + TB);
+      var y = tb.getUTCFullYear(), m = tb.getUTCMonth(), d = tb.getUTCDate();
+      if(tb.getUTCHours() >= H1 - 1) d++;
+      var days = [];
+      for(var i = 0; days.length < DAYS && i < 14; i++){
+        var day = new Date(Date.UTC(y, m, d + i));
+        var wd = day.getUTCDay();
+        if(wd >= 1 && wd <= 5) days.push(day);
+      }
+      function startOf(day, h){ return Date.UTC(day.getUTCFullYear(), day.getUTCMonth(), day.getUTCDate(), h) - TB; }
+      function isBusy(a, b){ for(var k = 0; k < busy.length; k++){ if(busy[k][0] < b && busy[k][1] > a) return true; } return false; }
+      var todayKey = new Date(now + TB).toISOString().slice(0, 10);
+
+      var html = '<div class="lc-grid" role="grid" aria-label="Расписание на ближайшие рабочие дни, ваше время ' + tzLabel + '"><div></div>';
+      days.forEach(function(day){
+        var l = local(startOf(day, 12));
+        var today = day.toISOString().slice(0, 10) === todayKey;
+        html += '<div class="lc-dow' + (today ? ' today' : '') + '">' + (today ? 'Сегодня' : l.dow + ' ' + l.day) + '</div>';
+      });
+      for(var h = H0; h < H1; h++){
+        html += '<div class="lc-time">' + hm(startOf(days[0], h)) + '</div>';
+        days.forEach(function(day){
+          var a = startOf(day, h), b = a + 3600e3;
+          if(a < now) html += '<div class="lc-slot past" aria-hidden="true"></div>';
+          else if(isBusy(a, b)) html += '<div class="lc-slot busy" title="Занято"></div>';
+          else {
+            var l = local(a);
+            var when = l.dow.toLowerCase() + ', ' + l.day + ' ' + l.mon + ', ' + hm(a);
+            html += '<button type="button" class="lc-slot free" data-when="' + when + '" aria-label="Свободно: ' + when + '. Написать в Telegram" title="Свободно: ' + when + '"></button>';
+          }
+        });
+      }
+      html += '</div><div class="lc-legend"><span><i class="k-busy"></i>занято</span><span><i class="k-free"></i>свободно — нажмите, чтобы написать</span><a role="button" tabindex="0" data-steps>Как я работаю →</a></div>';
+      box.innerHTML = html;
+      box.hidden = false;
+      card.classList.add('is-live');
+      var head = card.querySelector('.cal-head');
+      head.innerHTML = '<div class="cal-nav lc-live"><i></i>Живое расписание</div><div class="cal-title">Когда я свободен</div><div class="cal-nav">ваше время ' + tzLabel + '</div>';
+    }
+
+    box.addEventListener('click', function(e){
+      var slot = e.target.closest('.lc-slot');
+      if(slot){
+        e.stopPropagation();
+        if(!slot.classList.contains('free')) return;
+        var text = 'Здравствуйте, Игнатий! Хочу записаться на бесплатную диагностику: ' + slot.dataset.when + ' (моё время, ' + tzLabel + ').';
+        window.open('https://t.me/HR_Ignatiy?text=' + encodeURIComponent(text), '_blank', 'noopener');
+      }
+    });
+    box.addEventListener('keydown', function(e){
+      if((e.key === 'Enter' || e.key === ' ') && e.target.closest('[data-steps]')){ e.preventDefault(); e.target.click(); }
+    });
+
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function(){ if(ctrl) ctrl.abort(); }, 8000);
+    function load(){
+      return fetch(SCHEDULE_URL, ctrl ? { signal: ctrl.signal } : {})
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          clearTimeout(timer);
+          if(!j || !Array.isArray(j.busy)) return;
+          render(j.busy.map(function(x){ return [Date.parse(x[0]), Date.parse(x[1])]; }));
+        });
+    }
+    load().catch(function(){});
+    // keep it fresh while the page is open
+    setInterval(function(){ if(!document.hidden){ ctrl = null; load().catch(function(){}); } }, 120000);
   })();
 </script>
 </body>
