@@ -247,10 +247,11 @@
   .pager{
     display:flex; align-items:flex-start; overflow-x:auto; overflow-y:hidden;
     scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none;
-    margin:-8px -26px 0; transition:height .55s cubic-bezier(.65,0,.35,1);
+    /* full window width, so cards slide out past the real screen edge, not the column edge */
+    margin:-8px calc(50% - var(--vw, 100vw) / 2) 0; transition:height .55s cubic-bezier(.65,0,.35,1);
   }
   .pager::-webkit-scrollbar{ display:none; }
-  .pg{ flex:0 0 100%; min-width:0; box-sizing:border-box; padding:8px 26px 4px; scroll-snap-align:start; scroll-snap-stop:always; }
+  .pg{ flex:0 0 100%; min-width:0; box-sizing:border-box; padding:8px max(26px, calc((var(--vw, 100vw) - 1268px) / 2)) 4px; scroll-snap-align:start; scroll-snap-stop:always; }
   .pager.is-animating{ scroll-snap-type:none; }
   .pg{ transform-origin:50% 0; will-change:transform; }
   .dock-ghost{ visibility:hidden; }
@@ -268,10 +269,6 @@
   .pg-arrow:hover{ background:rgba(255,255,255,0.16); }
   .pg-arrow[disabled]{ opacity:.3; cursor:default; background:none; }
   .pg-dots button:focus-visible{ outline:2px solid var(--accent-light); outline-offset:1px; border-radius:50%; }
-  @media (max-width:620px){
-    .pager{ margin:-8px -16px 0; }
-    .pg{ padding:8px 16px 4px; }
-  }
   @media (prefers-reduced-motion: reduce){ .pager{ transition:none; } }
 
   /* side buttons in the free space beside the grid (wide screens only) */
@@ -2847,6 +2844,8 @@ function unitCalcUpdate(){
   /* pages: dots, arrows, keyboard; the pager takes the height of the visible page */
   (function(){
     var pager = document.getElementById('pager'); if(!pager) return;
+    function setVw(){ document.documentElement.style.setProperty('--vw', document.documentElement.clientWidth + 'px'); }
+    setVw();
     var pages = pager.querySelectorAll('.pg');
     var dots = document.querySelectorAll('.pg-dot');
     var arrows = document.querySelectorAll('.pg-arrow');
@@ -2885,6 +2884,7 @@ function unitCalcUpdate(){
       if(top < 0) window.scrollBy({ top: top - 20, behavior: 'smooth' });
       if(reduce){ pager.scrollLeft = to; fit(); return; }
       animating = true; pager.classList.add('is-animating');
+      prev.classList.add('off'); next.classList.add('off');
       var t0 = performance.now(), dur = 720;
       (function step(now){
         var p = Math.min(1, (now - t0) / dur);
@@ -2919,7 +2919,7 @@ function unitCalcUpdate(){
       go(cur() + (e.key === 'ArrowRight' ? 1 : -1));
     });
     if(window.ResizeObserver) pages.forEach(function(p){ new ResizeObserver(fit).observe(p); });
-    window.addEventListener('resize', function(){ pager.scrollLeft = cur() * pager.clientWidth; fit(); });
+    window.addEventListener('resize', function(){ setVw(); pager.scrollLeft = cur() * pager.clientWidth; fit(); });
     fit();
   })();
 </script>
