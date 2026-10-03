@@ -151,6 +151,8 @@
   .hero h1{
     font-size:var(--fs-display); font-weight:var(--fw-bold); line-height:1; letter-spacing:-0.025em; }
   .hero p{ margin-top:10px; font-size:var(--fs-lead); color:var(--ink-soft); font-weight:var(--fw-medium); }
+  .hero h1 .h1-m{ display:none; }
+  @media (max-width:620px){ .hero h1 .h1-full, .hero .hero-lead{ display:none; } .hero h1 .h1-m{ display:inline; } .hero h1{ text-wrap:balance; } }
   .hero-cta{
     display:inline-block; margin-top:16px; text-decoration:none;
     background:var(--accent); color:#fff; font-size:var(--fs-btn); font-weight:var(--fw-medium);
@@ -1240,8 +1242,8 @@
           <div class="hero hero-face anim-in" id="top">
             <div class="hero-txt">
               <div class="eyebrow">Игнатий Филатов · HRBP-консультант</div>
-              <h1>Ваш бизнес теряет деньги прямо сейчас</h1>
-              <p>Нахожу, где HR съедает деньги — и выстраиваю процессы, которые это останавливают</p>
+              <h1><span class="h1-full">Ваш бизнес теряет деньги прямо сейчас</span><span class="h1-m">Вы 100% теряете деньги, я 100%&nbsp;их верну</span></h1>
+              <p class="hero-lead">Нахожу, где HR съедает деньги — и выстраиваю процессы, которые это останавливают</p>
               <a class="hero-cta" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит →</a>
             </div>
             <figure class="hero-person"><picture><source media="(max-width:620px)" srcset="/test/assets/people/3701-m.webp"><img src="/test/assets/people/3701.webp" alt="Игнатий Филатов" width="751" height="1100" fetchpriority="high"></picture></figure>
