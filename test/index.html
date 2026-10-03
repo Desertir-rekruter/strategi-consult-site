@@ -1067,6 +1067,11 @@
   @media (max-width:1499px){ .content{ padding-top:56px; } }
   @media (max-width:620px){ .theme-toggle{ top:10px; right:10px; } .content{ padding-top:50px; } }
 
+  /* theme switch: circular reveal from the switch (View Transitions); snapshots, so nothing animates on its own meanwhile */
+  ::view-transition-old(root), ::view-transition-new(root){ animation:none; mix-blend-mode:normal; }
+  ::view-transition-new(root){ z-index:2; }
+  html.theme-vt *, html.theme-vt *::before, html.theme-vt *::after{ transition:none !important; }
+
   /* smooth colour change while switching (class added for ~0.6s by JS) */
   html.theme-anim .content *, html.theme-anim .content, html.theme-anim .backdrop::after, html.theme-anim body > footer{
     transition:background-color .5s ease, color .5s ease, border-color .5s ease, fill .5s ease, stroke .5s ease !important;
@@ -2804,10 +2809,32 @@ function unitCalcUpdate(){
   function toggleTheme(){
     var next = currentTheme() === 'dark' ? 'light' : 'dark';
     var root = document.documentElement;
+    function apply(){
+      root.setAttribute('data-theme', next);
+      try{ localStorage.setItem('sc-theme', next); }catch(e){}
+      syncThemeToggle();
+    }
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce){ apply(); return; }
+    // the new theme spreads in a circle from the switch, the whole page at once
+    if(document.startViewTransition){
+      var b = document.getElementById('themeToggle').getBoundingClientRect();
+      var x = b.left + b.width / 2, y = b.top + b.height / 2;
+      var r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      root.classList.add('theme-vt');
+      var vt = document.startViewTransition(apply);
+      vt.ready.then(function(){
+        root.animate(
+          { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + r + 'px at ' + x + 'px ' + y + 'px)'] },
+          { duration: 750, easing: 'cubic-bezier(.65,0,.35,1)', pseudoElement: '::view-transition-new(root)' }
+        );
+      }).catch(function(){});
+      vt.finished.finally(function(){ root.classList.remove('theme-vt'); });
+      return;
+    }
+    // older browsers: soft cross-fade of colours
     root.classList.add('theme-anim');
-    root.setAttribute('data-theme', next);
-    try{ localStorage.setItem('sc-theme', next); }catch(e){}
-    syncThemeToggle();
+    apply();
     clearTimeout(toggleTheme._t);
     toggleTheme._t = setTimeout(function(){ root.classList.remove('theme-anim'); }, 650);
   }
