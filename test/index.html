@@ -1142,38 +1142,38 @@
   .proc-person{ position:absolute; right:14px; bottom:0; height:92%; width:auto; pointer-events:none; filter:drop-shadow(0 8px 18px rgba(20,30,60,.2)); }
 
 
-  /* ---------- «Как я работаю» card: live schedule from Google Calendar (busy / free only) ---------- */
-  #processCard.is-live .cal-grid, #processCard.is-live .cal-steps{ display:none; }
-  .lc-live{ display:inline-flex; align-items:center; gap:7px; }
+  /* ---------- «Как я работаю» card: live schedule from Google Calendar — calm calendar view ---------- */
+  #processCard.is-live .cal-grid, #processCard.is-live .cal-steps, #processCard.is-live > .card-hint{ display:none; }
+  #processCard.is-live .cal-head{ justify-content:flex-start; gap:8px 14px; flex-wrap:wrap; }
+  #processCard.is-live .cal-tz{ margin-left:auto; font-size:var(--fs-cap); font-weight:var(--fw-medium); color:var(--ink-soft); opacity:.75; }
+  .lc-live{ display:inline-flex; align-items:center; gap:7px; font-size:var(--fs-cap); font-weight:var(--fw-medium); color:var(--ink-soft); }
   .lc-live i{ width:7px; height:7px; border-radius:50%; background:#2fbf71; box-shadow:0 0 0 3px rgba(47,191,113,.22); animation:lcPulse 2s ease-in-out infinite; }
   @keyframes lcPulse{ 50%{ box-shadow:0 0 0 6px rgba(47,191,113,0); } }
-  .lc-grid{ display:grid; grid-template-columns:46px repeat(5, minmax(0,1fr)); gap:4px 6px; font-size:var(--fs-cap); font-weight:var(--fw-medium); }
-  .lc-dow{ text-align:center; color:var(--ink-soft); font-weight:700; padding-bottom:2px; white-space:nowrap; }
-  .lc-dow.today{ color:var(--accent); }
-  .lc-time{ color:var(--ink-soft); font-size:11px; line-height:20px; font-variant-numeric:tabular-nums; }
-  .lc-slot{ height:20px; border-radius:7px; min-width:0; padding:0; font:inherit; }
-  .lc-slot.busy{ background:var(--ink); opacity:.82; }
-  .lc-slot.past{ border:1px dashed rgba(20,20,20,0.08); }
-  .lc-slot.free{
-    position:relative; cursor:pointer; background:rgba(255,255,255,0.32); border:1px dashed rgba(25,95,232,0.4); color:#fff;
-    transition:background .2s, border-color .2s, transform .2s;
-  }
-  .lc-slot.free::after{ content:"+"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; opacity:0; transition:opacity .2s; }
-  .lc-slot.free:hover, .lc-slot.free:focus-visible{ background:var(--accent); border:1px solid var(--accent); transform:scale(1.06); outline:none; }
-  .lc-slot.free:hover::after, .lc-slot.free:focus-visible::after{ opacity:1; }
-  .lc-legend{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px; margin-top:10px; font-size:11px; font-weight:var(--fw-medium); color:var(--ink-soft); }
-  .lc-legend i{ display:inline-block; width:14px; height:10px; border-radius:4px; vertical-align:-1px; margin-right:5px; }
-  .lc-legend .k-busy{ background:var(--ink); opacity:.82; }
-  .lc-legend .k-free{ background:rgba(255,255,255,0.32); border:1px dashed rgba(25,95,232,0.5); }
-  .lc-legend a{ color:var(--accent); text-decoration:none; margin-left:auto; cursor:pointer; }
-  #processCard.is-live > .card-hint{ display:none; }
-  html[data-theme="dark"] .lc-slot.busy, html[data-theme="dark"] .lc-legend .k-busy{ background:rgba(255,255,255,0.85); }
-  html[data-theme="dark"] .lc-slot.free, html[data-theme="dark"] .lc-legend .k-free{ background:rgba(255,255,255,0.06); border-color:rgba(98,147,255,0.5); }
-  html[data-theme="dark"] .lc-slot.past{ border-color:rgba(255,255,255,0.1); }
-  html[data-theme="dark"] .lc-dow.today, html[data-theme="dark"] .lc-legend a{ color:var(--accent-light); }
+  .lc-cal{ --lc-h:21px; display:grid; grid-template-columns:42px repeat(5, minmax(0,1fr)); column-gap:6px; }
+  .lc-dow{ text-align:center; font-size:var(--fs-cap); font-weight:600; color:var(--ink-soft); padding-bottom:6px; line-height:1.15; }
+  .lc-dow b{ display:block; font-size:17px; color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums; }
+  .lc-dow.today, .lc-dow.today b{ color:var(--accent); }
+  .lc-times{ position:relative; }
+  .lc-times span{ position:absolute; left:0; font-size:11px; color:var(--ink-soft); opacity:.7; transform:translateY(-50%); font-variant-numeric:tabular-nums; }
+  .lc-col{ position:relative; border-left:1px solid rgba(19,19,19,0.06); }
+  .lc-col::before{ content:""; position:absolute; inset:0; background:repeating-linear-gradient(to bottom, rgba(19,19,19,0.07) 0 1px, transparent 1px var(--lc-h)); pointer-events:none; }
+  .lc-past{ position:absolute; left:0; right:0; top:0; background:rgba(255,255,255,0.28); pointer-events:none; }
+  .lc-blk{ position:absolute; left:3px; right:3px; border-radius:8px; background:rgba(19,19,19,0.14); padding:3px 5px; overflow:hidden; white-space:nowrap; letter-spacing:-0.01em;
+    font-size:10.5px; line-height:1.35; color:var(--ink-soft); font-weight:var(--fw-medium); font-variant-numeric:tabular-nums; }
+  .lc-hit{ position:absolute; left:3px; right:3px; border:0; padding:0; background:transparent; border-radius:8px; cursor:pointer; font:inherit; }
+  .lc-hit:hover, .lc-hit:focus-visible{ background:var(--accent); outline:none; }
+  .lc-hit:hover::after, .lc-hit:focus-visible::after{ content:"+ " attr(data-t); color:#fff; font-size:11px; font-weight:600; position:absolute; left:7px; top:50%; transform:translateY(-50%); white-space:nowrap; }
+  .lc-foot{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 14px; margin-top:12px; font-size:var(--fs-cap); color:var(--ink-soft); }
+  .lc-foot a{ color:var(--accent); text-decoration:none; margin-left:auto; cursor:pointer; font-weight:var(--fw-medium); }
+  html[data-theme="dark"] .lc-col{ border-left-color:rgba(255,255,255,0.08); }
+  html[data-theme="dark"] .lc-col::before{ background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.08) 0 1px, transparent 1px var(--lc-h)); }
+  html[data-theme="dark"] .lc-blk{ background:rgba(255,255,255,0.16); }
+  html[data-theme="dark"] .lc-past{ background:rgba(0,0,0,0.18); }
+  html[data-theme="dark"] .lc-dow.today, html[data-theme="dark"] .lc-dow.today b, html[data-theme="dark"] .lc-foot a{ color:var(--accent-light); }
   @media (max-width:620px){
-    .lc-grid{ grid-template-columns:38px repeat(5, minmax(0,1fr)); gap:4px 4px; }
-    .lc-dow{ font-size:11px; }
+    .lc-cal{ grid-template-columns:36px repeat(5, minmax(0,1fr)); column-gap:4px; }
+    .lc-blk{ padding:3px 4px; font-size:10px; }
+    #processCard.is-live .cal-tz{ margin-left:0; }
   }
   @media (prefers-reduced-motion: reduce){ .lc-live i{ animation:none; } }
 
@@ -2987,39 +2987,48 @@ function unitCalcUpdate(){
       function startOf(day, h){ return Date.UTC(day.getUTCFullYear(), day.getUTCMonth(), day.getUTCDate(), h) - TB; }
       function isBusy(a, b){ for(var k = 0; k < busy.length; k++){ if(busy[k][0] < b && busy[k][1] > a) return true; } return false; }
       var todayKey = new Date(now + TB).toISOString().slice(0, 10);
+      var RH = 21, span = (H1 - H0) * RH;
+      function px(ms, day){ return (ms - startOf(day, H0)) / 3600e3 * RH; }
 
-      var html = '<div class="lc-grid" role="grid" aria-label="Расписание на ближайшие рабочие дни, ваше время ' + tzLabel + '"><div></div>';
+      var html = '<div class="lc-cal" aria-label="Расписание на ближайшие рабочие дни, ваше время ' + tzLabel + '"><div></div>';
       days.forEach(function(day){
         var l = local(startOf(day, 12));
         var today = day.toISOString().slice(0, 10) === todayKey;
-        html += '<div class="lc-dow' + (today ? ' today' : '') + '">' + (today ? 'Сегодня' : l.dow + ' ' + l.day) + '</div>';
+        html += '<div class="lc-dow' + (today ? ' today' : '') + '">' + (today ? 'Сегодня' : l.dow) + '<b>' + l.day + '</b></div>';
       });
-      for(var h = H0; h < H1; h++){
-        html += '<div class="lc-time">' + hm(startOf(days[0], h)) + '</div>';
-        days.forEach(function(day){
-          var a = startOf(day, h), b = a + 3600e3;
-          if(a < now) html += '<div class="lc-slot past" aria-hidden="true"></div>';
-          else if(isBusy(a, b)) html += '<div class="lc-slot busy" title="Занято"></div>';
-          else {
-            var l = local(a);
-            var when = l.dow.toLowerCase() + ', ' + l.day + ' ' + l.mon + ', ' + hm(a);
-            html += '<button type="button" class="lc-slot free" data-when="' + when + '" aria-label="Свободно: ' + when + '. Написать в Telegram" title="Свободно: ' + when + '"></button>';
-          }
+      html += '<div class="lc-times" style="height:' + span + 'px">';
+      for(var h = H0; h < H1; h++) html += '<span style="top:' + ((h - H0) * RH + 1) + 'px">' + hm(startOf(days[0], h)) + '</span>';
+      html += '</div>';
+      days.forEach(function(day){
+        var a0 = startOf(day, H0), a1 = startOf(day, H1);
+        html += '<div class="lc-col" style="height:' + span + 'px">';
+        if(now > a0) html += '<div class="lc-past" style="height:' + Math.min(span, px(now, day)) + 'px"></div>';
+        busy.forEach(function(x){
+          var s0 = Math.max(x[0], a0), s1 = Math.min(x[1], a1);
+          if(s1 <= s0) return;
+          var top = px(s0, day) + 1, hgt = px(s1, day) - px(s0, day) - 2;
+          html += '<div class="lc-blk" style="top:' + top + 'px;height:' + hgt + 'px">' + (hgt > 34 ? 'Занят<br>' : '') + hm(x[0]) + '–' + hm(x[1]) + '</div>';
         });
-      }
-      html += '</div><div class="lc-legend"><span><i class="k-busy"></i>занято</span><span><i class="k-free"></i>свободно — нажмите, чтобы написать</span><a role="button" tabindex="0" data-steps>Как я работаю →</a></div>';
+        for(var h = H0; h < H1; h++){
+          var a = startOf(day, h), b = a + 3600e3;
+          if(a < now || isBusy(a, b)) continue;
+          var l = local(a), when = l.dow.toLowerCase() + ', ' + l.day + ' ' + l.mon + ', ' + hm(a);
+          html += '<button type="button" class="lc-hit" style="top:' + ((h - H0) * RH + 1) + 'px;height:' + (RH - 2) + 'px" data-t="' + hm(a) + '" data-when="' + when + '" aria-label="Свободно: ' + when + '. Написать в Telegram"></button>';
+        }
+        html += '</div>';
+      });
+      html += '</div><div class="lc-foot"><span>Нажмите на свободное время — откроется Telegram</span><a role="button" tabindex="0" data-steps>Как я работаю →</a></div>';
       box.innerHTML = html;
       box.hidden = false;
       card.classList.add('is-live');
       var head = card.querySelector('.cal-head');
-      head.innerHTML = '<div class="cal-nav lc-live"><i></i>Живое расписание</div><div class="cal-title">Когда я свободен</div><div class="cal-nav">ваше время ' + tzLabel + '</div>';
+      head.innerHTML = '<span class="lc-live"><i></i>Живое расписание</span><div class="cal-title">Когда я свободен</div><span class="cal-tz">ваше время ' + tzLabel + '</span>';
     }
 
     box.addEventListener('click', function(e){
-      var slot = e.target.closest('.lc-slot');
+      var slot = e.target.closest('.lc-hit');
+      if(e.target.closest('.lc-cal')) e.stopPropagation();
       if(slot){
-        e.stopPropagation();
-        if(!slot.classList.contains('free')) return;
         var text = 'Здравствуйте, Игнатий! Хочу записаться на бесплатную диагностику: ' + slot.dataset.when + ' (моё время, ' + tzLabel + ').';
         window.open('https://t.me/HR_Ignatiy?text=' + encodeURIComponent(text), '_blank', 'noopener');
       }
