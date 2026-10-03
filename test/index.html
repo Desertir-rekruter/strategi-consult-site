@@ -3126,7 +3126,13 @@ function unitCalcUpdate(){
       next.classList.toggle('off', !inView || i === pages.length - 1);
     }
     [prev, next].forEach(function(b){ b.addEventListener('click', function(){ next.classList.remove('hint'); go(cur() + (+b.dataset.dir)); }); });
-    window.addEventListener('scroll', side, { passive:true });
+    // side buttons exist only at ≥1420px; once per frame, so page scroll on phones does no layout reads
+    var sideRaf = 0, lastPageScroll = 0;
+    window.addEventListener('scroll', function(){ lastPageScroll = Date.now(); }, { passive:true });
+    window.addEventListener('scroll', function(){
+      if(sideRaf || window.innerWidth < 1420) return;
+      sideRaf = requestAnimationFrame(function(){ sideRaf = 0; side(); });
+    }, { passive:true });
     setTimeout(function(){ next.classList.add('hint'); }, 1500);
     document.addEventListener('keydown', function(e){
       if(e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -3139,11 +3145,17 @@ function unitCalcUpdate(){
     // safety net: if the browser moved the pages on its own (snap, history restore), re-sync height and dots
     pager.addEventListener('scrollend', function(){ if(!animating){ clearTimeout(t); t = setTimeout(fit, 60); } });
     setInterval(function(){
-      if(animating || document.hidden || Date.now() - lastScroll < 300) return;
+      if(animating || document.hidden || Date.now() - lastScroll < 300 || Date.now() - lastPageScroll < 300) return;
       var i = cur();
       if(i !== shown || Math.abs(parseFloat(pager.style.height) - pages[i].offsetHeight) > 2) fit();
     }, 400);
-    window.addEventListener('resize', function(){ setVw(); pager.scrollLeft = cur() * pager.clientWidth; fit(); });
+    // only a real width change re-lays the pages: iOS Safari fires resize on every toolbar collapse/expand while scrolling
+    var lastW = document.documentElement.clientWidth;
+    window.addEventListener('resize', function(){
+      var w = document.documentElement.clientWidth;
+      if(w === lastW) return;
+      lastW = w; setVw(); pager.scrollLeft = cur() * pager.clientWidth; fit();
+    });
     fit();
   })();
 
