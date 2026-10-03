@@ -107,6 +107,8 @@
   html,body{ height:100%; }
   /* mobile only: iOS Safari paints the strips under the status bar / bottom bar with the page colour, not the fixed photo — tint them like the photo instead of white */
   @media (max-width:620px){ html{ background-color:#a89b8a; } html[data-theme="dark"]{ background-color:#58514a; } }
+  /* mobile only: the photo runs 110px past the top and bottom of the screen, so it also fills the strips under the iOS status bar and bottom bar */
+  @media (max-width:620px){ .backdrop, .funnel-overlay-bg{ top:-110px !important; height:calc(100lvh + 220px) !important; } }
   body{
     font-family:var(--font);
     color:var(--ink);
