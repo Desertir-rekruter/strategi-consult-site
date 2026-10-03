@@ -255,7 +255,6 @@
   .pager::-webkit-scrollbar{ display:none; }
   .pg{ flex:0 0 100%; min-width:0; box-sizing:border-box; padding:8px max(26px, calc((var(--vw, 100vw) - 1268px) / 2)) 4px; scroll-snap-align:start; scroll-snap-stop:always; }
   .pager.is-animating{ scroll-snap-type:none; }
-  .pg{ transform-origin:50% 0; will-change:transform; }
   .dock-ghost{ visibility:hidden; }
   .pg-dots{
     position:relative; z-index:5; width:fit-content; margin:18px auto 0;
@@ -2961,6 +2960,7 @@ function unitCalcUpdate(){
       shown = i;
       pages[i].classList.add('is-seen');
       pager.style.height = pages[i].offsetHeight + 'px';
+      settle();
       dots.forEach(function(d, k){ d.classList.toggle('on', k === i); d.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
       arrows[0].disabled = i === 0; arrows[1].disabled = i === pages.length - 1;
       side();
@@ -2970,14 +2970,6 @@ function unitCalcUpdate(){
     var anim = 0, animating = false;
     var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     function ease(p){ return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }
-    // pages shrink a little while they slide away, like home-screen pages
-    function depth(){
-      var pos = pager.scrollLeft / pager.clientWidth;
-      pages.forEach(function(p, k){
-        var d = Math.min(1, Math.abs(pos - k));
-        p.style.transform = d < 0.002 ? '' : 'scale(' + (1 - 0.06 * d).toFixed(4) + ')';
-      });
-    }
     function go(k){
       k = Math.max(0, Math.min(pages.length - 1, k));
       var from = pager.scrollLeft, to = k * pager.clientWidth;
@@ -2995,7 +2987,7 @@ function unitCalcUpdate(){
         pager.scrollLeft = from + (to - from) * ease(p);
         follow();
         if(p < 1){ anim = requestAnimationFrame(step); return; }
-        animating = false; pager.classList.remove('is-animating'); depth(); fit();
+        animating = false; pager.classList.remove('is-animating'); fit();
       })(t0);
     }
     // height follows the slide: content below moves with the pages, frame by frame.
@@ -3010,11 +3002,27 @@ function unitCalcUpdate(){
       var lo = Math.min(ha, hb), hi = Math.max(ha, hb);
       return lo + (hi - lo) * (1 - d * d * d);
     }
-    function follow(){ pager.style.height = heightAt().toFixed(1) + 'px'; }
+    // while pages move: pager keeps the tallest height once, content below slides with a GPU transform (no layout per frame)
+    var followers = document.querySelectorAll('.pg-dots, .hello-band, .bottom-nav, body > footer');
+    var moving = false, tall = 0;
+    function follow(){
+      if(!moving){
+        moving = true;
+        tall = Math.max.apply(null, Array.prototype.map.call(pages, function(p){ return p.offsetHeight; }));
+        pager.style.height = tall + 'px';
+      }
+      var dy = (heightAt() - tall).toFixed(1);
+      followers.forEach(function(el){ el.style.transform = 'translate3d(0,' + dy + 'px,0)'; });
+    }
+    function settle(){
+      if(!moving) return;
+      moving = false;
+      followers.forEach(function(el){ el.style.transform = ''; });
+    }
     var raf = 0, lastScroll = 0;
     pager.addEventListener('scroll', function(){
       lastScroll = Date.now();
-      if(!raf) raf = requestAnimationFrame(function(){ raf = 0; depth(); follow(); });
+      if(!raf) raf = requestAnimationFrame(function(){ raf = 0; follow(); });
       if(animating) return;
       clearTimeout(t); t = setTimeout(fit, 150);
     }, { passive:true });
