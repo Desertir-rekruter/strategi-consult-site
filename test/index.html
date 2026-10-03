@@ -1254,12 +1254,11 @@
   html[data-theme="dark"] .tg-top{ background:rgba(23,33,43,0.7); border-bottom-color:rgba(255,255,255,0.06); }
   html[data-theme="dark"] .tg-btns span{ background:rgba(255,255,255,0.1); }
   /* compact: a fixed-height chat window, newest message at the bottom, older ones scroll away under a soft top fade */
-  .tg{ display:flex; flex-direction:column; height:196px; font-size:12px; }
+  .tg{ display:flex; flex-direction:column; font-size:12px; }
   .tg-top{ padding:6px 11px; flex:0 0 auto; }
   .tg-top b{ font-size:12.5px; } .tg-top small{ font-size:10.5px; }
   .tg-av{ width:24px; height:24px; font-size:10px; }
-  .tg-feed{ flex:1 1 auto; min-height:0; overflow:hidden; justify-content:flex-end; gap:4px; padding:6px 9px 8px;
-    -webkit-mask-image:linear-gradient(180deg, transparent 0, #000 22px); mask-image:linear-gradient(180deg, transparent 0, #000 22px); }
+  .tg-feed{ gap:5px; padding:9px 9px 10px; }
   .tg-feed > *{ flex:0 0 auto; }
   .tg-msg{ padding:5px 8px 5px 9px; border-radius:12px; }
   .tg-file i{ width:26px; height:26px; } .tg-file i::after{ left:8px; top:7px; width:10px; height:12px; }
@@ -1579,15 +1578,10 @@
                 </div>
                 <p>Когда готового решения нет или оно не подходит — разрабатываю CRM и внутренние системы под конкретные процессы найма и кадрового учёта. А рутину передаю Telegram-ботам: скрининг кандидатов, онбординг новых сотрудников, ответы на частые кадровые вопросы.</p>
               </div>
-              <div class="tg" aria-label="Пример: HR-бот в Telegram отвечает сотруднику" role="img">
-                <div class="tg-top"><span class="tg-av">HR</span><div><b>HR-бот компании</b><small>бот</small></div></div>
+              <div class="tg" aria-label="Пример: HR-бот в Telegram присылает сотруднику шаблон заявления на отпуск" role="img">
                 <div class="tg-feed" aria-hidden="true">
                   <div class="tg-msg out" style="--d:0"><span>Где взять шаблон заявления на отпуск?</span><time>18:47</time></div>
                   <div class="tg-msg in" style="--d:1"><span>Вот он 👇</span><div class="tg-file"><i></i><span>Заявление на отпуск.docx<small>24 КБ</small></span></div><time>18:47</time></div>
-                  <div class="tg-msg out" style="--d:2"><span>А сколько дней у меня осталось?</span><time>18:48</time></div>
-                  <div class="tg-typing" style="--d:3"><i></i><i></i><i></i></div>
-                  <div class="tg-msg in" style="--d:4"><span>14 дней. Отправить заявление руководителю на согласование?</span><time>18:48</time></div>
-                  <div class="tg-btns" style="--d:4"><span>Да, отправить</span><span>Позже</span></div>
                 </div>
               </div>
             </div>
