@@ -152,7 +152,7 @@
     font-size:var(--fs-display); font-weight:var(--fw-bold); line-height:1; letter-spacing:-0.025em; }
   .hero p{ margin-top:10px; font-size:var(--fs-lead); color:var(--ink-soft); font-weight:var(--fw-medium); }
   .hero h1 .h1-m{ display:none; }
-  @media (max-width:620px){ .hero h1 .h1-full, .hero .hero-lead{ display:none; } .hero h1 .h1-m{ display:inline; } #top h1{ text-wrap:balance; font-size:28px; } }
+  @media (max-width:620px){ .hero h1 .h1-full, .hero .hero-lead{ display:none; } .hero h1 .h1-m{ display:inline; } #top h1{ text-wrap:balance; font-size:min(28px, calc((100vw - 90px) * .08)); line-height:1.12; } #top h1 .h1-l{ display:block; white-space:nowrap; } }
   .hero-cta{
     display:inline-block; margin-top:16px; text-decoration:none;
     background:var(--accent); color:#fff; font-size:var(--fs-btn); font-weight:var(--fw-medium);
@@ -1258,7 +1258,7 @@
           <div class="hero hero-face anim-in" id="top">
             <div class="hero-txt">
               <div class="eyebrow">Игнатий Филатов · HRBP-консультант</div>
-              <h1><span class="h1-full">Ваш бизнес теряет деньги прямо сейчас</span><span class="h1-m">Вы 100% теряете деньги, я 100%&nbsp;их верну</span></h1>
+              <h1><span class="h1-full">Ваш бизнес теряет деньги прямо сейчас</span><span class="h1-m"><span class="h1-l">Вы 100% теряете деньги</span> <span class="h1-l">я 100% их верну</span></span></h1>
               <p class="hero-lead">Нахожу, где HR съедает деньги — и выстраиваю процессы, которые это останавливают</p>
               <a class="hero-cta" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит →</a>
             </div>
