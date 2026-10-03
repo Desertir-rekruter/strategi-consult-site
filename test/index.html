@@ -2893,8 +2893,10 @@ function unitCalcUpdate(){
     var prev = document.querySelector('.pg-prev'), next = document.querySelector('.pg-next');
     var t;
     function cur(){ return Math.max(0, Math.min(pages.length - 1, Math.round(pager.scrollLeft / pager.clientWidth))); }
+    var shown = -1;
     function fit(){
       var i = cur();
+      shown = i;
       pager.style.height = pages[i].offsetHeight + 'px';
       dots.forEach(function(d, k){ d.classList.toggle('on', k === i); d.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
       arrows[0].disabled = i === 0; arrows[1].disabled = i === pages.length - 1;
@@ -2960,6 +2962,13 @@ function unitCalcUpdate(){
       go(cur() + (e.key === 'ArrowRight' ? 1 : -1));
     });
     if(window.ResizeObserver) pages.forEach(function(p){ new ResizeObserver(fit).observe(p); });
+    // safety net: if the browser moved the pages on its own (snap, history restore), re-sync height and dots
+    pager.addEventListener('scrollend', function(){ if(!animating) fit(); });
+    setInterval(function(){
+      if(animating || document.hidden) return;
+      var i = cur();
+      if(i !== shown || Math.abs(parseFloat(pager.style.height) - pages[i].offsetHeight) > 2) fit();
+    }, 400);
     window.addEventListener('resize', function(){ setVw(); pager.scrollLeft = cur() * pager.clientWidth; fit(); });
     fit();
   })();
