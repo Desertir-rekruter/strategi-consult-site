@@ -1068,9 +1068,13 @@
   @media (max-width:1499px){ .content{ padding-top:56px; } }
   @media (max-width:620px){ .theme-toggle{ top:10px; right:10px; } .content{ padding-top:50px; } }
 
-  /* theme switch: circular reveal from the switch (View Transitions); snapshots, so nothing animates on its own meanwhile */
-  ::view-transition-old(root), ::view-transition-new(root){ animation:none; mix-blend-mode:normal; }
-  ::view-transition-new(root){ z-index:2; }
+  /* theme switch (View Transitions): snapshots of old and new theme; nothing animates on its own meanwhile */
+  /* «dip»: the old theme fades out over a dark ground, the new one develops in a beat later (opacity only — no filters, no scaling) */
+  html.theme-vt::view-transition{ background:#0b0b0d; }
+  html.theme-vt::view-transition-old(root){ animation:themeDipOut .62s cubic-bezier(.4,0,.2,1) both; mix-blend-mode:normal; }
+  html.theme-vt::view-transition-new(root){ animation:themeDipIn .62s cubic-bezier(.4,0,.2,1) both; mix-blend-mode:normal; }
+  @keyframes themeDipOut{ 0%{ opacity:1; } 60%{ opacity:0; } 100%{ opacity:0; } }
+  @keyframes themeDipIn{ 0%{ opacity:0; } 30%{ opacity:0; } 100%{ opacity:1; } }
   html.theme-vt *, html.theme-vt *::before, html.theme-vt *::after{ transition:none !important; }
 
   /* smooth colour change while switching (class added for ~0.6s by JS) */
@@ -2851,19 +2855,10 @@ function unitCalcUpdate(){
     }
     var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(reduce){ apply(); return; }
-    // the new theme spreads in a circle from the switch, the whole page at once
+    // the page dims, the new theme develops in (CSS keyframes on the view-transition snapshots)
     if(document.startViewTransition){
-      var b = document.getElementById('themeToggle').getBoundingClientRect();
-      var x = b.left + b.width / 2, y = b.top + b.height / 2;
-      var r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
       root.classList.add('theme-vt');
       var vt = document.startViewTransition(apply);
-      vt.ready.then(function(){
-        root.animate(
-          { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + r + 'px at ' + x + 'px ' + y + 'px)'] },
-          { duration: 750, easing: 'cubic-bezier(.65,0,.35,1)', pseudoElement: '::view-transition-new(root)' }
-        );
-      }).catch(function(){});
       vt.finished.finally(function(){ root.classList.remove('theme-vt'); });
       return;
     }
