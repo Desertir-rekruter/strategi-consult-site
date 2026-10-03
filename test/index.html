@@ -1177,6 +1177,10 @@
   }
   @media (prefers-reduced-motion: reduce){ .lc-live i{ animation:none; } }
 
+  /* «HRBP по подписке»: photo instead of the paragraph, standing on the bottom edge */
+  #hrbpCard{ display:flex; flex-direction:column; overflow:hidden; padding-bottom:0; }
+  .hrbp-person{ display:block; margin:10px auto 0; height:170px; width:auto; filter:drop-shadow(0 10px 22px rgba(0,0,0,.35)); pointer-events:none; }
+  @media (min-width:981px){ #hrbpCard, #customCard{ align-self:stretch; } .hrbp-person{ margin-top:auto; } }
   .hello-band{ max-width:980px; margin:26px auto 6px; display:flex; align-items:flex-end; gap:26px; padding:0 34px 0 16px;
     background:var(--glass); backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px); border:1px solid var(--glass-border); border-radius:34px; overflow:hidden; }
   .hello-person{ width:230px; height:auto; flex:0 0 auto; margin-top:18px; display:block; filter:drop-shadow(0 10px 24px rgba(20,30,60,.2)); }
@@ -1459,7 +1463,7 @@
                   <div class="sub">HR-директор на part-time, без найма в штат</div>
                 </div>
               </div>
-              <p>Веду HR-функцию удалённо на регулярной основе — от найма до стратегии, в формате часов в месяц. Для компаний, которым рано брать штатного HRBP, но HR уже нужен системно.</p>
+              <img class="hrbp-person" src="/test/assets/people/3807.webp" alt="" width="479" height="700" loading="lazy">
             </div>
 
             <!-- NEW SERVICE: CUSTOM SYSTEMS + BOTS -->
