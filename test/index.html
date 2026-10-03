@@ -7,7 +7,7 @@
   /* theme: apply the saved choice before first paint (no flash) */
   (function(){ try{ var t=localStorage.getItem('sc-theme'); if(t==='dark'||t==='light') document.documentElement.setAttribute('data-theme',t); }catch(e){} })();
 </script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preload" as="image" href="/test/assets/automation-backdrop-m.avif" type="image/avif" media="(max-width:620px) and (max-aspect-ratio:3/5)" fetchpriority="high">
 <link rel="preload" as="image" href="/test/assets/automation-backdrop.avif" type="image/avif" media="not all and (max-width:620px) and (max-aspect-ratio:3/5)" fetchpriority="high">
 <meta name="format-detection" content="telephone=no">
@@ -105,11 +105,10 @@
 
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{ height:100%; }
-  /* mobile only: iOS Safari paints the strips under the status bar / bottom bar with the page colour, not the fixed photo — tint them like the photo instead of white */
-  @media (max-width:620px){ html{ background-color:#a89b8a; } html[data-theme="dark"]{ background-color:#58514a; } }
-  /* mobile only: viewport-fit=cover lets the fixed photo run under the iOS status bar and bottom bar (no beige strips);
-     content and windows are pushed down by the status-bar height instead */
-  @media (max-width:620px){ .backdrop, .funnel-overlay-bg{ height:calc(100lvh + env(safe-area-inset-top) + env(safe-area-inset-bottom)) !important; } .funnel-overlay-scroll{ padding-top:calc(48px + env(safe-area-inset-top)) !important; } }
+  /* mobile only: iOS Safari tints the status-bar strip from a fixed element with a background colour at the top edge;
+     this 1px strip (behind the photo) makes the top strip photo-coloured instead of white, the bottom bar keeps its original look */
+  .ios-top-tint{ display:none; }
+  @media (max-width:620px){ .ios-top-tint{ display:block; position:fixed; top:0; left:0; right:0; height:1px; z-index:-2; background-color:#a89b8a; pointer-events:none; } html[data-theme="dark"] .ios-top-tint{ background-color:#58514a; } }
   body{
     font-family:var(--font);
     color:var(--ink);
@@ -1082,7 +1081,7 @@
   html[data-theme="dark"] .theme-toggle .tt-moon{ color:#fff; opacity:1; }
   /* keep the first row clear of the fixed toggle where the side margins are narrow */
   @media (max-width:1499px){ .content{ padding-top:56px; } }
-  @media (max-width:620px){ .theme-toggle{ top:calc(10px + env(safe-area-inset-top)); right:10px; } .content{ padding-top:calc(50px + env(safe-area-inset-top)); } }
+  @media (max-width:620px){ .theme-toggle{ top:10px; right:10px; } .content{ padding-top:50px; } }
 
   /* theme switch (View Transitions): snapshots of old and new theme; nothing animates on its own meanwhile */
   /* «dip»: the old theme fades out over a dark ground, the new one develops in a beat later (opacity only — no filters, no scaling) */
@@ -1321,6 +1320,7 @@
 </style>
 </head>
 <body>
+<div class="ios-top-tint" aria-hidden="true"></div>
 
 <div class="backdrop"></div>
 <button type="button" class="theme-toggle" id="themeToggle" aria-label="Тёмная тема" aria-pressed="false" onclick="toggleTheme()">
