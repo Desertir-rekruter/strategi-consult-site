@@ -1258,7 +1258,9 @@
   .tg-top{ padding:6px 11px; flex:0 0 auto; }
   .tg-top b{ font-size:12.5px; } .tg-top small{ font-size:10.5px; }
   .tg-av{ width:24px; height:24px; font-size:10px; }
-  .tg-feed{ gap:5px; padding:9px 9px 10px; }
+  .tg-feed{ gap:5px; padding:9px 9px 10px; flex:1 1 auto; justify-content:flex-end; }
+  /* the chat window fills the card's full height, messages sit at the bottom */
+  @media (min-width:981px){ .custom-split{ align-items:stretch; } .custom-split .tg{ align-self:stretch; } }
   .tg-feed > *{ flex:0 0 auto; }
   .tg-msg{ padding:5px 8px 5px 9px; border-radius:12px; }
   .tg-file i{ width:26px; height:26px; } .tg-file i::after{ left:8px; top:7px; width:10px; height:12px; }
