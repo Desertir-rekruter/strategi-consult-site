@@ -966,6 +966,8 @@
     @supports (animation-timeline: scroll()){
       .bg-clip .backdrop{ animation:bgStay linear both; animation-timeline:scroll(root block); animation-range:0px 100000px; }
     }
+    /* set by JS when the scroll-driven animation is caught lagging (seen on a real iPhone): JS moves the photo instead */
+    .bg-clip .backdrop.bg-js{ animation:none !important; }
   }
   @keyframes bgStay{ from{ transform:translateY(0); } to{ transform:translateY(100000px); } }
 
@@ -3328,12 +3330,23 @@ function unitCalcUpdate(){
   })();
 </script>
 <script>
-/* phones on browsers without scroll-driven animations (iOS < 26): keep the scrolling photo layer in place from JS */
+/* phones: keep the scrolling photo layer in place. Normally a scroll-driven animation does it; on browsers without it
+   (iOS < 26), or if the animation is caught lagging behind the scroll (seen on a real iPhone: the photo froze and
+   scrolled away with the page), JS takes over and moves the photo itself. */
 (function(){
-  if(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()')) return;
   var bg = document.querySelector('.bg-clip .backdrop'), mq = window.matchMedia('(max-width:620px)'), raf = 0;
-  function put(){ raf = 0; bg.style.transform = mq.matches ? 'translateY(' + window.scrollY + 'px)' : ''; }
+  var js = !(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()'));
+  function put(){ raf = 0; if(js) bg.style.transform = mq.matches ? 'translateY(' + window.scrollY + 'px)' : ''; }
+  function check(){
+    if(js || !mq.matches) return;
+    var top = bg.getBoundingClientRect().top, clip = bg.parentNode.getBoundingClientRect().top;
+    var max = document.documentElement.scrollHeight - innerHeight, y = Math.min(Math.max(window.scrollY, 0), max);
+    // the photo is shifted inside .bg-clip by exactly the scroll (ignoring iOS rubber-band overscroll)
+    if(Math.abs(top - clip - y) > 2){ js = true; bg.classList.add('bg-js'); put(); }
+  }
   window.addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(put); }, {passive:true});
+  window.addEventListener('scrollend', check, {passive:true});
+  setInterval(check, 500);
   mq.addEventListener('change', put); put();
 })();
 </script>
