@@ -1352,8 +1352,11 @@
     .about-sq .sq-big small, .audit-num span, .week-num span{ font-size:15px !important; letter-spacing:0; }
     .hc-val small{ font-size:10.5px; letter-spacing:0; }
     /* 04.10: headline figures of the homepage tiles bigger (calculator, charts and windows stay 24px: long prices would not fit) */
-    .content :is(.about-sq .sq-big, .audit-num, .week-num){ font-size:40px; font-weight:var(--fw-semibold, 600); letter-spacing:-0.03em; line-height:1; }
-    .about-sq .sq-big small, .audit-num span, .week-num span{ font-size:18px !important; }
+    .content :is(.about-sq .sq-big, .audit-num, .week-num){ font-size:34px; font-weight:var(--fw-semibold, 600); letter-spacing:-0.03em; line-height:1; }
+    .about-sq .sq-big small, .audit-num span, .week-num span{ font-size:15px !important; }
+    /* calculator result on the see-through dark tile was lost over light parts of the photo: lighter blue + soft shadow */
+    .content .calc-output-val:not(.unit-outs *){ color:#a8c4ff !important; text-shadow:0 1px 2px rgba(0,0,0,0.45), 0 0 14px rgba(0,0,0,0.35); }
+    .content .calc-output-lbl:not(.unit-outs *){ color:#fff; text-shadow:0 1px 2px rgba(0,0,0,0.45); }
 
     .card.dark .sub, .card.dark2 .sub{ color:rgba(255,255,255,0.82); }
     .calc-output-lbl{ color:rgba(255,255,255,0.75); }
