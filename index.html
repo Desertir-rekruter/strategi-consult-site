@@ -1096,6 +1096,7 @@
 
   /* theme switch (View Transitions): snapshots of old and new theme; nothing animates on its own meanwhile */
   /* «dip»: the old theme fades out over a dark ground, the new one develops in a beat later (opacity only — no filters, no scaling) */
+  #themeDip{ display:none; position:fixed; inset:-200px 0; z-index:2147483000; background:#0b0b0d; opacity:0; pointer-events:none; }
   html.theme-vt::view-transition{ background:#0b0b0d; }
   html.theme-vt::view-transition-old(root){ animation:themeDipOut .62s cubic-bezier(.4,0,.2,1) both; mix-blend-mode:normal; }
   html.theme-vt::view-transition-new(root){ animation:themeDipIn .62s cubic-bezier(.4,0,.2,1) both; mix-blend-mode:normal; }
@@ -1336,9 +1337,38 @@
     .hello-btns{ justify-content:center; }
     .face-h .face-av{ width:40px; height:40px; }
   }
+
+  /* ---------- 04.10 mobile only: one style for every figure, readable small captions, white footer, schedule without photo ---------- */
+  @media (max-width:620px){
+    .about-sq .sq-big, .week-num, .audit-num, .kbr-leg b, .kd-cap b, .calc-output-val, .unit-outs .calc-output-val, .hc-val,
+    .audit-n, .speed-cmp-row em, .kb-stat .kval, .kbr-ov .kbr-leg b, .w-big, .ret-cost .rc-q b, .stat .n,
+    .audit-hero-num, .leak-num, .week-bar-val, .donut span{
+      font-size:24px; font-weight:var(--fw-medium); color:var(--accent); letter-spacing:-0.02em; line-height:1.1;
+    }
+    .card.dark :is(.calc-output-val, .hc-val), .card.dark2 :is(.calc-output-val, .hc-val),
+    .funnel-page :is(.audit-n, .speed-cmp-row em, .kb-stat .kval, .kbr-leg b, .w-big, .rc-q b, .stat .n, .audit-hero-num, .leak-num, .week-bar-val, .donut span, .calc-output-val),
+    html[data-theme="dark"] .content :is(.sq-big, .week-num, .audit-num, .kbr-leg b, .kd-cap b){ color:var(--accent-light); }
+    .about-sq .sq-big small, .audit-num span, .week-num span{ font-size:15px !important; letter-spacing:0; }
+    .hc-val small{ font-size:10.5px; letter-spacing:0; }
+
+    .card.dark .sub, .card.dark2 .sub{ color:rgba(255,255,255,0.82); }
+    .calc-output-lbl{ color:rgba(255,255,255,0.75); }
+    .hc-lbl{ color:rgba(255,255,255,0.85); }
+    .hc-val small{ color:rgba(255,255,255,0.8); }
+    .hc-axis{ color:rgba(255,255,255,0.75); }
+    #processCard.is-live .cal-tz, .lc-times span{ opacity:1; }
+    .funnel-page-head .eyebrow, .funnel-cta span{ color:rgba(255,255,255,0.8); }
+
+    body > footer{ color:#fff !important; border-top-color:rgba(255,255,255,0.35) !important; text-shadow:0 1px 3px rgba(0,0,0,0.35); }
+    body > footer span{ opacity:.85 !important; }
+
+    #processCard{ padding-right:18px; }
+    .proc-person{ display:none; }
+  }
 </style>
 </head>
 <body>
+<div id="themeDip" aria-hidden="true"></div>
 <div class="bg-clip"><div class="backdrop"></div></div>
 <button type="button" class="theme-toggle" id="themeToggle" aria-label="Тёмная тема" aria-pressed="false" onclick="toggleTheme()">
   <span class="tt-knob" aria-hidden="true"></span>
@@ -2610,6 +2640,7 @@
      overlay page (already filled with text) turns in from -90deg and grows to
      full size. Close plays the same motion backwards. */
   var cardFlip = {};
+  var ovBack = {};   // overlayId -> the window it was opened from
   // images inside overlays aren't visible on load: fetch them once the page is idle
   function loadDeferredImages(){
     document.querySelectorAll('[data-srcset]').forEach(function(el){ el.srcset = el.dataset.srcset; el.removeAttribute('data-srcset'); });
@@ -2720,6 +2751,16 @@
       document.body.classList.remove('funnel-lock');
       document.body.style.paddingRight = '';
       delete cardFlip[overlayId];
+      // opened from another window: closing goes back there, not to the home screen
+      var back = ovBack[overlayId];
+      if(back){
+        delete ovBack[overlayId];
+        document.getElementById(back.card).scrollIntoView({block:'center'});
+        setTimeout(function(){
+          openCardOverlay(back.card, back.overlay);
+          document.getElementById(back.overlay + 'Scroll').scrollTop = back.top || 0;
+        }, 60);
+      }
     }
     Promise.all(st.anims.map(function(a){ return a.finished; })).then(finish, finish);
     setTimeout(finish, longest/1.3 + 250);
@@ -2797,6 +2838,7 @@
   // close the solver, then open the chosen service's window from its own card
   function svOpen(k){
     var t = svServices[k].open;
+    ovBack[t[1]] = { card:'solverCard', overlay:'solverOverlay', top:document.getElementById('solverOverlayScroll').scrollTop };
     closeCardOverlay('solverCard', 'solverOverlay');
     setTimeout(function(){
       var card = document.getElementById(t[0]);
@@ -2955,11 +2997,26 @@ function unitCalcUpdate(){
     }
     var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(reduce){ apply(); return; }
-    // the page dims, the new theme develops in (CSS keyframes on the view-transition snapshots)
-    if(document.startViewTransition){
+    // the page dims, the new theme develops in. A real dark layer over the live page instead of
+    // view-transition snapshots: Safari paints those snapshots without backdrop-filter, so the
+    // glass tiles flashed see-through for a moment
+    var dip = document.getElementById('themeDip');
+    if(dip && dip.animate){
+      if(toggleTheme._busy) return;
+      toggleTheme._busy = true;
       root.classList.add('theme-vt');
-      var vt = document.startViewTransition(apply);
-      vt.finished.finally(function(){ root.classList.remove('theme-vt'); });
+      dip.style.display = 'block';
+      dip.animate([{opacity:0},{opacity:1}], {duration:300, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'}).finished.then(function(){
+        apply();
+        requestAnimationFrame(function(){ requestAnimationFrame(function(){
+          dip.animate([{opacity:1},{opacity:0}], {duration:360, easing:'cubic-bezier(.4,0,.2,1)', fill:'forwards'}).finished.then(function(){
+            dip.style.display = 'none';
+            dip.getAnimations().forEach(function(a){ a.cancel(); });
+            root.classList.remove('theme-vt');
+            toggleTheme._busy = false;
+          });
+        }); });
+      });
       return;
     }
     // older browsers: soft cross-fade of colours
