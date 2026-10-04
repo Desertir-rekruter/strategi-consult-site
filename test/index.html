@@ -1351,6 +1351,9 @@
     html[data-theme="dark"] .content :is(.sq-big, .week-num, .audit-num, .kbr-leg b, .kd-cap b){ color:var(--accent-light); }
     .about-sq .sq-big small, .audit-num span, .week-num span{ font-size:15px !important; letter-spacing:0; }
     .hc-val small{ font-size:10.5px; letter-spacing:0; }
+    /* 04.10: headline figures of the homepage tiles bigger (calculator, charts and windows stay 24px: long prices would not fit) */
+    .content :is(.about-sq .sq-big, .audit-num, .week-num){ font-size:40px; font-weight:var(--fw-semibold, 600); letter-spacing:-0.03em; line-height:1; }
+    .about-sq .sq-big small, .audit-num span, .week-num span{ font-size:18px !important; }
 
     .card.dark .sub, .card.dark2 .sub{ color:rgba(255,255,255,0.82); }
     .calc-output-lbl{ color:rgba(255,255,255,0.75); }
