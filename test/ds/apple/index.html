@@ -3291,24 +3291,24 @@ function unitCalcUpdate(){
 /* ===== design-system skin: Apple (awesome-design-md · apple) ===== */
 :root, html .content, html body > footer { 
   --ink:#1d1d1f; --ink-soft:#333333; --ink-mute:#7a7a7a;
-  --glass:#ffffff; --glass-strong:#f5f5f7; --glass-border:#e0e0e0;
-  --dark:#272729; --dark-soft:#2a2a2c; --line:#e0e0e0;
+  --glass:rgba(255,255,255,.72); --glass-strong:#f5f5f7; --glass-border:#e0e0e0;
+  --dark:rgba(29,29,31,.72); --dark-soft:rgba(42,42,44,.7); --line:#e0e0e0;
   --accent:#0066cc; --accent-light:#2997ff; --accent-soft:#e8f0fb; --accent-soft-dark:#e8f0fb;
   --radius-lg:18px; --radius-md:11px; --radius-sm:8px;
   --font:-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif; --ds-head:-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif; color:var(--ink); }
-html, body{ background:#f5f5f7; background-attachment:scroll; }
-body{ min-height:100vh; }
-.backdrop, .bg-clip{ display:none !important; }
-*{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
-.card, .hero, html .card{ background:var(--glass); border:1px solid var(--glass-border); box-shadow:none; }
+html{ background:#272729; }
+.backdrop{ filter:none; }
+.backdrop::after, html[data-theme="dark"] .backdrop::after{ background:transparent !important; }
+.card, .hero, html .card{ background:var(--glass); border:1px solid var(--glass-border); box-shadow:none; -webkit-backdrop-filter:blur(20px) saturate(1.8); backdrop-filter:blur(20px) saturate(1.8); }
 .hero{ border-radius:calc(var(--radius-lg) + 4px); }
 .card.dark, html .card.dark{ background:var(--dark); border-color:transparent; color:#f5f5f7; }
-.card.dark2{ background:var(--dark-soft); }
+.card.dark2{ background:var(--dark-soft); -webkit-backdrop-filter:blur(20px) saturate(1.8); backdrop-filter:blur(20px) saturate(1.8); }
+.card.dark, html .card.dark{ -webkit-backdrop-filter:blur(20px) saturate(1.8); backdrop-filter:blur(20px) saturate(1.8); }
 .hero h1, .funnel-page-head h2, .hello-txt h2, .card h3, h2, h3{ font-family:var(--ds-head); }
 .hero h1, .funnel-page-head h2, .hello-txt h2{ font-weight:600; letter-spacing:-0.02em; }
 .hero-cta, .calc-cta, .hello-btn, .mkt-go, .sv-tile-go, .funnel-cta a{ border-radius:9999px; background:var(--accent); }
-.funnel-overlay-bg{ background:#000000 !important; }
-.funnel-overlay-bg::after{ background:transparent !important; }
+.funnel-overlay-bg{ filter:none; }
+.funnel-overlay-bg::after, html[data-theme="dark"] .funnel-overlay-bg::after{ background:#000000 !important; opacity:.78; }
 .funnel-page, html[data-theme="dark"] .funnel-page{ background:#1d1d1f; border-color:rgba(255,255,255,.08); border-radius:calc(var(--radius-lg) + 4px); }
 .theme-toggle, #themeToggle{ display:none !important; }
 html .funnel-wrap, html .audit-teaser{ background:var(--glass-strong); border:1px solid var(--glass-border); }

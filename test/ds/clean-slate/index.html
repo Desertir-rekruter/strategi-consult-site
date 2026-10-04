@@ -3291,24 +3291,24 @@ function unitCalcUpdate(){
 /* ===== design-system skin: Clean Slate (tweakcn · Clean Slate) ===== */
 :root, html .content, html body > footer { 
   --ink:#1e293b; --ink-soft:#374151; --ink-mute:#6b7280;
-  --glass:#ffffff; --glass-strong:#f3f4f6; --glass-border:#d1d5db;
-  --dark:#1e293b; --dark-soft:#312e81; --line:#d1d5db;
+  --glass:rgba(255,255,255,.96); --glass-strong:#f3f4f6; --glass-border:#d1d5db;
+  --dark:rgba(30,41,59,.95); --dark-soft:rgba(49,46,129,.95); --line:#d1d5db;
   --accent:#6366f1; --accent-light:#818cf8; --accent-soft:#e0e7ff; --accent-soft-dark:#e0e7ff;
   --radius-lg:12px; --radius-md:8px; --radius-sm:6px;
   --font:"Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif; --ds-head:"Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif; color:var(--ink); }
-html, body{ background:#f8fafc; background-attachment:scroll; }
-body{ min-height:100vh; }
-.backdrop, .bg-clip{ display:none !important; }
-*{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
-.card, .hero, html .card{ background:var(--glass); border:1px solid var(--glass-border); box-shadow:0 4px 8px -1px rgba(0,0,0,.1); }
+html{ background:#1e293b; }
+.backdrop{ filter:blur(7px); }
+.backdrop::after, html[data-theme="dark"] .backdrop::after{ background:rgba(248,250,252,.25) !important; }
+.card, .hero, html .card{ background:var(--glass); border:1px solid var(--glass-border); box-shadow:0 4px 8px -1px rgba(0,0,0,.1); -webkit-backdrop-filter:none; backdrop-filter:none; }
 .hero{ border-radius:calc(var(--radius-lg) + 4px); }
 .card.dark, html .card.dark{ background:var(--dark); border-color:transparent; color:#f5f5f7; }
-.card.dark2{ background:var(--dark-soft); }
+.card.dark2{ background:var(--dark-soft); -webkit-backdrop-filter:none; backdrop-filter:none; }
+.card.dark, html .card.dark{ -webkit-backdrop-filter:none; backdrop-filter:none; }
 .hero h1, .funnel-page-head h2, .hello-txt h2, .card h3, h2, h3{ font-family:var(--ds-head); }
 .hero h1, .funnel-page-head h2, .hello-txt h2{ font-weight:700; letter-spacing:-0.02em; }
 .hero-cta, .calc-cta, .hello-btn, .mkt-go, .sv-tile-go, .funnel-cta a{ border-radius:8px; background:var(--accent); }
-.funnel-overlay-bg{ background:#0f172a !important; }
-.funnel-overlay-bg::after{ background:transparent !important; }
+.funnel-overlay-bg{ filter:blur(7px); }
+.funnel-overlay-bg::after, html[data-theme="dark"] .funnel-overlay-bg::after{ background:#0f172a !important; opacity:.78; }
 .funnel-page, html[data-theme="dark"] .funnel-page{ background:#1e293b; border-color:rgba(255,255,255,.08); border-radius:calc(var(--radius-lg) + 4px); }
 .theme-toggle, #themeToggle{ display:none !important; }
 html .funnel-wrap, html .audit-teaser{ background:var(--glass-strong); border:1px solid var(--glass-border); }

@@ -3291,24 +3291,24 @@ function unitCalcUpdate(){
 /* ===== design-system skin: Claude (awesome-design-md · claude) ===== */
 :root, html .content, html body > footer { 
   --ink:#141413; --ink-soft:#3d3d3a; --ink-mute:#6c6a64;
-  --glass:#efe9de; --glass-strong:#f5f0e8; --glass-border:#e6dfd8;
-  --dark:#181715; --dark-soft:#252320; --line:#e6dfd8;
+  --glass:rgba(239,233,222,.88); --glass-strong:#f5f0e8; --glass-border:#e6dfd8;
+  --dark:rgba(24,23,21,.88); --dark-soft:rgba(37,35,32,.88); --line:#e6dfd8;
   --accent:#cc785c; --accent-light:#e8a55a; --accent-soft:#f5e6dd; --accent-soft-dark:#f5e6dd;
   --radius-lg:16px; --radius-md:12px; --radius-sm:8px;
   --font:"Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif; --ds-head:"Source Serif 4", Georgia, serif; color:var(--ink); }
-html, body{ background:#faf9f5; background-attachment:scroll; }
-body{ min-height:100vh; }
-.backdrop, .bg-clip{ display:none !important; }
-*{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
-.card, .hero, html .card{ background:var(--glass); border:1px solid var(--glass-border); box-shadow:none; }
+html{ background:#181715; }
+.backdrop{ filter:sepia(.45) saturate(.9); }
+.backdrop::after, html[data-theme="dark"] .backdrop::after{ background:rgba(204,120,92,.12) !important; }
+.card, .hero, html .card{ background:var(--glass); border:1px solid var(--glass-border); box-shadow:none; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
 .hero{ border-radius:calc(var(--radius-lg) + 4px); }
 .card.dark, html .card.dark{ background:var(--dark); border-color:transparent; color:#f5f5f7; }
-.card.dark2{ background:var(--dark-soft); }
+.card.dark2{ background:var(--dark-soft); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+.card.dark, html .card.dark{ -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
 .hero h1, .funnel-page-head h2, .hello-txt h2, .card h3, h2, h3{ font-family:var(--ds-head); }
 .hero h1, .funnel-page-head h2, .hello-txt h2{ font-weight:500; letter-spacing:-0.01em; }
 .hero-cta, .calc-cta, .hello-btn, .mkt-go, .sv-tile-go, .funnel-cta a{ border-radius:8px; background:var(--accent); }
-.funnel-overlay-bg{ background:#141413 !important; }
-.funnel-overlay-bg::after{ background:transparent !important; }
+.funnel-overlay-bg{ filter:sepia(.45) saturate(.9); }
+.funnel-overlay-bg::after, html[data-theme="dark"] .funnel-overlay-bg::after{ background:#141413 !important; opacity:.78; }
 .funnel-page, html[data-theme="dark"] .funnel-page{ background:#252320; border-color:rgba(255,255,255,.08); border-radius:calc(var(--radius-lg) + 4px); }
 .theme-toggle, #themeToggle{ display:none !important; }
 html .funnel-wrap, html .audit-teaser{ background:var(--glass-strong); border:1px solid var(--glass-border); }
