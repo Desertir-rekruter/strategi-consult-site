@@ -1370,7 +1370,8 @@
     /* 05.10: figures in windows (case bars etc.) — the site's button blue #195FE8 (user: light blue is not «the site blue») */
     .funnel-page :is(.audit-n, .speed-cmp-row em, .kb-stat .kval, .kbr-leg b, .w-big, .rc-q b, .stat .n, .audit-hero-num, .leak-num, .week-bar-val, .donut span){ color:var(--accent) !important; font-weight:var(--fw-semibold, 600); }
     .speed-cmp-row{ color:rgba(255,255,255,0.92); }
-    .speed-cmp-row.after i{ background:var(--accent); }
+    .speed-cmp-row i, .speed-cmp-row.after i{ background:var(--accent); }
+    .funnel-page .speed-cmp-row em{ font-size:21.5px; }
     /* 05.10 smoother scroll: looping animations pause while their tile is off screen (hero tile has blur under it) */
     .anim-off, .anim-off *, .anim-off *::after{ animation-play-state:paused !important; }
     .calc-output-lbl{ color:rgba(255,255,255,0.75); }
