@@ -1359,8 +1359,9 @@
     .content .calc-output-lbl:not(.unit-outs *){ color:#fff; text-shadow:0 1px 2px rgba(0,0,0,0.45); }
 
     .card.dark .sub, .card.dark2 .sub{ color:rgba(255,255,255,0.82); }
-    /* 05.10: hero figures in blue (like «30%» on the onboarding page) */
-    #top h1 .h1-m em{ font-style:normal; color:var(--accent-light); }
+    /* 05.10: hero figures in blue exactly like «30%» on the onboarding page: button blue on light, light blue on dark */
+    #top h1 .h1-m em{ font-style:normal; color:var(--accent); }
+    html[data-theme="dark"] #top h1 .h1-m em{ color:var(--accent-light); }
     /* 05.10: grey subtitles on dark tiles (#b8b8ba, partly inline) and dim captions → near white */
     .card .sub[style*="#b8b8ba"], .card.dark .sub, .card.dark2 .sub, .stat .l{ color:rgba(255,255,255,0.9) !important; }
     .ktext[style*="0.55"]{ color:rgba(255,255,255,0.8) !important; }
