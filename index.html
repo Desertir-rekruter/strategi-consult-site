@@ -1352,8 +1352,29 @@
     html[data-theme="dark"] .content :is(.sq-big, .week-num, .audit-num, .kbr-leg b, .kd-cap b){ color:var(--accent-light); }
     .about-sq .sq-big small, .audit-num span, .week-num span{ font-size:15px !important; letter-spacing:0; }
     .hc-val small{ font-size:10.5px; letter-spacing:0; }
+    /* 04.10: headline figures of the homepage tiles bigger (calculator, charts and windows stay 24px: long prices would not fit) */
+    .content :is(.about-sq .sq-big, .audit-num, .week-num){ font-size:34px; font-weight:var(--fw-semibold, 600); letter-spacing:-0.03em; line-height:1; }
+    .about-sq .sq-big small, .audit-num span, .week-num span{ font-size:15px !important; }
+    /* calculator result on the see-through dark tile was lost over light parts of the photo: lighter blue + soft shadow */
+    .content .calc-output-val:not(.unit-outs *){ color:#a8c4ff !important; text-shadow:0 1px 2px rgba(0,0,0,0.45), 0 0 14px rgba(0,0,0,0.35); }
+    .content .calc-output-lbl:not(.unit-outs *){ color:#fff; text-shadow:0 1px 2px rgba(0,0,0,0.45); }
 
     .card.dark .sub, .card.dark2 .sub{ color:rgba(255,255,255,0.82); }
+    /* 05.10: hero figures in blue exactly like «30%» on the onboarding page: button blue on light, light blue on dark */
+    #top h1 .h1-m em{ font-style:normal; color:var(--accent); }
+    html[data-theme="dark"] #top h1 .h1-m em{ color:var(--accent-light); }
+    /* 05.10: grey subtitles on dark tiles (#b8b8ba, partly inline) and dim captions → near white */
+    .card .sub[style*="#b8b8ba"], .card.dark .sub, .card.dark2 .sub, .stat .l{ color:rgba(255,255,255,0.9) !important; }
+    .ktext[style*="0.55"]{ color:rgba(255,255,255,0.8) !important; }
+    /* 05.10: step numbers in windows = button style (blue pill, white figures) */
+    .fstep .fnum{ display:inline-block; padding:2px 8px; border-radius:999px; background:var(--accent); color:#fff; font-weight:var(--fw-semibold, 600); }
+    /* 05.10: figures in windows (case bars etc.) — light blue #6293FF (button blue next to blue bars looked harsh) */
+    .funnel-page :is(.audit-n, .speed-cmp-row em, .kb-stat .kval, .kbr-leg b, .w-big, .rc-q b, .stat .n, .audit-hero-num, .leak-num, .week-bar-val, .donut span){ color:var(--accent-light) !important; font-weight:var(--fw-semibold, 600); }
+    .speed-cmp-row{ color:rgba(255,255,255,0.92); }
+    .speed-cmp-row i, .speed-cmp-row.after i{ background:var(--accent); }
+    .funnel-page .speed-cmp-row em{ font-size:21.5px; }
+    /* 05.10 smoother scroll: looping animations pause while their tile is off screen (hero tile has blur under it) */
+    .anim-off, .anim-off *, .anim-off *::after{ animation-play-state:paused !important; }
     .calc-output-lbl{ color:rgba(255,255,255,0.75); }
     .hc-lbl{ color:rgba(255,255,255,0.85); }
     .hc-val small{ color:rgba(255,255,255,0.8); }
@@ -1400,7 +1421,7 @@
           <div class="hero hero-face anim-in" id="top">
             <div class="hero-txt">
               <div class="eyebrow">Игнатий Филатов · HRBP-консультант</div>
-              <h1><span class="h1-full">Ваш бизнес теряет деньги прямо сейчас</span><span class="h1-m"><span class="h1-l">Вы 100% теряете деньги</span> <span class="h1-l">я 100% их верну</span></span></h1>
+              <h1><span class="h1-full">Ваш бизнес теряет деньги прямо сейчас</span><span class="h1-m"><span class="h1-l">Вы <em>100%</em> теряете деньги</span> <span class="h1-l">я <em>100%</em> их верну</span></span></h1>
               <p class="hero-lead">Нахожу, где HR съедает деньги — и выстраиваю процессы, которые это останавливают</p>
               <a class="hero-cta" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит →</a>
             </div>
@@ -1981,7 +2002,7 @@
         <p>Сегодня нейронки пишут резюме и готовят человека к собеседованию. Именно поэтому мы не можем убрать рекрутера из этой схемы, именно поэтому это долго и дорого (у меня, кстати, вообще не дорого и не так уж долго, но это потому, что в начале пути было очень дорого и очень долго).</p>
         <p>В общем, если вы тут все еще ради инструкции, как действовать, то я описал ее только что. Простая воронка, несколько этапов. Обязательно найдется тот самый кандидат. Главное — не ленитесь, и к вам придет человек, который будет приносить деньги компании от года к году. А за бесплатной консультацией вы знаете, куда писать)</p>
       </details>
-      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-smile.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
+      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-calm.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Предварительные результаты вы получите еще в течение первой недели, а полное закрытие вакансии — до трех недель. Вакансия будет закрыта под ключ, а платите только после выхода специалиста. Ниже вы можете видеть пример того, как будет выстроена моя работа. Я пропущу через себя около 400 релевантных резюме, чтобы выбрать 20 лучших, из которых только 5 человек дойдут до вас, чтобы вы смогли выбрать человека под себя.</p>
 
       <div class="funnel-page-section">
@@ -2233,7 +2254,7 @@
         <p>Что можно сделать самому уже на этой неделе. Позвоните трём–пяти последним ушедшим и спросите, что стало последней каплей (через пару месяцев после ухода люди говорят гораздо честнее, чем на прощальной беседе). Посчитайте, из каких отделов уходят, — почти всегда текучесть собирается вокруг одного руководителя или одной команды. И поговорите с теми, кто остался и хорошо работает: что их держит и что может заставить уйти. Это и есть стей-интервью, и проводить его нужно до того, как человек открыл hh.</p>
         <p>Если после этого картина сложилась — отлично, вы знаете, что чинить. Если нет — вы знаете, куда писать)</p>
       </details>
-      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-smile.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
+      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-calm.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Я не начинаю с «давайте поднимем зарплаты» или «давайте закажем пиццу по пятницам». Сначала выясняю, почему уходят именно у вас, и только потом предлагаю, что менять. Бывшие сотрудники говорят со мной откровеннее, чем с бывшим начальником: я человек со стороны, и мне не надо ничего доказывать.</p>
         </div>
         <div class="ret-calc" aria-label="Сколько человек уйдёт из команды за год">
@@ -2285,7 +2306,7 @@
         <p>Начните с простого. Возьмите пять последних вакансий и посчитайте в обычной таблице, сколько дней каждая была открыта. Уже по этим пяти строчкам будет видно, где у вас затык. Потом прибавьте к окладу всё, что компания платит сверху, и сравните с тем, что человек приносит. Калькулятор ниже как раз для этого.</p>
         <p>И не пытайтесь сразу построить идеальный дашборд на двадцать метрик (такие обычно умирают через месяц). Одна-две цифры, которые вы реально смотрите каждый месяц, полезнее. Ну а если хочется, чтобы всё это считалось само, вы знаете, куда писать)</p>
       </details>
-      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-smile.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
+      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-calm.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Я перевожу HR на язык денег. Не «кажется, справляется», а сколько человек стоит компании, сколько приносит и когда выходит в плюс. Считаю на ваших данных: из таблиц, 1С, выгрузок с hh — откуда получится.</p>
         </div>
         <div class="funnel-case unit-calc">
@@ -2365,7 +2386,7 @@
         <p>Что можно сделать самому. Откройте hh.ru и посмотрите 5–10 похожих вакансий, именно свежих, за последний месяц. Спросите у кандидатов, которые вам отказали, на какую сумму они рассчитывали (на удивление, многие честно отвечают). И не зацикливайтесь только на деньгах: иногда проигрывают из-за того, что ответили кандидату через неделю, а конкурент — через день.</p>
         <p>Если после этого всё равно непонятно, почему не идут люди, вы знаете, куда писать)</p>
       </details>
-      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-smile.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
+      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-calm.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Я собираю картину рынка под вашу конкретную вакансию: сколько сейчас платят за такого специалиста, кто ещё его ищет и чем переманивает, и сколько таких людей вообще есть. Чтобы оффер не проигрывал ещё до собеседования.</p>
         </div>
         <div class="ret-calc" aria-label="Не устарела ли ваша вилка">
@@ -2423,7 +2444,7 @@
         <p>Что можно сделать самому. Выделите фиксированные часы на HR, хотя бы два-три в неделю, и не отдавайте их под срочное. Ведите список вопросов, которые повторяются: если что-то всплыло третий раз, это уже процесс, а не случайность. И отделяйте задачи, которые тушат пожар, от тех, которые убирают его причину. Вторых почти всегда меньше, но именно они экономят время.</p>
         <p>Если после недели такого учёта окажется, что HR у вас занимает больше, чем вы готовы ему отдавать, вы знаете, куда писать)</p>
       </details>
-      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-smile.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
+      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-calm.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Я работаю как ваш HR, только не в штате и не на полный день. Вы покупаете часы в месяц, а я закрываю в них то, что нужно именно сейчас: найм, онбординг, конфликт, кадровые документы или стратегию. Платите за работу, а не за то, что человек сидит в офисе.</p>
         </div>
         <div class="ret-calc" aria-label="Нужен ли вам штатный HR">
@@ -2571,7 +2592,7 @@
         <p>Итого один простой чат-бот, живущий на моём компьютере, освободил мне 1 час в день, 5 часов в неделю. Учитывая мою зарплату в 75&nbsp;000&nbsp;₽, я бы стал филонить на 9&nbsp;375&nbsp;₽, или 12,5%. Но будем честными: мне просто накинули ещё задач, а бот стал бесплатно трудиться на благо компании.</p>
         <p>Короче, берёте ChatGPT в руки и говорите, что нужно. Код он за вас напишет, а дальше ручками) Сложного ничего нет. Ну а если хотите подключить человека с опытом, то куда писать, вы знаете, стоить это будет копейки)</p>
       </details>
-      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-smile.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
+      <h3 class="funnel-article-h face-h"><img class="face-av" src="/assets/people/av-calm.webp" alt="" width="240" height="240" loading="lazy">А теперь о том, как работаю я</h3>
       <p class="funnel-lead">Я делаю HR-системы и Telegram-ботов под ваш процесс, а не подгоняю процесс под чужой шаблон. Скрининг кандидатов, онбординг, ответы на частые вопросы: рутина уходит к боту, а не переезжает в очередной чат.</p>
         </div>
         <div class="ret-calc" aria-label="Сколько времени съедают одни и те же вопросы">
@@ -3359,9 +3380,15 @@ function unitCalcUpdate(){
     // the photo is shifted inside .bg-clip by exactly the scroll (ignoring iOS rubber-band overscroll)
     if(Math.abs(top - clip - y) > 2){ js = true; bg.classList.add('bg-js'); put(); }
   }
-  window.addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(put); }, {passive:true});
+  var lastY = 0;
+  window.addEventListener('scroll', function(){ lastY = Date.now(); if(!raf) raf = requestAnimationFrame(put); }, {passive:true});
   window.addEventListener('scrollend', check, {passive:true});
-  setInterval(check, 500);
+  setInterval(function(){ if(Date.now() - lastY > 300) check(); }, 500);
+  // looping animations (hero tile float/sheen, live dots, typing) pause while off screen: on phones they kept repainting blurred glass
+  if(window.IntersectionObserver){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('anim-off', !e.isIntersecting); }); });
+    document.querySelectorAll('.hero-about, .lc-live, .tg-typing').forEach(function(el){ io.observe(el); });
+  }
   mq.addEventListener('change', put); put();
 })();
 </script>
