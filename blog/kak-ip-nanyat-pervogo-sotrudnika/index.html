@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<script>
+  /* theme: apply the saved choice before first paint (shared with the homepage) */
+  (function(){ try{ var t=localStorage.getItem('sc-theme'); if(t==='dark'||t==='light') document.documentElement.setAttribute('data-theme',t); }catch(e){} })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<title>Как ИП или ООО нанять первого сотрудника: пошаговая инструкция | Игнатий Филатов</title>
+<meta name="description" content="Как ИП и ООО официально нанять первого сотрудника: документы, отчёт в СФР, налоги и взносы, и главное — как не ошибиться с человеком. Чек-лист от HRBP.">
+<meta name="author" content="Игнатий Филатов">
+<link rel="canonical" href="https://strategi-consult.com/blog/kak-ip-nanyat-pervogo-sotrudnika/">
+<meta property="og:title" content="Как ИП или ООО нанять первого сотрудника: пошаговая инструкция | Игнатий Филатов">
+<meta property="og:description" content="Как ИП и ООО официально нанять первого сотрудника: документы, отчёт в СФР, налоги и взносы, и главное — как не ошибиться с человеком. Чек-лист от HRBP.">
+<meta property="og:url" content="https://strategi-consult.com/blog/kak-ip-nanyat-pervogo-sotrudnika/">
+<meta property="og:image" content="https://strategi-consult.com/assets/og-image.jpeg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Игнатий Филатов — HR консультант">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="/assets/automation-backdrop.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Как нанять первого сотрудника: инструкция для ИП и ООО",
+  "description": "Как ИП и ООО официально нанять первого сотрудника: документы, отчёт в СФР, налоги и взносы, и главное — как не ошибиться с человеком. Чек-лист от HRBP.",
+  "url": "https://strategi-consult.com/blog/kak-ip-nanyat-pervogo-sotrudnika/",
+  "mainEntityOfPage": "https://strategi-consult.com/blog/kak-ip-nanyat-pervogo-sotrudnika/",
+  "datePublished": "2026-10-08",
+  "dateModified": "2026-10-08",
+  "inLanguage": "ru-RU",
+  "image": "https://strategi-consult.com/assets/og-image.jpeg",
+  "author": {
+    "@type": "Person",
+    "name": "Игнатий Филатов",
+    "url": "https://strategi-consult.com",
+    "jobTitle": "HRBP, HR-консультант"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Игнатий Филатов",
+    "url": "https://strategi-consult.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Может ли самозанятый нанять сотрудника?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. Самозанятый (плательщик НПД) не вправе иметь работников по трудовым договорам. Если нужен сотрудник — придётся перейти в ИП на другом режиме налогообложения."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Нужно ли ИП отдельно регистрироваться как работодатель?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Отдельно идти в фонд не нужно: ИП регистрируется как работодатель автоматически, когда подаёт первую форму ЕФС-1 о приёме сотрудника. Детали по своему режиму налогообложения уточните у бухгалтера."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Сколько стоит сотрудник сверх зарплаты?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Кроме зарплаты работодатель платит страховые взносы — ориентировочно около 30% сверху, для малого бизнеса часть зарплаты облагается по пониженному тарифу. Плюс отпускные, больничные за первые три дня и рабочее место."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": "https://strategi-consult.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Блог",
+      "item": "https://strategi-consult.com/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Как нанять первого сотрудника: инструкция для ИП и ООО",
+      "item": "https://strategi-consult.com/blog/kak-ip-nanyat-pervogo-sotrudnika/"
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#131313;
+    --accent:#195FE8;
+    --accent-light:#6293FF;
+    --glass-line: rgba(255,255,255,0.2);
+    --glass-fill: rgba(255,255,255,0.08);
+    --text-soft: rgba(255,255,255,0.75);
+    --text-mute: rgba(255,255,255,0.6);
+    /* ---------- type scale (SF Pro): role -> size / weight ---------- */
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+    --fs-display: 56px;   /* hero H1                         bold   */
+    --fs-title: 40px;     /* заголовок окна / страницы        bold   */
+    --fs-section: 28px;   /* раздел на подстранице            bold   */
+    --fs-h2: 22px;        /* раздел внутри окна               bold   */
+    --fs-h3: 17px;        /* заголовок карточки / пункта      bold   */
+    --fs-lead: 17px;      /* подзаголовок, лид                medium */
+    --fs-body: 15px;      /* основной текст                   regular*/
+    --fs-body-s: 13px;    /* текст в карточках                regular*/
+    --fs-sec: 12px;       /* вторичный: подписи, источники    regular*/
+    --fs-cap: 11px;       /* метки графиков, теги             medium */
+    --fs-btn: 14px;       /* кнопки                           medium */
+    --fs-chip: 13px;      /* чипы, переключатели              medium */
+    --fs-num-xl: 48px;    /* цифры: крупные                   bold   */
+    --fs-num-l: 32px;
+    --fs-num-m: 24px;
+    --fs-num-s: 17px;
+    --fw-regular: 400; --fw-medium: 500; --fw-bold: 700;
+    --ink-mute: #6e6e73;  /* вторичный текст на светлом */
+  }
+  @media (max-width:980px){ :root{ --fs-display:48px; --fs-title:34px; } }
+  @media (max-width:760px){ :root{ --fs-title:28px; } }
+  @media (max-width:620px){ :root{ --fs-display:34px; --fs-title:26px; --fs-section:22px; --fs-h2:20px; --fs-lead:16px; --fs-num-xl:40px; } }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--font);
+    color:#fff; min-height:100vh; background:#1b1b1d;
+  }
+  a{ color:inherit; }
+
+  /* same office photo as the homepage, dimmed like an opened card */
+  .backdrop{
+    position:fixed; top:0; bottom:0; left:0; width:100vw; z-index:-1;
+    background:#1b1b1d url('/assets/automation-backdrop.jpg') center 35% / cover no-repeat;
+  }
+  .backdrop::after{ content:""; position:absolute; inset:0; background:rgba(20,20,20,0.55); }
+
+  .skip{ position:absolute; left:-9999px; top:8px; background:#fff; color:var(--ink); padding:8px 14px; border-radius:10px; z-index:10; }
+  .skip:focus{ left:12px; }
+
+  .wrap{ width:100%; max-width:968px; margin:0 auto; padding:24px 24px 40px; }
+
+  /* ---------- top nav (the homepage's dark pill bar) ---------- */
+  .topnav{ display:flex; justify-content:center; margin-bottom:22px; }
+  .pills{
+    display:flex; align-items:center; gap:4px; flex-wrap:wrap; justify-content:center;
+    background:rgba(27,27,29,0.55); backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
+    border:1px solid rgba(255,255,255,0.08); border-radius:40px; padding:6px;
+    box-shadow:0 14px 30px rgba(0,0,0,0.25);
+  }
+  .pills a{ text-decoration:none; color:#d6d6d8; font-size:var(--fs-chip); font-weight:var(--fw-medium); padding:9px 16px; border-radius:30px; transition:background .2s, color .2s; white-space:nowrap; }
+  .pills a:hover{ background:rgba(255,255,255,0.1); color:#fff; }
+  .pills a[aria-current="page"]{ background:#fff; color:var(--accent); }
+  .pills a.go{ background:var(--accent); color:#fff; }
+  .pills a.go:hover{ opacity:.9; }
+
+  /* ---------- main glass panel ---------- */
+  .page{
+    background:rgba(255,255,255,0.14);
+    backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+    border:1px solid rgba(255,255,255,0.35);
+    border-radius:30px; padding:44px 40px 44px;
+  }
+  .crumbs{ font-size:var(--fs-sec); font-weight:var(--fw-regular); color:var(--text-mute); margin-bottom:22px; }
+  .crumbs a{ text-decoration:none; }
+  .crumbs a:hover{ color:#fff; }
+  .eyebrow{ font-size:var(--fs-cap); letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,0.65); font-weight:var(--fw-medium); margin-bottom:10px; }
+  h1{ font-size:var(--fs-title); font-weight:var(--fw-bold); line-height:1.1; max-width:780px; letter-spacing:-0.02em; }
+  h1 em{ font-style:normal; color:var(--accent-light); font-weight:inherit; }
+  .lead{ font-size:var(--fs-lead); font-weight:var(--fw-regular); color:rgba(255,255,255,0.88); max-width:640px; line-height:1.5; margin-top:16px; }
+  .actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+  .btn{ display:inline-block; text-decoration:none; font-size:var(--fs-btn); font-weight:var(--fw-medium); padding:13px 24px; border-radius:30px; transition:transform .2s, background .2s, opacity .2s; }
+  .btn.primary{ background:var(--accent); color:#fff; }
+  .btn.primary:hover{ transform:translateY(-1px); opacity:.92; }
+  .btn.ghost{ background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); color:#fff; }
+  .btn.ghost:hover{ background:rgba(255,255,255,0.2); }
+
+  /* ---------- sections ---------- */
+  .sec{ margin-top:48px; scroll-margin-top:24px; }
+  .sec-label{ font-size:var(--fs-sec); letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute); font-weight:var(--fw-regular); }
+  .sec h2{ font-size:var(--fs-section); font-weight:var(--fw-bold); line-height:1.2; margin-top:8px; letter-spacing:-0.015em; }
+  .sec-sub{ font-size:var(--fs-body); color:var(--text-soft); margin-top:6px; font-weight:var(--fw-regular); }
+  .sec-body{ margin-top:18px; }
+
+  .cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .cards.c3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .card{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:16px; padding:18px 20px; }
+  .card h3{ font-size:var(--fs-h3); font-weight:var(--fw-bold); margin-bottom:6px; line-height:1.3; }
+  .card p{ font-size:var(--fs-body-s); color:var(--text-soft); line-height:1.55; font-weight:var(--fw-regular); }
+  .card .num{ display:inline-block; font-size:var(--fs-cap); font-weight:var(--fw-medium); color:var(--accent-light); margin-bottom:8px; letter-spacing:.04em; }
+
+  /* process: 4 steps joined by a line */
+  .steps{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; position:relative; }
+  .step{ position:relative; }
+  .step .dot{ display:block; width:13px; height:13px; border-radius:50%; background:var(--accent-light); box-shadow:0 0 0 5px rgba(98,147,255,0.22); margin:0 0 16px 20px; position:relative; z-index:1; }
+  .steps::before{ content:""; position:absolute; top:6px; left:26px; right:26px; height:2px; background:linear-gradient(90deg,rgba(98,147,255,0.35),var(--accent-light)); border-radius:2px; }
+  .step .card{ height:calc(100% - 29px); }
+
+  /* numbers */
+  .stats{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+  .stat{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:16px; padding:20px 16px; }
+  .stat .v{ font-size:var(--fs-num-l); font-weight:var(--fw-medium); color:#fff; line-height:1; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; }
+  .stat .v.accent{ color:var(--accent-light); font-weight:400; }
+  .stat .l{ font-size:var(--fs-sec); color:var(--text-soft); line-height:1.4; margin-top:10px; font-weight:var(--fw-regular); }
+
+  .stat .v.long{ font-size:var(--fs-num-m); white-space:nowrap; font-weight:var(--fw-medium); font-variant-numeric:tabular-nums; }
+  @media (max-width:620px){ .stat .v.long{ font-size:20px; } }
+
+  /* FAQ */
+  .faq{ display:flex; flex-direction:column; gap:8px; }
+  .faq-item{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:14px; overflow:hidden; transition:background .2s; }
+  .faq-item.open{ background:rgba(255,255,255,0.12); }
+  .faq-item h3{ font-size:inherit; font-weight:inherit; }
+  .faq-q{ width:100%; text-align:left; font-family:inherit; font-size:var(--fs-h3); font-weight:var(--fw-bold); color:#fff; background:none; border:none; padding:15px 18px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:14px; }
+  .faq-q span{ font-size:18px; font-weight:400; color:var(--text-soft); transition:transform .45s cubic-bezier(.33,1,.68,1); flex:0 0 auto; line-height:1; }
+  .faq-item.open .faq-q span{ transform:rotate(45deg); }
+  .faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .6s cubic-bezier(.33,1,.68,1); }
+  .faq-item.open .faq-a{ grid-template-rows:1fr; }
+  .faq-a > div{ min-height:0; overflow:hidden; }
+  .faq-a p{ padding:0 18px 16px; font-size:var(--fs-body); color:var(--text-soft); line-height:1.6; opacity:0; transition:opacity .4s ease; font-weight:var(--fw-regular); }
+  .faq-item.open .faq-a p{ opacity:1; transition:opacity .5s ease .1s; }
+  .faq-q:focus-visible, .btn:focus-visible, .pills a:focus-visible, .card-link:focus-visible{ outline:2px solid var(--accent-light); outline-offset:3px; }
+
+  /* other services */
+  .card-link{ text-decoration:none; display:block; transition:transform .2s, background .2s, border-color .2s; }
+  .card-link:hover{ transform:translateY(-2px); background:rgba(255,255,255,0.13); border-color:rgba(255,255,255,0.35); }
+  .card-link h3 i{ font-style:normal; color:var(--accent-light); }
+
+  /* final CTA */
+  .cta{ margin-top:48px; background:rgba(255,255,255,0.96); color:var(--ink); border-radius:22px; padding:30px 32px; box-shadow:0 20px 44px rgba(0,0,0,0.28); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .cta h2{ font-size:var(--fs-section); font-weight:var(--fw-bold); line-height:1.2; letter-spacing:-0.015em; }
+  .cta p{ font-size:var(--fs-body); color:#3a3a3c; margin-top:6px; line-height:1.5; max-width:460px; font-weight:var(--fw-regular); }
+  .cta .actions{ margin-top:0; }
+  .cta .btn.ghost{ background:transparent; border-color:rgba(20,20,20,0.2); color:var(--ink); }
+  .cta .btn.ghost:hover{ background:rgba(20,20,20,0.05); }
+
+  .foot{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px 22px; margin-top:28px; font-size:var(--fs-sec); color:rgba(255,255,255,0.7); text-align:center; font-weight:var(--fw-regular); }
+  .foot a{ text-decoration:none; }
+  .foot a:hover{ color:#fff; }
+  .foot .copy{ width:100%; opacity:.7; margin-top:4px; }
+
+  /* entrance */
+  @keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+  .page{ animation:rise .7s cubic-bezier(.22,1,.36,1) backwards; }
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .page{ animation:none; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .faq-a, .faq-a p, .faq-q span{ transition:none; }
+  }
+
+  @media (max-width:860px){
+    .cards.c3{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .steps{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .steps::before{ display:none; }
+    .step .dot{ display:none; }
+    .step .card{ height:100%; }
+  }
+  @media (max-width:620px){
+    .wrap{ padding:16px 12px 32px; }
+    .pills a{ padding:8px 12px; font-size:12px; }
+    .pills a.hide-sm{ display:none; }
+    .page{ padding:28px 18px 30px; border-radius:24px; }
+    h1{ font-size:var(--fs-title); }
+    .lead{ font-size:15px; }
+    .sec{ margin-top:38px; }
+    .sec h2{ font-size:var(--fs-section); }
+    .cards, .cards.c3{ grid-template-columns:minmax(0,1fr); }
+    .steps{ grid-template-columns:minmax(0,1fr); }
+    .stat .v{ font-size:28px; }
+    .cta{ padding:24px 20px; }
+    .cta h2{ font-size:var(--fs-section); }
+  }
+
+  /* ============ THEME TOGGLE (same control as the homepage) ============ */
+  .theme-toggle{
+    position:fixed; top:14px; right:14px; z-index:50;
+    width:62px; height:32px; border-radius:20px; cursor:pointer;
+    background:rgba(24,24,27,0.55); border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
+    box-shadow:0 8px 22px rgba(0,0,0,0.18);
+    display:flex; align-items:center; justify-content:space-between; padding:0 8px;
+    transition:background .4s ease, border-color .4s ease;
+  }
+  .theme-toggle svg{ width:14px; height:14px; position:relative; z-index:1; color:#fff; transition:opacity .4s ease, color .4s ease; }
+  .theme-toggle .tt-sun{ opacity:.45; }
+  .theme-toggle .tt-knob{ position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#2b2b2f; box-shadow:0 2px 6px rgba(0,0,0,0.25); transform:translateX(30px); transition:transform .5s cubic-bezier(.33,1,.68,1), background .4s ease; }
+  .theme-toggle:focus-visible{ outline:2px solid var(--accent-light); outline-offset:3px; }
+  html[data-theme="light"] .theme-toggle{ background:rgba(255,255,255,0.4); border-color:rgba(255,255,255,0.6); }
+  html[data-theme="light"] .theme-toggle .tt-knob{ transform:none; background:#fff; }
+  html[data-theme="light"] .theme-toggle svg{ color:#131313; }
+  html[data-theme="light"] .theme-toggle .tt-sun{ opacity:1; }
+  html[data-theme="light"] .theme-toggle .tt-moon{ opacity:.45; }
+  @media (max-width:1100px){ .wrap{ padding-top:56px; } }
+  @media (max-width:620px){ .theme-toggle{ top:10px; right:10px; } .wrap{ padding-top:50px; } }
+
+  html.theme-anim body, html.theme-anim body *, html.theme-anim .backdrop::after{
+    transition:background-color .5s ease, color .5s ease, border-color .5s ease !important;
+  }
+
+  /* ============ LIGHT THEME (page is dark by default) ============ */
+  .backdrop::after{ transition:background .5s ease; }
+  html[data-theme="light"]{
+    --glass-line: rgba(255,255,255,0.6);
+    --glass-fill: rgba(255,255,255,0.42);
+    --text-soft: #3a3a3c;
+    --text-mute: rgba(19,19,19,0.55);
+  }
+  html[data-theme="light"] body{ color:#131313; }
+  html[data-theme="light"] .backdrop::after{ background:rgba(255,255,255,0.05); }
+  html[data-theme="light"] .page{ background:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.6); }
+  html[data-theme="light"] .eyebrow{ color:rgba(19,19,19,0.6); }
+  html[data-theme="light"] .lead{ color:#2a2a2c; }
+  html[data-theme="light"] h1 em,
+  html[data-theme="light"] .card .num,
+  html[data-theme="light"] .stat .v.accent,
+  html[data-theme="light"] .card-link h3 i{ color:var(--accent); }
+  html[data-theme="light"] .crumbs a:hover, html[data-theme="light"] .foot a:hover{ color:#131313; }
+  html[data-theme="light"] .btn.ghost{ background:rgba(255,255,255,0.5); border-color:rgba(19,19,19,0.15); color:#131313; }
+  html[data-theme="light"] .btn.ghost:hover{ background:rgba(255,255,255,0.75); }
+  html[data-theme="light"] .step .dot{ background:var(--accent); box-shadow:0 0 0 5px rgba(25,95,232,0.18); }
+  html[data-theme="light"] .steps::before{ background:linear-gradient(90deg,rgba(25,95,232,0.3),var(--accent)); }
+  html[data-theme="light"] .stat .v{ color:#131313; }
+  html[data-theme="light"] .faq-q{ color:#131313; }
+  html[data-theme="light"] .faq-item.open{ background:rgba(255,255,255,0.62); }
+  html[data-theme="light"] .card-link:hover{ background:rgba(255,255,255,0.62); border-color:rgba(255,255,255,0.85); }
+  html[data-theme="light"] .foot{ color:rgba(19,19,19,0.7); }
+  html[data-theme="light"] .faq-q:focus-visible, html[data-theme="light"] .btn:focus-visible, html[data-theme="light"] .card-link:focus-visible{ outline-color:var(--accent); }
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle .tt-knob, .backdrop::after{ transition:none; }
+    html.theme-anim body, html.theme-anim body *{ transition:none !important; }
+  }
+
+  /* ---------- статья ---------- */
+  .meta{ font-size:var(--fs-sec); color:var(--text-mute); margin-top:14px; }
+  .toc{ margin-top:28px; background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:16px; padding:16px 20px; }
+  .toc b{ display:block; font-size:var(--fs-sec); letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute); font-weight:var(--fw-regular); margin-bottom:8px; }
+  .toc ol{ margin-left:18px; font-size:var(--fs-body); line-height:1.7; color:var(--text-soft); }
+  .toc a{ text-decoration:none; } .toc a:hover{ text-decoration:underline; }
+  .prose{ max-width:720px; }
+  .prose h2{ font-size:var(--fs-section); font-weight:var(--fw-bold); line-height:1.2; letter-spacing:-0.015em; margin:44px 0 14px; scroll-margin-top:24px; }
+  .prose h3{ font-size:var(--fs-h2); font-weight:var(--fw-bold); line-height:1.3; margin:28px 0 10px; }
+  .prose p, .prose li{ font-size:16px; line-height:1.7; color:rgba(255,255,255,0.88); }
+  .prose p{ margin-top:14px; }
+  .prose ul, .prose ol{ margin:12px 0 0 22px; }
+  .prose li{ margin-top:6px; }
+  .prose a{ color:var(--accent-light); text-decoration:underline; text-underline-offset:3px; }
+  .prose b, .prose strong{ color:#fff; }
+  .prose .formula{ margin-top:16px; background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:14px; padding:16px 18px; font-size:17px; font-weight:var(--fw-medium); text-align:center; line-height:1.5; }
+  .prose .note{ margin-top:18px; border-left:3px solid var(--accent-light); background:rgba(98,147,255,0.10); border-radius:0 14px 14px 0; padding:14px 18px; }
+  .prose .note p:first-child{ margin-top:0; }
+  .prose .case{ margin-top:22px; background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:16px; padding:18px 20px; }
+  .prose .case .sec-label{ margin-bottom:4px; }
+  .prose .case p:first-of-type{ margin-top:6px; }
+  .tbl{ margin-top:16px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .prose table{ width:100%; border-collapse:collapse; font-size:14px; min-width:460px; }
+  .prose th, .prose td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--glass-line); vertical-align:top; line-height:1.5; }
+  .prose th{ font-weight:var(--fw-bold); color:#fff; background:var(--glass-fill); }
+  .prose td{ color:rgba(255,255,255,0.85); }
+  .checklist{ list-style:none; margin-left:0 !important; }
+  .checklist li{ position:relative; padding-left:30px; }
+  .checklist li::before{ content:""; position:absolute; left:0; top:5px; width:16px; height:16px; border:2px solid var(--accent-light); border-radius:5px; }
+
+  /* ---------- калькулятор ---------- */
+  .calc{ margin-top:22px; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.3); border-radius:20px; padding:22px; }
+  .calc h3{ margin-top:0 !important; }
+  .calc .row{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:12px; }
+  .calc label{ display:block; font-size:var(--fs-body-s); color:var(--text-soft); line-height:1.4; }
+  .calc input, .calc select{ display:block; width:100%; margin-top:6px; font:inherit; font-size:17px; color:#fff; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.3); border-radius:12px; padding:11px 12px; }
+  .calc select option{ color:#131313; }
+  .calc input:focus, .calc select:focus{ outline:2px solid var(--accent-light); outline-offset:1px; }
+  .calc .out{ margin-top:18px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .calc .res{ background:rgba(25,95,232,0.22); border:1px solid rgba(98,147,255,0.5); border-radius:14px; padding:14px 16px; }
+  .calc .res .v{ font-size:var(--fs-num-l); font-weight:var(--fw-bold); line-height:1.1; font-variant-numeric:tabular-nums; }
+  .calc .res .l{ font-size:var(--fs-sec); color:var(--text-soft); margin-top:6px; line-height:1.4; }
+  .calc .verdict{ margin-top:12px !important; font-size:15px !important; }
+  .calc .hint{ font-size:var(--fs-sec) !important; color:var(--text-mute) !important; margin-top:12px !important; }
+
+  /* ---------- список статей ---------- */
+  .posts{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .posts .card-link p{ margin-top:4px; }
+  .posts .tag{ display:inline-block; font-size:var(--fs-cap); font-weight:var(--fw-bold); color:#a9c2ff; letter-spacing:.04em; margin-bottom:8px; text-transform:uppercase; }
+
+  @media (max-width:620px){
+    .prose p, .prose li{ font-size:15px; }
+    .prose h2{ margin-top:36px; }
+    .calc{ padding:18px 14px; }
+    .calc .row, .calc .out, .posts{ grid-template-columns:minmax(0,1fr); }
+  }
+
+  html[data-theme="light"] .prose p, html[data-theme="light"] .prose li, html[data-theme="light"] .prose td{ color:#2a2a2c; }
+  html[data-theme="light"] .prose b, html[data-theme="light"] .prose strong, html[data-theme="light"] .prose th{ color:#131313; }
+  html[data-theme="light"] .prose a{ color:var(--accent); }
+  html[data-theme="light"] .prose .note{ border-left-color:var(--accent); background:rgba(25,95,232,0.08); }
+  html[data-theme="light"] .checklist li::before{ border-color:var(--accent); }
+  html[data-theme="light"] .calc{ background:rgba(255,255,255,0.5); border-color:rgba(255,255,255,0.7); }
+  html[data-theme="light"] .calc input, html[data-theme="light"] .calc select{ color:#131313; background:rgba(255,255,255,0.8); border-color:rgba(19,19,19,0.15); }
+  html[data-theme="light"] .calc .res{ background:rgba(25,95,232,0.10); border-color:rgba(25,95,232,0.35); }
+  html[data-theme="light"] .posts .tag{ color:var(--accent); }
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113403420', 'ym');
+
+    ym(113403420, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113403420" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<button type="button" class="theme-toggle" id="themeToggle" aria-label="Светлая тема" aria-pressed="true" onclick="toggleTheme()">
+  <span class="tt-knob" aria-hidden="true"></span>
+  <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+  <svg class="tt-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+</button>
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<div class="wrap">
+  <header class="topnav">
+    <nav class="pills" aria-label="Разделы сайта">
+      <a href="/">Главная</a>
+      <a href="/naim/" class="hide-sm">Найм</a>
+      <a href="/hr-audit/" class="hide-sm">HR-аудит</a>
+      <a href="/malyj-biznes/" class="hide-sm">Малый бизнес</a>
+      <a href="/blog/">Блог</a>
+      <a href="https://t.me/HR_Ignatiy" class="go" target="_blank" rel="noopener">Связаться →</a>
+    </nav>
+  </header>
+
+  <main id="main" class="page">
+    <nav class="crumbs" aria-label="Хлебные крошки"><a href="/">Главная</a> / <a href="/blog/">Блог</a> / Найм</nav>
+    <div class="eyebrow">Найм</div>
+    <h1>Как нанять первого сотрудника. <em>Инструкция для ИП и ООО.</em></h1>
+    <p class="lead">Первый сотрудник — самый дорогой найм в жизни компании. Не по деньгам, а по цене ошибки: когда в команде два человека, один неудачный найм — это минус половина бизнеса. Разбираю обе части: как оформить и как выбрать.</p>
+    <p class="meta">Игнатий Филатов, HRBP · 8 октября 2026 · 4 мин чтения</p>
+    <nav class="toc" aria-label="Содержание"><b>Содержание</b><ol><li><a href="#s1">Сначала ответьте на три вопроса</a></li><li><a href="#s2">Как выбрать человека, а не резюме</a></li><li><a href="#s3">Как оформить сотрудника официально</a></li><li><a href="#s4">Сколько на самом деле стоит сотрудник</a></li><li><a href="#s5">Первые 30 дней решают всё</a></li><li><a href="#s6">Чек-лист первого найма</a></li></ol></nav>
+
+    <article class="prose">
+
+<h2 id="s1">Сначала ответьте на три вопроса</h2>
+<p>Самая частая ошибка первого найма — нанять «помощника вообще». Человек приходит, а что он делает, никто толком не знает: сегодня отвечает клиентам, завтра везёт документы, послезавтра «разбирается в рекламе». Через два месяца вы оба недовольны.</p>
+<p>Перед тем как писать вакансию, ответьте письменно:</p>
+<ol>
+<li><b>Какие задачи я снимаю с себя?</b> Не «помогать», а конкретный список: «отвечать на заявки в течение 15 минут», «вести учёт склада».</li>
+<li><b>Как я пойму через месяц, что человек справляется?</b> Одна-две цифры. Если не можете их назвать — вы пока не знаете, кого ищете.</li>
+<li><b>Сколько я готов платить и сколько это стоит на рынке?</b> Посмотрите 20–30 похожих вакансий на hh.ru и Авито. Если ваша цифра ниже рынка, хорошие кандидаты просто не откликнутся.</li>
+</ol>
+<p>Эти три ответа — это и есть профиль кандидата. Звучит скучно, но именно он отделяет найм «по ощущениям» от найма, который работает.</p>
+
+<h2 id="s2">Как выбрать человека, а не резюме</h2>
+<p>Резюме сегодня пишут нейронки, к собеседованию тоже готовят нейронки. Поэтому «хорошо поговорили» больше ничего не значит. Что работает:</p>
+<ul>
+<li><b>Короткий телефонный скрининг</b> на 10–15 минут: зарплатные ожидания, график, почему ищет работу. Отсеивает половину сразу и экономит вам часы.</li>
+<li><b>Тестовое задание на реальной задаче</b> — на 1–2 часа, не больше. Хотите менеджера по продажам — дайте обработать три настоящих заявки. Хотите администратора — дайте разобрать реальный хаос в таблице.</li>
+<li><b>Параллельный найм</b>, если роль сложная: 2–3 финалиста пару дней делают реальные задачи, никто не увольняется с текущей работы. Вы выбираете по результату, а не по впечатлению.</li>
+<li><b>Проверка рекомендаций</b> — один звонок прошлому руководителю. Не «хороший ли он человек», а «взяли бы вы его обратно?». Пауза перед ответом скажет больше слов.</li>
+</ul>
+<div class="note"><p>Не ищите «лучшего». Ищите самого подходящего. Лучший может уйти через месяц, потому что ему у вас скучно, или увести ваших клиентов. Подходящий — тот, кому ваши задачи по силам и интересны прямо сейчас.</p></div>
+
+<h2 id="s3">Как оформить сотрудника официально</h2>
+<p>Порядок для ИП и ООО практически одинаковый:</p>
+<ol>
+<li><b>Получите от кандидата документы:</b> паспорт, СНИЛС, ИНН, сведения о трудовой деятельности (бумажная трудовая книжка или электронная выписка), документ об образовании, если он нужен для должности.</li>
+<li><b>До подписания договора ознакомьте с локальными документами</b> под подпись (ст. 68 ТК РФ): правила внутреннего трудового распорядка, положение об оплате труда, должностная инструкция, положение о персональных данных.</li>
+<li><b>Заключите трудовой договор</b> в двух экземплярах. Если человек уже фактически вышел на работу, договор нужно оформить не позднее трёх рабочих дней с этого дня (ст. 67 ТК РФ).</li>
+<li><b>Издайте приказ о приёме</b> и ознакомьте с ним сотрудника под подпись.</li>
+<li><b>Подайте форму ЕФС-1 в Социальный фонд</b> — не позднее следующего рабочего дня после приказа. Для ИП это заодно и регистрация как работодателя.</li>
+<li><b>Проведите вводные инструктажи</b> по охране труда и пожарной безопасности, зафиксируйте в журнале.</li>
+</ol>
+<p>Дальше — ежемесячные и квартальные отчёты, удержание НДФЛ и уплата взносов. Это проще отдать бухгалтеру или <a href="/kadry/">кадровому учёту на аутсорсинге</a>, чем разбираться самому: штрафы за ошибки в кадровых документах обычно дороже, чем сам сервис.</p>
+
+<h2 id="s4">Сколько на самом деле стоит сотрудник</h2>
+<p>Зарплата в вакансии — это не вся сумма. Сверху добавляются:</p>
+<ul>
+<li>страховые взносы — ориентировочно около 30% к зарплате (у малого бизнеса часть зарплаты облагается по пониженному тарифу, уточните у бухгалтера);</li>
+<li>отпускные — 28 календарных дней в год;</li>
+<li>рабочее место, техника, подписки на сервисы;</li>
+<li>ваше время на обучение в первый месяц — его почти никто не считает, а зря.</li>
+</ul>
+<p>Подробный расчёт с калькулятором — в статье <a href="/blog/skolko-stoit-nanyat-sotrudnika/">«Сколько стоит нанять сотрудника»</a>.</p>
+
+<h2 id="s5">Первые 30 дней решают всё</h2>
+<p>Человека мало нанять — его нужно ввести в работу. Без этого даже хороший сотрудник через месяц начинает искать, куда уйти. Минимум, который стоит сделать:</p>
+<ul class="checklist">
+<li>в первый день — рабочее место, доступы и понятный план на неделю;</li>
+<li>одна-две задачи с быстрым результатом, чтобы человек почувствовал пользу;</li>
+<li>короткая встреча раз в неделю: что получилось, что мешает;</li>
+<li>через месяц — честный разговор по тем самым цифрам из профиля кандидата.</li>
+</ul>
+<p>Если хочется, чтобы это работало без вашего участия, — посмотрите, как я выстраиваю <a href="/onboarding/">онбординг сотрудников</a>.</p>
+
+<h2 id="s6">Чек-лист первого найма</h2>
+<ul class="checklist">
+<li>Записал задачи, которые снимаю с себя, и цифры успеха через месяц</li>
+<li>Сверил зарплату с 20–30 похожими вакансиями</li>
+<li>Подготовил тестовое задание на 1–2 часа на реальной задаче</li>
+<li>Провёл скрининг по телефону, пригласил 3–5 человек на встречу</li>
+<li>Позвонил прошлому руководителю финалиста</li>
+<li>Оформил договор, приказ, ознакомил с локальными документами</li>
+<li>Подал ЕФС-1 на следующий рабочий день</li>
+<li>Расписал план первой недели и встречи на первый месяц</li>
+</ul>
+
+    </article>
+
+    <section class="sec reveal" aria-labelledby="h-svc">
+      <div class="sec-label">Если не хотите разбираться сами</div>
+      <h2 id="h-svc">Сделаю это за вас</h2>
+      <div class="sec-body cards">
+        <a class="card card-link wide" href="/naim/"><h3>Подбор персонала <i>→</i></h3><p>Закрываю вакансию до трёх недель, вы видите только 5 финалистов. Платите после выхода специалиста.</p></a>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-faq">
+      <div class="sec-label">FAQ</div>
+      <h2 id="h-faq">Коротко: ответы на частые вопросы</h2>
+      <div class="sec-body faq">
+<div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Может ли самозанятый нанять сотрудника?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Нет. Самозанятый (плательщик НПД) не вправе иметь работников по трудовым договорам. Если нужен сотрудник — придётся перейти в ИП на другом режиме налогообложения.</p></div></div></div>
+<div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Нужно ли ИП отдельно регистрироваться как работодатель?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Отдельно идти в фонд не нужно: ИП регистрируется как работодатель автоматически, когда подаёт первую форму ЕФС-1 о приёме сотрудника. Детали по своему режиму налогообложения уточните у бухгалтера.</p></div></div></div>
+<div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Сколько стоит сотрудник сверх зарплаты?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Кроме зарплаты работодатель платит страховые взносы — ориентировочно около 30% сверху, для малого бизнеса часть зарплаты облагается по пониженному тарифу. Плюс отпускные, больничные за первые три дня и рабочее место.</p></div></div></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-rel">
+      <div class="sec-label">Читать дальше</div>
+      <h2 id="h-rel">Статьи по теме</h2>
+      <div class="sec-body posts">
+        <a class="card card-link" href="/blog/skolko-stoit-nanyat-sotrudnika/"><span class="tag">Найм</span><h3>Сколько стоит нанять сотрудника: расчёт и калькулятор <i>→</i></h3><p>Прямые расходы — только верхушка. Время руководителя, простой и цена ошибки. С калькулятором.</p></a><a class="card card-link" href="/blog/pochemu-vakansiya-dolgo-ne-zakryvaetsya/"><span class="tag">Найм</span><h3>Почему вакансия долго не закрывается и как закрыть её быстрее <i>→</i></h3><p>Семь причин, по которым вакансия висит месяцами, и что делать с каждой.</p></a><a class="card card-link" href="/blog/hr-autsorsing-ili-shtatnyj-hr/"><span class="tag">HR для малого бизнеса</span><h3>HR-аутсорсинг или штатный HR: что выгоднее малому бизнесу <i>→</i></h3><p>Сколько стоит штатный HR, что такое аутсорсинг HR-функций и когда что выгоднее.</p></a>
+      </div>
+    </section>
+
+    <section class="cta reveal" aria-labelledby="h-cta">
+      <div>
+        <h2 id="h-cta">Нанимаете первого сотрудника?</h2>
+        <p>Первый разговор — бесплатно. 30 минут, и у вас будет чёткое понимание, с чего начать.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="btn ghost" href="https://wa.me/995557602599" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <a href="/">← На главную</a>
+    <a href="/blog/">Блог</a>
+    <a href="/naim/">Подбор персонала</a>
+    <a href="/hr-audit/">HR-аудит</a>
+    <a href="/malyj-biznes/">HR-аутсорсинг для малого бизнеса</a>
+    <a href="/onboarding/">Автоматизация онбординга</a>
+    <a href="/kadry/">Кадровый учёт</a>
+    <a href="/privacy/">Политика конфиденциальности</a>
+    <span class="copy">© 2026 Игнатий Филатов — HRBP, HR-консультант, автоматизация HR процессов</span>
+  </footer>
+</div>
+
+<script>
+  // FAQ: one open at a time, smooth grid-rows animation (CSS)
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i){
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if(!wasOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // sections fade up as they scroll into view
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin:'0px 0px -8% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+
+  // theme toggle — this page is dark unless the visitor picked light
+  function currentTheme(){ return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'; }
+  function syncThemeToggle(){
+    var b = document.getElementById('themeToggle'); if(!b) return;
+    var dark = currentTheme() === 'dark';
+    b.setAttribute('aria-pressed', String(dark));
+    b.setAttribute('aria-label', dark ? 'Светлая тема' : 'Тёмная тема');
+  }
+  function toggleTheme(){
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    var root = document.documentElement;
+    root.classList.add('theme-anim');
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('sc-theme', next); }catch(e){}
+    syncThemeToggle();
+    clearTimeout(toggleTheme._t);
+    toggleTheme._t = setTimeout(function(){ root.classList.remove('theme-anim'); }, 650);
+  }
+  syncThemeToggle();
+</script>
+<script>
+  /* клик по фону вокруг страницы (или Esc) закрывает её, как окна на главной */
+  (function(){
+    function closePage(){
+      var home = '/';
+      try{
+        var r = document.referrer ? new URL(document.referrer) : null;
+        if(r && r.origin === location.origin && history.length > 1){ history.back(); return; }
+      }catch(e){}
+      location.href = home;
+    }
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.page, .pills, .theme-toggle, a, button, input, select, textarea, label')) return;
+      closePage();
+    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePage(); });
+  })();
+</script>
+
+</body>
+</html>
