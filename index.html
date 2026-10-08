@@ -340,8 +340,8 @@
     .calc-stack .calc-output{ margin-top:12px; padding-top:12px; }
     .calc-stack .calc-cta{ margin-top:12px; padding:10px; }
   }
-  /* next to the tall «Обо мне» card: kadry + process fill its height, no holes */
-  @media (min-width:981px){ #kadryCard, #processCard{ align-self:stretch; } }
+  /* process fills the row; kadry keeps its own height (no empty space inside) */
+  @media (min-width:981px){ #processCard{ align-self:stretch; } #kadryCard{ align-self:start; } }
   @media (max-width:980px){
     .grid{ grid-template-columns: repeat(2, 1fr); }
     .gc3{ grid-column: span 2; }
