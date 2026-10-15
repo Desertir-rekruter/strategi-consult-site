@@ -1387,6 +1387,27 @@
     #processCard{ padding-right:18px; }
     .proc-person{ display:none; }
   }
+  /* 16.10 (mobile only): Apple iPhone 17 «Magichromatic» gradient text — violet → blue → green, sampled from apple.com screenshots.
+     The gradient spans each headline's own width (fit-content), like on apple.com. Light variant on dark tiles / windows / dark theme. */
+  :root{
+    --magi:linear-gradient(90deg,#a478c4 0%,#8a81c2 30%,#7889c2 47%,#738dac 60%,#719188 75%,#6f9851 100%);
+    --magi-light:linear-gradient(90deg,#cfa6f2 0%,#b6aef0 30%,#a3b5f0 47%,#9cbad6 60%,#9cc2b0 75%,#9dcb84 100%);
+  }
+  @media (max-width:620px){
+    #top h1 .h1-l, .hello-band h2, .funnel-page h2,
+    .content :is(.about-sq .sq-big, .audit-num, .week-num), .content .calc-output-val:not(.unit-outs *){
+      width:fit-content; background:var(--magi); -webkit-background-clip:text; background-clip:text;
+      color:transparent !important; -webkit-text-fill-color:transparent;
+    }
+    #top h1 .h1-l, .hello-band h2{ margin-inline:auto; }
+    #top h1 .h1-m em{ color:inherit; -webkit-text-fill-color:transparent; }
+    .about-sq .sq-big small, .audit-num span, .week-num span{ -webkit-text-fill-color:transparent; }
+    /* dark tiles, windows and the dark theme: brighter version of the same gradient */
+    .funnel-page h2, .content .calc-output-val:not(.unit-outs *),
+    html[data-theme="dark"] :is(#top h1 .h1-l, .hello-band h2, .content :is(.about-sq .sq-big, .audit-num, .week-num)){ background-image:var(--magi-light); }
+    /* text-shadow would paint through the transparent glyphs — use a drop-shadow on the box instead */
+    .content .calc-output-val:not(.unit-outs *){ text-shadow:none; filter:drop-shadow(0 1px 2px rgba(0,0,0,0.45)); }
+  }
 </style>
 </head>
 <body>
