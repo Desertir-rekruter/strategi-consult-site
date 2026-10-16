@@ -1387,29 +1387,20 @@
     #processCard{ padding-right:18px; }
     .proc-person{ display:none; }
   }
-  /* 16.10 (mobile only): Apple iPhone 17 «Magichromatic» gradient text — violet → blue → green, sampled from apple.com screenshots.
-     The gradient spans each headline's own width (fit-content), like on apple.com. Light variant on dark tiles / windows / dark theme. */
-  :root{
-    --magi:linear-gradient(90deg,#a478c4 0%,#8a81c2 30%,#7889c2 47%,#738dac 60%,#719188 75%,#6f9851 100%);
-    --magi-light:linear-gradient(90deg,#cfa6f2 0%,#b6aef0 30%,#a3b5f0 47%,#9cbad6 60%,#9cc2b0 75%,#9dcb84 100%);
-  }
-  /* 16.10: on all widths (user asked for it on desktop too) */
-  #top h1 .h1-l, #top h1 .h1-full, .hello-band h2, .funnel-page h2,
-  .content :is(.about-sq .sq-big, .audit-num, .week-num), .content .calc-output-val:not(.unit-outs *){
-    width:fit-content; background:var(--magi); -webkit-background-clip:text; background-clip:text;
-    color:transparent !important; -webkit-text-fill-color:transparent;
-  }
+  /* 16.10: Apple iPhone 17 «Magichromatic» gradient (violet → blue → green, sampled from apple.com) — ONLY on the hero headline,
+     on a light frosted plate so it reads over the photo (user: everything else back as it was). All widths. */
+  :root{ --magi:linear-gradient(90deg,#a478c4 0%,#8a81c2 30%,#7889c2 47%,#738dac 60%,#719188 75%,#6f9851 100%); }
+  #top h1{ width:fit-content; padding:8px 16px 10px; margin-left:-16px; border-radius:22px;
+    background:rgba(255,255,255,0.78); -webkit-backdrop-filter:blur(14px) saturate(1.4); backdrop-filter:blur(14px) saturate(1.4);
+    box-shadow:0 6px 24px rgba(0,0,0,0.10); }
+  #top h1 .h1-l, #top h1 .h1-full{ width:fit-content; background:var(--magi); -webkit-background-clip:text; background-clip:text;
+    color:transparent; -webkit-text-fill-color:transparent; }
   #top h1 .h1-full{ display:inline-block; }
-  #top h1 .h1-m em{ color:inherit; -webkit-text-fill-color:transparent; }
-  .about-sq .sq-big small, .audit-num span, .week-num span{ -webkit-text-fill-color:transparent; }
-  /* dark tiles, windows and the dark theme: brighter version of the same gradient */
-  .funnel-page h2, .content .calc-output-val:not(.unit-outs *),
-  html[data-theme="dark"] :is(#top h1 .h1-l, #top h1 .h1-full, .hello-band h2, .content :is(.about-sq .sq-big, .audit-num, .week-num)){ background-image:var(--magi-light); }
-  /* text-shadow would paint through the transparent glyphs — use a drop-shadow on the box instead */
-  .content .calc-output-val:not(.unit-outs *){ text-shadow:none; filter:drop-shadow(0 1px 2px rgba(0,0,0,0.45)); }
+  #top h1 .h1-m em{ color:inherit !important; -webkit-text-fill-color:transparent; }
   @media (max-width:620px){
+    #top h1{ margin-inline:auto; padding:6px 14px 8px; border-radius:18px; }
     #top h1 .h1-full{ display:none; }
-    #top h1 .h1-l, .hello-band h2{ margin-inline:auto; }
+    #top h1 .h1-l{ margin-inline:auto; }
   }
 </style>
 </head>
