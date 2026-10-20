@@ -8,9 +8,11 @@
 
 - [Автоматизация HR процессов](https://strategi-consult.com/) — комплексный аудит и автоматизация HR
 - [Автоматизация онбординга](https://strategi-consult.com/onboarding/) — снижение текучести в первые 3 месяца
-- [Автоматизация найма](https://strategi-consult.com/#naim) — оптимизация воронки подбора, снижение стоимости найма
-- [Автоматизация кадрового учёта](https://strategi-consult.com/kadry/) — КЭДО, устранение бумажной рутины
-- [HR для малого бизнеса](https://strategi-consult.com/#hrbp) — HR процессы без штатного HR директора
+- [Подбор персонала под ключ](https://strategi-consult.com/naim/) — закрытие вакансии до трёх недель, оплата после выхода специалиста
+- [Автоматизация кадрового учёта](https://strategi-consult.com/avtomatizaciya-kadrovogo-ucheta/) — КЭДО, напоминания о сроках, Telegram-боты для частых вопросов
+- [Кадровый учёт на аутсорсинге](https://strategi-consult.com/kadry/) — ведение кадрового учёта от 26 000 ₽/мес
+- [HR-аутсорсинг для малого бизнеса](https://strategi-consult.com/malyj-biznes/) — HRBP по подписке, без штатного HR-директора
+- [HR-аудит](https://strategi-consult.com/hr-audit/) — бесплатный 30-минутный аудит HR-процессов
 
 ## Блог
 
