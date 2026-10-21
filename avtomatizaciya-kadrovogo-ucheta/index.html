@@ -380,6 +380,34 @@
     .theme-toggle .tt-knob, .backdrop::after{ transition:none; }
     html.theme-anim body, html.theme-anim body *{ transition:none !important; }
   }
+
+  /* hero with accent widget on the right */
+  .hero2{ display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:36px; align-items:center; }
+  .hero2 h1{ margin-top:0; }
+  @media (max-width:980px){ .hero2{ grid-template-columns:minmax(0,1fr); gap:26px; } .hw{ max-width:420px; } }
+  .hw{ position:relative; border-radius:22px; padding:18px; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.28);
+       box-shadow:0 20px 50px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.25); color:#fff; overflow:hidden; }
+  .hw::before{ content:""; position:absolute; inset:-40% -40% auto auto; width:220px; height:220px; border-radius:50%;
+       background:radial-gradient(circle, rgba(25,95,232,0.55), rgba(25,95,232,0) 70%); pointer-events:none; }
+  .hw > *{ position:relative; }
+  .hw-k{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,0.6); }
+  .hw-big{ font-size:44px; font-weight:800; line-height:1; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+  .hw-big em{ font-style:normal; color:#6293FF; }
+  .hw-s{ font-size:13px; color:rgba(255,255,255,0.72); line-height:1.4; }
+  html[data-theme="light"] .hw{ background:rgba(255,255,255,0.55); border-color:rgba(255,255,255,0.8); color:#131313; box-shadow:0 20px 50px rgba(0,0,0,0.12); }
+  html[data-theme="light"] .hw-k, html[data-theme="light"] .hw-s{ color:rgba(19,19,19,0.6); }
+  @media (prefers-reduced-motion:reduce){ .hw *{ animation:none !important; transition:none !important; } }
+
+  /* V1 paper vs KEDO bars */
+  .v1 .row{ margin-top:16px; }
+  .v1 .lab{ display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px; }
+  .v1 .tr{ height:14px; border-radius:8px; background:rgba(255,255,255,0.12); overflow:hidden; }
+  .v1 .tr i{ display:block; height:100%; border-radius:8px; background:rgba(255,255,255,0.55); width:0; animation:v1grow 1.4s .3s cubic-bezier(.2,.8,.2,1) forwards; }
+  .v1 .row.after .tr i{ background:linear-gradient(90deg,#195FE8,#6293FF); animation-name:v1grow3; animation-delay:1s; }
+  @keyframes v1grow{ to{ width:100%; } } @keyframes v1grow3{ to{ width:33%; } }
+  .v1 .hw-big{ margin-top:22px; }
+
+
   /* calculator (from blog) */
   .calc{ margin-top:22px; background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.3); border-radius:20px; padding:22px; }
   .calc h3{ margin-top:0 !important; }
@@ -453,12 +481,22 @@
   <main id="main" class="page">
     <nav class="crumbs" aria-label="Хлебные крошки"><a href="/">Главная</a> / Автоматизация кадрового учёта</nav>
 
+    <div class="hero2"><div>
     <div class="eyebrow">Автоматизация HR-процессов</div>
     <h1>Автоматизация кадрового учёта. <em>В 3 раза меньше времени на рутину.</em></h1>
     <p class="lead">Перевожу кадровое делопроизводство с бумаги в цифру: электронный документооборот (КЭДО), напоминания о сроках, Telegram-боты для частых вопросов. HR перестаёт жить в табелях и приказах.</p>
     <div class="actions">
       <a class="btn primary" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Обсудить задачу</a>
       <a class="btn ghost" href="#calc">Посчитать потери</a>
+    </div>
+    </div>
+<div class="hw v1" aria-hidden="true">
+  <div class="hw-k">Время на кадровый учёт</div>
+  <div class="row"><div class="lab"><span>Бумага</span><span>100%</span></div><div class="tr"><i></i></div></div>
+  <div class="row after"><div class="lab"><span>КЭДО</span><span>⅓</span></div><div class="tr"><i></i></div></div>
+  <div class="hw-big"><em>×3</em></div>
+  <div class="hw-s">меньше времени на кадровый учёт после перехода на цифровую систему</div>
+</div>
     </div>
 
     <section class="sec reveal" aria-labelledby="h-pain">
