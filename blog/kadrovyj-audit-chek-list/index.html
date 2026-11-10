@@ -39,13 +39,18 @@
   "author": {
     "@type": "Person",
     "name": "Игнатий Филатов",
-    "url": "https://strategi-consult.com",
-    "jobTitle": "HRBP, HR-консультант"
+    "url": "https://strategi-consult.com/obo-mne/",
+    "jobTitle": "HRBP, HR-консультант",
+    "image": "https://strategi-consult.com/assets/people/3992-480.webp",
+    "sameAs": [
+      "https://t.me/HR_Ignatiy",
+      "https://vc.ru/id5997122"
+    ]
   },
   "publisher": {
     "@type": "Person",
     "name": "Игнатий Филатов",
-    "url": "https://strategi-consult.com"
+    "url": "https://strategi-consult.com/obo-mne/"
   }
 }
 </script>
@@ -430,6 +435,24 @@
   html[data-theme="light"] .calc input, html[data-theme="light"] .calc select{ color:#131313; background:rgba(255,255,255,0.8); border-color:rgba(19,19,19,0.15); }
   html[data-theme="light"] .calc .res{ background:rgba(25,95,232,0.10); border-color:rgba(25,95,232,0.35); }
   html[data-theme="light"] .posts .tag{ color:var(--accent); }
+
+  /* ---------- картинки, автор ---------- */
+  .prose figure{ margin-top:20px; }
+  .prose figure img, .shot img{ display:block; width:100%; height:auto; border-radius:14px; border:1px solid var(--glass-line); }
+  .prose figcaption, .shot figcaption{ font-size:var(--fs-sec); color:var(--text-mute); margin-top:8px; line-height:1.5; }
+  .author-box{ max-width:720px; margin-top:36px; display:flex; gap:16px; align-items:center; background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:18px; padding:16px 18px; }
+  .author-box img{ width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:50% 20%; flex:none; }
+  .author-box b{ display:block; font-size:16px; }
+  .author-box p{ font-size:var(--fs-body-s); color:var(--text-soft); line-height:1.5; margin-top:4px; }
+  .author-box a, .meta a{ color:var(--accent-light); }
+  html[data-theme="light"] .author-box a, html[data-theme="light"] .meta a{ color:var(--accent); }
+  .about-hero{ display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:28px; align-items:start; margin-top:8px; }
+  .about-hero img{ width:100%; height:auto; border-radius:22px; border:1px solid var(--glass-line); }
+  .facts{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  .facts span{ font-size:var(--fs-body-s); border:1px solid var(--glass-line); background:var(--glass-fill); border-radius:999px; padding:7px 14px; }
+  .facts em{ font-style:normal; color:#a9c2ff; font-weight:var(--fw-bold); }
+  html[data-theme="light"] .facts em{ color:var(--accent); }
+  @media (max-width:620px){ .about-hero{ grid-template-columns:minmax(0,1fr); } .about-hero figure{ max-width:300px; } }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -487,7 +510,7 @@
     <div class="eyebrow">Текучесть и HR-аудит</div>
     <h1>Кадровый аудит своими силами. <em>Чек-лист на один вечер.</em></h1>
     <p class="lead">Кадровый аудит — это проверка, всё ли в порядке с документами по сотрудникам и с тем, как устроена работа с людьми. Первую часть можно пройти самому по чек-листу ниже, вторая покажет, где компания теряет деньги.</p>
-    <p class="meta">Игнатий Филатов, HRBP · 8 октября 2026 · обновлено 10 ноября 2026 · 4 мин чтения</p>
+    <p class="meta"><a href="/obo-mne/" rel="author">Игнатий Филатов</a>, HRBP · 8 октября 2026 · обновлено 10 ноября 2026 · 5 мин чтения</p>
     <nav class="toc" aria-label="Содержание"><b>Содержание</b><ol><li><a href="#s1">Что такое кадровый аудит и зачем он нужен</a></li><li><a href="#s2">Чек-лист: обязательные документы компании</a></li><li><a href="#s3">Чек-лист: документы по каждому сотруднику</a></li><li><a href="#s4">Чек-лист: время, деньги и отпуска</a></li><li><a href="#s4a">Чек-лист: аудит архива кадровых документов</a></li><li><a href="#s5">Чек-лист: HR-процессы и деньги</a></li><li><a href="#s6">С чего начать</a></li><li><a href="#s7">Когда звать специалиста</a></li></ol></nav>
 
     <article class="prose">
@@ -521,9 +544,14 @@
 <li>Все изменения — зарплата, должность, график — оформлены допсоглашениями, а не «договорились устно»</li>
 <li>Форма ЕФС-1 о приёме и переводах подана в срок</li>
 <li>Есть должностная инструкция и она совпадает с тем, что человек реально делает</li>
+<li>С удалёнными сотрудниками заключён договор о дистанционной работе (глава 49.1 ТК РФ), а не тот же шаблон, что для офиса</li>
 </ul>
+<div class="case"><div class="sec-label">Из практики</div>
+<p><b>Плохой договор, который уже стоил денег.</b> На аудите одной компании я открыл трудовой договор и увидел слабый шаблон. А для удалённых сотрудников отдельного договора не было вовсе: они работали по тому же документу, что и офис. Потом выяснилось, что у компании из-за этого уже были проблемы.</p>
+<p>Вместе с юристом я подготовил новый шаблон трудового договора и отдельный — для удалённых сотрудников. С тех пор проблем с договорами у компании не было.</p></div>
 
 <h2 id="s4">Чек-лист: время, деньги и отпуска</h2>
+<figure><img src="/assets/blog/tabel-urv.webp" width="1600" height="744" alt="Рабочий табель учёта рабочего времени монтажников по объектам и дням месяца" loading="lazy" decoding="async"><figcaption>Так выглядит живой табель учёта рабочего времени у моего клиента: часы по дням и объектам, выходные и больничные. Фамилии скрыты.</figcaption></figure>
 <ul class="checklist">
 <li>Ведётся табель учёта рабочего времени</li>
 <li>Зарплата выплачивается не реже чем каждые полмесяца (ст. 136 ТК РФ)</li>
@@ -559,7 +587,10 @@
 <li>У сотрудников есть понятные цели и правила премий</li>
 <li>Одни и те же вопросы не задают по сто раз — ответы где-то записаны</li>
 </ul>
-<p>Каждое «нет» здесь — это деньги. Например, в одной компании сравнение зарплат с рынком показало переплату в 1 100 000 ₽ в месяц; по его результатам я сократил расходы на ФОТ на 700 000 ₽ в месяц.</p>
+<p>Каждое «нет» здесь — это деньги.</p>
+<div class="case"><div class="sec-label">Из практики</div>
+<p><b>Переплата 1 100 000 ₽ в месяц.</b> В производственной компании на 70 человек я сравнил зарплаты с рынком по 24 позициям. Получилась переплата 1 100 000 ₽ в месяц, это больше 13 млн ₽ в год. Для компании такого размера сумма огромная, а видна она становится только когда кладёшь свою ведомость рядом с рынком.</p>
+<p>По результатам я сократил расходы на ФОТ на 700 000 ₽ в месяц.</p></div>
 
 <h2 id="s6">С чего начать</h2>
 <ol>
@@ -573,6 +604,11 @@
 <p>Если «нет» и «не уверен» получилось больше пяти, если впереди проверка или спор с бывшим сотрудником, или если вы просто не хотите тратить на это вечера. Свои ошибки замечать сложнее всего — взгляд со стороны находит больше. Ведение кадровых документов можно отдать на <a href="/kadry/">кадровый учёт на аутсорсинге</a>, а проверку HR-процессов — на <a href="/hr-audit/">бесплатный HR-аудит</a>.</p>
 
     </article>
+
+    <aside class="author-box" aria-label="Об авторе">
+      <img src="/assets/people/3992-480.webp" width="72" height="72" alt="Игнатий Филатов" loading="lazy" decoding="async">
+      <div><b>Игнатий Филатов</b><p>HRBP и HR-консультант. Больше 5 лет в HR, разобрал HR-процессы в 25+ компаниях — от IT до производства. Все истории в статьях — из моей практики. <a href="/obo-mne/" rel="author">Подробнее обо мне →</a></p></div>
+    </aside>
 
     <section class="sec reveal" aria-labelledby="h-svc">
       <div class="sec-label">Если не хотите разбираться сами</div>
@@ -617,6 +653,7 @@
   <footer class="foot">
     <a href="/">← На главную</a>
     <a href="/blog/">Блог</a>
+    <a href="/obo-mne/">Обо мне</a>
     <a href="/naim/">Подбор персонала</a>
     <a href="/hr-audit/">HR-аудит</a>
     <a href="/malyj-biznes/">HR-аутсорсинг для малого бизнеса</a>

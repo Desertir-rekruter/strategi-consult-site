@@ -34,7 +34,13 @@
   "author": {
     "@type": "Person",
     "name": "Игнатий Филатов",
-    "url": "https://strategi-consult.com"
+    "url": "https://strategi-consult.com/obo-mne/",
+    "jobTitle": "HRBP, HR-консультант",
+    "image": "https://strategi-consult.com/assets/people/3992-480.webp",
+    "sameAs": [
+      "https://t.me/HR_Ignatiy",
+      "https://vc.ru/id5997122"
+    ]
   },
   "blogPost": [
     {
@@ -441,6 +447,24 @@
   html[data-theme="light"] .calc input, html[data-theme="light"] .calc select{ color:#131313; background:rgba(255,255,255,0.8); border-color:rgba(19,19,19,0.15); }
   html[data-theme="light"] .calc .res{ background:rgba(25,95,232,0.10); border-color:rgba(25,95,232,0.35); }
   html[data-theme="light"] .posts .tag{ color:var(--accent); }
+
+  /* ---------- картинки, автор ---------- */
+  .prose figure{ margin-top:20px; }
+  .prose figure img, .shot img{ display:block; width:100%; height:auto; border-radius:14px; border:1px solid var(--glass-line); }
+  .prose figcaption, .shot figcaption{ font-size:var(--fs-sec); color:var(--text-mute); margin-top:8px; line-height:1.5; }
+  .author-box{ max-width:720px; margin-top:36px; display:flex; gap:16px; align-items:center; background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:18px; padding:16px 18px; }
+  .author-box img{ width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:50% 20%; flex:none; }
+  .author-box b{ display:block; font-size:16px; }
+  .author-box p{ font-size:var(--fs-body-s); color:var(--text-soft); line-height:1.5; margin-top:4px; }
+  .author-box a, .meta a{ color:var(--accent-light); }
+  html[data-theme="light"] .author-box a, html[data-theme="light"] .meta a{ color:var(--accent); }
+  .about-hero{ display:grid; grid-template-columns:minmax(0,1.6fr) minmax(0,1fr); gap:28px; align-items:start; margin-top:8px; }
+  .about-hero img{ width:100%; height:auto; border-radius:22px; border:1px solid var(--glass-line); }
+  .facts{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  .facts span{ font-size:var(--fs-body-s); border:1px solid var(--glass-line); background:var(--glass-fill); border-radius:999px; padding:7px 14px; }
+  .facts em{ font-style:normal; color:#a9c2ff; font-weight:var(--fw-bold); }
+  html[data-theme="light"] .facts em{ color:var(--accent); }
+  @media (max-width:620px){ .about-hero{ grid-template-columns:minmax(0,1fr); } .about-hero figure{ max-width:300px; } }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -544,6 +568,7 @@
   <footer class="foot">
     <a href="/">← На главную</a>
     <a href="/blog/">Блог</a>
+    <a href="/obo-mne/">Обо мне</a>
     <a href="/naim/">Подбор персонала</a>
     <a href="/hr-audit/">HR-аудит</a>
     <a href="/malyj-biznes/">HR-аутсорсинг для малого бизнеса</a>
