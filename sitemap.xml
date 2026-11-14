@@ -44,7 +44,7 @@
   </url>
   <url>
     <loc>https://strategi-consult.com/blog/</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-11-14</lastmod></lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -123,6 +123,12 @@
   <url>
     <loc>https://strategi-consult.com/blog/sotrudnik-uehal-iz-rossii-udalenno/</loc>
     <lastmod>2026-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://strategi-consult.com/blog/sotrudnik-trebuet-tri-oklada-pri-uvolnenii/</loc>
+    <lastmod>2026-11-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
