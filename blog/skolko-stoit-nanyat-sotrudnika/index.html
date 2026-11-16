@@ -387,6 +387,13 @@
   .prose th, .prose td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--glass-line); vertical-align:top; line-height:1.5; }
   .prose th{ font-weight:var(--fw-bold); color:#fff; background:var(--glass-fill); }
   .prose td{ color:rgba(255,255,255,0.85); }
+  .magnet{ max-width:720px; margin-top:36px; border:1px solid var(--accent-light); background:rgba(98,147,255,0.10); border-radius:18px; padding:20px 22px; }
+  .magnet h2{ font-size:var(--fs-h2); font-weight:var(--fw-bold); line-height:1.3; margin:4px 0 8px; }
+  .magnet p{ font-size:15px; line-height:1.6; color:rgba(255,255,255,0.85); }
+  .magnet .actions{ margin-top:14px; }
+  .magnet small{ display:block; margin-top:10px; font-size:13px; color:var(--text-mute); }
+  .share{ max-width:720px; margin-top:28px; font-size:15px; color:var(--text-mute); }
+  .share a{ color:var(--accent-light); text-decoration:underline; text-underline-offset:3px; }
   .checklist{ list-style:none; margin-left:0 !important; }
   .checklist li{ position:relative; padding-left:30px; }
   .checklist li::before{ content:""; position:absolute; left:0; top:5px; width:16px; height:16px; border:2px solid var(--accent-light); border-radius:5px; }
@@ -423,6 +430,7 @@
   html[data-theme="light"] .prose a{ color:var(--accent); }
   html[data-theme="light"] .prose .note{ border-left-color:var(--accent); background:rgba(25,95,232,0.08); }
   html[data-theme="light"] .checklist li::before{ border-color:var(--accent); }
+  html[data-theme="light"] .magnet{ border-color:var(--accent); background:rgba(25,95,232,0.08); } html[data-theme="light"] .magnet p{ color:#2a2a2c; } html[data-theme="light"] .share a{ color:var(--accent); }
   html[data-theme="light"] .calc{ background:rgba(255,255,255,0.5); border-color:rgba(255,255,255,0.7); }
   html[data-theme="light"] .calc input, html[data-theme="light"] .calc select{ color:#131313; background:rgba(255,255,255,0.8); border-color:rgba(19,19,19,0.15); }
   html[data-theme="light"] .calc .res{ background:rgba(25,95,232,0.10); border-color:rgba(25,95,232,0.35); }
@@ -501,7 +509,7 @@
     <nav class="crumbs" aria-label="Хлебные крошки"><a href="/">Главная</a> / <a href="/blog/">Блог</a> / Найм</nav>
     <div class="eyebrow">Найм</div>
     <h1>Сколько стоит нанять сотрудника. <em>Считаем честно, с калькулятором.</em></h1>
-    <p class="lead">Обычно собственник называет цену найма как «сколько заплатили за hh». На деле это меньшая часть. Покажу, из чего складывается настоящая цифра, и дам калькулятор, чтобы посчитать её для вашей вакансии.</p>
+    <p class="lead">Сколько стоит нанять сотрудника? Возьмём менеджера на 80 000 ₽: в бюджете найм записан как 15 000 ₽, а на деле выходит около 260 000 ₽ — больше трёх его зарплат. И дороже всего тут не hh.ru и не агентство. Дороже всего дни, пока место пустует. Ниже формула и калькулятор для вашей вакансии.</p>
     <p class="meta"><a href="/obo-mne/" rel="author">Игнатий Филатов</a>, HRBP · 8 октября 2026 · обновлено 14 ноября 2026 · 3 мин чтения</p>
     <nav class="toc" aria-label="Содержание"><b>Содержание</b><ol><li><a href="#s1">Из чего складывается стоимость найма</a></li><li><a href="#s2">Формула стоимости найма</a></li><li><a href="#s3">Калькулятор стоимости найма</a></li><li><a href="#s4">Пример расчёта</a></li><li><a href="#s5">Как снизить стоимость найма</a></li></ol></nav>
 
@@ -563,6 +571,7 @@
 <div class="note"><p>Агентства берут 15–20% от годовой зарплаты. Для менеджера на 80 000 ₽ это 144 000–192 000 ₽ за одного человека. Я беру 20 000–30 000 ₽ за вакансию, а платите вы после выхода специалиста.</p></div>
 
     </article>
+    <p class="share">Полезно? <a href="https://t.me/share/url?url=https%3A%2F%2Fstrategi-consult.com%2Fblog%2Fskolko-stoit-nanyat-sotrudnika%2F&amp;text=%D0%A1%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE%20%D1%81%D1%82%D0%BE%D0%B8%D1%82%20%D0%BD%D0%B0%D0%BD%D1%8F%D1%82%D1%8C%20%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B0%3A%20%D1%80%D0%B0%D1%81%D1%87%D1%91%D1%82%20%D0%B8%20%D0%BA%D0%B0%D0%BB%D1%8C%D0%BA%D1%83%D0%BB%D1%8F%D1%82%D0%BE%D1%80" target="_blank" rel="noopener">Отправьте статью коллеге в Telegram</a> — тому, кто занимается людьми в вашей компании.</p>
 
     <aside class="author-box" aria-label="Об авторе">
       <img src="/assets/people/3992-480.webp" width="72" height="72" alt="Игнатий Филатов" loading="lazy" decoding="async">
