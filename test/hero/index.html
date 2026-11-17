@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Поток документов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;800;900&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: один экран-hero. Поток реальных документов на всю площадь, заголовок внизу слева, служебная подпись справа. Контрастный ч/б: чистый белый и чёрный. */
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --ink:#000000; --muted:#3A3A3A; --line:rgba(0,0,0,.9);
+  --btn:#000000; --btn-ink:#FFFFFF;
+  --grot:"Inter Tight","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+:root.dark{color-scheme:dark;--bg:#000000;--ink:#FFFFFF;--muted:#C8C8C8;--line:rgba(255,255,255,.9);--btn:#FFFFFF;--btn-ink:#000000}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--grot);overflow:hidden}
+.hero{position:relative;height:100%;min-height:560px;overflow:hidden;background:var(--bg);transition:background .4s}
+canvas#gl{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+.ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;
+  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:14px 28px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:2px solid var(--line);pointer-events:auto}
+.brand{font-weight:900;letter-spacing:.02em;font-size:15px;text-transform:uppercase}
+.mode{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;border:2px solid var(--ink);color:var(--ink);background:var(--bg);padding:8px 10px;border-radius:0;cursor:pointer}
+.mode:focus-visible,.cta:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.tag{align-self:flex-end;max-width:290px;text-align:right;font:500 12px/1.55 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);margin-top:14vh;
+  background:var(--bg);padding:8px 10px}
+.tag b{display:block;font-weight:500;margin-bottom:6px;border-bottom:2px solid var(--ink);padding-bottom:6px}
+.bottom{display:flex;flex-direction:column;gap:20px}
+h1{margin:0;font-weight:900;text-transform:uppercase;letter-spacing:-.04em;line-height:.88;font-size:clamp(40px,7.8vw,116px);text-wrap:balance}
+h1 span{display:block}
+.row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.cta{pointer-events:auto;font:700 15px/1 var(--grot);color:var(--btn-ink);background:var(--btn);border:0;border-radius:0;padding:17px 22px;cursor:pointer;letter-spacing:.01em}
+.meta{font:500 11px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+@media (max-width:620px){
+  .tag{margin-top:6px;max-width:220px;font-size:11px}
+  h1{font-size:clamp(34px,10.4vw,50px)}
+  .meta{display:none}
+}
+</style>
+</head>
+<body>
+<section class="hero">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="ui">
+    <div class="top">
+      <span class="brand">Strategi-consult</span>
+      <button class="mode" type="button" id="mode" aria-pressed="false">Тёмная</button>
+    </div>
+    <p class="tag"><b>HR-аудит · найм · кадровый учёт</b>Нахожу, где HR съедает деньги, и выстраиваю процессы, которые это останавливают</p>
+    <div class="bottom">
+      <h1>Вы 100% теряете деньги <span>Я 100% их верну</span></h1>
+      <div class="row">
+        <button class="cta" type="button">Получить бесплатный аудит →</button>
+        <span class="meta">30 минут · бесплатно</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script>
+(()=>{
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas=document.getElementById('gl');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping=THREE.NoToneMapping;
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(32,1,.1,100);camera.position.set(0,0,13);
+
+(()=>{const env=new THREE.Scene();
+  env.add(new THREE.Mesh(new THREE.BoxGeometry(30,30,30),new THREE.MeshBasicMaterial({color:0x777777,side:THREE.BackSide})));
+  const box=(w,h,x,y,z,c)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:c,side:THREE.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);env.add(m)};
+  box(16,6,0,12,4,0xffffff);box(8,10,-13,2,6,0xffffff);box(6,8,13,-2,8,0xdddddd);box(10,4,0,-12,6,0x222222);
+  scene.environment=new THREE.PMREMGenerator(renderer).fromScene(env,.03).texture;})();
+scene.add(new THREE.AmbientLight(0xffffff,.95));
+const key=new THREE.DirectionalLight(0xffffff,1.6);key.position.set(-5,8,10);key.castShadow=true;
+Object.assign(key.shadow.camera,{left:-14,right:14,top:10,bottom:-10,near:1,far:40});key.shadow.mapSize.set(2048,2048);key.shadow.bias=-.0004;key.shadow.normalBias=.02;key.shadow.radius=4;
+scene.add(key);
+/* стена, на которую падают тени */
+const catcher=new THREE.Mesh(new THREE.PlaneGeometry(80,50),new THREE.ShadowMaterial({opacity:.13}));catcher.position.z=-3.2;catcher.receiveShadow=true;
+
+/* ---------- текстуры документов ---------- */
+const FILL='Работодатель обязуется предоставить работнику работу по обусловленной трудовой функции, обеспечить условия труда, предусмотренные трудовым законодательством, своевременно и в полном размере выплачивать заработную плату. Работник обязуется лично выполнять определённую настоящим договором трудовую функцию, соблюдать правила внутреннего трудового распорядка. Заработная плата выплачивается не реже чем каждые полмесяца. Испытательный срок составляет три месяца. ';
+function grain(g,w,h,a){const d=g.getImageData(0,0,w,h),p=d.data;for(let i=0;i<p.length;i+=4){const n=(Math.random()-.5)*a;p[i]+=n;p[i+1]+=n;p[i+2]+=n}g.putImageData(d,0,0)}
+function para(g,x,y,w,lines,size){g.font=`${size}px "Times New Roman",Times,serif`;g.fillStyle='#1b1b1b';const words=(FILL+FILL).split(' ');let line='',k=0,n=0;
+  for(;n<lines&&k<words.length;k++){const t=line+words[k]+' ';if(g.measureText(t).width>w){g.fillText(line,x,y);y+=size*1.45;line=words[k]+' ';n++}else line=t}return y}
+function sign(g,x,y){g.strokeStyle='#1f3fa8';g.lineWidth=2.6;g.lineCap='round';g.beginPath();g.moveTo(x,y);g.bezierCurveTo(x+20,y-34,x+34,y+22,x+52,y-8);g.bezierCurveTo(x+64,y-26,x+70,y+6,x+92,y-12);g.bezierCurveTo(x+104,y-20,x+112,y-2,x+130,y-6);g.stroke()}
+function stamp(g,x,y,r){g.save();g.globalAlpha=.78;g.strokeStyle='#2d3fb0';g.fillStyle='#2d3fb0';g.lineWidth=3;g.beginPath();g.arc(x,y,r,0,7);g.stroke();g.lineWidth=1.5;g.beginPath();g.arc(x,y,r-9,0,7);g.stroke();
+  g.font='bold 11px Arial';const s='ОТДЕЛ КАДРОВ • ПРИНЯТО • ';for(let i=0;i<s.length;i++){const a=i/s.length*Math.PI*2-Math.PI/2;g.save();g.translate(x+Math.cos(a)*(r-17),y+Math.sin(a)*(r-17));g.rotate(a+Math.PI/2);g.fillText(s[i],-3,4);g.restore()}
+  g.font='bold 16px Arial';g.textAlign='center';g.fillText('№ 1',x,y+6);g.textAlign='left';g.restore()}
+function doc(kind){
+  const W=512,H=724,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+  g.fillStyle='#fdfdfb';g.fillRect(0,0,W,H);
+  g.fillStyle='#000';g.textAlign='center';
+  if(kind==='contract'){g.font='bold 22px "Times New Roman",serif';g.fillText('ТРУДОВОЙ ДОГОВОР № 14/2026',W/2,72);g.textAlign='left';g.font='15px "Times New Roman",serif';g.fillText('г. Москва',48,110);g.textAlign='right';g.fillText('«12» ноября 2026 г.',W-48,110);g.textAlign='left';
+    g.font='bold 15px "Times New Roman",serif';g.fillText('1. Предмет договора',48,150);let y=para(g,48,176,416,14,14);g.font='bold 15px "Times New Roman",serif';g.fillText('2. Права и обязанности сторон',48,y+16);y=para(g,48,y+42,416,10,14);
+    g.font='14px "Times New Roman",serif';g.fillText('Работодатель ____________',48,H-70);g.fillText('Работник ____________',290,H-70);sign(g,150,H-78);sign(g,370,H-76);stamp(g,120,H-110,52)}
+  if(kind==='order'){g.font='bold 30px "Times New Roman",serif';g.fillText('ПРИКАЗ',W/2,84);g.font='16px "Times New Roman",serif';g.fillText('№ 128-к   от 05.11.2026',W/2,114);g.font='italic 16px "Times New Roman",serif';g.fillText('О приёме работника на работу',W/2,150);g.textAlign='left';
+    let y=para(g,48,190,416,6,14);g.strokeStyle='#222';g.lineWidth=1.2;for(let r=0;r<6;r++){g.strokeRect(48,y+10+r*30,416,30)}g.beginPath();g.moveTo(90,y+10);g.lineTo(90,y+190);g.moveTo(300,y+10);g.lineTo(300,y+190);g.stroke();
+    g.font='13px "Times New Roman",serif';['№','ФИО','Должность'].forEach((t,i)=>g.fillText(t,[58,100,310][i],y+30));y=para(g,48,y+226,416,6,14);g.font='14px "Times New Roman",serif';g.fillText('Генеральный директор ____________',48,H-70);sign(g,250,H-78)}
+  if(kind==='memo'){g.textAlign='right';g.font='15px "Times New Roman",serif';['Генеральному директору','от руководителя','производственного отдела'].forEach((t,i)=>g.fillText(t,W-48,64+i*20));g.textAlign='center';
+    g.font='bold 22px "Times New Roman",serif';g.fillText('СЛУЖЕБНАЯ ЗАПИСКА',W/2,170);g.textAlign='left';let y=para(g,48,210,416,18,14);
+    g.strokeStyle='#000';g.lineWidth=2;g.beginPath();g.moveTo(60,y+120);[[120,y+80],[180,y+96],[240,y+50],[300,y+64],[360,y+20],[440,y+30]].forEach(([a,b])=>g.lineTo(a,b));g.stroke();g.lineWidth=1;g.strokeStyle='#888';g.strokeRect(48,y+10,416,120);
+    g.font='14px "Times New Roman",serif';g.fillText('«17» ноября 2026 г.',48,H-60);g.fillText('____________',330,H-60);sign(g,330,H-68)}
+
+  const T=(t,x,y,f,c)=>{g.font=f;g.fillStyle=c||'#111';g.fillText(t,x,y)};
+  const SERIF='"Times New Roman",serif',SANS='Arial,Helvetica,sans-serif';
+  function photo(x,y,w,h,dark){const gr=g.createLinearGradient(0,y,0,y+h);gr.addColorStop(0,dark?'#9a9a9a':'#d6d6d6');gr.addColorStop(1,dark?'#5a5a5a':'#a8a8a8');g.fillStyle=gr;g.fillRect(x,y,w,h);
+    g.fillStyle=dark?'#1c1c1c':'#3a3a3a';g.beginPath();g.ellipse(x+w/2,y+h*.4,w*.2,h*.18,0,0,7);g.fill();g.beginPath();g.ellipse(x+w/2,y+h*1.02,w*.44,h*.36,0,Math.PI,0);g.fill()}
+  function sec(t,x,y,w,c){T(t,x,y,'bold 15px '+SANS,c);g.fillStyle=c||'#111';g.fillRect(x,y+6,w,1.5);return y+26}
+  function job(x,y,w,period,firm,pos,n,c){T(period,x,y,'12px '+SANS,'#666');T(firm,x+110,y,'bold 13px '+SANS,c);T(pos,x+110,y+17,'13px '+SANS,c);
+    g.fillStyle='#bbb';for(let i=0;i<n;i++)g.fillRect(x+110,y+30+i*11,(w-110)*(i===n-1?.6:1),4);return y+40+n*11}
+  function tags(x,y,list){g.font='12px '+SANS;let cx=x;list.forEach(t=>{const w=g.measureText(t).width+16;g.strokeStyle='#111';g.lineWidth=1.2;g.strokeRect(cx,y-14,w,20);g.fillStyle='#111';g.fillText(t,cx+8,y);cx+=w+6})}
+  function pen(t,x,y,rot){g.save();g.translate(x,y);g.rotate(rot||-.08);g.font='italic 22px "Snell Roundhand","Segoe Script","Brush Script MT",cursive';g.fillStyle='#1f3fa8';g.fillText(t,0,0);g.restore()}
+  if(kind.startsWith('resA')){const [nm,pos,firm,firm2,note]=kind==='resA1'?['Смирнова Анна','Менеджер по продажам','ООО «Вектор»','ООО «Северный ветер»','на собеседование ✓']:['Козлов Дмитрий','Инженер-конструктор','АО «Стройдеталь»','ООО «Металлпроект»','перезвонить вт'];
+    g.textAlign='left';photo(40,40,120,150);T(nm,184,76,'bold 28px '+SANS);T(pos,184,104,'17px '+SANS,'#333');T('Москва · опыт 6 лет · готов к переезду',184,128,'13px '+SANS,'#666');T('+7 9•• ••• •• ••',184,150,'13px '+SANS,'#666');
+    let y=sec('Опыт работы',40,232,432);y=job(40,y,432,'2021 — н.в.',firm,'Руководитель группы',3);y=job(40,y+6,432,'2018 — 2021',firm2,pos,3);
+    y=sec('Образование',40,y+18,432);T('МГТУ им. Баумана, 2018',40,y,'13px '+SANS);T('Бакалавр',40,y+18,'13px '+SANS,'#666');y=sec('Навыки',40,y+48,432);tags(40,y+4,kind==='resA1'?['CRM','B2B','Переговоры','Excel']:['SolidWorks','КОМПАС-3D','ЕСКД','AutoCAD']);
+    g.strokeStyle='#1f3fa8';g.lineWidth=2.5;g.beginPath();g.ellipse(270,92,128,34,-.04,0,7);g.stroke();pen(note,290,206)}
+  if(kind==='resB'){g.fillStyle='#0b0b0b';g.fillRect(0,0,172,H);photo(26,34,120,148,true);g.strokeStyle='#fff';g.lineWidth=3;g.strokeRect(26,34,120,148);
+    T('КОНТАКТЫ',26,220,'bold 12px '+SANS,'#fff');['Москва','+7 9•• ••• ••','orlova@mail'].forEach((t,i)=>T(t,26,242+i*18,'12px '+SANS,'#cfcfcf'));
+    T('НАВЫКИ',26,330,'bold 12px '+SANS,'#fff');['1С:ЗУП','Налоги','МСФО','Excel'].forEach((t,i)=>{T(t,26,354+i*34,'12px '+SANS,'#cfcfcf');g.fillStyle='#333';g.fillRect(26,360+i*34,120,4);g.fillStyle='#fff';g.fillRect(26,360+i*34,120*(.9-i*.12),4)});
+    T('ОРЛОВА',196,82,'900 36px '+SANS);T('МАРИЯ',196,118,'900 36px '+SANS);T('Главный бухгалтер',196,146,'16px '+SANS,'#444');
+    let y=sec('Опыт работы',196,196,280);y=job(196,y,280,'2020 — н.в.','ООО «Альфатех»','Главный бухгалтер',4);y=job(196,y+6,280,'2016 — 2020','ООО «Ромашка»','Бухгалтер',4);
+    y=sec('Образование',196,y+18,280);T('РЭУ им. Плеханова',196,y,'13px '+SANS);y=sec('О себе',196,y+40,280);g.fillStyle='#bbb';for(let i=0;i<5;i++)g.fillRect(196,y+i*12,280*(i===4?.5:1),4)}
+  if(kind==='resC'){g.textAlign='center';T('ВОЛКОВ ИЛЬЯ',W/2,92,'900 34px '+SANS);T('Слесарь-сборщик 5 разряда',W/2,124,'17px '+SANS,'#333');T('Красково · опыт 11 лет · график 5/2',W/2,148,'13px '+SANS,'#666');g.textAlign='left';
+    g.fillStyle='#111';g.fillRect(40,170,432,3);let y=sec('Опыт работы',40,214,432);y=job(40,y,432,'2019 — н.в.','ЗАО «Профсталь»','Слесарь-сборщик',3);y=job(40,y+6,432,'2014 — 2019','ООО «ТехноМонтаж»','Слесарь МСР',3);y=job(40,y+6,432,'2012 — 2014','ИП Гусев','Помощник слесаря',2);
+    y=sec('Навыки',40,y+18,432);tags(40,y+4,['Чертежи','Сварка','Клёпка','Допуски']);y=sec('Документы',40,y+44,432);T('Права B · Мед. книжка · Гражданство РФ',40,y,'13px '+SANS);pen('отказ — далеко',300,96,.12);
+    g.strokeStyle='#1f3fa8';g.lineWidth=2.5;g.beginPath();g.moveTo(290,104);g.lineTo(470,98);g.stroke()}
+  if(kind==='timesheet'){g.textAlign='center';T('ТАБЕЛЬ УЧЁТА РАБОЧЕГО ВРЕМЕНИ',W/2,60,'bold 17px '+SERIF);T('Форма Т-13 · ноябрь 2026',W/2,82,'13px '+SERIF,'#444');g.textAlign='left';
+    const x0=30,y0=110,cw=27,rh=28,cols=16,rows=18;g.strokeStyle='#222';g.lineWidth=1;for(let r=0;r<=rows;r++){g.beginPath();g.moveTo(x0,y0+r*rh);g.lineTo(x0+84+cols*cw,y0+r*rh);g.stroke()}
+    for(let c=0;c<=cols;c++){g.beginPath();g.moveTo(x0+84+c*cw,y0);g.lineTo(x0+84+c*cw,y0+rows*rh);g.stroke()}g.beginPath();g.moveTo(x0,y0);g.lineTo(x0,y0+rows*rh);g.stroke();
+    g.font='11px '+SANS;g.fillStyle='#111';for(let c=0;c<cols;c++)g.fillText(String(c+1),x0+88+c*cw,y0+18);
+    for(let r=1;r<rows;r++){g.fillStyle='#bbb';g.fillRect(x0+6,y0+r*rh+12,62,4);for(let c=0;c<cols;c++){const v=(c%7===5||c%7===6)?'В':((r*7+c)%23===0?'Б':'8');g.fillStyle=v==='8'?'#111':'#1f3fa8';g.fillText(v,x0+93+c*cw,y0+r*rh+19)}}
+    T('Ответственное лицо ____________',30,H-50,'13px '+SERIF);sign(g,250,H-56)}
+  if(kind==='report'){T('ОТЧЁТ ПО ТЕКУЧЕСТИ ПЕРСОНАЛА',40,64,'bold 18px '+SANS);T('III квартал 2026 · производство',40,88,'13px '+SANS,'#555');g.fillStyle='#111';g.fillRect(40,100,432,2);
+    const vals=[14,22,18,31,12,9];['Июл','Авг','Сен','Окт','Ноя','Дек'].forEach((m,i)=>{const h=vals[i]*7;g.fillStyle=i===3?'#111':'#9a9a9a';g.fillRect(60+i*70,360-h,40,h);T(m,64+i*70,382,'12px '+SANS,'#333');T(vals[i]+'%',62+i*70,352-h,'bold 12px '+SANS)});
+    g.strokeStyle='#111';g.beginPath();g.moveTo(40,362);g.lineTo(472,362);g.stroke();
+    let y=sec('Причины ухода',40,430,432);[['Зарплата ниже рынка','42%'],['Руководитель','27%'],['График','18%'],['Другое','13%']].forEach(([a,b],i)=>{T(a,40,y+i*26,'13px '+SANS);T(b,430,y+i*26,'bold 13px '+SANS);g.fillStyle='#ddd';g.fillRect(40,y+i*26+7,432,1)});
+    pen('обсудить на планёрке!',200,H-60,-.06)}
+  if(kind==='application'){g.textAlign='right';['Генеральному директору','ООО «Альфатех»','от инженера Козлова Д.'].forEach((t,i)=>T(t,W-48,70+i*20,'15px '+SERIF));g.textAlign='center';T('ЗАЯВЛЕНИЕ',W/2,200,'bold 22px '+SERIF);g.textAlign='left';
+    ['Прошу предоставить мне ежегодный','оплачиваемый отпуск с 01.12.2026','на 14 календарных дней.'].forEach((t,i)=>{pen(t,60,260+i*40,0);g.fillStyle='#ccc';g.fillRect(48,266+i*40,416,1)});
+    pen('17.11.2026',60,420,0);sign(g,320,416);g.save();g.translate(330,520);g.rotate(-.12);g.strokeStyle='#1f3fa8';g.lineWidth=2;g.strokeRect(-90,-36,190,70);g.font='bold 15px '+SANS;g.fillStyle='#1f3fa8';g.fillText('СОГЛАСОВАНО',-70,-6);g.font='13px '+SANS;g.fillText('нач. отдела ______',-70,18);g.restore()}
+  grain(g,W,H,10);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t;
+}
+function deloTex(){const W=512,H=740,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+  g.fillStyle='#f3f1ea';g.fillRect(0,0,W,H);g.strokeStyle='#000';g.lineWidth=3;g.strokeRect(26,26,W-52,H-52);
+  g.fillStyle='#000';g.textAlign='center';g.font='bold 64px Arial';g.fillText('Д Е Л О  №',W/2,180);g.lineWidth=2;g.beginPath();g.moveTo(120,250);g.lineTo(W-120,250);g.stroke();
+  g.textAlign='left';g.font='22px Arial';['Начато','Окончено','На            листах','Хранить'].forEach((t,i)=>{g.fillText(t,70,420+i*62);g.beginPath();g.moveTo(200,424+i*62);g.lineTo(W-70,424+i*62);g.stroke()});
+  g.fillStyle='#1f3fa8';g.font='italic 30px "Times New Roman",serif';g.fillText('Личные дела сотрудников',112,320);
+  grain(g,W,H,16);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t}
+
+/* лист с лёгким изгибом; оборот листа чисто-белый */
+function bentSheet(w,h,bend){const g=new THREE.PlaneGeometry(w,h,12,1),p=g.attributes.position;for(let i=0;i<p.count;i++){const x=p.getX(i)/(w/2);p.setZ(i,bend*(x*x-.4))}g.computeVertexNormals();return g}
+function paperMat(tex){const m=new THREE.MeshStandardMaterial({map:tex,roughness:.92,side:THREE.DoubleSide});
+  m.onBeforeCompile=s=>{s.fragmentShader=s.fragmentShader.replace('#include <map_fragment>','#include <map_fragment>\nif(!gl_FrontFacing) diffuseColor.rgb=vec3(.97);')};return m}
+const sheetGeo=bentSheet(.86,1.22,.05);
+const DOCS=['contract','order','memo','resA1','resA2','resB','resC','timesheet','report','application'];
+const docs=DOCS.map(k=>paperMat(doc(k)));
+function rounded(pts,r){const s=new THREE.Shape(),P=pts.map(([x,y])=>new THREE.Vector2(x,y)),n=P.length;
+  for(let i=0;i<n;i++){const a=P[(i-1+n)%n],b=P[i],c=P[(i+1)%n],rr=Math.min(r,a.distanceTo(b)/2,c.distanceTo(b)/2);
+    const p1=b.clone().add(a.clone().sub(b).normalize().multiplyScalar(rr)),p2=b.clone().add(c.clone().sub(b).normalize().multiplyScalar(rr));
+    i?s.lineTo(p1.x,p1.y):s.moveTo(p1.x,p1.y);s.quadraticCurveTo(b.x,b.y,p2.x,p2.y)}return s}
+const ext=(shape,d)=>new THREE.ExtrudeGeometry(shape,{depth:d,bevelEnabled:true,bevelThickness:.006,bevelSize:.006,bevelSegments:2,curveSegments:4});
+/* чёрная пластиковая папка: задник с ярлыком, створка, бумаги внутри */
+const blackMat=new THREE.MeshPhysicalMaterial({color:0x050505,roughness:.28,clearcoat:1,clearcoatRoughness:.15});
+const bBackGeo=ext(rounded([[-.6,-.46],[.6,-.46],[.6,.4],[-.06,.4],[-.14,.5],[-.6,.5]],.035),.016);
+const bFrontGeo=ext(rounded([[-.6,-.46],[.6,-.46],[.6,.3],[-.6,.3]],.03),.016);bFrontGeo.translate(0,0,.05);
+const bPaperGeo=new THREE.BoxGeometry(1.08,.84,.01);bPaperGeo.translate(0,.03,.034);
+/* картонная папка «Дело» с бумагами, торчащими сверху */
+const deloGeo=new THREE.BoxGeometry(.94,1.3,.03);
+const card=new THREE.MeshStandardMaterial({color:0xe9e6dd,roughness:.95});
+const deloMats=[card,card,card,card,new THREE.MeshStandardMaterial({map:deloTex(),roughness:.95}),card];
+const dPaperGeo=new THREE.BoxGeometry(.86,1.26,.02);dPaperGeo.translate(.01,.06,-.026);
+const whitePaper=new THREE.MeshStandardMaterial({color:0xfbfbf9,roughness:.9});
+
+/* состав потока */
+const N=74;
+const rnd=i=>Math.abs((Math.sin(i*12.9898+4.1)*43758.5453)%1);
+// резюме чаще остальных: примерно 45% потока
+const W8=[1,1,1,2,2,2,2,1,1,1],SUM=W8.reduce((a,b)=>a+b);
+const kinds=[...Array(N)].map((_,i)=>{let r=rnd(i)*SUM,k=0;while(r>=W8[k]){r-=W8[k];k++}return 's'+k});
+const count=k=>kinds.filter(x=>x===k).length;
+const ribbon=new THREE.Group();scene.add(ribbon);
+function inst(geo,mat,n){const m=new THREE.InstancedMesh(geo,mat,Math.max(1,n));m.count=n;m.castShadow=true;m.receiveShadow=true;m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);ribbon.add(m);return m}
+const groups={},idx={};DOCS.forEach((_,k)=>{groups['s'+k]=[inst(sheetGeo,docs[k],count('s'+k))];idx['s'+k]=0});
+const slot=kinds.map(k=>[groups[k],idx[k]++]);
+
+const curve=new THREE.CatmullRomCurve3([[-11,3.4,-1.5],[-7,2.6,0],[-3.6,.4,.8],[-.6,-.6,.4],[2.2,.9,-.4],[4.4,1.6,0],[6.6,-.6,.6],[9,-3.2,0],[12,-5,-1]].map(a=>new THREE.Vector3(...a)),false,'catmullrom',.5);
+
+/* отлетевшие листки-стикеры и скрепки-обрывки */
+const bits=inst(new THREE.BoxGeometry(.22,.3,.005),new THREE.MeshStandardMaterial({roughness:.85}),24);
+const col=new THREE.Color();
+const bitData=[...Array(24)].map((_,i)=>{const p=curve.getPointAt(rnd(i+90));bits.setColorAt(i,col.set(i%4?'#fbfbf9':'#050505'));
+  return{base:p.add(new THREE.Vector3((rnd(i+7)-.5)*3.2,(rnd(i+13)-.5)*4.6,(rnd(i+21)-.5)*2.5)),ph:rnd(i+3)*6.28,sp:.3+rnd(i+5)*.5,r:new THREE.Euler(rnd(i)*3,rnd(i+1)*3,rnd(i+2)*3)}});
+bits.instanceColor.needsUpdate=true;
+
+const m4=new THREE.Matrix4(),q=new THREE.Quaternion(),q2=new THREE.Quaternion(),Z=new THREE.Vector3(0,0,1),one=new THREE.Vector3(1,1,1);
+const n=new THREE.Vector3(),x=new THREE.Vector3(),y=new THREE.Vector3(),T=new THREE.Vector3(),eu=new THREE.Euler(),nx=new THREE.Vector3();
+let off=0,last=performance.now(),mx=0,my=0,tmx=0,tmy=0,visible=true;
+/* мышь пугает документы: точка курсора на плоскости ленты, листы отскакивают и плавно возвращаются */
+const ndc=new THREE.Vector2(9,9),ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,0,1),0),hit=new THREE.Vector3(),mLoc=new THREE.Vector3(),hasM={v:false};
+const push=[...Array(N)].map(()=>new THREE.Vector3()),tgt=new THREE.Vector3(),R=2.3;
+addEventListener('pointermove',e=>{tmx=e.clientX/innerWidth*2-1;tmy=e.clientY/innerHeight*2-1;const r=canvas.getBoundingClientRect();ndc.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);hasM.v=true});
+addEventListener('pointerleave',()=>{hasM.v=false});document.addEventListener('mouseleave',()=>{hasM.v=false});addEventListener('pointerup',e=>{if(e.pointerType==='touch')hasM.v=false});
+new IntersectionObserver(([e])=>visible=e.isIntersecting).observe(canvas);
+
+function layout(){
+  const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+  const a=w/h;
+  if(a<1){ribbon.scale.setScalar(.34+.3*a);ribbon.rotation.z=-.62;ribbon.position.set(0,.9,0)}
+  else{ribbon.scale.setScalar(Math.min(1,.62+.25*a));ribbon.rotation.z=0;ribbon.position.set(0,.5,0)}
+}
+addEventListener('resize',layout);layout();
+
+function frame(now){
+  const dt=Math.max(0,Math.min(.05,(now-last)/1000));last=now;
+  if(!reduce)off=(off+dt*.015)%1;
+  mx+=(tmx-mx)*.04;my+=(tmy-my)*.04;
+  const t=now/1000;
+  ribbon.rotation.y=mx*.12;ribbon.rotation.x=my*.08;
+  ribbon.updateMatrixWorld();
+  let mOn=false;if(hasM.v){ray.setFromCamera(ndc,camera);if(ray.ray.intersectPlane(plane,hit)){mLoc.copy(hit);ribbon.worldToLocal(mLoc);mOn=true}}
+  for(let i=0;i<N;i++){
+    const u=(((i/N)+off)%1+1)%1;
+    const p=curve.getPointAt(u);curve.getTangentAt(u,T);
+    const k=1.0+.35*Math.sin(u*9+t*.6);
+    n.copy(T).addScaledVector(Z,k).normalize();
+    x.copy(T).addScaledVector(n,-T.dot(n)).normalize();
+    y.crossVectors(n,x);
+    m4.makeBasis(x,y,n);q.setFromRotationMatrix(m4);
+    tgt.set(0,0,0);
+    if(mOn){const dx=p.x-mLoc.x,dy=p.y-mLoc.y,d=Math.hypot(dx,dy);if(d<R){const f=Math.pow(1-d/R,2)*1.36,inv=1/Math.max(d,.001);tgt.set(dx*inv*f,dy*inv*f,f*.9)}}
+    push[i].lerp(tgt,tgt.lengthSq()>push[i].lengthSq()?.18:.05);
+    p.add(push[i]);
+    eu.set(Math.sin(t*1.1+i)*.1+push[i].y*.5,Math.cos(t*.9+i*1.7)*.12-push[i].x*.5,Math.sin(t*.7+i*2.3)*.18+push[i].x*.3);q2.setFromEuler(eu);q.multiply(q2);
+    m4.compose(p,q,one);
+    const [ms,j]=slot[i];for(const m of ms)m.setMatrixAt(j,m4);
+  }
+  for(const k in groups)for(const m of groups[k])m.instanceMatrix.needsUpdate=true;
+  bitData.forEach((c,i)=>{const p=c.base.clone();p.y+=Math.sin(t*c.sp+c.ph)*.3;p.x+=Math.cos(t*c.sp*.7+c.ph)*.18;
+    eu.set(c.r.x+t*c.sp*.6,c.r.y+t*c.sp*.4,c.r.z+t*.2);q.setFromEuler(eu);m4.compose(p,q,one);bits.setMatrixAt(i,m4)});
+  bits.instanceMatrix.needsUpdate=true;
+  if(visible)renderer.render(scene,camera);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+const mode=document.getElementById('mode');
+mode.onclick=()=>{const d=document.documentElement.classList.toggle('dark');mode.textContent=d?'Светлая':'Тёмная';mode.setAttribute('aria-pressed',d);catcher.material.opacity=d?0:.13};
+})();
+</script>
+
+</body>
+</html>
