@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<script>
+  /* theme: apply the saved choice before first paint (shared with the homepage) */
+  (function(){ try{ var t=localStorage.getItem('sc-theme'); if(t==='dark'||t==='light') document.documentElement.setAttribute('data-theme',t); }catch(e){} })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<title>HR-аутсорсинг для малого бизнеса: HR-отдел без штатного HR | Игнатий Филатов</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="HR на аутсорсе для компаний 20–300 человек: найм, адаптация, кадровые документы, зарплаты против рынка и причины увольнений. Что входит, сколько стоит по сравнению со штатным HR и когда аутсорс не подойдёт.">
+<meta name="author" content="Игнатий Филатов">
+<link rel="canonical" href="https://strategi-consult.com/malyj-biznes/">
+<meta property="og:title" content="HR-аутсорсинг для малого бизнеса — Игнатий Филатов">
+<meta property="og:description" content="HR на аутсорсе для компаний 20–300 человек: найм, адаптация, кадровые документы, зарплаты против рынка и причины увольнений. Что входит, сколько стоит по сравнению со штатным HR и когда аутсорс не подойдёт.">
+<meta property="og:url" content="https://strategi-consult.com/malyj-biznes/">
+<meta property="og:image" content="https://strategi-consult.com/assets/og-image.jpeg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Игнатий Филатов — HR консультант">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HR-аутсорсинг для малого бизнеса — Игнатий Филатов">
+<meta name="twitter:description" content="Аутсорсинг HR-функций для компаний до 300 человек: HR-отдел на аутсорсе — HRBP по подписке вместо штатного HR-директора. Найм, онбординг, кадровые документы и сложные разговоры — платите за работу, а не за ставку.">
+<meta name="twitter:image" content="https://strategi-consult.com/assets/og-image.jpeg?v=2">
+<link rel="preload" as="image" href="/assets/automation-backdrop.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "HR-аутсорсинг для малого бизнеса (HRBP по подписке)",
+  "description": "HR на аутсорсе для компаний 20–300 человек: найм, адаптация, кадровые документы, зарплаты против рынка и причины увольнений. Что входит, сколько стоит по сравнению со штатным HR и когда аутсорс не подойдёт.",
+  "url": "https://strategi-consult.com/malyj-biznes/",
+  "provider": {
+    "@type": "Person",
+    "name": "Игнатий Филатов",
+    "url": "https://strategi-consult.com"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Russia"
+  },
+  "serviceType": "HR консультирование",
+  "inLanguage": "ru-RU"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Сколько часов HR нужно малому бизнесу?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Зависит от того, что горит. Компании на 20–50 человек без активного найма обычно хватает нескольких часов в неделю: документы, адаптация, разовые вопросы. Если открыто сразу несколько вакансий, первый месяц уходит больше, потом нагрузка падает. Объём считаем на первом бесплатном разговоре."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Сколько стоит HR на аутсорсе?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Вы платите за часы в месяц, а не за ставку. Точную сумму называю после первого разговора, когда понятен объём. Для сравнения: штатный HR-директор стоит от 150 000 ₽ в месяц плюс взносы, рабочее место и месяц-два на поиск."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Чем HR-аутсорсинг отличается от кадрового агентства?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Агентство закрывает вакансию и уходит. HR на аутсорсе отвечает за всё, что происходит с людьми после найма: адаптацию, документы, премии, причины увольнений. Подбор тоже делаю, но как часть работы, а не единственную задачу."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Вы работаете вместе с нашим бухгалтером?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да. Зарплату и отчётность ведёт бухгалтер, я — людей: найм, приём, документы по персоналу, графики, премиальные правила. Договариваемся, кто за что отвечает, чтобы ничего не падало между стульями."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что останется у компании, если мы перестанем работать?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Всё, что сделано: шаблоны договоров, положение о премировании, памятки и чек-листы для новичков, таблицы найма. Я строю так, чтобы процессы работали без меня, а не держались на одном человеке."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Можно начать с одной задачи?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да, так начинает большинство. Обычно это найм, когда вакансии висят месяцами, или ранняя текучесть, когда новички уходят в первые три месяца. Решаем её, показываю результат в цифрах, дальше решаете сами."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Вы работаете только с Россией?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет, с любыми русскоязычными компаниями: Россия, Казахстан, Армения и другие страны, а также команды, разъехавшиеся по разным странам. Работаю онлайн."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": "https://strategi-consult.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "HR-аутсорсинг для малого бизнеса",
+      "item": "https://strategi-consult.com/malyj-biznes/"
+    }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --ink:#131313;
+    --accent:#195FE8;
+    --accent-light:#6293FF;
+    --glass-line: rgba(255,255,255,0.2);
+    --glass-fill: rgba(255,255,255,0.08);
+    --text-soft: rgba(255,255,255,0.75);
+    --text-mute: rgba(255,255,255,0.6);
+    /* ---------- type scale (SF Pro): role -> size / weight ---------- */
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+    --fs-display: 56px;   /* hero H1                         bold   */
+    --fs-title: 40px;     /* заголовок окна / страницы        bold   */
+    --fs-section: 28px;   /* раздел на подстранице            bold   */
+    --fs-h2: 22px;        /* раздел внутри окна               bold   */
+    --fs-h3: 17px;        /* заголовок карточки / пункта      bold   */
+    --fs-lead: 17px;      /* подзаголовок, лид                medium */
+    --fs-body: 15px;      /* основной текст                   regular*/
+    --fs-body-s: 13px;    /* текст в карточках                regular*/
+    --fs-sec: 12px;       /* вторичный: подписи, источники    regular*/
+    --fs-cap: 11px;       /* метки графиков, теги             medium */
+    --fs-btn: 14px;       /* кнопки                           medium */
+    --fs-chip: 13px;      /* чипы, переключатели              medium */
+    --fs-num-xl: 48px;    /* цифры: крупные                   bold   */
+    --fs-num-l: 32px;
+    --fs-num-m: 24px;
+    --fs-num-s: 17px;
+    --fw-regular: 400; --fw-medium: 500; --fw-bold: 700;
+    --ink-mute: #6e6e73;  /* вторичный текст на светлом */
+  }
+  @media (max-width:980px){ :root{ --fs-display:48px; --fs-title:34px; } }
+  @media (max-width:760px){ :root{ --fs-title:28px; } }
+  @media (max-width:620px){ :root{ --fs-display:34px; --fs-title:26px; --fs-section:22px; --fs-h2:20px; --fs-lead:16px; --fs-num-xl:40px; } }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--font);
+    color:#fff; min-height:100vh; background:#1b1b1d;
+  }
+  a{ color:inherit; }
+
+  /* same office photo as the homepage, dimmed like an opened card */
+  .backdrop{
+    position:fixed; top:0; bottom:0; left:0; width:100vw; z-index:-1;
+    background:#1b1b1d url('/assets/automation-backdrop.jpg') center 35% / cover no-repeat;
+  }
+  .backdrop::after{ content:""; position:absolute; inset:0; background:rgba(20,20,20,0.55); }
+
+  .skip{ position:absolute; left:-9999px; top:8px; background:#fff; color:var(--ink); padding:8px 14px; border-radius:10px; z-index:10; }
+  .skip:focus{ left:12px; }
+
+  .wrap{ width:100%; max-width:968px; margin:0 auto; padding:24px 24px 40px; }
+
+  /* ---------- top nav (the homepage's dark pill bar) ---------- */
+  .topnav{ display:flex; justify-content:center; margin-bottom:22px; }
+  .pills{
+    display:flex; align-items:center; gap:4px; flex-wrap:wrap; justify-content:center;
+    background:rgba(27,27,29,0.55); backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
+    border:1px solid rgba(255,255,255,0.08); border-radius:40px; padding:6px;
+    box-shadow:0 14px 30px rgba(0,0,0,0.25);
+  }
+  .pills a{ text-decoration:none; color:#d6d6d8; font-size:var(--fs-chip); font-weight:var(--fw-medium); padding:9px 16px; border-radius:30px; transition:background .2s, color .2s; white-space:nowrap; }
+  .pills a:hover{ background:rgba(255,255,255,0.1); color:#fff; }
+  .pills a[aria-current="page"]{ background:#fff; color:var(--accent); }
+  .pills a.go{ background:var(--accent); color:#fff; }
+  .pills a.go:hover{ opacity:.9; }
+
+  /* ---------- main glass panel ---------- */
+  .page{
+    background:rgba(255,255,255,0.14);
+    backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+    border:1px solid rgba(255,255,255,0.35);
+    border-radius:30px; padding:44px 40px 44px;
+  }
+  .crumbs{ font-size:var(--fs-sec); font-weight:var(--fw-regular); color:var(--text-mute); margin-bottom:22px; }
+  .crumbs a{ text-decoration:none; }
+  .crumbs a:hover{ color:#fff; }
+  .eyebrow{ font-size:var(--fs-cap); letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,0.65); font-weight:var(--fw-medium); margin-bottom:10px; }
+  h1{ font-size:var(--fs-title); font-weight:var(--fw-bold); line-height:1.1; max-width:780px; letter-spacing:-0.02em; }
+  h1 em{ font-style:normal; color:var(--accent-light); font-weight:inherit; }
+  .lead{ font-size:var(--fs-lead); font-weight:var(--fw-regular); color:rgba(255,255,255,0.88); max-width:640px; line-height:1.5; margin-top:16px; }
+  .actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+  .btn{ display:inline-block; text-decoration:none; font-size:var(--fs-btn); font-weight:var(--fw-medium); padding:13px 24px; border-radius:30px; transition:transform .2s, background .2s, opacity .2s; }
+  .btn.primary{ background:var(--accent); color:#fff; }
+  .btn.primary:hover{ transform:translateY(-1px); opacity:.92; }
+  .btn.ghost{ background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.35); color:#fff; }
+  .btn.ghost:hover{ background:rgba(255,255,255,0.2); }
+
+  /* ---------- sections ---------- */
+  .sec{ margin-top:48px; scroll-margin-top:24px; }
+  .sec-label{ font-size:var(--fs-sec); letter-spacing:.1em; text-transform:uppercase; color:var(--text-mute); font-weight:var(--fw-regular); }
+  .sec h2{ font-size:var(--fs-section); font-weight:var(--fw-bold); line-height:1.2; margin-top:8px; letter-spacing:-0.015em; }
+  .sec-sub{ font-size:var(--fs-body); color:var(--text-soft); margin-top:6px; font-weight:var(--fw-regular); }
+  .sec-body{ margin-top:18px; }
+
+  .cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .cards.c3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .card{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:16px; padding:18px 20px; }
+  .card h3{ font-size:var(--fs-h3); font-weight:var(--fw-bold); margin-bottom:6px; line-height:1.3; }
+  .card p{ font-size:var(--fs-body-s); color:var(--text-soft); line-height:1.55; font-weight:var(--fw-regular); }
+  .card .num{ display:inline-block; font-size:var(--fs-cap); font-weight:var(--fw-medium); color:var(--accent-light); margin-bottom:8px; letter-spacing:.04em; }
+
+  /* process: 4 steps joined by a line */
+  .steps{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; position:relative; }
+  .step{ position:relative; }
+  .step .dot{ display:block; width:13px; height:13px; border-radius:50%; background:var(--accent-light); box-shadow:0 0 0 5px rgba(98,147,255,0.22); margin:0 0 16px 20px; position:relative; z-index:1; }
+  .steps::before{ content:""; position:absolute; top:6px; left:26px; right:26px; height:2px; background:linear-gradient(90deg,rgba(98,147,255,0.35),var(--accent-light)); border-radius:2px; }
+  .step .card{ height:calc(100% - 29px); }
+
+  /* numbers */
+  .stats{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+  .stat{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:16px; padding:20px 16px; }
+  .stat .v{ font-size:var(--fs-num-l); font-weight:var(--fw-medium); color:#fff; line-height:1; letter-spacing:-0.02em; font-variant-numeric:tabular-nums; }
+  .stat .v.accent{ color:var(--accent-light); font-weight:400; }
+  .stat .l{ font-size:var(--fs-sec); color:var(--text-soft); line-height:1.4; margin-top:10px; font-weight:var(--fw-regular); }
+
+  .stat .v.long{ font-size:var(--fs-num-m); white-space:nowrap; font-weight:var(--fw-medium); font-variant-numeric:tabular-nums; }
+  @media (max-width:620px){ .stat .v.long{ font-size:20px; } }
+
+  /* FAQ */
+  .faq{ display:flex; flex-direction:column; gap:8px; }
+  .faq-item{ background:var(--glass-fill); border:1px solid var(--glass-line); border-radius:14px; overflow:hidden; transition:background .2s; }
+  .faq-item.open{ background:rgba(255,255,255,0.12); }
+  .faq-item h3{ font-size:inherit; font-weight:inherit; }
+  .faq-q{ width:100%; text-align:left; font-family:inherit; font-size:var(--fs-h3); font-weight:var(--fw-bold); color:#fff; background:none; border:none; padding:15px 18px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:14px; }
+  .faq-q span{ font-size:18px; font-weight:400; color:var(--text-soft); transition:transform .45s cubic-bezier(.33,1,.68,1); flex:0 0 auto; line-height:1; }
+  .faq-item.open .faq-q span{ transform:rotate(45deg); }
+  .faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .6s cubic-bezier(.33,1,.68,1); }
+  .faq-item.open .faq-a{ grid-template-rows:1fr; }
+  .faq-a > div{ min-height:0; overflow:hidden; }
+  .faq-a p{ padding:0 18px 16px; font-size:var(--fs-body); color:var(--text-soft); line-height:1.6; opacity:0; transition:opacity .4s ease; font-weight:var(--fw-regular); }
+  .faq-item.open .faq-a p{ opacity:1; transition:opacity .5s ease .1s; }
+  .faq-q:focus-visible, .btn:focus-visible, .pills a:focus-visible, .card-link:focus-visible{ outline:2px solid var(--accent-light); outline-offset:3px; }
+
+  /* other services */
+  .card-link{ text-decoration:none; display:block; transition:transform .2s, background .2s, border-color .2s; }
+  .card-link:hover{ transform:translateY(-2px); background:rgba(255,255,255,0.13); border-color:rgba(255,255,255,0.35); }
+  .card-link h3 i{ font-style:normal; color:var(--accent-light); }
+
+  /* final CTA */
+  .cta{ margin-top:48px; background:rgba(255,255,255,0.96); color:var(--ink); border-radius:22px; padding:30px 32px; box-shadow:0 20px 44px rgba(0,0,0,0.28); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .cta h2{ font-size:var(--fs-section); font-weight:var(--fw-bold); line-height:1.2; letter-spacing:-0.015em; }
+  .cta p{ font-size:var(--fs-body); color:#3a3a3c; margin-top:6px; line-height:1.5; max-width:460px; font-weight:var(--fw-regular); }
+  .cta .actions{ margin-top:0; }
+  .cta .btn.ghost{ background:transparent; border-color:rgba(20,20,20,0.2); color:var(--ink); }
+  .cta .btn.ghost:hover{ background:rgba(20,20,20,0.05); }
+
+  .foot{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px 22px; margin-top:28px; font-size:var(--fs-sec); color:rgba(255,255,255,0.7); text-align:center; font-weight:var(--fw-regular); }
+  .foot a{ text-decoration:none; }
+  .foot a:hover{ color:#fff; }
+  .foot .copy{ width:100%; opacity:.7; margin-top:4px; }
+
+  /* entrance */
+  @keyframes rise{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+  .page{ animation:rise .7s cubic-bezier(.22,1,.36,1) backwards; }
+  .reveal{ opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .page{ animation:none; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .faq-a, .faq-a p, .faq-q span{ transition:none; }
+  }
+
+  @media (max-width:860px){
+    .cards.c3{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .steps{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .steps::before{ display:none; }
+    .step .dot{ display:none; }
+    .step .card{ height:100%; }
+  }
+  @media (max-width:620px){
+    .wrap{ padding:16px 12px 32px; }
+    .pills a{ padding:8px 12px; font-size:12px; }
+    .pills a.hide-sm{ display:none; }
+    .page{ padding:28px 18px 30px; border-radius:24px; }
+    h1{ font-size:var(--fs-title); }
+    .lead{ font-size:15px; }
+    .sec{ margin-top:38px; }
+    .sec h2{ font-size:var(--fs-section); }
+    .cards, .cards.c3{ grid-template-columns:minmax(0,1fr); }
+    .steps{ grid-template-columns:minmax(0,1fr); }
+    .stat .v{ font-size:28px; }
+    .cta{ padding:24px 20px; }
+    .cta h2{ font-size:var(--fs-section); }
+  }
+
+  /* ============ THEME TOGGLE (same control as the homepage) ============ */
+  .theme-toggle{
+    position:fixed; top:14px; right:14px; z-index:50;
+    width:62px; height:32px; border-radius:20px; cursor:pointer;
+    background:rgba(24,24,27,0.55); border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
+    box-shadow:0 8px 22px rgba(0,0,0,0.18);
+    display:flex; align-items:center; justify-content:space-between; padding:0 8px;
+    transition:background .4s ease, border-color .4s ease;
+  }
+  .theme-toggle svg{ width:14px; height:14px; position:relative; z-index:1; color:#fff; transition:opacity .4s ease, color .4s ease; }
+  .theme-toggle .tt-sun{ opacity:.45; }
+  .theme-toggle .tt-knob{ position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#2b2b2f; box-shadow:0 2px 6px rgba(0,0,0,0.25); transform:translateX(30px); transition:transform .5s cubic-bezier(.33,1,.68,1), background .4s ease; }
+  .theme-toggle:focus-visible{ outline:2px solid var(--accent-light); outline-offset:3px; }
+  html[data-theme="light"] .theme-toggle{ background:rgba(255,255,255,0.4); border-color:rgba(255,255,255,0.6); }
+  html[data-theme="light"] .theme-toggle .tt-knob{ transform:none; background:#fff; }
+  html[data-theme="light"] .theme-toggle svg{ color:#131313; }
+  html[data-theme="light"] .theme-toggle .tt-sun{ opacity:1; }
+  html[data-theme="light"] .theme-toggle .tt-moon{ opacity:.45; }
+  @media (max-width:1100px){ .wrap{ padding-top:56px; } }
+  @media (max-width:620px){ .theme-toggle{ top:10px; right:10px; } .wrap{ padding-top:50px; } }
+
+  html.theme-anim body, html.theme-anim body *, html.theme-anim .backdrop::after{
+    transition:background-color .5s ease, color .5s ease, border-color .5s ease !important;
+  }
+
+  /* ============ LIGHT THEME (page is dark by default) ============ */
+  .backdrop::after{ transition:background .5s ease; }
+  html[data-theme="light"]{
+    --glass-line: rgba(255,255,255,0.6);
+    --glass-fill: rgba(255,255,255,0.42);
+    --text-soft: #3a3a3c;
+    --text-mute: rgba(19,19,19,0.55);
+  }
+  html[data-theme="light"] body{ color:#131313; }
+  html[data-theme="light"] .backdrop::after{ background:rgba(255,255,255,0.05); }
+  html[data-theme="light"] .page{ background:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.6); }
+  html[data-theme="light"] .eyebrow{ color:rgba(19,19,19,0.6); }
+  html[data-theme="light"] .lead{ color:#2a2a2c; }
+  html[data-theme="light"] h1 em,
+  html[data-theme="light"] .card .num,
+  html[data-theme="light"] .stat .v.accent,
+  html[data-theme="light"] .card-link h3 i{ color:var(--accent); }
+  html[data-theme="light"] .crumbs a:hover, html[data-theme="light"] .foot a:hover{ color:#131313; }
+  html[data-theme="light"] .btn.ghost{ background:rgba(255,255,255,0.5); border-color:rgba(19,19,19,0.15); color:#131313; }
+  html[data-theme="light"] .btn.ghost:hover{ background:rgba(255,255,255,0.75); }
+  html[data-theme="light"] .step .dot{ background:var(--accent); box-shadow:0 0 0 5px rgba(25,95,232,0.18); }
+  html[data-theme="light"] .steps::before{ background:linear-gradient(90deg,rgba(25,95,232,0.3),var(--accent)); }
+  html[data-theme="light"] .stat .v{ color:#131313; }
+  html[data-theme="light"] .faq-q{ color:#131313; }
+  html[data-theme="light"] .faq-item.open{ background:rgba(255,255,255,0.62); }
+  html[data-theme="light"] .card-link:hover{ background:rgba(255,255,255,0.62); border-color:rgba(255,255,255,0.85); }
+  html[data-theme="light"] .foot{ color:rgba(19,19,19,0.7); }
+  html[data-theme="light"] .faq-q:focus-visible, html[data-theme="light"] .btn:focus-visible, html[data-theme="light"] .card-link:focus-visible{ outline-color:var(--accent); }
+  @media (prefers-reduced-motion: reduce){
+    .theme-toggle .tt-knob, .backdrop::after{ transition:none; }
+    html.theme-anim body, html.theme-anim body *{ transition:none !important; }
+  }
+
+  /* make_small.py: таблица сравнения и 3 цифры */
+  .tbl{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .tbl table{ width:100%; border-collapse:collapse; font-size:15px; }
+  .tbl th, .tbl td{ text-align:left; padding:12px; border-bottom:1px solid var(--glass-line); vertical-align:top; line-height:1.5; }
+  .tbl th{ font-weight:var(--fw-bold); background:var(--glass-fill); }
+  .tbl td{ color:var(--text-soft); } .tbl td:first-child{ font-weight:var(--fw-bold); color:inherit; width:22%; }
+  .stats.s3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .sec-body.stats + .sec-body{ margin-top:12px; }
+  @media (max-width:620px){ .stats.s3{ grid-template-columns:1fr; } .tbl table{ font-size:14px; } .tbl th, .tbl td{ padding:10px 8px; } .tbl td:first-child{ width:auto; } }
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113403420', 'ym');
+
+    ym(113403420, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113403420" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<style>
+  .steps.s5{ grid-template-columns:repeat(5,minmax(0,1fr)); }
+  @media (max-width:860px){ .steps.s5{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:620px){ .steps.s5{ grid-template-columns:minmax(0,1fr); } }
+  .card p + p{ margin-top:10px; }
+  .card.wide{ grid-column:1/-1; }
+</style>
+<style id="tap44">/* зоны нажатия ≥44px на мобильной, вид не меняется */
+@media (max-width:620px){
+  .foot, body > footer{ row-gap:0 !important; }
+  .foot a, body > footer a{ display:inline-flex; align-items:center; min-height:44px; }
+  .crumbs a{ display:inline-block; padding:15px 6px; margin:-15px -6px; }
+  .pills a, .pg-dot, .pg-arrow, .calc-svc{ position:relative; }
+  .pills a::after, .theme-toggle::after, .pg-dot::after, .pg-arrow::after, .calc-svc::after{ content:""; position:absolute; }
+  .pills a::after{ inset:-7px -2px; }
+  .theme-toggle::after{ inset:-6px; }
+  .pg-dot::after{ inset:-10px -4px; }
+  .pg-arrow::after{ inset:-7px; }
+  .calc-svc::after{ inset:-5px -2px; }
+  .lc-foot a{ display:inline-block; padding:15px 0; margin:-15px 0; }
+}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+<button type="button" class="theme-toggle" id="themeToggle" aria-label="Светлая тема" aria-pressed="true" onclick="toggleTheme()">
+  <span class="tt-knob" aria-hidden="true"></span>
+  <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+  <svg class="tt-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+</button>
+<a class="skip" href="#main">Перейти к содержимому</a>
+
+<div class="wrap">
+  <header class="topnav">
+    <nav class="pills" aria-label="Разделы сайта">
+      <a href="/">Главная</a>
+      <a href="/onboarding/" class="hide-sm">Онбординг</a>
+      <a href="/naim/">Найм</a>
+      <a href="/kadry/" class="hide-sm">Кадровый учёт</a>
+      <a href="/hr-audit/">HR-аудит</a>
+      <a href="https://t.me/HR_Ignatiy" class="go" target="_blank" rel="noopener">Связаться →</a>
+    </nav>
+  </header>
+
+  <main id="main" class="page">
+    <nav class="crumbs" aria-label="Хлебные крошки"><a href="/">Главная</a> / HR-аутсорсинг для малого бизнеса</nav>
+
+    <div class="eyebrow">HR-аутсорсинг для малого бизнеса</div>
+    <h1>HR-отдел, которого у вас нет. <em>На аутсорсе, без ставки в штате.</em></h1>
+    <p class="lead">В компании на 20–300 человек HR обычно делает собственник — по вечерам, между продажами и поставщиками. Я забираю эту работу на себя: найм, адаптацию, кадровые документы, зарплаты и причины увольнений. Вы платите за часы, а не за человека в офисе.</p>
+    <div class="actions">
+      <a class="btn primary" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Получить бесплатный аудит</a>
+      <a class="btn ghost" href="#h-cases">Что это даёт в цифрах</a>
+    </div>
+
+    <section class="sec reveal" aria-labelledby="h-pain">
+      <div class="sec-label">Как сейчас</div>
+      <h2 id="h-pain">Кто сейчас делает HR в вашей компании</h2>
+      <div class="sec-body cards c3">
+        <div class="card"><h3>Найм между встречами</h3><p>Резюме разбираются, когда есть свободный час. Вакансия висит третий месяц, а работу пустого места делят те, кто остался.</p></div>
+        <div class="card"><h3>Документы «как получится»</h3><p>Договор скачан из интернета пять лет назад, удалёнщики работают по офисному шаблону, график отпусков вспоминают в декабре.</p></div>
+        <div class="card"><h3>Люди уходят, а почему — неизвестно</h3><p>«Не сошлись», «нашёл другое». Причину никто не записывает, поэтому через полгода всё повторяется.</p></div>
+      </div>
+      <p class="sec-sub" style="margin-top:16px;">Ни одна из этих задач не срочная. Поэтому их никто и не делает — пока они не станут дорогими.</p>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-take">
+      <div class="sec-label">Что входит</div>
+      <h2 id="h-take">Что я беру на себя</h2>
+      <ol class="sec-body steps" style="list-style:none;">
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">НАЙМ</span><h3>Закрываю вакансии</h3><p>Профиль кандидата, поиск, первые звонки. Вы смотрите только 3–5 финалистов. Подробнее — <a href="/naim/">подбор персонала</a>.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">ПЕРВЫЕ МЕСЯЦЫ</span><h3>Удерживаю новичков</h3><p>План первых недель, памятки, встречи с руководителем. Чтобы человек не ушёл раньше, чем окупится. Подробнее — <a href="/onboarding/">онбординг</a>.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">ДОКУМЕНТЫ</span><h3>Навожу порядок в бумагах</h3><p>Трудовые договоры, отдельный шаблон для удалёнщиков, положение о премировании, график отпусков. Подробнее — <a href="/kadry/">кадровый учёт</a>.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">ДЕНЬГИ</span><h3>Сверяю зарплаты с рынком</h3><p>Где вы переплачиваете, а где недоплачиваете так, что люди скоро уйдут. Плюс понятные правила премий.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">ЛЮДИ</span><h3>Нахожу, почему уходят</h3><p>Разговоры с уходящими, опрос eNPS, сложные разговоры с руководителями. Записываю причины, чтобы с ними можно было работать.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-cases">
+      <div class="sec-label">Из практики</div>
+      <h2 id="h-cases">Что это дало производственной компании на 70 человек</h2>
+      <div class="sec-body stats s3">
+        <div class="stat"><div class="v accent">10 → 1</div><div class="l">открытых вакансий: было около 10 одновременно, закрыл за полтора месяца. Сейчас открывается максимум одна в месяц</div></div>
+        <div class="stat"><div class="v accent long">1,1 млн ₽</div><div class="l">в месяц переплаты нашлось, когда я положил зарплаты по 24 позициям рядом с рынком — больше 13 млн ₽ в год</div></div>
+        <div class="stat"><div class="v accent">≤17%</div><div class="l">текучести в год: не больше 12 уходов на 70 человек</div></div>
+      </div>
+      <div class="sec-body cards">
+        <div class="card wide"><p><b>Увольнения из-за одного руководителя.</b> Опрос eNPS с открытыми вопросами показал одну точку: токсичный руководитель. Увольнять его не стали — перевели на роль без подчинённых. Уходы прекратились, а сам он стал приносить больше результата: новая роль нравилась ему больше. Никто не потерял работу, компания сохранила и команду, и специалиста.</p></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-cost">
+      <div class="sec-label">Сравнение</div>
+      <h2 id="h-cost">Штатный HR или аутсорс: считаем честно</h2>
+      <div class="sec-body tbl"><table>
+        <tr><th></th><th>Штатный HR</th><th>HR на аутсорсе</th></tr>
+        <tr><td>Деньги</td><td>Ставка от 150 000 ₽ в месяц для HR-директора, плюс взносы, отпуск и больничные</td><td>Часы в месяц под реальный объём задач</td></tr>
+        <tr><td>Старт</td><td>Месяц-два на поиск, ещё месяц на ввод в курс дела</td><td>С первой недели, после разговора и разбора</td></tr>
+        <tr><td>Загрузка</td><td>В компании до 50 человек на полный день задач обычно нет — их начинают придумывать</td><td>Платите только за сделанное, отчёт в конце месяца</td></tr>
+        <tr><td>Если не подошло</td><td>Увольнение по ТК и новый поиск</td><td>Просто не продлеваете на следующий месяц</td></tr>
+      </table></div>
+      <p class="sec-sub" style="margin-top:16px;">Подробный расчёт с цифрами — в статье <a href="/blog/hr-autsorsing-ili-shtatnyj-hr/">«HR-аутсорсинг или штатный HR: что выгоднее малому бизнесу»</a>.</p>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-notfit">
+      <div class="sec-label">Честно</div>
+      <h2 id="h-notfit">Когда HR на аутсорсе вам не подойдёт</h2>
+      <div class="sec-body cards c3">
+        <div class="card"><h3>Вы нанимаете десятки людей в месяц</h3><p>Тогда HR нужен каждый день и на месте. Помогу найти такого человека и передам ему всё, что успели выстроить.</p></div>
+        <div class="card"><h3>Нужна только зарплата и отчётность</h3><p>Это работа бухгалтера. Я работаю с людьми: найм, удержание, документы по персоналу.</p></div>
+        <div class="card"><h3>Нужен человек в офисе</h3><p>Я работаю онлайн. Зато с командами в разных городах и странах это плюс — подробнее про <a href="/udalennye-komandy/">HR для удалённых команд</a>.</p></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" id="process" aria-labelledby="h-start">
+      <div class="sec-label">Старт</div>
+      <h2 id="h-start">Как мы начинаем</h2>
+      <ol class="sec-body steps" style="list-style:none;">
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">01</span><h3>30 минут бесплатно</h3><p>Рассказываете, что болит. Я задаю вопросы и сразу говорю, чем могу помочь, а чем нет.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">02</span><h3>Список «что горит»</h3><p>Смотрю найм, документы, зарплаты и уходы. Раскладываю: что дорого стоит прямо сейчас, а что подождёт.</p></div></li>
+        <li class="step"><i class="dot"></i><div class="card"><span class="num">03</span><h3>Часы на месяц и отчёт</h3><p>Договариваемся об объёме, я работаю, в конце месяца показываю результат в цифрах и решаем, что дальше.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-faq">
+      <div class="sec-label">FAQ</div>
+      <h2 id="h-faq">Вопросы про HR-аутсорсинг для малого бизнеса</h2>
+      <div class="sec-body faq">
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Сколько часов HR нужно малому бизнесу?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Зависит от того, что горит. Компании на 20–50 человек без активного найма обычно хватает нескольких часов в неделю: документы, адаптация, разовые вопросы. Если открыто сразу несколько вакансий, первый месяц уходит больше, потом нагрузка падает. Объём считаем на первом бесплатном разговоре.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Сколько стоит HR на аутсорсе?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Вы платите за часы в месяц, а не за ставку. Точную сумму называю после первого разговора, когда понятен объём. Для сравнения: штатный HR-директор стоит от 150 000 ₽ в месяц плюс взносы, рабочее место и месяц-два на поиск.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Чем HR-аутсорсинг отличается от кадрового агентства?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Агентство закрывает вакансию и уходит. HR на аутсорсе отвечает за всё, что происходит с людьми после найма: адаптацию, документы, премии, причины увольнений. Подбор тоже делаю, но как часть работы, а не единственную задачу.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Вы работаете вместе с нашим бухгалтером?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Да. Зарплату и отчётность ведёт бухгалтер, я — людей: найм, приём, документы по персоналу, графики, премиальные правила. Договариваемся, кто за что отвечает, чтобы ничего не падало между стульями.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Что останется у компании, если мы перестанем работать?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Всё, что сделано: шаблоны договоров, положение о премировании, памятки и чек-листы для новичков, таблицы найма. Я строю так, чтобы процессы работали без меня, а не держались на одном человеке.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Можно начать с одной задачи?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Да, так начинает большинство. Обычно это найм, когда вакансии висят месяцами, или ранняя текучесть, когда новички уходят в первые три месяца. Решаем её, показываю результат в цифрах, дальше решаете сами.</p></div></div></div>
+        <div class="faq-item"><h3><button type="button" class="faq-q" aria-expanded="false">Вы работаете только с Россией?<span aria-hidden="true">+</span></button></h3><div class="faq-a"><div><p>Нет, с любыми русскоязычными компаниями: Россия, Казахстан, Армения и другие страны, а также команды, разъехавшиеся по разным странам. Работаю онлайн.</p></div></div></div>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-blog">
+      <div class="sec-label">Блог</div>
+      <h2 id="h-blog">Статьи по теме</h2>
+      <div class="sec-body cards">
+        <a class="card card-link" href="/blog/kpi-dlya-sotrudnikov/"><h3>KPI для сотрудников простыми словами: как разработать и посчитать премию <i>→</i></h3><p>Что это такое, зачем нужно самому сотруднику, примеры показателей и формула премии.</p></a>
+        <a class="card card-link" href="/blog/motivaciya-sotrudnikov-bez-deneg/"><h3>Мотивация сотрудников без повышения зарплаты: что реально работает <i>→</i></h3><p>Когда без денег не обойтись и 10 бесплатных способов, которые реально держат людей.</p></a>
+        <a class="card card-link" href="/blog/hr-autsorsing-ili-shtatnyj-hr/"><h3>HR-аутсорсинг или штатный HR: что выгоднее малому бизнесу <i>→</i></h3><p>Сколько стоит штатный HR, что такое аутсорсинг HR-функций и когда что выгоднее.</p></a>
+        <a class="card card-link" href="/blog/"><h3>Все статьи блога <i>→</i></h3><p>Найм, текучесть, KPI и HR для малого бизнеса — с калькуляторами.</p></a>
+      </div>
+    </section>
+
+    <section class="sec reveal" aria-labelledby="h-other">
+      <div class="sec-label">Другие услуги</div>
+      <h2 id="h-other">Чем ещё могу помочь</h2>
+      <div class="sec-body cards c3">
+        <a class="card card-link" href="/hr-audit/"><h3>Бесплатный HR-аудит <i>→</i></h3><p>30 минут разговора: где теряете деньги, что с этим делать и сколько это стоит.</p></a>
+        <a class="card card-link" href="/naim/"><h3>Подбор персонала под ключ <i>→</i></h3><p>Закрываю вакансию до трёх недель, платите после выхода специалиста.</p></a>
+        <a class="card card-link" href="/kadry/"><h3>Кадровый учёт на аутсорсинге <i>→</i></h3><p>Убираю бумажную рутину и риск штрафов, настраиваю систему под размер компании.</p></a>
+      </div>
+    </section>
+
+    <section class="cta reveal" aria-labelledby="h-cta">
+      <div>
+        <h2 id="h-cta">Нужен HR, но не в штат?</h2>
+        <p>Первый разговор — бесплатно. 30 минут, и у вас будет чёткое понимание, с чего начать.</p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://t.me/HR_Ignatiy" target="_blank" rel="noopener">Написать в Telegram</a>
+        <a class="btn ghost" href="https://wa.me/995557602599" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <a href="/">← На главную</a>
+    <a href="/blog/">Блог</a>
+    <a href="/obo-mne/">Обо мне</a>
+    <a href="/naim/">Подбор персонала</a>
+    <a href="/hr-audit/">HR-аудит</a>
+    <a href="/malyj-biznes/">HR-аутсорсинг для малого бизнеса</a>
+    <a href="/udalennye-komandy/">HR для удалённых команд</a>
+    <a href="/onboarding/">Автоматизация онбординга</a>
+    <a href="/kadry/">Кадровый учёт</a>
+    <a href="/avtomatizaciya-kadrovogo-ucheta/">Автоматизация кадрового учёта</a>
+    <a href="/privacy/">Политика конфиденциальности</a>
+    <span class="copy">© 2026 Игнатий Филатов — HRBP, HR-консультант, автоматизация HR процессов</span>
+  </footer>
+</div>
+
+<script>
+  // FAQ: one open at a time, smooth grid-rows animation (CSS)
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i){
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if(!wasOpen){
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // sections fade up as they scroll into view
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin:'0px 0px -8% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+
+  // theme toggle — this page is dark unless the visitor picked light
+  function currentTheme(){ return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'; }
+  function syncThemeToggle(){
+    var b = document.getElementById('themeToggle'); if(!b) return;
+    var dark = currentTheme() === 'dark';
+    b.setAttribute('aria-pressed', String(dark));
+    b.setAttribute('aria-label', dark ? 'Светлая тема' : 'Тёмная тема');
+  }
+  function toggleTheme(){
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    var root = document.documentElement;
+    root.classList.add('theme-anim');
+    root.setAttribute('data-theme', next);
+    try{ localStorage.setItem('sc-theme', next); }catch(e){}
+    syncThemeToggle();
+    clearTimeout(toggleTheme._t);
+    toggleTheme._t = setTimeout(function(){ root.classList.remove('theme-anim'); }, 650);
+  }
+  syncThemeToggle();
+</script>
+<script>
+  /* клик по фону вокруг страницы (или Esc) закрывает её, как окна на главной */
+  (function(){
+    function closePage(){
+      var home = '/';
+      try{
+        var r = document.referrer ? new URL(document.referrer) : null;
+        if(r && r.origin === location.origin && history.length > 1){ history.back(); return; }
+      }catch(e){}
+      location.href = home;
+    }
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.page, .pills, .theme-toggle, a, button, input, select, textarea, label')) return;
+      closePage();
+    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePage(); });
+  })();
+</script>
+</body>
+</html>
